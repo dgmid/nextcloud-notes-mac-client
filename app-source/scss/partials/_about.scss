@@ -1,0 +1,75 @@
+
+body {
+	
+	text-align: center;
+	padding: 0;
+	background-image: url('#{$texture}');
+	
+	header {
+	
+	height: 23px;
+	background: linear-gradient(#EDEBED, #D6D4D6) no-repeat border-box;
+	background-size: 100% 23px;
+	
+	-webkit-app-region: drag;
+}
+	
+	main {
+		
+		padding: 10px 20px 0;
+		height: 270px;
+		
+		figure {
+			
+			padding-bottom: 10px;
+			
+			img {
+				
+				-webkit-user-drag: none;
+				-webkit-app-region: no-drag;
+			}
+		}
+		
+		h1 {
+			
+			font-size: 15px;
+			margin-bottom: 20px;
+			color: $text;
+			font-weight: 700;
+		}
+		
+		p {
+			
+			font-size: 13px;
+			font-weight: 400;
+			width: 160px;
+			margin: 0 auto 15px;
+			color: $text;
+		}
+		
+		dl {
+			
+			font-size: 11px;
+			line-height: 14px;
+			margin-bottom: 15px;
+			
+			dt, dd {
+				
+				display: inline;
+				color: $text;
+			}
+			
+			dt {
+				
+				padding-right: 5px;
+			}
+			
+			dd::after {
+					
+				display: block;
+				content: '';
+				white-space: pre-line;
+			}
+		}
+	}
+}

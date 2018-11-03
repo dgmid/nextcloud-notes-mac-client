@@ -1,0 +1,297 @@
+body {
+	
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+header {
+	
+	height: 23px;
+	background: linear-gradient(#EDEBED, #D6D4D6) no-repeat border-box;
+	background-size: 100% 23px;
+	background-position: left top;
+	border-bottom: 1px solid #B5B4B5;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	-webkit-app-region: drag;
+}
+
+#time {
+	
+	display: block;
+	color: $text;
+	font-size: 13px;
+	height: 23px;
+	line-height: 23px;
+	font-weight: 400;
+	text-align: center;
+}
+
+#frame {
+	
+	background-image: url('#{$texture}');
+	position: absolute;
+	top: 23px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	
+	transition: left .25s ease-out;
+}
+
+footer {
+	
+	width: 200px;
+	border-right: 1px solid $dividers;
+	background: grey;
+	position: absolute;
+	top: 23px;
+	left: -200px;
+	bottom: 0;
+	overflow: hidden;
+	
+	transition: left .25s ease-out;
+}
+
+main {
+
+	margin-left: 200px;
+	padding: 0;
+	height: calc(100vh - 23px);
+	font-size: 16px;
+	line-height: 1.4;
+	overflow-y: scroll;
+	
+	position: relative;
+
+	#edit {
+	
+		position: fixed;
+		right: 15px;
+		bottom: 15px;
+		width: 32px;
+		height: 32px;
+		background-color: #fff;
+		background-position: center center;
+		background-repeat: no-repeat;
+		border: 1px solid $text;
+		border-radius: 3px;
+		background-image: url('#{$pencil}');
+		opacity: .5;
+		z-index: 1;
+		
+		transition: all .15s ease-in-out;
+	
+		&:focus {
+	
+			opacity: 1;
+			background-color: $app-color;
+			border-color: transparent;
+			outline: none;
+		}
+	
+		&:hover {
+		
+			opacity: 1;
+			background-color: rgba($text, .5);
+			background-image: url('#{$pencil-white}');
+			border-color: transparent;
+		}
+		
+		&:active {
+			
+			background-color: rgba($text, .8);
+			background-image: url('#{$pencil-white}');
+			border-color: transparent;
+		}
+	}
+	
+	#edit.editing {
+		
+		background-image: url('#{$eye}');
+		
+		&:hover {
+
+			background-image: url('#{$eye-white}');
+		}
+		
+		&:active {
+			
+			background-image: url('#{$eye-white}');
+		}
+	}
+}
+
+aside {
+
+	width: 200px;
+	float: left;
+	height: calc(100vh - 23px);
+	border-right: 1px solid $dividers;
+	position: relative;
+	overflow-x: hidden; 
+	overflow-y: scroll;
+}
+
+#divider {
+
+	width: 5px;
+	position: absolute;
+	top: 0;
+	right: -2px;
+	bottom: 0;
+	cursor: col-resize;
+	z-index: 1000;
+}
+
+#sidebar {
+	
+	button {
+		
+		width: 100%;
+		height: 55px;
+		display: block;
+		border: 0;
+		border-radius: 0;
+		text-align: left;
+		background-color: transparent;
+		position: relative;
+		
+		&::after {
+			
+			content: '';
+			display: block;
+			position: absolute;
+			bottom: 0;
+			left: 25px;
+			right: 0;
+			height: 1px;
+			background-color: $dividers;
+		}
+		
+		span {
+			
+			display: block;
+			padding-left: 25px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		
+		.side-title {
+			
+			font-size: 13px;
+			font-weight: 700;
+			padding-bottom: 2px;
+			position: relative;
+		}
+		
+		.side-text {
+			
+			font-size: 12px;
+		}
+		
+		&[data-favorite="true"] {
+			
+			.side-title::before {
+				
+				content: '';
+				display: block;
+				width: 14px;
+				height: 14px;
+				background: url('#{$favorite}') no-repeat center;
+				position: absolute;
+				top: 0;
+				left: 4px;
+			}
+		}
+		
+		&:focus {
+			
+			outline: none;
+			background-color: rgba($app-color, .5);
+			
+			&::after { display: none; }
+		}
+		
+		&.selected {
+			
+			outline: none;
+			background-color: $app-color;
+			
+			&::after { display: none; }
+		}
+		
+		&.above-selected {
+			
+			&::after { display: none; }
+		}
+	}
+}
+
+.loader {
+	
+	height: calc(100vh - 23px);
+	background: url('#{$loader}') no-repeat center center;
+}
+
+.CodeMirror {
+	
+	border: none;
+	color: inherit;
+	background: transparent;
+	border-top: 1px solid $dividers;
+	position: absolute;
+	top: 54px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 0 22px;
+	
+	.cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
+		
+		background: none;
+		background-image: none;
+		background-position: 0 bottom;
+		background-repeat: repeat-x;
+		background-size: 5px 2px;
+	}
+	
+	&.spellcheck {
+		
+		.cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
+			
+			background-image: linear-gradient(to right, red 50%, transparent 50%);
+		}
+	}
+}
+
+.CodeMirror-code {
+	
+	margin-top: 22px;
+	
+	&.hide { opacity: 0 }
+}
+
+.editor-toolbar {
+	
+	border: 0;
+	border-radius: 0;
+	height: 39px;
+    margin-top: 3px;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	text-align: center;
+	
+	a:hover { cursor: default; }
+}
+
+.editor-preview {
+	
+	padding: 22px;
+	background-image: url('#{$texture}');
+}

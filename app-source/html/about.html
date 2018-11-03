@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>&nbsp;</title>
+	<link rel="stylesheet" type="text/css" href="../css/about.min.css" media="all">
+</head>
+<body>
+	<header>
+		
+	</header>
+	
+	<main>
+		
+		<figure>
+			<img src="../assets/icon/icon.png" width="128" height="128" alt="" />
+		</figure>
+		
+		<h1 id="productName"></h1>
+		<p id="description"></p>
+		
+		<dl>
+			<dt>version:</dt>
+			<dd id="version"></dd>
+			<dt>author:</dt>
+			<dd id="author"></dd>
+			<dt>license:</dt>
+			<dd id="license"></dd>
+		</dl>
+		
+		<button id="info" role="button">more info</button>
+	</main>
+	
+	<script>
+		window.$ = window.jQuery = require( 'jquery' )
+		const shell = require('electron')
+				
+		$.getJSON('../../package.json', function(json) {
+			
+			let packageData = json
+			
+			$('#productName').html( packageData['productName'] )
+			$('#version').html( packageData['version'] )
+			$('#description').html( packageData['description'] )
+			$('#author').html( packageData['author']['name'] )
+			$('#license').html( packageData['license'] )
+			
+			$('#info').click(function() {
+				
+				require('electron').shell.openExternal( packageData['homepage'] )
+			})
+		})
+	</script>
+</body>
+</html>

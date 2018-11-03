@@ -1,0 +1,11 @@
+# Mac
+.DS_Store
+
+# Dependency directories
+node_modules/
+
+# Release
+build
+
+# NPM debug
+npm-debug.log
