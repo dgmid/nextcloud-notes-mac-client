@@ -8,10 +8,9 @@ A replacement for the Mac Notes app that syncs with the Nextcloud Notes app
 
 [node.js / npm](https://www.npmjs.com/get-npm)
 
-To modify a/o build this project you will need to install electron and electron packager
+To modify a/o build this project you will need to install electron packager
 
 ```shell
-npm install electron -g --save-exact
 npm install electron-packager -g
 ```
 

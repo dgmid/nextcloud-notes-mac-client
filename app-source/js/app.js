@@ -91,14 +91,16 @@ function apiCall( call, id, body ) {
 		method: method,
 		headers: {
 			'Authorization': 'Basic ' + btoa( username + ':' + password ),
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		},
 		mode: 'cors',
-		cache: 'default'
+		cache: 'no-store'
 	}
 	
 	if( id ) { url += `/${id}` }
 	if( body ) { init.body = JSON.stringify( body ) }
+	
+	console.log( `URL: ${url}` )
 	
 	fetch(server + url, init).then(function(response) {
 	
@@ -110,7 +112,7 @@ function apiCall( call, id, body ) {
 		} else {
 			
 			dialog.showErrorBox(
-				'Server connection error',
+				' Server connection error',
 				`there was an error connecting to:\n${server}`
 			)
 			
@@ -197,7 +199,7 @@ function apiCall( call, id, body ) {
 	}).catch(function(error) {
 		
 		dialog.showErrorBox(
-				'Server connection error',
+				`Server connection error`,
 				`there was an error connecting to:\n${server}`
 			)
 		
@@ -596,7 +598,10 @@ function openModal( url, width, height, resize ) {
 			minHeight: height,
 			resizable: resize,
 			show: false,
-			backgroundColor: '#ececec'
+			backgroundColor: '#ececec',
+			webPreferences: {
+				nodeIntegration: true
+			}	
 		})
 		
 	modal.loadURL( url )

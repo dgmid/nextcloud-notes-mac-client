@@ -8,7 +8,6 @@ const 	gulp 			= require('gulp'),
 		uglify 			= require('gulp-uglify-es').default,
 		pump 			= require('pump'),
 		iconutil 		= require('gulp-iconutil'),
-		sequence 		= require('run-sequence'),
 		exec 			= require('child_process').exec
 
 
@@ -50,7 +49,7 @@ gulp.task('html', () => {
 
 
 
-gulp.task('js', (cb) => {
+gulp.task('js', done => {
 	
 	pump([
 			gulp.src(sourceJs),
@@ -64,10 +63,10 @@ gulp.task('js', (cb) => {
 			rename({suffix: '.min'}),
 			sourcemaps.write('./maps'),
 			gulp.dest(destJs)
-		],
-		
-		cb()
+		]
 	)
+	
+	done()
 })
 
 
@@ -106,21 +105,25 @@ gulp.task('json', () => {
 
 
 
-gulp.task('build', () => {
+gulp.task('build', gulp.series(	'sass',
+								'html',
+								'js',
+								'svg',
+								'json',
+								'icns',
+								'icon'
+), done => {
 	
-	sequence(
-		'sass',
-		['html', 'js', 'svg', 'json'],
-		'icns',
-		'icon'
-	)
+	done()
 })
 
 
 
-gulp.task('watch', ['html', 'js', 'sass'], () => {
+gulp.task('watch', gulp.series(gulp.parallel('html', 'js', 'sass'), () => {
 	
-	gulp.watch('app-source/html/**/*.html', ['html'])
-	gulp.watch('app-source/js/**/*.js', ['js'])
-	gulp.watch('app-source/scss/**/*.scss', ['sass'])
-})
+	gulp.watch('app-source/html/**/*.html', gulp.series('html')),
+	gulp.watch('app-source/js/**/*.js', gulp.series('js')),
+	gulp.watch('app-source/scss/**/*.scss', gulp.series('sass'))
+	
+	return
+}))

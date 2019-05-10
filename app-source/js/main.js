@@ -69,6 +69,9 @@ function createWindow() {
 		minWidth: 500,
 		minHeight: 372,
 		backgroundColor: '#fff',
+		webPreferences: {
+			nodeIntegration: true
+		},
 		icon: path.join(__dirname, '../assets/icon/Icon.icns')
 	})
 	
@@ -174,6 +177,9 @@ app.on('open-prefs', () => {
 			maximizable: false,
 			show: false,
 			backgroundColor: '#EDEDED',
+			webPreferences: {
+				nodeIntegration: true
+			},
 		})
 		
 		
