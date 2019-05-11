@@ -18,7 +18,7 @@ const 	server 		= store.get( 'loginCredentials.server' ),
 
 let modal
 
-const SimpleMDE = require( 'simplemde' )
+const SimpleMDE = require( 'easymde' )
 
 let smeSetup = {
 		
