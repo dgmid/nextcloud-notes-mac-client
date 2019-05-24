@@ -65,9 +65,10 @@ main {
 	font-size: 16px;
 	line-height: 1.4;
 	overflow-y: scroll;
-	
 	position: relative;
-
+	
+	&::-webkit-scrollbar { width: 0 !important }
+	
 	#edit {
 	
 		position: fixed;
@@ -283,11 +284,15 @@ aside {
 	border-radius: 0;
 	height: 50px;
     margin-top: 3px;
-	overflow-x: scroll;
-	overflow-y: hidden;
+	overflow: hidden;
 	text-align: center;
+	white-space: nowrap;
 	
-	a:hover { cursor: default; }
+	button {
+		
+		cursor: default;
+		font-size: 15px;
+	}
 }
 
 .editor-preview {

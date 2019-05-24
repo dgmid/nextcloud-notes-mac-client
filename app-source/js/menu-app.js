@@ -7,7 +7,8 @@ const BrowserWindow = electron.BrowserWindow
 const ipc = electron.ipcMain
 const path = require('path')
 const name = app.getName()
-var about = require('./about.min')
+
+let about = require('./about.min')
 
 
 
@@ -16,20 +17,20 @@ const template = [
 		label: name,
 		submenu: [
 			{
-				label: 'About ' + name,
+				label: 'About' + ` ${name}`,
 				click() { about.createAbout() }
 			},
 			{
 				type: 'separator'
 			},
 			{
-				label: 'Log in/out to Nextcloud…',
+				label: 'Log in/out to Nextcloud' + '…',
 				accelerator: 'Command+Ctrl+Alt+l',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('open-login-modal', 'open-login-modal') }
 			
 			},
 			{
-				label: 'Preferences…',
+				label: 'Preferences' + '…',
 				accelerator: 'Command+,',
 				click () { app.emit('open-prefs') }
 			
@@ -38,6 +39,7 @@ const template = [
 				type: 'separator'
 			},
 			{
+				label: 'Services',
 				role: 'services',
 				submenu: []
 			},
@@ -45,18 +47,22 @@ const template = [
 				type: 'separator'
 			},
 			{
+				label: 'Hide' + ` ${name}`,
 				role: 'hide'
 			},
 			{
+				label: 'Hide Others',
 				role: 'hideothers'
 			},
 			{
+				label: 'Show All',
 				role: 'unhide'
 			},
 			{
 				type: 'separator'
 			},
 			{
+				label: 'Quit' + ` ${name}`,
 				role: 'quit'
 			}
 		]
@@ -88,7 +94,7 @@ const template = [
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'favorite') }
 			},
 			{
-				label: 'Export Selected Note as…',
+				label: 'Export Selected Note as' + '…',
 				accelerator: 'Cmd+Alt+e',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'export') }
 			},
@@ -106,30 +112,38 @@ const template = [
 		label: 'Edit',
 		submenu: [
 			{
+				label: 'Undo',
 				role: 'undo'
 			},
 			{
+				label: 'Redo',
 				role: 'redo'
 			},
 			{
 				type: 'separator'
 			},
 			{
+				label: 'Cut',
 				role: 'cut'
 			},
 			{
+				label: 'Copy',
 				role: 'copy'
 			},
 			{
+				label: 'Paste',
 				role: 'paste'
 			},
 			{
+				label: 'Paste and Match Style',
 				role: 'pasteandmatchstyle'
 			},
 			{
+				label: 'Delete',
 				role: 'delete'
 			},
 			{
+				label: 'Select All',
 				role: 'selectall'
 			}
 		]
@@ -308,11 +322,13 @@ const template = [
 				type: 'separator'
 			},
 			{
+				label: 'Toggle Full Screen',
 				role: 'togglefullscreen'
 			}
 		]
 	},
 	{
+		label: 'Window',
 		role: 'window',
 		submenu:
 		[
@@ -340,6 +356,7 @@ const template = [
 		]
 	},
 	{
+		label: 'Help',
 		role: 'help',
 		submenu:
 		[

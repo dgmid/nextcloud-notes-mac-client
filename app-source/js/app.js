@@ -18,31 +18,92 @@ const 	server 		= store.get( 'loginCredentials.server' ),
 
 let modal
 
-const SimpleMDE = require( 'easymde' )
+const EasyMDE = require( 'easymde' )
 
-let smeSetup = {
+let easymdeSetup = {
 		
 		element: $('#note')[0],
 		autofocus: false,
 		forceSync: true,
 		status: false,
 		spellChecker: true,
-		toolbar: [	'heading',
+		toolbar: [	
+					{
+						name: "Heading",
+						action: EasyMDE.toggleHeadingSmaller,
+						className: "fa fa-header",
+						title: 'Heading',
+					},
 					'|',
-					'bold',
-					'italic',
-					'strikethrough',
+					{
+						name: "bold",
+						action: EasyMDE.toggleBold,
+						className: "fa fa-bold",
+						title: 'Bold',
+					},
+					{
+						name: "italic",
+						action: EasyMDE.toggleItalic,
+						className: "fa fa-italic",
+						title: 'Italic',
+					},
+					{
+						name: "srtikethrough",
+						action: EasyMDE.toggleStrikethrough,
+						className: "fa fa-strikethrough",
+						title: 'Strikethrough',
+					},
 					'|',
-					'unordered-list',
-					'ordered-list',
+					{
+						name: "unordered-list",
+						action: EasyMDE.toggleUnorderedList,
+						className: "fa fa-list-ul",
+						title: 'Generic List',
+					},
+					{
+						name: "ordered-list",
+						action: EasyMDE.toggleOrderedList,
+						className: "fa fa-list-ol",
+						title: 'Numbered List',
+					},
 					'|',
-					'link',
-					'image',
+					{
+						name: "link",
+						action: EasyMDE.drawLink,
+						className: "fa fa-link",
+						title: 'Create Link',
+					},
+					{
+						name: "image",
+						action: EasyMDE.drawImage,
+						className: "fa fa-picture-o",
+						title: 'Insert Image',
+					},
 					'|',
-					'code',
-					'quote',
-					'table',
-					'horizontal-rule'
+					{
+						name: "code",
+						action: EasyMDE.toggleCodeBlock,
+						className: "fa fa-code",
+						title: 'Code',
+					},
+					{
+						name: "quote",
+						action: EasyMDE.toggleBlockquote,
+						className: "fa fa-quote-left",
+						title: 'Quote',
+					},
+					{
+						name: "table",
+						action: EasyMDE.drawTable,
+						className: "fa fa-table",
+						title: 'Insert Table',
+					},
+					{
+						name: "horizontal-rule",
+						action: EasyMDE.drawHorizontalRule,
+						className: "fa fa-minus",
+						title: 'Insert Horizontal Line',
+					},
 				],
 		shortcuts: {
 			'toggleStrikethrough': 'Cmd-Alt-D',
@@ -56,7 +117,7 @@ let smeSetup = {
 		}
 	}
 
-let simplemde = new SimpleMDE( smeSetup )
+let easymde = new EasyMDE( easymdeSetup )
 
 
 
@@ -112,8 +173,8 @@ function apiCall( call, id, body ) {
 		} else {
 			
 			dialog.showErrorBox(
-				' Server connection error',
-				`there was an error connecting to:\n${server}`
+				'Server connection error',
+				`${'there was an error connecting to'} :\n${server}`
 			)
 			
 			console.log( response.error() )
@@ -129,7 +190,7 @@ function apiCall( call, id, body ) {
 			
 			dialog.showErrorBox(
 				'JSON parsing error',
-				`An error occured parsing the notes`
+				'An error occured parsing the notes'
 			)
 			
 			console.log(notes['message'])	
@@ -199,8 +260,8 @@ function apiCall( call, id, body ) {
 	}).catch(function(error) {
 		
 		dialog.showErrorBox(
-				`Server connection error`,
-				`there was an error connecting to:\n${server}`
+				'Server connection error',
+				 `${'there was an error connecting to'} :\n${server}`
 			)
 		
 		console.log(error)
@@ -213,8 +274,8 @@ function apiCall( call, id, body ) {
 
 function resetEditor() {
 	
-	simplemde.codemirror.setValue('')
-	simplemde.value('')
+	easymde.codemirror.setValue('')
+	easymde.value('')
 	$('.editor-preview').html('')
 }
 
@@ -224,14 +285,14 @@ function resetEditor() {
 
 function insertTextAtCursor( text ) {
 	
-	let note = simplemde.codemirror.getDoc()
+	let note = easymde.codemirror.getDoc()
 	let cursor = note.getCursor()
 	note.replaceRange(text, cursor)
 }
 
 function wrapTextToSelection( start, end ) {
 	
-	let note = simplemde.codemirror.getDoc()
+	let note = easymde.codemirror.getDoc()
 	let selection = note.getSelection()
 	note.replaceSelection( start + selection + end )
 }
@@ -311,12 +372,12 @@ function formatDate( now, timestamp ) {
 	} else if ( (now - 604800) < timestamp ) {
 		
 		//day
-		return dateFormat( timestamp * 1000, 'dddd')
+		return dateFormat( timestamp * 1000, 'dddd' )
 	
 	} else {
 		
 		//date
-		return dateFormat( timestamp * 1000, 'dd/mm/yy')
+		return dateFormat( timestamp * 1000, 'dd/mm/yy' )
 	}
 }
 
@@ -326,19 +387,23 @@ function formatDate( now, timestamp ) {
 
 function displayNote( note ) {
 	
+	let prep = 'at',
+		date = dateFormat(note.modified * 1000, "d mmmm, yyyy"),
+		time = dateFormat(note.modified * 1000, "HH:MM")
+	
 	$('.CodeMirror-code').addClass('hide')
 	$('#edit').removeClass('editing')
 	
-	$('#time').html( dateFormat(note.modified * 1000, 'd mmmm, yyyy "at" HH:MM') )
+	$('#time').html( `${date} ${prep} ${time}` )
 	
 	resetEditor()
 	
-	if( simplemde.isPreviewActive() ) simplemde.togglePreview()
+	if( easymde.isPreviewActive() ) easymde.togglePreview()
 	
 	$('#note').attr('data-id', note.id)
-	simplemde.value( note.content )
-	simplemde.codemirror.clearHistory()
-	simplemde.togglePreview()
+	easymde.value( note.content )
+	easymde.codemirror.clearHistory()
+	easymde.togglePreview()
 	applyZoom( store.get( 'appSettings.zoom' ) )
 	
 	$('.CodeMirror-code').removeClass('hide')
@@ -370,42 +435,42 @@ function editNote() {
 		
 	if( selected ) {
 		
-		if( simplemde.isPreviewActive() ) {
+		if( easymde.isPreviewActive() ) {
 		
 			$('#edit').addClass('editing')
-			simplemde.togglePreview()
-			simplemde.codemirror.focus()
+			easymde.togglePreview()
+			easymde.codemirror.focus()
 			
 			if( store.get('appSettings.cursor') == 'end' ) {
 				
-				simplemde.codemirror.setCursor(simplemde.codemirror.lineCount(), 0)
+				easymde.codemirror.setCursor(easymde.codemirror.lineCount(), 0)
 			}
 		
 		} else {
 			
-			if( simplemde.codemirror.historySize().undo > 0 ) {
+			if( easymde.codemirror.historySize().undo > 0 ) {
 			
 				let response = dialog.showMessageBox(remote.getCurrentWindow(), {
-								message: `You have made changes to this note`,
-								detail: `Do you want to save them?`,
-								buttons: ['Save changes','Cancel']
+								message: 'You have made changes to this note',
+								detail: 'Do you want to save them?',
+								buttons: ['Save changes', 'Cancel']
 							})
 				
 				if( response === 0 ) {
 					
-					let content = simplemde.value()
+					let content = easymde.value()
 					
-					simplemde.codemirror.clearHistory()
+					easymde.codemirror.clearHistory()
 					
 					apiCall( 'save', selected, {"content": content, "modified": Math.floor(Date.now() / 1000) } )
 				
 				} else {
 			
-					while ( simplemde.codemirror.historySize().undo > 0) simplemde.codemirror.undo()
+					while ( easymde.codemirror.historySize().undo > 0) easymde.codemirror.undo()
 				}
 			}
 			
-			simplemde.togglePreview()
+			easymde.togglePreview()
 			$('#edit').removeClass('editing').focus()
 		}
 	}
@@ -417,14 +482,14 @@ function editNote() {
 
 function saveNote( id ) {
 	
-		if(	!simplemde.isPreviewActive() &&
-			simplemde.codemirror.historySize().undo > 0 ) {
+		if(	!easymde.isPreviewActive() &&
+			easymde.codemirror.historySize().undo > 0 ) {
 			
 			console.log( 'SAVING!!' )
 			
-			let content = simplemde.value()
+			let content = easymde.value()
 						
-			//simplemde.codemirror.clearHistory()
+			//easymde.codemirror.clearHistory()
 						
 			apiCall( 'save', id, {"content": content, "modified": Math.floor(Date.now() / 1000) } )
 		}
@@ -497,7 +562,7 @@ function exportNote( note ) {
 			
 			let exportNotification = new Notification('Nextcloud Notes Client', {
 			
-				body: `The note ${note.title} has been exported as ${filetype}.`
+				body: `${'The note'} ${note.title} ${'has been exported as'} ${filetype}.`
 			})
 		})
 		
@@ -515,9 +580,9 @@ function exportNote( note ) {
 function deleteCheck( id ) {
 	
 	let response = dialog.showMessageBox(remote.getCurrentWindow(), {
-							message: `Are you sure you want to delete this note?`,
-							detail: `This operation is not reversable.`,
-							buttons: ['Delete Note','Cancel']
+							message: 'Are you sure you want to delete this note?',
+							detail: 'This operation is not reversable.',
+							buttons: ['Delete Note', 'Cancel']
 						})
 		
 	if( response === 0 ) {
@@ -641,7 +706,7 @@ ipcRenderer.on('note', (event, message) => {
 	switch( message ) {
 		
 		case 'new':
-			apiCall( 'new', null, {"content": "# New note"} )
+			apiCall( 'new', null, {"content": `# ${'New note'}`} )
 		break
 		
 		case 'edit':
@@ -677,60 +742,60 @@ ipcRenderer.on('note', (event, message) => {
 
 ipcRenderer.on('markdown', (event, message) => {
 	
-	if( !simplemde.isPreviewActive() ) {
+	if( !easymde.isPreviewActive() ) {
 		
 		switch( message ) {
 			
 			case 'h1':
-				simplemde.toggleHeading1()
+				easymde.toggleHeading1()
 			break
 			case 'h2':
-				simplemde.toggleHeading2()
+				easymde.toggleHeading2()
 			break
 			case 'h3':
-				simplemde.toggleHeading3()
+				easymde.toggleHeading3()
 			break
 			case 'h4':
-				simplemde.toggleHeading4()
+				easymde.toggleHeading4()
 			break
 			case 'h5':
-				simplemde.toggleHeading5()
+				easymde.toggleHeading5()
 			break
 			case 'h6':
-				simplemde.toggleHeading6()
+				easymde.toggleHeading6()
 			break
 			case 'b':
-				simplemde.toggleBold()
+				easymde.toggleBold()
 			break
 			case 'i':
-				simplemde.toggleItalic()
+				easymde.toggleItalic()
 			break
 			case 'del':
-				simplemde.toggleStrikethrough()
+				easymde.toggleStrikethrough()
 			break
 			case 'ul':
-				simplemde.toggleUnorderedList()
+				easymde.toggleUnorderedList()
 			break
 			case 'ol':
-				simplemde.toggleOrderedList()
+				easymde.toggleOrderedList()
 			break
 			case 'a':
-				simplemde.drawLink()
+				easymde.drawLink()
 			break
 			case 'img':
-				simplemde.drawImage()
+				easymde.drawImage()
 			break
 			case 'code':
-				simplemde.toggleCodeBlock()
+				easymde.toggleCodeBlock()
 			break
 			case 'blockquote':
-				simplemde.toggleBlockquote()
+				easymde.toggleBlockquote()
 			break
 			case 'table':
-				simplemde.drawTable()
+				easymde.drawTable()
 			break
 			case 'hr':
-				simplemde.drawHorizontalRule()
+				easymde.drawHorizontalRule()
 			break
 		}
 	}
@@ -743,7 +808,7 @@ ipcRenderer.on('markdown', (event, message) => {
 ipcRenderer.on('html', (event, message) => {
 	
 	
-	if( !simplemde.isPreviewActive() ) {
+	if( !easymde.isPreviewActive() ) {
 		
 		switch( message ) {
 			
@@ -757,15 +822,16 @@ ipcRenderer.on('html', (event, message) => {
 			case 'dl':
 				insertTextAtCursor(
 `<dl>
-	<dt>title</dt>
-	<dd>description</dd>
-	<dt>title</dt>
-	<dd>description</dd>
+	<dt>${'title'}</dt>
+	<dd>${'description'}</dd>
+	<dt>${'title'}</dt>
+	<dd>${'description'}</dd>
 </dl>` )
 			break
 		}
 	}
 })
+
 
 
 //note(@duncanmid): view menu - zoom levels

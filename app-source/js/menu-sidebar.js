@@ -35,7 +35,7 @@ ipc.on('show-sidebar-menu', ( event, message ) => {
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('context-favorite', message) }
 			},
 			{
-				label: 'Export as…',
+				label: 'Export as' + '…',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('context-export', message.id) }
 			},
 			{
