@@ -1,9 +1,9 @@
 'use strict'
 
-const {ipcRenderer, shell} = require( 'electron' )
+const i18n = require( './i18n.min' )
+const {ipcRenderer, shell, remote} = require( 'electron' )
 const Store = require( 'electron-store' )
 const store = new Store()
-const { remote } = require( 'electron' )
 const dialog = remote.dialog
 const dateFormat = require( 'dateformat' )
 const $ = require( 'jquery' )
@@ -32,77 +32,77 @@ let easymdeSetup = {
 						name: "Heading",
 						action: EasyMDE.toggleHeadingSmaller,
 						className: "fa fa-header",
-						title: 'Heading',
+						title: i18n.t('app:toolbar.heading', 'Heading'),
 					},
 					'|',
 					{
 						name: "bold",
 						action: EasyMDE.toggleBold,
 						className: "fa fa-bold",
-						title: 'Bold',
+						title: i18n.t('app:toolbar.bold', 'Bold'),
 					},
 					{
 						name: "italic",
 						action: EasyMDE.toggleItalic,
 						className: "fa fa-italic",
-						title: 'Italic',
+						title: i18n.t('app:toolbar.italic', 'Italic'),
 					},
 					{
 						name: "srtikethrough",
 						action: EasyMDE.toggleStrikethrough,
 						className: "fa fa-strikethrough",
-						title: 'Strikethrough',
+						title: i18n.t('app:toolbar.strikethrough', 'Strikethrough'),
 					},
 					'|',
 					{
 						name: "unordered-list",
 						action: EasyMDE.toggleUnorderedList,
 						className: "fa fa-list-ul",
-						title: 'Generic List',
+						title: i18n.t('app:toolbar.ul', 'Generic List'),
 					},
 					{
 						name: "ordered-list",
 						action: EasyMDE.toggleOrderedList,
 						className: "fa fa-list-ol",
-						title: 'Numbered List',
+						title: i18n.t('app:toolbar.ol', 'Numbered List'),
 					},
 					'|',
 					{
 						name: "link",
 						action: EasyMDE.drawLink,
 						className: "fa fa-link",
-						title: 'Create Link',
+						title: i18n.t('app:toolbar.link', 'Create Link'),
 					},
 					{
 						name: "image",
 						action: EasyMDE.drawImage,
 						className: "fa fa-picture-o",
-						title: 'Insert Image',
+						title: i18n.t('app:toolbar.image', 'Insert Image'),
 					},
 					'|',
 					{
 						name: "code",
 						action: EasyMDE.toggleCodeBlock,
 						className: "fa fa-code",
-						title: 'Code',
+						title: i18n.t('app:toolbar.code', 'Code'),
 					},
 					{
 						name: "quote",
 						action: EasyMDE.toggleBlockquote,
 						className: "fa fa-quote-left",
-						title: 'Quote',
+						title: i18n.t('app:toolbar.quote', 'Quote'),
 					},
 					{
 						name: "table",
 						action: EasyMDE.drawTable,
 						className: "fa fa-table",
-						title: 'Insert Table',
+						title: i18n.t('app:toolbar.table', 'Insert Table'),
 					},
 					{
 						name: "horizontal-rule",
 						action: EasyMDE.drawHorizontalRule,
 						className: "fa fa-minus",
-						title: 'Insert Horizontal Line',
+						title: i18n.t('app:toolbar.hr', 'Insert Horizontal Line'),
 					},
 				],
 		shortcuts: {
@@ -119,6 +119,64 @@ let easymdeSetup = {
 
 let easymde = new EasyMDE( easymdeSetup )
 
+
+
+//note(@duncanmid): dateFormat i18n setup
+
+dateFormat.i18n = {
+    dayNames: [
+        'Sun',
+        'Mon',
+        'Tue',
+        'Wed',
+        'Thu',
+        'Fri',
+        'Sat',
+        i18n.t('date:sunday', 'Sunday'),
+        i18n.t('date:monday', 'Monday'),
+        i18n.t('date:tuesday', 'Tuesday'),
+        i18n.t('date:wednesday', 'Wednesday'),
+        i18n.t('date:thursday', 'Thursday'),
+        i18n.t('date:friday', 'Friday'),
+        i18n.t('date:saturday', 'Saturday')
+    ],
+    monthNames: [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+        i18n.t('date:january', 'January',),
+        i18n.t('date:february', 'February'),
+        i18n.t('date:march', 'March'),
+        i18n.t('date:april', 'April'),
+        i18n.t('date:may', 'May'),
+        i18n.t('date:june', 'June'),
+        i18n.t('date:july', 'July'),
+        i18n.t('date:august', 'August'),
+        i18n.t('date:september', 'September'),
+        i18n.t('date:august', 'October'),
+        i18n.t('date:november', 'November'),
+        i18n.t('date:december', 'December')
+    ],
+    timeNames: [
+        'a',
+        'p',
+        'am',
+        'pm',
+        'A',
+        'P',
+        'AM',
+        'PM'
+    ]
+}
 
 
 //note(@duncanmid): call notes api
@@ -173,8 +231,8 @@ function apiCall( call, id, body ) {
 		} else {
 			
 			dialog.showErrorBox(
-				'Server connection error',
-				`${'there was an error connecting to'} :\n${server}`
+				i18n.t('app:dialog.error.server.title', 'Server connection error'),
+				i18n.t('app:dialog.error.server.text', 'there was an error connecting to') + `:\n${server}`
 			)
 			
 			console.log( response.error() )
@@ -189,8 +247,8 @@ function apiCall( call, id, body ) {
 		if (notes['status'] == 'error') {
 			
 			dialog.showErrorBox(
-				'JSON parsing error',
-				'An error occured parsing the notes'
+				i18n.t('app:dialog.error.json.title', 'JSON parsing error'),
+				i18n.t('app:dialog.error.json.text', 'An error occured parsing the notes')
 			)
 			
 			console.log(notes['message'])	
@@ -260,9 +318,9 @@ function apiCall( call, id, body ) {
 	}).catch(function(error) {
 		
 		dialog.showErrorBox(
-				'Server connection error',
-				 `${'there was an error connecting to'} :\n${server}`
-			)
+			i18n.t('app:dialog.error.server.title', 'Server connection error'),
+			i18n.t('app:dialog.error.server.text', 'there was an error connecting to') + `:\n${server}`
+		)
 		
 		console.log(error)
 	})
@@ -340,7 +398,7 @@ function listNotes( array, sidebar ) {
 			
 		} else {
 			
-			plainTxt = 'No additional text'
+			plainTxt = i18n.t('app:sidebar.notext', 'No additional text')
 		}
 		                                                                                     
 		$('#sidebar').append(
@@ -387,7 +445,7 @@ function formatDate( now, timestamp ) {
 
 function displayNote( note ) {
 	
-	let prep = 'at',
+	let prep = i18n.t('app:date.titlebar', 'at'),
 		date = dateFormat(note.modified * 1000, "d mmmm, yyyy"),
 		time = dateFormat(note.modified * 1000, "HH:MM")
 	
@@ -437,7 +495,7 @@ function editNote() {
 		
 		if( easymde.isPreviewActive() ) {
 		
-			$('#edit').addClass('editing')
+			$('#edit').attr('title', i18n.t('app:main.button.save', 'Save Note')).addClass('editing')
 			easymde.togglePreview()
 			easymde.codemirror.focus()
 			
@@ -451,9 +509,9 @@ function editNote() {
 			if( easymde.codemirror.historySize().undo > 0 ) {
 			
 				let response = dialog.showMessageBox(remote.getCurrentWindow(), {
-								message: 'You have made changes to this note',
-								detail: 'Do you want to save them?',
-								buttons: ['Save changes', 'Cancel']
+								message: i18n.t('app:dialog.save.title', 'You have made changes to this note'),
+								detail: i18n.t('app:dialog.save.text', 'Do you want to save them?'),
+								buttons: [i18n.t('app:dialog.button.savechanges', 'Save changes'), i18n.t('app:dialog.button.cancel', 'Cancel')]
 							})
 				
 				if( response === 0 ) {
@@ -471,7 +529,7 @@ function editNote() {
 			}
 			
 			easymde.togglePreview()
-			$('#edit').removeClass('editing').focus()
+			$('#edit').attr('title', i18n.t('app:main.button.edit', 'Edit Note')).removeClass('editing').focus()
 		}
 	}
 }
@@ -506,18 +564,18 @@ function exportNote( note ) {
 	dialog.showSaveDialog(remote.getCurrentWindow(), {
 			
 			defaultPath: `${exportPath}/${note.title}`,
-			buttonLabel: 'Export Note',
+			buttonLabel: i18n.t('app:dialog.button.export', 'Export Note'),
 			properties: [	'openDirectory',
 							'createDirectory'
 						],
 			filters: [
-				{	name:		'html',
+				{	name:		i18n.t('app:dialog.format.html', 'html'),
 					extensions:	['html']
 				},
-				{	name:		'markdown',
+				{	name:		i18n.t('app:dialog.format.md', 'markdown'),
 					extensions:	['md']
 				},
-				{	name:		'text',
+				{	name:		i18n.t('app:dialog.format.txt', 'text'),
 					extensions:	['txt']
 				}
 			]
@@ -561,8 +619,8 @@ function exportNote( note ) {
 		.then(data => {
 			
 			let exportNotification = new Notification('Nextcloud Notes Client', {
-			
-				body: `${'The note'} ${note.title} ${'has been exported as'} ${filetype}.`
+				
+				body: i18n.t('app:notification.export.text', 'The note {{title}} has been exported as {{filetype}}', {title: note.title, filetype: filetype})
 			})
 		})
 		
@@ -580,9 +638,9 @@ function exportNote( note ) {
 function deleteCheck( id ) {
 	
 	let response = dialog.showMessageBox(remote.getCurrentWindow(), {
-							message: 'Are you sure you want to delete this note?',
-							detail: 'This operation is not reversable.',
-							buttons: ['Delete Note', 'Cancel']
+							message: i18n.t('app:dialog.delete.title', 'Are you sure you want to delete this note?'),
+							detail: i18n.t('app:dialog.delete.text', 'This operation is not reversable.'),
+							buttons: [i18n.t('app:dialog.button.delete', 'Delete Note'), i18n.t('app:dialog.button.cancel', 'Cancel')]
 						})
 		
 	if( response === 0 ) {
@@ -706,7 +764,7 @@ ipcRenderer.on('note', (event, message) => {
 	switch( message ) {
 		
 		case 'new':
-			apiCall( 'new', null, {"content": `# ${'New note'}`} )
+			apiCall( 'new', null, {"content": '# ' +  i18n.t('app:sidebar.new', 'New note')} )
 		break
 		
 		case 'edit':
@@ -822,10 +880,10 @@ ipcRenderer.on('html', (event, message) => {
 			case 'dl':
 				insertTextAtCursor(
 `<dl>
-	<dt>${'title'}</dt>
-	<dd>${'description'}</dd>
-	<dt>${'title'}</dt>
-	<dd>${'description'}</dd>
+	<dt>${i18n.t('app:main.title', 'title')}</dt>
+	<dd>${i18n.t('app:main.description', 'description')}</dd>
+	<dt>${i18n.t('app:main.title', 'title')}</dt>
+	<dd>${i18n.t('app:main.description', 'description')}</dd>
 </dl>` )
 			break
 		}
@@ -971,9 +1029,17 @@ $('body').on('click', '.editor-preview a', (event) => {
 //note(@duncanmid): docready
 
 $(document).ready(function() {
-
+	
+	// set lang
+	$('html').attr('lang', i18n.language)
+	
+	// set spellcheck
 	toggleSpellcheck( store.get('appSettings.spellcheck') )
 	
+	// set edit button title
+	$('#edit').attr('title', i18n.t('app:main.button.edit', 'Edit Note'))
+	
+	// check login
 	if( !server || !username || !password ) {
 		
 		openModal( 'file://' + __dirname + '/../html/login.html', 480, 180, false )
@@ -983,7 +1049,7 @@ $(document).ready(function() {
 		apiCall('all')	
 	}
 	
-	
+	// edit save
 	$('#edit').click(function() {
 		
 		editNote()

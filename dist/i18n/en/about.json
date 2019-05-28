@@ -1,0 +1,13 @@
+{
+  "body": {
+    "description": "Access and edit your Nextcloud Notes on the Mac",
+    "label": {
+      "version": "version:",
+      "author": "author:",
+      "license": "license:"
+    },
+    "button": {
+      "info": "more info"
+    }
+  }
+}

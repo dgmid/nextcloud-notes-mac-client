@@ -1,0 +1,22 @@
+{
+  "head": {
+    "title": "Preferenze"
+  },
+  "body": {
+    "option": {
+      "date": "Data",
+      "title": "Titolo",
+      "desc": "Discendente",
+      "asc": "Ascendente"
+    },
+    "label": {
+      "sort": "Ordina per",
+      "order": "In ordine",
+      "zoom": "Dimensione testo predefinita",
+      "cursor": "Posizione cursore",
+      "start": "inizio",
+      "end": "fine",
+      "spell": "Controllo ortografico"
+    }
+  }
+}

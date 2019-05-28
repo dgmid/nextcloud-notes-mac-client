@@ -9,6 +9,7 @@ const Store = require('electron-store')
 const marked = require( 'marked' )
 const removeMarkdown = require( 'remove-markdown' )
 
+
 let win,
 	loginFlow,
 	prefs = null

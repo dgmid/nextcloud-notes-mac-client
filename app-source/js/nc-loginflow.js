@@ -1,5 +1,6 @@
 'use strict'
 
+const i18n = require( './i18n.min' )
 const Store = require( 'electron-store' )
 const store = new Store()
 
@@ -7,6 +8,8 @@ const server = store.get( 'loginCredentials.server' )
 const $ = require( 'jquery' )
 
 
+
+$('html').attr('lang', i18n.language)
 
 //note(@duncanmid): open loginflow webview
 

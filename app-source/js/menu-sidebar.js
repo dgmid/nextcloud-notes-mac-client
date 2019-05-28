@@ -1,5 +1,6 @@
 'use strict'
 
+let i18n = require('./i18n.min')
 const electron = require( 'electron' )
 const { app } = require( 'electron' )
 const BrowserWindow = electron.BrowserWindow
@@ -22,27 +23,27 @@ ipc.on('show-sidebar-menu', ( event, message ) => {
 		
 		sidebarMenuTemplate = [
 			{
-				label: 'New Note',
+				label: i18n.t('sidebarmenu:new', 'New Note'),
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'new') }
 			},
 			{
 				type: 'separator'
 			},
 			{
-				label: 'Favorite',
+				label: i18n.t('sidebarmenu:favorite', 'Favorite'),
 				type: 'checkbox',
 				checked: favorite,
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('context-favorite', message) }
 			},
 			{
-				label: 'Export as' + '…',
+				label: i18n.t('sidebarmenu:export', 'Export as') + '…',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('context-export', message.id) }
 			},
 			{
 				type: 'separator'
 			},
 			{
-				label: 'Delete',
+				label: i18n.t('sidebarmenu:delete', 'Delete'),
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('context-delete', message.id) }
 			},
 		]
@@ -51,7 +52,7 @@ ipc.on('show-sidebar-menu', ( event, message ) => {
 		
 		sidebarMenuTemplate = [
 			{
-				label: 'New Note',
+				label: i18n.t('sidebarmenu:new', 'New Note'),
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'new') }
 			}
 		]

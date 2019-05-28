@@ -1,11 +1,24 @@
 'use strict'
 
+const i18n = require( './i18n.min' )
 const remote = require( 'electron' ).remote
 const {ipcRenderer} = require( 'electron' )
 const Store = require( 'electron-store' )
 const store = new Store()
-
 const $ = require( 'jquery' )
+const jqueryI18next = require( 'jquery-i18next' )
+
+jqueryI18next.init(i18n, $)
+
+
+
+//note(@duncanmid): set lang & localize strings
+
+$('html').attr('lang', i18n.language)
+$('header').localize()
+$('label').localize()
+$('input').localize()
+$('button').localize()
 
 
 

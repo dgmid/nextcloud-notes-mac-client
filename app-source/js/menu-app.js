@@ -1,14 +1,15 @@
 'use strict'
 
-const electron = require('electron')
-const {Menu, shell} = require('electron')
+const i18n = require( './i18n.min' )
+const electron = require( 'electron' )
+const {Menu, shell} = require( 'electron' )
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const ipc = electron.ipcMain
-const path = require('path')
+const path = require( 'path' )
 const name = app.getName()
 
-let about = require('./about.min')
+const about = require( './about.min' )
 
 
 
@@ -17,20 +18,20 @@ const template = [
 		label: name,
 		submenu: [
 			{
-				label: 'About' + ` ${name}`,
+				label: i18n.t('menu:app.about', 'About') + ` ${name}`,
 				click() { about.createAbout() }
 			},
 			{
 				type: 'separator'
 			},
 			{
-				label: 'Log in/out to Nextcloud' + '…',
+				label: i18n.t('menu:app.login', 'Log in/out to Nextcloud') + '…',
 				accelerator: 'Command+Ctrl+Alt+l',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('open-login-modal', 'open-login-modal') }
 			
 			},
 			{
-				label: 'Preferences' + '…',
+				label: i18n.t('menu:app.prefs', 'Preferences') + '…',
 				accelerator: 'Command+,',
 				click () { app.emit('open-prefs') }
 			
@@ -39,7 +40,7 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: 'Services',
+				label: i18n.t('menu:app.services', 'Services'),
 				role: 'services',
 				submenu: []
 			},
@@ -47,41 +48,41 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: 'Hide' + ` ${name}`,
+				label: i18n.t('menu:app.hide', 'Hide') + ` ${name}`,
 				role: 'hide'
 			},
 			{
-				label: 'Hide Others',
+				label: i18n.t('menu:app.hideothers', 'Hide Others'),
 				role: 'hideothers'
 			},
 			{
-				label: 'Show All',
+				label: i18n.t('menu:app.showall', 'Show All'),
 				role: 'unhide'
 			},
 			{
 				type: 'separator'
 			},
 			{
-				label: 'Quit' + ` ${name}`,
+				label: i18n.t('menu:app.quit', 'Quit') + ` ${name}`,
 				role: 'quit'
 			}
 		]
 	},
 	{
-		label: 'Note',
+		label: i18n.t('menu:note.note', 'Note'),
 		submenu: [
 			{
-				label: 'New Note',
+				label: i18n.t('menu:note.new', 'New Notw'),
 				accelerator: 'Cmd+n',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'new') }
 			},
 			{
-				label: 'Edit / Preview Selected Note',
+				label: i18n.t('menu:note.edit', 'Edit / Preview Selected Note'),
 				accelerator: 'Cmd+e',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'edit') } 
 			},
 			{
-				label: 'Save Selected Note',
+				label: i18n.t('menu:note.save', 'Save Selected Note'),
 				accelerator: 'Cmd+s',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'save') } 
 			},
@@ -89,12 +90,12 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: 'Toggle Favorite',
+				label: i18n.t('menu:note.favorite', 'Toggle Favorite'),
 				accelerator: 'Cmd+f',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'favorite') }
 			},
 			{
-				label: 'Export Selected Note as' + '…',
+				label: i18n.t('menu:note.export', 'Export Selected Note as') + '…',
 				accelerator: 'Cmd+Alt+e',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'export') }
 			},
@@ -102,82 +103,82 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: 'Delete Selected Note',
+				label: i18n.t('menu:note.delete', 'Delete Selected Note'),
 				accelerator: 'Cmd+d',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'delete') }
 			},
 		]
 	},
 	{
-		label: 'Edit',
+		label: i18n.t('menu:edit.edit', 'Edit'),
 		submenu: [
 			{
-				label: 'Undo',
+				label: i18n.t('menu:edit.undo', 'Undo'),
 				role: 'undo'
 			},
 			{
-				label: 'Redo',
+				label: i18n.t('menu:edit.redo', 'Redo'),
 				role: 'redo'
 			},
 			{
 				type: 'separator'
 			},
 			{
-				label: 'Cut',
+				label: i18n.t('menu:edit.cut', 'Cut'),
 				role: 'cut'
 			},
 			{
-				label: 'Copy',
+				label: i18n.t('menu:edit.copy', 'Copy'),
 				role: 'copy'
 			},
 			{
-				label: 'Paste',
+				label: i18n.t('menu:edit.paste', 'Paste'),
 				role: 'paste'
 			},
 			{
-				label: 'Paste and Match Style',
+				label: i18n.t('menu:edit.match', 'Paste and Match Style'),
 				role: 'pasteandmatchstyle'
 			},
 			{
-				label: 'Delete',
+				label: i18n.t('menu:edit.delete', 'Delete'),
 				role: 'delete'
 			},
 			{
-				label: 'Select All',
+				label: i18n.t('menu:edit.selectall', 'Select All'),
 				role: 'selectall'
 			}
 		]
 	},
 	{
-		label: 'Insert Markdown',
+		label: i18n.t('menu:markdown.insert', 'Insert Markdown'),
 		submenu: [
 			{
-				label: 'Heading 1',
+				label: i18n.t('menu:markdown.h1', 'Heading 1'),
 				accelerator: 'Cmd+1',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'h1') }
 			},
 			{
-				label: 'Heading 2',
+				label: i18n.t('menu:markdown.h2', 'Heading 2'),
 				accelerator: 'Cmd+2',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'h2') }
 			},
 			{
-				label: 'Heading 3',
+				label: i18n.t('menu:markdown.h3', 'Heading 3'),
 				accelerator: 'Cmd+3',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'h3') }
 			},
 			{
-				label: 'Heading 4',
+				label: i18n.t('menu:markdown.h4', 'Heading 4'),
 				accelerator: 'Cmd+4',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'h4') }
 			},
 			{
-				label: 'Heading 5',
+				label: i18n.t('menu:markdown.h5', 'Heading 5'),
 				accelerator: 'Cmd+5',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'h5') }
 			},
 			{
-				label: 'Heading 6',
+				label: i18n.t('menu:markdown.h6', 'Heading 6'),
 				accelerator: 'Cmd+6',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'h6') }
 			},
@@ -185,17 +186,17 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: 'Bold',
+				label: i18n.t('menu:markdown.bold', 'Bold'),
 				accelerator: 'Cmd+b',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'b') }
 			},
 			{
-				label: 'Italic',
+				label: i18n.t('menu:markdown.italic', 'Italic'),
 				accelerator: 'Cmd+i',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'i') }
 			},
 			{
-				label: 'Strikethrough',
+				label: i18n.t('menu:markdown.strike', 'Strikethrough'),
 				accelerator: 'Cmd+Alt+d',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'del') }
 			},
@@ -203,12 +204,12 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: 'Unordered List',
+				label: i18n.t('menu:markdown.ul', 'Unordered List'),
 				accelerator: 'Cmd+l',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'ul') }
 			},
 			{
-				label: 'Ordered List',
+				label: i18n.t('menu:markdown.ol', 'Ordered List'),
 				accelerator: 'Cmd+Alt+l',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'ol') }
 			},
@@ -216,12 +217,12 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: 'Create Link',
+				label: i18n.t('menu:markdown.link', 'Create Link'),
 				accelerator: 'Cmd+k',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'a') }
 			},
 			{
-				label: 'Insert Image',
+				label: i18n.t('menu:markdown.image', 'Insert Image'),
 				accelerator: 'Cmd+Alt+i',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'img') }
 			},
@@ -229,53 +230,53 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: 'Code',
+				label: i18n.t('menu:markdown.code', 'Code'),
 				accelerator: 'Cmd+Alt+c',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'code') }
 			},
 			{
-				label: 'Blockquote',
+				label: i18n.t('menu:markdown.blockquote', 'Blockquote'),
 				accelerator: 'Cmd+\'',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'blockquote') }
 			},
 			{
-				label: 'Table',
+				label: i18n.t('menu:markdown.table', 'Table'),
 				accelerator: 'Cmd+t',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'table') }
 			},
 			{
-				label: 'Horizontal Line',
+				label: i18n.t('menu:markdown.hr', 'Horizontal Line'),
 				accelerator: 'Cmd+-',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'hr') }
 			},
 			{
-				label: 'Additional <html> Elements',
+				label: i18n.t('menu:markdown.additional', 'Additional <html> Elements'),
 				submenu: [
 					{
-						label: '<small> Small',
+						label: i18n.t('menu:markdown.small', '<small> Small'),
 						click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('html', 'small') }
 					},
 					{
-						label: '<sup> Superscript',
+						label: i18n.t('menu:markdown.sup', '<sup> Superscript'),
 						click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('html', 'sup') }
 					},
 					{
-						label: '<sub> Subscript',
+						label: i18n.t('menu:markdown.sub', '<sub> Subscript'),
 						click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('html', 'sub') }
 					},
 					{
-						label: '<u> Underline',
+						label: i18n.t('menu:markdown.u', '<u> Underline'),
 						click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('html', 'u') }
 					},
 					{
-						label: '<mark> Hilight',
+						label: i18n.t('menu:markdown.mark', '<mark> Highlight'),
 						click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('html', 'mark') }
 					},
 					{
 						type: 'separator'
 					},
 					{
-						label: '<dl> Description List',
+						label: i18n.t('menu:markdown.dl', '<dl> Description List'),
 						click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('html', 'dl') }
 					},
 				]
@@ -283,21 +284,21 @@ const template = [
 		]
 	},
 	{
-		label: 'View',
+		label: i18n.t('menu:view.view', 'View'),
 		submenu:
 		[
 			{
-				label: 'Zoom In',
+				label: i18n.t('menu:view.zoomin', 'Zoom In'),
 				accelerator: 'Cmd+=',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('set-zoom-level', 1) }	
 			},
 			{
-				label: 'Zoom Out',
+				label: i18n.t('menu:view.zoomout', 'Zoom Out'),
 				accelerator: 'Cmd+-',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('set-zoom-level', -1) }	
 			},
 			{
-				label: 'Actual Size',
+				label: i18n.t('menu:view.actualsize', 'Actual Size'),
 				accelerator: 'Cmd+0',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('set-zoom-level', 0) }	
 			},
@@ -305,14 +306,14 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: 'Reload',
+				label: i18n.t('menu:view.reload', 'Reload'),
 				accelerator: 'CmdOrCtrl+R',
 				click (item, focusedWindow) {
 					if (focusedWindow) focusedWindow.reload()
 				}
 			},
 			{
-				label: 'Toggle Developer Tools',
+				label: i18n.t('menu:view.devtools', 'Toggle Developer Tools'),
 				accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
 				click (item, focusedWindow) {
 					if (focusedWindow) focusedWindow.webContents.toggleDevTools()
@@ -322,46 +323,46 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: 'Toggle Full Screen',
+				label: i18n.t('menu:view.fullscreen', 'Toggle Full Screen'),
 				role: 'togglefullscreen'
 			}
 		]
 	},
 	{
-		label: 'Window',
+		label: i18n.t('menu:window.window', 'Window'),
 		role: 'window',
 		submenu:
 		[
 			{
-				label: 'Close',
+				label: i18n.t('menu:window.close', 'Close'),
 				accelerator: 'CmdOrCtrl+W',
 				role: 'close'
 			},
 			{
-				label: 'Minimize',
+				label: i18n.t('menu:window.minimize', 'Minimize'),
 				accelerator: 'CmdOrCtrl+M',
 				role: 'minimize'
 			},
 			{
-				label: 'Zoom',
+				label: i18n.t('menu:window.zoom', 'Zoom'),
 				role: 'zoom'
 			},
 			{
 				type: 'separator'
 			},
 			{
-				label: 'Bring All to Front',
+				label: i18n.t('menu:window.bringall', 'Bring All to Front'),
 				role: 'front'
 			}
 		]
 	},
 	{
-		label: 'Help',
+		label: i18n.t('menu:help.help', 'Help'),
 		role: 'help',
 		submenu:
 		[
 			{
-				label: 'Nextcloud Notes Mac Client Homepage',
+				label: i18n.t('menu:help.homepage', 'Nextcloud Notes Mac Client Homepage'),
 				click () { require('electron').shell.openExternal('https://www.midwinter-dg.com/mac-apps/nextcloud-notes-mac-client.html') }
 			}
 		]

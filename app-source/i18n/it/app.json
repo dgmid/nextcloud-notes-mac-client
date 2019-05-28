@@ -1,0 +1,67 @@
+{
+  "toolbar": {
+    "heading": "Intestazione",
+    "bold": "Grassetto",
+    "italic": "Corsivo",
+    "strikethrough": "Barrato",
+    "ul": "Lista non ordinata",
+    "ol": "Lista ordinata",
+    "link": "Crea collegamento",
+    "image": "Inserisci immagine",
+    "code": "Codice",
+    "quote": "Citazione",
+    "table": "Inserisci tabella",
+    "hr": "Inserisci linea orizzontale"
+  },
+  "dialog": {
+    "error": {
+      "server": {
+        "title": "Errore di connessione al server",
+        "text": "si è verificato un errore durante la connessione a"
+      },
+      "json": {
+        "title": "Errore di analisi JSON",
+        "text": "Si è verificato un errore durante l’analisi delle note"
+      }
+    },
+    "button": {
+      "export": "Esporta nota",
+      "savechanges": "Salva",
+      "cancel": "Annulla",
+      "delete": "Elimina nota"
+    },
+    "format": {
+      "html": "html",
+      "md": "markdown",
+      "txt": "testo"
+    },
+    "save": {
+      "title": "Hai apportato modifiche a questa nota",
+      "text": "Vuoi salvare?"
+    },
+    "delete": {
+      "title": "Sei sicuro di voler eliminare questa nota?",
+      "text": "Questa operazione non è reversibile."
+    }
+  },
+  "sidebar": {
+    "notext": "Nessun testo aggiuntivo",
+    "new": "Nuova nota"
+  },
+  "date": {
+    "titlebar": "alle"
+  },
+  "notification": {
+    "export": {
+      "text": "La nota {{title}} è stato esportato come {{filetype}}"
+    }
+  },
+  "main": {
+    "title": "titolo",
+    "description": "descrizione",
+    "button": {
+      "edit": "Modifica nota",
+      "save": "Salva nota"
+    }
+  }
+}

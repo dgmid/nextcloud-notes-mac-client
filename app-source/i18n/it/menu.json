@@ -1,0 +1,79 @@
+{
+  "app": {
+    "about": "Informazioni su",
+    "login": "Accesso/disconnettersi a Nextcloud",
+    "prefs": "Preferenze",
+    "services": "Servizi",
+    "hide": "Nascondi",
+    "hideothers": "Nascondi altre",
+    "showall": "Mostra tutti",
+    "quit": "Esci da"
+  },
+  "note": {
+    "note": "Nota",
+    "new": "Nuova nota",
+    "edit": "Modifica/anteprima nota selezionata",
+    "save": "Salva nota selezionata",
+    "favorite": "Attiva/disattiva preferito",
+    "export": "Esporta la nota selezionata come",
+    "delete": "Elimina la nota selezionata"
+  },
+  "edit": {
+    "edit": "Modificare",
+    "undo": "Anulla",
+    "redo": "Ripristina originale",
+    "cut": "Taglia",
+    "copy": "Copia",
+    "paste": "Incolla",
+    "match": "Incolla e associa stile",
+    "delete": "Elimina",
+    "selectall": "Seleziona tutto"
+  },
+  "markdown": {
+    "insert": "Inserisci Markdown",
+    "h1": "Intestazione 1",
+    "h2": "Intestazione 2",
+    "h3": "Intestazione 3",
+    "h4": "Intestazione 4",
+    "h5": "Intestazione 5",
+    "h6": "Intestazione 6",
+    "bold": "Grassetto",
+    "italic": "Corsivo",
+    "strike": "Barrato",
+    "ul": "Lista non ordinata",
+    "ol": "Lista ordinata",
+    "link": "Crea collegamento",
+    "image": "Inserisci immagine",
+    "code": "Codice",
+    "blockquote": "Citazione",
+    "table": "Tabella",
+    "hr": "Linea orizzontale",
+    "additional": "Ulteriori elementi <html>",
+    "small": "<small> Piccolo",
+    "sup": "<sup> Apici",
+    "sub": "<sub> Pedice",
+    "u": "<u> Sottolineare",
+    "mark": "<mark> Evidenziare",
+    "dl": "<dl> Elenco di descrizione"
+  },
+  "view": {
+    "view": "Vista",
+    "zoomin": "Ingrandire",
+    "zoomout": "Rimpicciolire",
+    "actualsize": "Dimensione reale",
+    "reload": "Ricaricare",
+    "devtools": "Attiva/disattiva Developer Tools",
+    "fullscreen": "Attiva/disattiva modalità a tutto schermo"
+  },
+  "window": {
+    "window": "Finestra",
+    "close": "Chiudi",
+    "minimize": "Riduci a icona",
+    "zoom": "Zoom",
+    "bringall": "Porta tutto in primo piano"
+  },
+  "help": {
+    "help": "Aiuto",
+    "homepage": "Homepage del Nextcloud Notes Mac Client"
+  }
+}

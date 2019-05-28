@@ -1,0 +1,22 @@
+{
+  "head": {
+    "title": "Preferences"
+  },
+  "body": {
+    "option": {
+      "date": "Date",
+      "title": "Title",
+      "desc": "Descending",
+      "asc": "Ascending"
+    },
+    "label": {
+      "sort": "Sort notes by",
+      "order": "Order notes by",
+      "zoom": "Default text size",
+      "cursor": "Cursor position",
+      "start": "start",
+      "end": "end",
+      "spell": "Spellcheck"
+    }
+  }
+}

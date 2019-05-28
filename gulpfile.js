@@ -20,7 +20,7 @@ const	sourceCss 		= 'app-source/scss/*.scss',
 		destHtml 		= 'dist/html',
 		sourceSvg 		= 'app-source/assets/svg/*.svg',
 		destSvg 		= 'dist/assets/svg',
-		sourceLang 		= 'app-source/i18n/*.json',
+		sourceLang 		= 'app-source/i18n/**/*.json',
 		destLang 		= 'dist/i18n'
 
 
@@ -119,11 +119,12 @@ gulp.task('build', gulp.series(	'sass',
 
 
 
-gulp.task('watch', gulp.series(gulp.parallel('html', 'js', 'sass'), () => {
+gulp.task('watch', gulp.series(gulp.parallel('html', 'js', 'sass', 'i18n'), () => {
 	
 	gulp.watch('app-source/html/**/*.html', gulp.series('html')),
 	gulp.watch('app-source/js/**/*.js', gulp.series('js')),
 	gulp.watch('app-source/scss/**/*.scss', gulp.series('sass'))
+	gulp.watch('app-source/i18n/**/*.json', gulp.series('i18n'))
 	
 	return
 }))

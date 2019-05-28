@@ -43,6 +43,12 @@ header {
 	transition: left .25s ease-out;
 }
 
+@media screen 
+	and (-webkit-min-device-pixel-ratio: 2) { 
+		
+		#frame { background-image: url('#{$texture2}'); }
+}
+
 footer {
 	
 	width: 200px;

@@ -23,7 +23,7 @@ exports.createAbout = () => {
 			maximizable: false,
 			alwaysOnTop: true,
 			backgroundColor: '#fff',
-			webPreferences: { devTools: false }
+			webPreferences: { devTools: true }
 		})
 		
 		about.loadURL(url.format ({ 

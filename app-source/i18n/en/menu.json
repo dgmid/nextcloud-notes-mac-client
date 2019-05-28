@@ -1,0 +1,79 @@
+{
+  "app": {
+    "about": "About",
+    "login": "Log in/out to Nextcloud",
+    "prefs": "Preferences",
+    "services": "Services",
+    "hide": "Hide",
+    "hideothers": "Hide Others",
+    "showall": "Show All",
+    "quit": "Quit"
+  },
+  "note": {
+    "note": "Note",
+    "new": "New Note",
+    "edit": "Edit / Preview Selected Note",
+    "save": "Save Selected Note",
+    "favorite": "Toggle Favorite",
+    "export": "Export Selected Note as",
+    "delete": "Delete Selected Note"
+  },
+  "edit": {
+    "edit": "Edit",
+    "undo": "Undo",
+    "redo": "Redo",
+    "cut": "Cut",
+    "copy": "Copy",
+    "paste": "Paste",
+    "match": "Paste and Match Style",
+    "delete": "Delete",
+    "selectall": "Select All"
+  },
+  "markdown": {
+    "insert": "Insert Markdown",
+    "h1": "Heading 1",
+    "h2": "Heading 2",
+    "h3": "Heading 3",
+    "h4": "Heading 4",
+    "h5": "Heading 5",
+    "h6": "Heading 6",
+    "bold": "Bold",
+    "italic": "Italic",
+    "strike": "Strikethrough",
+    "ul": "Unordered List",
+    "ol": "Ordered List",
+    "link": "Create Link",
+    "image": "Insert Image",
+    "code": "Code",
+    "blockquote": "Blockquote",
+    "table": "Table",
+    "hr": "Horizontal Line",
+    "additional": "Additional <html> Elements",
+    "small": "<small> Small",
+    "sup": "<sup> Superscript",
+    "sub": "<sub> Subscript",
+    "u": "<u> Underline",
+    "mark": "<mark> Highlight",
+    "dl": "<dl> Description List"
+  },
+  "view": {
+    "view": "View",
+    "zoomin": "Zoom In",
+    "zoomout": "Zoom Out",
+    "actualsize": "Actual Size",
+    "reload": "Reload",
+    "devtools": "Toggle Developer Tools",
+    "fullscreen": "Toggle Full Screen"
+  },
+  "window": {
+    "window": "Window",
+    "close": "Close",
+    "minimize": "Minimize",
+    "zoom": "Zoom",
+    "bringall": "Bring All to Front"
+  },
+  "help": {
+    "help": "Help",
+    "homepage": "Nextcloud Notes Mac Client Homepage"
+  }
+}

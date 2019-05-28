@@ -1,0 +1,17 @@
+{
+  "body": {
+    "header": "Accedi a Nextcloud:",
+    "label": {
+      "server": "server"
+    },
+    "input": {
+      "placeholder": "https://il-tuo-indirizzo-server.com",
+      "title": "questo campo è richiesta"
+    },
+    "button": {
+      "cancel": "Annulla",
+      "logout": "‹ Disconnettersi",
+      "login": "Accesso ›"
+    }
+  }
+}

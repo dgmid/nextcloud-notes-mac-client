@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="">
 	<head>
 		<meta charset="utf-8" />
 		<title>Nextcloud Notes Client - Login</title>
@@ -7,23 +7,21 @@
 	</head>
 	
 	<body>
-		<header>
-			Login to Nextcloud:
-		</header>
+		<header data-i18n="login:body.header">Login to Nextcloud:</header>
 		
 		<div class="scroll">
 			<form id="modal-form">
 				<ul id="fields">
 					<li>
-						<label for="server">server</label>
-						<input type="url" name="server" placeholder="https://your-server-address.com" required pattern="https?://.+" title="this field is required" value="">
+						<label for="server" data-i18n="login:body.label.server">server</label>
+						<input type="url" name="server" placeholder="https://your-server-address.com" required pattern="https?://.+" title="this field is required" value="" data-i18n="[placeholder]login:body.input.placeholder; [title]login:body.input.title">
 					</li>
 				</ul>
 				
 				<footer>
-					<button id="cancel" type="button">Cancel</button>
-					<button id="logout" type="button">‹ Logout</button>
-					<button id="update" type="submit">Login ›</button>
+					<button id="cancel" type="button" data-i18n="login:body.button.cancel">Cancel</button>
+					<button id="logout" type="button" data-i18n="login:body.button.logout">‹ Logout</button>
+					<button id="update" type="submit" data-i18n="login:body.button.login">Login ›</button>
 				</footer>
 			</form>
 		</div>

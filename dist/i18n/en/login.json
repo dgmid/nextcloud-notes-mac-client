@@ -1,0 +1,17 @@
+{
+  "body": {
+    "header": "Login to Nextcloud:",
+    "label": {
+      "server": "server"
+    },
+    "input": {
+      "placeholder": "https://your-server-address.com",
+      "title": "this field is required"
+    },
+    "button": {
+      "cancel": "Cancel",
+      "logout": "‹ Logout",
+      "login": "Login ›"
+    }
+  }
+}

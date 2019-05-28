@@ -1,0 +1,67 @@
+{
+  "toolbar": {
+    "heading": "Heading",
+    "bold": "Bold",
+    "italic": "Italic",
+    "strikethrough": "Strikethrough",
+    "ul": "Generic List",
+    "ol": "Numbered List",
+    "link": "Create Link",
+    "image": "Insert Image",
+    "code": "Code",
+    "quote": "Quote",
+    "table": "Insert Table",
+    "hr": "Insert Horizontal Line"
+  },
+  "dialog": {
+    "error": {
+      "server": {
+        "title": "Server connection error",
+        "text": "there was an error connecting to"
+      },
+      "json": {
+        "title": "JSON parsing error",
+        "text": "An error occured parsing the notes"
+      }
+    },
+    "button": {
+      "export": "Export Note",
+      "savechanges": "Save changes",
+      "cancel": "Cancel",
+      "delete": "Delete Note"
+    },
+    "format": {
+      "html": "html",
+      "md": "markdown",
+      "txt": "text"
+    },
+    "save": {
+      "title": "You have made changes to this note",
+      "text": "Do you want to save them?"
+    },
+    "delete": {
+      "title": "Are you sure you want to delete this note?",
+      "text": "This operation is not reversable."
+    }
+  },
+  "sidebar": {
+    "notext": "No additional text",
+    "new": "New note"
+  },
+  "date": {
+    "titlebar": "at"
+  },
+  "notification": {
+    "export": {
+      "text": "The note {{title}} has been exported as {{filetype}}"
+    }
+  },
+  "main": {
+    "title": "title",
+    "description": "description",
+    "button": {
+      "edit": "Edit Note",
+      "save": "Save Note"
+    }
+  }
+}
