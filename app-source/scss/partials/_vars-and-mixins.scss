@@ -1,11 +1,100 @@
 
-$text:			#454545;
-$app-color:		#FEE298; 
-$dividers:		#e6e6e6;
+:root {
+	
+	// common
+	
+	--text:					#454545;
+	--text-light:			rgba(69,69,69,.7);
+	--app-color:			#fee298;
+	--app-color-focus:		rgba(254,226,152,.5);
+	--dividers:				#e6e6e6;
+	--titlebar:				#454545;
+	--header:				linear-gradient(#edebed, #d6d4d6) no-repeat border-box;
+	--header-border:		#b5b4b5;
+	--form-control:			#409BFF;
+	
+	// edit					
+	
+	--edit: 				#ffffff;
+	--edit-hover:			rgba(69,69,69,.5);
+	--edit-active:			rgba(69,69,69,.8);
+	
+	// modal
+	
+	--modal:				rgba(240,239,240,.95);
+	--window:				#ededed;
+	--input-color:			#000000;
+	--input-border:			#cccccc;
+	--input-background:		#ffffff;
+	--select:				#ffffff;
+	--select-border:		#b2b2b2;
+	
+	// buttons
+	
+	--button:				#ffffff;
+	--button-color:			rgba(0,0,0,.85);
+	--button-border:		#c0c0c0;
+	--button-hover:			linear-gradient(#6cb3fa, #067dff);
+	--button-color-hover:	#ffffff;
+	--button-border-hover:	linear-gradient(#50a4f9, #005cff);		
+	
+	// note
+	
+	--link:					#1e90ff;
+	--hover:				#005ee0;
+	--code:					#e6e6e6;
+	--code-color:			#777777;
+	--mark:					#000000;
+	--table-border:			#dddddd;
+	--table-head:			#ffffff;
+	--table-stripe:			rgba(69,69,69,.03);
+}
 
-$form-control:	#cccccc;
-$invalid:		#E14540;
-$valid:			#37CA41;
 
-$code:			#e6e6e6;
-$link:			#1E90FF;
+[data-theme^="dark"] {
+	
+	// common
+	
+	--text:					#dcdcdc;
+	--text-light:			rgba(255,255,255,.6);
+	--app-color:			#c5993e;
+	--app-color-focus:		#343434;
+	--dividers:				#484848;
+	--titlebar:				#c8c6c6;
+	--header:				linear-gradient(#4b4b4b, #3d3d3d) no-repeat border-box;
+	--header-border:		#000000;
+	--form-control:			#4D89F5;
+	
+	// edit
+	
+	--edit: 				#1e1e1e;
+	--edit-hover:			rgba(255,255,255.5);
+	--edit-active:			rgba(255,255,255.8);
+	
+	// modal
+	
+	--modal:				rgba(56,56,56,.95);
+	--window:				#343434;
+	--input-color:			#dcdcdc;
+	--input-border:			#565656;
+	--input-background:		#292724;
+	--select:				#616161;
+	--select-border:		#7f7f7f;
+	
+	// buttons
+	
+	--button:				#616161;
+	--button-color:			rgba(255,255,255,.85);
+	--button-border:		#7f7f7f;
+	--button-hover:			linear-gradient(#1768e5, #145ccc);
+	--button-color-hover:	#ffffff;
+	--button-border-hover:	#5895ec;
+	
+	// note
+	
+	--code:					#1e1e1e;
+	--code-color:			#aaaaaa;
+	--table-border:			#484848;
+	--table-head:			#484848;
+	--table-stripe:			rgba(255,255,255,.03);
+}

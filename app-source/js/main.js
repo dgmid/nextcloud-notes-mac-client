@@ -1,6 +1,6 @@
 'use strict'
 
-const {app, BrowserWindow, ipcMain, protocol} = require('electron')
+const {app, BrowserWindow, ipcMain, protocol, systemPreferences} = require('electron')
 const url = require('url') 
 const path = require('path')
 const dialog = require('electron').dialog
@@ -58,7 +58,9 @@ let store = new Store({
 
 function createWindow() {
 	
-	let { x, y, width, height } = store.get('windowBounds')
+	
+	let { x, y, width, height } = store.get('windowBounds'),
+		theme = systemPreferences.isDarkMode() ? '#393837' : '#ededed'
 	
 	win = new BrowserWindow({
 		show: false,
@@ -69,8 +71,9 @@ function createWindow() {
 		titleBarStyle: 'hidden',
 		minWidth: 500,
 		minHeight: 372,
-		backgroundColor: '#fff',
+		backgroundColor: theme,
 		webPreferences: {
+			preload: path.join(__dirname, './preload.min.js'),
 			nodeIntegration: true
 		},
 		icon: path.join(__dirname, '../assets/icon/Icon.icns')
@@ -168,7 +171,9 @@ ipcMain.on('loginflow', (event, message) => {
 app.on('open-prefs', () => {
 	
 	if( prefs === null ) {
-	
+		
+		let theme = systemPreferences.isDarkMode() ? '#393837' : '#ededed'
+		
 		prefs = new BrowserWindow({
 			
 			width: 548,
@@ -177,8 +182,9 @@ app.on('open-prefs', () => {
 			minimizable: false,
 			maximizable: false,
 			show: false,
-			backgroundColor: '#EDEDED',
+			backgroundColor: theme,
 			webPreferences: {
+				preload: path.join(__dirname, './preload.min.js'),
 				nodeIntegration: true
 			},
 		})

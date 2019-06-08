@@ -2,6 +2,7 @@
 
 const i18n = require( './i18n.min' )
 const {ipcRenderer, shell, remote} = require( 'electron' )
+const path = require('path')
 const Store = require( 'electron-store' )
 const store = new Store()
 const dialog = remote.dialog
@@ -124,58 +125,58 @@ let easymde = new EasyMDE( easymdeSetup )
 //note(@duncanmid): dateFormat i18n setup
 
 dateFormat.i18n = {
-    dayNames: [
-        'Sun',
-        'Mon',
-        'Tue',
-        'Wed',
-        'Thu',
-        'Fri',
-        'Sat',
-        i18n.t('date:sunday', 'Sunday'),
-        i18n.t('date:monday', 'Monday'),
-        i18n.t('date:tuesday', 'Tuesday'),
-        i18n.t('date:wednesday', 'Wednesday'),
-        i18n.t('date:thursday', 'Thursday'),
-        i18n.t('date:friday', 'Friday'),
-        i18n.t('date:saturday', 'Saturday')
-    ],
-    monthNames: [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-        i18n.t('date:january', 'January',),
-        i18n.t('date:february', 'February'),
-        i18n.t('date:march', 'March'),
-        i18n.t('date:april', 'April'),
-        i18n.t('date:may', 'May'),
-        i18n.t('date:june', 'June'),
-        i18n.t('date:july', 'July'),
-        i18n.t('date:august', 'August'),
-        i18n.t('date:september', 'September'),
-        i18n.t('date:august', 'October'),
-        i18n.t('date:november', 'November'),
-        i18n.t('date:december', 'December')
-    ],
-    timeNames: [
-        'a',
-        'p',
-        'am',
-        'pm',
-        'A',
-        'P',
-        'AM',
-        'PM'
-    ]
+	dayNames: [
+		i18n.t('date:sun', 'Sun'),
+		i18n.t('date:mon', 'Mon'),
+		i18n.t('date:tue', 'Tue'),
+		i18n.t('date:wed', 'Wed'),
+		i18n.t('date:thu', 'Thu'),
+		i18n.t('date:fri', 'Fri'),
+		i18n.t('date:sat', 'Sat'),
+		i18n.t('date:sunday', 'Sunday'),
+		i18n.t('date:monday', 'Monday'),
+		i18n.t('date:tuesday', 'Tuesday'),
+		i18n.t('date:wednesday', 'Wednesday'),
+		i18n.t('date:thursday', 'Thursday'),
+		i18n.t('date:friday', 'Friday'),
+		i18n.t('date:saturday', 'Saturday')
+	],
+	monthNames: [
+		i18n.t('date:jan', 'Jan'),
+		i18n.t('date:feb', 'Feb'),
+		i18n.t('date:mar', 'Mar'),
+		i18n.t('date:apr', 'Apr'),
+		i18n.t('date:_may', 'May'),
+		i18n.t('date:jun', 'Jun'),
+		i18n.t('date:jul', 'Jul'),
+		i18n.t('date:aug', 'Aug'),
+		i18n.t('date:sep', 'Sep'),
+		i18n.t('date:oct', 'Oct'),
+		i18n.t('date:nov', 'Nov'),
+		i18n.t('date:dec', 'Dec'),
+		i18n.t('date:january', 'January'),
+		i18n.t('date:february', 'February'),
+		i18n.t('date:march', 'March'),
+		i18n.t('date:april', 'April'),
+		i18n.t('date:may', 'May'),
+		i18n.t('date:june', 'June'),
+		i18n.t('date:july', 'July'),
+		i18n.t('date:august', 'August'),
+		i18n.t('date:september', 'September'),
+		i18n.t('date:october', 'October'),
+		i18n.t('date:november', 'November'),
+		i18n.t('date:december', 'December')
+	],
+	timeNames: [
+		i18n.t('date:a', 'a'),
+		i18n.t('date:p', 'p'),
+		i18n.t('date:am', 'am'),
+		i18n.t('date:pm', 'pm'),
+		i18n.t('date:_a', 'A'),
+		i18n.t('date:_p', 'P'),
+		i18n.t('date:_am', 'AM'),
+		i18n.t('date:_pm', 'PM')
+	]
 }
 
 
@@ -405,7 +406,7 @@ function listNotes( array, sidebar ) {
 		`<li>
 			<button data-id="${item.id}" data-title="${item.title}" data-category="${item.category}" data-favorite="${item.favorite}">
 				<span class="side-title">${item.title}</span>
-				<span class="side-text">${formattedDate}&nbsp;&nbsp;${plainTxt}</span>
+				<span class="side-text">${formattedDate}&nbsp;&nbsp;<span class="excerpt">${plainTxt}</span></span>
 			</button>
 		</li>
 		`)
@@ -721,8 +722,10 @@ function openModal( url, width, height, resize ) {
 			minHeight: height,
 			resizable: resize,
 			show: false,
-			backgroundColor: '#ececec',
+			frame: false,
+			transparent: true,
 			webPreferences: {
+				preload: path.join(__dirname, './preload.min.js'),
 				nodeIntegration: true
 			}	
 		})

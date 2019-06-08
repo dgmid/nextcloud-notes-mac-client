@@ -1,3 +1,6 @@
+
+//note(@duncanmid): common / light theme
+
 body {
 	
 	min-height: 100vh;
@@ -9,10 +12,10 @@ body {
 header {
 	
 	height: 23px;
-	background: linear-gradient(#EDEBED, #D6D4D6) no-repeat border-box;
+	background: var(--header);
 	background-size: 100% 23px;
 	background-position: left top;
-	border-bottom: 1px solid #B5B4B5;
+	border-bottom: 1px solid var(--header-border);
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -23,7 +26,7 @@ header {
 #time {
 	
 	display: block;
-	color: $text;
+	color: var(--titlebar);
 	font-size: 13px;
 	height: 23px;
 	line-height: 23px;
@@ -33,7 +36,7 @@ header {
 
 #frame {
 	
-	background-image: url('#{$texture}');
+	background-image: var(--texture);
 	position: absolute;
 	top: 23px;
 	left: 0;
@@ -43,16 +46,10 @@ header {
 	transition: left .25s ease-out;
 }
 
-@media screen 
-	and (-webkit-min-device-pixel-ratio: 2) { 
-		
-		#frame { background-image: url('#{$texture2}'); }
-}
-
 footer {
 	
 	width: 200px;
-	border-right: 1px solid $dividers;
+	border-right: 1px solid var(--dividers);
 	background: grey;
 	position: absolute;
 	top: 23px;
@@ -82,12 +79,12 @@ main {
 		bottom: 15px;
 		width: 32px;
 		height: 32px;
-		background-color: #fff;
+		background-color: var(--edit);
 		background-position: center center;
 		background-repeat: no-repeat;
-		border: 1px solid $text;
+		border: 1px solid var(--text);
 		border-radius: 3px;
-		background-image: url('#{$pencil}');
+		background-image: var(--pencil);
 		opacity: .5;
 		z-index: 1;
 		
@@ -96,7 +93,7 @@ main {
 		&:focus {
 	
 			opacity: 1;
-			background-color: $app-color;
+			background-color: var(--app-color);
 			border-color: transparent;
 			outline: none;
 		}
@@ -104,31 +101,31 @@ main {
 		&:hover {
 		
 			opacity: 1;
-			background-color: rgba($text, .5);
-			background-image: url('#{$pencil-white}');
+			background-color: var(--edit-hover);
+			background-image: var(--pencil-white);
 			border-color: transparent;
 		}
 		
 		&:active {
 			
-			background-color: rgba($text, .8);
-			background-image: url('#{$pencil-white}');
+			background-color: var(--edit-active);
+			background-image: var(--pencil-white);
 			border-color: transparent;
 		}
 	}
 	
 	#edit.editing {
 		
-		background-image: url('#{$eye}');
+		background-image: var(--eye);
 		
 		&:hover {
 
-			background-image: url('#{$eye-white}');
+			background-image: var(--eye-white);
 		}
 		
 		&:active {
 			
-			background-image: url('#{$eye-white}');
+			background-image: var(--eye-white);
 		}
 	}
 }
@@ -138,7 +135,7 @@ aside {
 	width: 200px;
 	float: left;
 	height: calc(100vh - 23px);
-	border-right: 1px solid $dividers;
+	border-right: 1px solid var(--dividers);
 	position: relative;
 	overflow-x: hidden; 
 	overflow-y: scroll;
@@ -165,6 +162,7 @@ aside {
 		border: 0;
 		border-radius: 0;
 		text-align: left;
+		color: var(--text);
 		background-color: transparent;
 		position: relative;
 		
@@ -177,7 +175,7 @@ aside {
 			left: 25px;
 			right: 0;
 			height: 1px;
-			background-color: $dividers;
+			background-color: var(--dividers);
 		}
 		
 		span {
@@ -187,6 +185,14 @@ aside {
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
+			color: var(--text);
+			
+			span {
+				
+				display: inline;
+				padding-left: 0;
+				color: var(--text);
+			}
 		}
 		
 		.side-title {
@@ -200,6 +206,8 @@ aside {
 		.side-text {
 			
 			font-size: 12px;
+			
+			.excerpt { color: var(--text-light); }
 		}
 		
 		&[data-favorite="true"] {
@@ -210,7 +218,7 @@ aside {
 				display: block;
 				width: 14px;
 				height: 14px;
-				background: url('#{$favorite}') no-repeat center;
+				background: var(--favorite) no-repeat center;
 				position: absolute;
 				top: 0;
 				left: 4px;
@@ -220,7 +228,7 @@ aside {
 		&:focus {
 			
 			outline: none;
-			background-color: rgba($app-color, .5);
+			background-color: var(--app-color-focus);
 			
 			&::after { display: none; }
 		}
@@ -228,7 +236,7 @@ aside {
 		&.selected {
 			
 			outline: none;
-			background-color: $app-color;
+			background-color: var(--app-color);
 			
 			&::after { display: none; }
 		}
@@ -243,7 +251,7 @@ aside {
 .loader {
 	
 	height: calc(100vh - 23px);
-	background: url('#{$loader}') no-repeat center center;
+	background: var(--loader) no-repeat center center;
 }
 
 .CodeMirror {
@@ -251,7 +259,7 @@ aside {
 	border: none;
 	color: inherit;
 	background: transparent;
-	border-top: 1px solid $dividers;
+	border-top: 1px solid var(--dividers);
 	position: absolute;
 	top: 54px;
 	left: 0;
@@ -298,11 +306,102 @@ aside {
 		
 		cursor: default;
 		font-size: 15px;
+		color: var(--text);
+		transition: all .3s;
+		
+		&:hover {
+			
+			background-color: transparent;
+			border-color: var(--dividers);
+		}
+	}
+	
+	i.separator {
+		
+		border-left-color: var(--dividers);
+		border-right-color: #fff;
 	}
 }
 
 .editor-preview {
 	
 	padding: 22px;
-	background-image: url('#{$texture}');
+	background-image: var(--texture);
+}
+
+
+
+//note(@duncanmid): retina
+
+@media screen and (-webkit-min-device-pixel-ratio: 2) { 
+		
+	#frame,
+	.editor-preview {
+		
+		background-image: var(--texture2);
+		background-size: 100px 100px;
+	}
+}
+
+
+
+//note(@duncanmid): dark theme
+
+[data-theme="dark"] {
+	
+	main {
+		
+		#edit {
+			
+			border: 0;
+			background-image: var(--pencil-white);
+			opacity: .7;
+			
+			&:focus { background-image: var(--pencil); }
+			
+			&:hover { background-image: var(--pencil); }
+			
+			&:active { opacity: 1; }
+		}
+		
+		#edit.editing {
+			
+			background-image: var(--eye-white);
+			
+			&:focus { background-image: var(--eye); }
+			
+			&:hover { background-image: var(--eye); }
+			
+			&:active { background-image: var(--eye); }
+		}
+	}
+	
+	aside {
+		
+		border-right: 1px solid var(--header-border);
+		background-image: none;
+		background-color: #1E1E1E;
+	}
+	
+	#sidebar {
+	
+		button {
+			
+			&.selected {
+				
+				span { color: white; }
+				
+				.excerpt { color: var(--text-light); }
+			}
+		}
+	}
+	
+	.editor-toolbar {
+		
+		i.separator {
+			
+			border-left-color: var(--header-border);
+			border-right-color: var(--dividers);
+		}
+	}
 }

@@ -1,18 +1,21 @@
 
+//note(@duncanmid): common / light theme
+
 body {
 	
 	text-align: center;
 	padding: 0;
-	background-image: url('#{$texture}');
+	background-image: var(--texture);
 	
 	header {
 	
 	height: 23px;
-	background: linear-gradient(#EDEBED, #D6D4D6) no-repeat border-box;
+	background: var(--header);
 	background-size: 100% 23px;
+	border-bottom: 1px solid  var(--header-border);
 	
 	-webkit-app-region: drag;
-}
+	}
 	
 	main {
 		
@@ -34,7 +37,7 @@ body {
 			
 			font-size: 15px;
 			margin-bottom: 20px;
-			color: $text;
+			color: var(--text);
 			font-weight: 700;
 		}
 		
@@ -44,7 +47,7 @@ body {
 			font-weight: 400;
 			width: 160px;
 			margin: 0 auto 15px;
-			color: $text;
+			color: var(--text);
 		}
 		
 		dl {
@@ -56,7 +59,7 @@ body {
 			dt, dd {
 				
 				display: inline;
-				color: $text;
+				color: var(--text);
 			}
 			
 			dt {
@@ -69,6 +72,64 @@ body {
 				display: block;
 				content: '';
 				white-space: pre-line;
+			}
+		}
+		
+		button {
+			
+			padding: 3px 14px;
+			border: 1px solid var(--button-border);
+			background: var(--button);
+			background-clip: border-box;
+			color: var(--button-color);
+			border-radius: 5px;
+			
+			&:active {
+				
+				color: var(--button-color-hover);
+				background-image: var(--button-hover);
+				border: 1px solid;
+				border-image: var(--button-border-hover);
+				border-image-slice: 1;
+			}
+		}
+	}
+}
+
+
+//note(@duncanmid): @2x
+
+@media screen and (-webkit-min-device-pixel-ratio: 2) { 
+	
+	body {
+		
+		background-image: var(--texture2);
+		background-size: 100px 100px;
+	}
+}
+
+
+//note(@duncanmid): dark theme
+
+[data-theme="dark"] {
+	
+	body {
+		
+		main {
+			
+			button {
+				
+				border-left: 0;
+				border-right: 0;
+				border-bottom: 0;
+				
+				&:active {
+					
+					border: 1px solid var(--button-border-hover);
+					border-left: 0;
+					border-right: 0;
+					border-bottom: 0;
+				}
 			}
 		}
 	}

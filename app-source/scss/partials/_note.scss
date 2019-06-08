@@ -1,3 +1,6 @@
+
+//note(@duncanmid): common / light theme
+
 .CodeMirror-code {
 	
 	* { font-size: inherit !important; }
@@ -10,7 +13,7 @@
 	width: 100%;
 	
 	h1, h2, h3, h4, h5, h6 {
-	
+		
 		line-height: 1;
 		margin: 1ex 0;
 	}
@@ -34,9 +37,13 @@
 		
 		margin-top: 1.5em;
 		margin-bottom: 2em;
+		
+		th, td { padding: .8em; }
 	}
 	
-	h1, h2, h3, h4, h5, h6, b, strong { font-weight: 700; }
+	h1, h2, h3, h4, h5, h6 { font-weight: 600; }
+	
+	b, strong { font-weight: 700; }
 	
 	i, em { font-style: italic; }
 	
@@ -55,7 +62,7 @@
 	blockquote {
 		
 		padding-left: 2ch;
-		border-left: 0.2em solid $app-color;
+		border-left: 0.2em solid var(--app-color);
 	}
 	
 	ul {
@@ -92,19 +99,20 @@
 	
 	code {
 		
-		background-color: rgba($code, .5);
+		color: var(--code-color);
+		background-color: var(--code);
 		padding-left: 1ch;
 		padding-right: 1ch;
 		font-family: 'Menlo', monospace;
+		font-size: .9em;
 		border-radius: 0.3em;
 	}
 	
 	pre {
 		
-		background-color: rgba($code, .5);
+		background-color: var(--code);
 		padding: 1.5ch 2ch;
 		border-radius: 0.4em;
-		font-size: .9em;
 		overflow-x: scroll;
 		
 		code {
@@ -118,23 +126,24 @@
 	
 	hr {
 		
-		border: 1px solid $code;
+		border: 1px solid var(--code);
 		border-top: 0;
 	}
 	
 	a {
 		
-		color: $link;
+		color: var(--link);
 		text-decoration: none;
 		transition: color .15s;
 		
-		&:hover { color: darken($link, 10%); }
+		&:hover { color: var(--hover); }
+		
+		
 		
 		&:focus {
 			
-			color: #fff;
-			background-color: $link;
-			outline: 3px solid lighten($link, 10%);
+			outline: 4px solid -webkit-focus-ring-color;
+			outline-style: auto;
 		}
 	}
 	
@@ -144,11 +153,17 @@
 		max-width: 100%;
 	}
 	
+	mark {
+		
+		color: var(--mark);
+		background-color: var(--app-color);
+	}
+	
 	table {
 		
 		thead {
 			
-			background-color: #fff;
+			background-color: var(--table-head);
 			font-weight: 700;
 		}
 		
@@ -156,13 +171,24 @@
 			
 			tr:nth-of-type(even) {
 				
-				background-color: rgba($text, .03);
+				background-color: var(--table-stripe);
 			}
 		}
 		
 		th, td {
 			
-			padding: .8em;
+			border-color: var(--table-border);
 		}
+	}
+}
+
+
+//note(@duncanmid): dark theme
+
+[data-theme="dark"] {
+	
+	.editor-preview-active {
+		
+		font-weight: 300;
 	}
 }

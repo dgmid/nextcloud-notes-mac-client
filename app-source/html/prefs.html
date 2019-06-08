@@ -3,24 +3,31 @@
 <head>
 	<meta charset="utf-8">
 	<title data-i18n="prefs:head.title">Preferences</title>
+	<script>
+		require( '../js/theme.min' )
+	</script>
 	<link rel="stylesheet" type="text/css" href="../css/prefs.min.css" media="all">
 </head>
 <body>
 	<section>
 		<div>
 			<label for="sortby" data-i18n="prefs:body.label.sort">Sort notes by</label>
-			<select id="sortby" name="sortby">
-				<option value="modified" data-i18n="prefs:body.option.date">Date</option>
-				<option value="title" data-i18n="prefs:body.option.title">Title</option>
-			</select>
+			<div class="select-container">
+				<select id="sortby" name="sortby">
+					<option value="modified" data-i18n="prefs:body.option.date">Date</option>
+					<option value="title" data-i18n="prefs:body.option.title">Title</option>
+				</select>
+			</div>
 		</div>
 		
 		<div>
 			<label for="orderby" data-i18n="prefs:body.label.order">Order notes by</label>
-			<select id="orderby" name="orderby">
-				<option value="desc" data-i18n="prefs:body.option.desc">Descending</option>
-				<option value="asc" data-i18n="prefs:body.option.asc">Ascending</option>
-			</select>
+			<div class="select-container">
+				<select id="orderby" name="orderby">
+					<option value="desc" data-i18n="prefs:body.option.desc">Descending</option>
+					<option value="asc" data-i18n="prefs:body.option.asc">Ascending</option>
+				</select>
+			</div>
 		</div>
 	</section>
 	

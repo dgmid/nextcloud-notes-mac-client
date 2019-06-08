@@ -1,13 +1,13 @@
 body {
 	
-	background-color: #EDEDED;
+	background-color: var(--window);
 	padding: 20px;
-	color: #000;
+	color: var(--text);
 }
 
 section {
 	
-	border-bottom: 1px solid #D6D6D6;
+	border-bottom: 1px solid var(--dividers);
 	padding-bottom: 10px;
 	margin-bottom: 10px;
 	
@@ -39,7 +39,43 @@ section {
 			font-size: 13.5px;
 		}
 		
-		select { height: 22px; }
+		input[type=range]::-webkit-slider-thumb {
+			
+			margin-top: -5px;
+		}
+		
+		input[type=range]::-webkit-slider-runnable-track {
+			
+			height: 3px;
+			border-radius: 2px;
+			background: var(--form-control);
+		}
+		
+		.select-container {
+			
+			position: relative;
+			
+			&::after {
+				
+				content: var(--select-arrow);
+				position: absolute;
+				top: 0;
+				right: 8px;
+				pointer-events: none;
+			}
+		}
+		
+		select {
+			
+			appearance: none;
+			height: 22px;
+			padding: 0 6px;
+			font-size: 12px;
+			background: var(--select);
+			border: 1px solid var(--select-border);
+			color: var(--input-color);
+			border-radius: 3px;
+		}
 		
 		datalist {
 			
@@ -97,15 +133,32 @@ section {
 			transition: .25s;
 		}
 		
-		input:checked + .slider { background-color: #2196F3; }
+		input:checked + .slider { background-color: var(--form-control); }
 			
-		input:focus + .slider { box-shadow: 0 0 1px #2196F3; }
+		input:focus + .slider { box-shadow: 0 0 1px var(--form-control); }
 			
 		input:checked + .slider:before { transform: translateX(17px); }
 		
 		li {
 			
 			label { font-size: 13px; }
+		}
+	}
+}
+
+
+[data-theme="dark"] {
+	
+	section {
+		
+		div {
+			
+			select {
+				
+				border-left: 0;
+				border-right: 0;
+				border-bottom: 0;
+			}
 		}
 	}
 }

@@ -20,7 +20,7 @@ body {
 					BlinkMacSystemFont,
 					sans-serif;
 	
-	color: $text;
+	color: var(--text);
 }
 
 ::placeholder {

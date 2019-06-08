@@ -1,11 +1,15 @@
+
+//note(@duncanmid): common / light theme
+
 body {
 	
+	background-color: var(--modal);
 }
 
 header {
 	
 	padding: 10px 40px;
-	background-color: $app-color;
+	background-color: var(--app-color);
 	font-size: 13px;
 	line-height: 18px;
 	text-align: center;
@@ -58,15 +62,15 @@ form {
 				}
 			}
 			
-			input,
-			textarea {
+			input {
 				
 				display: block;
 				padding-left: 10px;
 				padding-right: 28px;
 				width: calc(100% - 80px);
-				border: 1px solid $form-control;
-				background-color: #fff;
+				color: var(--input-color);
+				background-color: var(--input-background);
+				border: 1px solid var(--input-border);
 				background-position: right 6px top 6px;
 				background-repeat: no-repeat;
 				
@@ -76,28 +80,17 @@ form {
 				
 					&:invalid:not(:placeholder-shown) {
 						
-						background-image: url('#{$error}');
+						background-image: var(--error);
 					}
 					
 					&:valid {
 						
-						background-image: url('#{$check}');
+						background-image: var(--check);
 					}
 				}
 			}
 			
-			input {
-				
-				height: 28px;
-			}
-			
-			textarea {
-				
-				height: 44px;
-				resize: none;
-			}
-			
-			
+			input { height: 28px; }
 		}
 	}
 }
@@ -110,18 +103,49 @@ footer {
 	button {
 		
 		padding: 3px 14px;
-		border: 1px solid #C5C3C5;
-		border-bottom-color: #9F9E9F;
-		background: #fff;
+		border: 1px solid var(--button-border);
+		background: var(--button);
+		background-clip: border-box;
+		color: var(--button-color);
 		font-size: 13px;
 		border-radius: 5px;
 		
 		&:active {
 			
-			color: #fff;
-			border-color: #237DFE;
-			border-bottom-color: #0240DD;
-			background-image: linear-gradient(-180deg, #4A97FD 0%, #0968E5 100%);
+			color: var(--button-color-hover);
+			background-image: var(--button-hover);
+			border: 1px solid;
+			border-image: var(--button-border-hover);
+			border-image-slice: 1;
+		}
+	}
+}
+
+
+//note(@duncanmid): dark theme
+
+[data-theme="dark"] {
+	
+	header {
+		
+		color: #fff;
+	}
+	
+	footer {
+		
+		button {
+			
+			border-left: 0;
+			border-right: 0;
+			border-bottom: 0;
+			
+			&:active {
+				
+				border: 1px solid var(--button-border-hover);
+				border-left: 0;
+				border-right: 0;
+				border-bottom: 0;
+			}
 		}
 	}
 }
