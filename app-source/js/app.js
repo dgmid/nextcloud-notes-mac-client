@@ -725,6 +725,7 @@ function openModal( url, width, height, resize ) {
 			frame: false,
 			transparent: true,
 			webPreferences: {
+				devTools: false,
 				preload: path.join(__dirname, './preload.min.js'),
 				nodeIntegration: true
 			}	

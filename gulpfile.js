@@ -123,7 +123,7 @@ gulp.task('watch', gulp.series(gulp.parallel('html', 'js', 'sass', 'i18n'), () =
 	
 	gulp.watch('app-source/html/**/*.html', gulp.series('html')),
 	gulp.watch('app-source/js/**/*.js', gulp.series('js')),
-	gulp.watch('app-source/scss/**/*.scss', gulp.series('sass'))
+	gulp.watch('app-source/scss/**/*.scss', gulp.series('sass')),
 	gulp.watch('app-source/i18n/**/*.json', gulp.series('i18n'))
 	
 	return
