@@ -1,17 +1,19 @@
 'use strict'
 
 const i18n = require( './i18n.min' )
-const {ipcRenderer, shell, remote} = require( 'electron' )
-const path = require('path')
-const Store = require( 'electron-store' )
-const store = new Store()
-const dialog = remote.dialog
-const dateFormat = require( 'dateformat' )
-const $ = require( 'jquery' )
-const marked = require( 'marked' )
-const removeMarkdown = require( 'remove-markdown' )
-const pretty = require( 'pretty' )
-const fs = require( 'fs-extra' )
+
+const { ipcRenderer, shell, remote } = require( 'electron' )
+
+const path				= require('path')
+const Store				= require( 'electron-store' )
+const store				= new Store()
+const dialog			= remote.dialog
+const dateFormat		= require( 'dateformat' )
+const $					= require( 'jquery' )
+const marked			= require( 'marked' )
+const removeMarkdown	= require( 'remove-markdown' )
+const pretty			= require( 'pretty' )
+const fs				= require( 'fs-extra' )
 
 const 	server 		= store.get( 'loginCredentials.server' ),
 		username 	= store.get( 'loginCredentials.username' ),
@@ -180,6 +182,7 @@ dateFormat.i18n = {
 }
 
 
+
 //note(@duncanmid): call notes api
 
 function apiCall( call, id, body ) {
@@ -220,7 +223,7 @@ function apiCall( call, id, body ) {
 	if( id ) { url += `/${id}` }
 	if( body ) { init.body = JSON.stringify( body ) }
 	
-	console.log( `URL: ${url}` )
+	console.log( `URL: ${server}${url}` )
 	
 	fetch(server + url, init).then(function(response) {
 	
@@ -363,7 +366,6 @@ function wrapTextToSelection( start, end ) {
 function listNotes( array, sidebar ) {
 	
 	const date = new Date()
-	const now = date.getTime() / 1000
 	
 	let sortby 	= store.get( 'appSettings.sortby' ),
 		orderby = store.get( 'appSettings.orderby' )
@@ -389,7 +391,7 @@ function listNotes( array, sidebar ) {
 	for ( let item of array ) {
 		
 		let theDate = new Date( item.modified )
-		let formattedDate = formatDate( now, theDate.getTime() )
+		let formattedDate = formatDate( theDate.getTime() )
 		
 		let plainTxt = removeMarkdown( item.content.replace(/(!\[.*\]\(.*\)|<[^>]*>|>|<)/g, ''))
 		
@@ -419,23 +421,37 @@ function listNotes( array, sidebar ) {
 
 //note(@duncanmid): formatDate
 
-function formatDate( now, timestamp ) {
+function formatDate( timestamp ) {
 	
-	//todo(@duncanmid): add if the time (H:MM) is greater than current -> 'yesterday' 
+	let today		= new Date(),
+		yesterday	= new Date(),
+		week		= new Date()
 	
-	if( (now - 86400) < timestamp ) {
+	today.setHours( 0, 0, 0, 0 )
+	yesterday.setHours( 0, 0, 0, 0 )
+	yesterday.setDate( yesterday.getDate() - 1 )
+	week.setHours( 0, 0, 0, 0 )
+	week.setDate( week.getDate() - 7 )
+	
+	
+	if( ( today.getTime() / 1000 ) < timestamp ) {
 		
-		//time
+		//if today - show time
 		return dateFormat( timestamp * 1000, 'H:MM' )
 	
-	} else if ( (now - 604800) < timestamp ) {
+	} else if ( ( yesterday.getTime() / 1000 ) < timestamp ) {
 		
-		//day
+		//if yesterday - show string
+		return i18n.t('date:yesterday', 'yesterday')
+	
+	} else if ( ( week.getTime() / 1000 ) < timestamp ) {
+		
+		//if last week - show day
 		return dateFormat( timestamp * 1000, 'dddd' )
 	
 	} else {
 		
-		//date
+		//else - show date
 		return dateFormat( timestamp * 1000, 'dd/mm/yy' )
 	}
 }

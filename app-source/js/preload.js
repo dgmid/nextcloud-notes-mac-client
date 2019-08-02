@@ -6,6 +6,7 @@ const { remote } 	= require( 'electron' )
 const os 			= require('os').release()
 const parts 		= os.split('.')
 
+
 if (process.platform == 'darwin') {
 	
 	const { systemPreferences } = remote

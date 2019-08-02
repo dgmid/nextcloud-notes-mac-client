@@ -311,8 +311,14 @@ aside {
 		
 		&:hover {
 			
-			background-color: transparent;
-			border-color: var(--dividers);
+			background-color: var(--toolbar-hover);
+			border-color: var(--toolbar-border);
+		}
+		
+		&.active {
+			
+			background-color: var(--app-color);
+			border-color: var(--app-color);
 		}
 	}
 	
@@ -402,6 +408,14 @@ aside {
 			
 			border-left-color: var(--header-border);
 			border-right-color: var(--dividers);
+		}
+	}
+	
+	.CodeMirror {
+		
+		.CodeMirror-cursor {
+		
+			border-left: 1px solid white;
 		}
 	}
 }

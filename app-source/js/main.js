@@ -9,7 +9,6 @@ const Store = require('electron-store')
 const marked = require( 'marked' )
 const removeMarkdown = require( 'remove-markdown' )
 
-
 let win,
 	loginFlow,
 	prefs = null
@@ -58,7 +57,6 @@ let store = new Store({
 
 function createWindow() {
 	
-	
 	let { x, y, width, height } = store.get('windowBounds'),
 		theme = systemPreferences.isDarkMode() ? '#393837' : '#ededed'
 	
@@ -75,7 +73,7 @@ function createWindow() {
 		webPreferences: {
 			devTools: false,
 			preload: path.join(__dirname, './preload.min.js'),
-			nodeIntegration: true
+			nodeIntegration: true,
 		},
 		icon: path.join(__dirname, '../assets/icon/Icon.icns')
 	})
@@ -94,9 +92,11 @@ function createWindow() {
 		slashes: true 
 	}))
 	
+	//win.webContents.toggleDevTools()
+	
 	win.once('ready-to-show', () => {
 		
-		win.show()
+		win.show()	
 	})
 	
 	win.on('resize', saveWindowBounds)

@@ -4,7 +4,6 @@ const i18n = require( './i18n.min' )
 const electron = require( 'electron' )
 const {Menu, shell} = require( 'electron' )
 const app = electron.app
-const BrowserWindow = electron.BrowserWindow
 const ipc = electron.ipcMain
 const path = require( 'path' )
 const name = app.getName()
@@ -368,7 +367,7 @@ const template = [
 		]
 	}
 ]
-	
+
 
 const menu = Menu.buildFromTemplate(template)
 
