@@ -1,6 +1,6 @@
 'use strict'
 
-const {app, BrowserWindow, ipcMain, protocol, systemPreferences} = require('electron')
+const {app, BrowserWindow, ipcMain, protocol, systemPreferences, webContents} = require('electron')
 const url = require('url') 
 const path = require('path')
 const dialog = require('electron').dialog
@@ -37,6 +37,7 @@ let store = new Store({
 			
 			sidebar: null,
 			selected: null,
+			categories: false
 		},
 		
 		appSettings: {
@@ -179,7 +180,7 @@ app.on('open-prefs', () => {
 		prefs = new BrowserWindow({
 			
 			width: 548,
-			height: 330,
+			height: 436,
 			resizable: false,
 			minimizable: false,
 			maximizable: false,
@@ -229,4 +230,12 @@ ipcMain.on('set-zoom-slider', (event, message) => {
 ipcMain.on('spellcheck', (event, message) => {
 	
 	win.webContents.send('spellcheck', message)	
+})
+
+ipcMain.on('update-theme', (event, message) => {
+	
+	webContents.getAllWebContents().forEach( wc => {
+		
+		wc.send('set-theme', message)
+	})
 })

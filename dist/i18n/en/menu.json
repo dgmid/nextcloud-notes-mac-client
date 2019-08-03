@@ -63,6 +63,7 @@
     "actualsize": "Actual Size",
     "reload": "Reload",
     "devtools": "Toggle Developer Tools",
+    "categories": "Toggle Categories",
     "fullscreen": "Toggle Full Screen"
   },
   "window": {

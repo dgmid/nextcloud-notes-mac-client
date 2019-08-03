@@ -48,6 +48,11 @@
     "notext": "No additional text",
     "new": "New note"
   },
+  "categories": {
+    "title": "Categories",
+    "all": "All notes",
+    "none": "Uncategorised"
+  },
   "date": {
     "titlebar": "at"
   },

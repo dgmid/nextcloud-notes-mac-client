@@ -7,7 +7,10 @@
       "date": "Date",
       "title": "Title",
       "desc": "Descending",
-      "asc": "Ascending"
+      "asc": "Ascending",
+      "os": "OS default",
+      "light": "light",
+      "dark": "dark"
     },
     "label": {
       "sort": "Sort notes by",
@@ -16,7 +19,8 @@
       "cursor": "Cursor position",
       "start": "start",
       "end": "end",
-      "spell": "Spellcheck"
+      "spell": "Spellcheck",
+      "theme": "Theme"
     }
   }
 }

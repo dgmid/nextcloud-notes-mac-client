@@ -63,6 +63,7 @@
     "actualsize": "Dimensione reale",
     "reload": "Ricaricare",
     "devtools": "Attiva/disattiva Developer Tools",
+    "categories": "Mostra/nascondere le categorie",
     "fullscreen": "Attiva/disattiva modalità a tutto schermo"
   },
   "window": {

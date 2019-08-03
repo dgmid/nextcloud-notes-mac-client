@@ -44,20 +44,39 @@ header {
 	bottom: 0;
 	
 	transition: left .25s ease-out;
+	
+	&.slide { left: 200px; }
 }
 
 footer {
 	
 	width: 200px;
 	border-right: 1px solid var(--dividers);
-	background: grey;
+	background-color: var(--categories);
 	position: absolute;
 	top: 23px;
 	left: -200px;
 	bottom: 0;
-	overflow: hidden;
+	overflow-x: hidden; 
+	overflow-y: scroll;
 	
 	transition: left .25s ease-out;
+	
+	&.slide { left: 0; }
+	
+	button {
+		
+		border: 0;
+		border-radius: 0;
+		width: 100%;
+		text-align: left;
+		color: #fff;
+		background-color: transparent;
+		
+		transition: background-color .15s;
+		
+		&:focus { outline: none; }
+	}
 }
 
 main {
@@ -354,6 +373,13 @@ aside {
 //note(@duncanmid): dark theme
 
 [data-theme="dark"] {
+	
+	footer {
+		
+		background-image: var(--texture2);
+		background-size: 100px 100px;
+		border-right: 1px solid var(--header-border);
+	}
 	
 	main {
 		

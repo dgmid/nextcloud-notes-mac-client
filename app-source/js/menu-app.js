@@ -321,6 +321,11 @@ const template = [
 			{
 				type: 'separator'
 			},
+			/* {
+				label: i18n.t('menu:view.categories', 'Toggle Categories'),
+				accelerator: 'Cmd+Shift+C',
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('toggle-categories', '') }
+			}, */
 			{
 				label: i18n.t('menu:view.fullscreen', 'Toggle Full Screen'),
 				role: 'togglefullscreen'

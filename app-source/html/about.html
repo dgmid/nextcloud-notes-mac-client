@@ -35,12 +35,13 @@
 	</main>
 	
 	<script>
-		const i18n = require( '../js/i18n.min' )
-		window.$ = window.jQuery = require( 'jquery' )
-		const shell = require('electron')
-		const jqueryI18next = require( 'jquery-i18next' )
+		const i18n 					= require( '../js/i18n.min' )
+		window.$ = window.jQuery 	= require( 'jquery' )
+		const {shell, ipcRenderer} 	= require( 'electron' )
+		const jqueryI18next 		= require( 'jquery-i18next' )
 
 		jqueryI18next.init(i18n, $)
+		
 		
 		//note(@duncanmid): set lang & localize strings
 		
@@ -66,6 +67,15 @@
 				require('electron').shell.openExternal( packageData['homepage'] )
 			})
 		})
+		
+		
+		//note(@duncanmid): update-theme
+		
+		ipcRenderer.on('set-theme', (event, message) => {
+			
+			__setTheme()
+		})
+		
 	</script>
 </body>
 </html>

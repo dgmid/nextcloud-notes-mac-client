@@ -1,12 +1,12 @@
 'use strict'
 
-const i18n = require( './i18n.min' )
-const remote = require( 'electron' ).remote
-const {ipcRenderer} = require( 'electron' )
-const Store = require( 'electron-store' )
-const store = new Store()
-const $ = require( 'jquery' )
-const jqueryI18next = require( 'jquery-i18next' )
+const i18n 				= require( './i18n.min' )
+const remote 			= require( 'electron' ).remote
+const {ipcRenderer} 	= require( 'electron' )
+const Store 			= require( 'electron-store' )
+const store 			= new Store()
+const $ 				= require( 'jquery' )
+const jqueryI18next 	= require( 'jquery-i18next' )
 
 jqueryI18next.init(i18n, $)
 
@@ -42,6 +42,15 @@ function closeModal() {
 
 
 
+//note(@duncanmid): update-theme
+
+ipcRenderer.on('set-theme', (event, message) => {
+	
+	__setTheme()
+})
+
+
+
 $(document).ready(function() {	
 	
 	//note(@duncanmid): set button states
@@ -50,14 +59,14 @@ $(document).ready(function() {
 		
 		if( username && password ) {
 			
-			console.log('ALL THREE')
+			//console.log('ALL THREE')
 			
 			$('#update').prop('disabled', true)
 			$('#logout').prop('disabled', false)
 		
 		} else {
 			
-			console.log('ONLY SERVER')
+			//console.log('ONLY SERVER')
 			
 			$('#update').prop('disabled', false)
 			$('#logout').prop('disabled', true)
@@ -65,7 +74,7 @@ $(document).ready(function() {
 		
 	} else {
 		
-		console.log('NONE!')
+		//console.log('NONE!')
 		
 		$('#update').prop('disabled', false)
 		$('#logout').prop('disabled', true)

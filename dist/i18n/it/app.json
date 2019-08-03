@@ -48,6 +48,11 @@
     "notext": "Nessun testo aggiuntivo",
     "new": "Nuova nota"
   },
+  "categories": {
+    "title": "Categorie",
+    "all": "Tutte le note",
+    "none": "Non categorizzato"
+  },
   "date": {
     "titlebar": "alle"
   },

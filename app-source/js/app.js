@@ -723,6 +723,26 @@ ipcRenderer.on('spellcheck', (event, message) => {
 
 
 
+//note(@duncanmid): update-theme
+
+ipcRenderer.on('set-theme', (event, message) => {
+	
+	__setTheme()
+})
+
+
+
+//note(@duncanmid): toggle-sidebar
+
+ipcRenderer.on('toggle-categories', (event, message) => {
+	
+	$('#frame, footer').toggleClass('slide')
+	
+	let cats = store.get( 'appInterface.categories' ) ? false : true
+	store.set( 'appInterface.categories', cats )
+})
+
+
 //note(@duncanmid): modal
 
 function openModal( url, width, height, resize ) {
@@ -1053,11 +1073,22 @@ $(document).ready(function() {
 	// set lang
 	$('html').attr('lang', i18n.language)
 	
+	// toggle categories sidebar
+	if( store.get( 'appInterface.categories' ) ) {
+		
+		$('#frame, footer').addClass( 'slide' )
+	}
+	
 	// set spellcheck
 	toggleSpellcheck( store.get('appSettings.spellcheck') )
 	
 	// set edit button title
 	$('#edit').attr('title', i18n.t('app:main.button.edit', 'Edit Note'))
+	
+	// set categories srings
+	$('#cat-title').html( i18n.t('app:categories.title', 'Categories') )
+	$('#cat-all').html( i18n.t('app:categories.all', 'All notes') )
+	$('#cat-none').html( i18n.t('app:categories.none', 'uncategorised') )
 	
 	// check login
 	if( !server || !username || !password ) {
