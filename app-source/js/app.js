@@ -14,14 +14,19 @@ const marked			= require( 'marked' )
 const removeMarkdown	= require( 'remove-markdown' )
 const pretty			= require( 'pretty' )
 const fs				= require( 'fs-extra' )
+const EasyMDE			= require( 'easymde' )
 
 const 	server 		= store.get( 'loginCredentials.server' ),
 		username 	= store.get( 'loginCredentials.username' ),
 		password 	= store.get( 'loginCredentials.password' )
 
-let modal
+let database = new Store({
+	name: 'database',
+	notes: {}
+})
 
-const EasyMDE = require( 'easymde' )
+
+let modal
 
 let easymdeSetup = {
 		
@@ -192,20 +197,21 @@ function apiCall( call, id, body ) {
 	switch( call ) {
 		
 		case 'new':
-			method = 'post'
+			method = 'POST'
 		break
 		
 		case 'save':
 		case 'update':
-			method = 'put'
+		case 'category':
+			method = 'PUT'
 		break
 		
 		case 'delete':
-			method = 'delete'
+			method = 'DELETE'
 		break
 		
 		default: //all, single or export
-			method = 'get'
+			method = 'GET'
 	}
 	
 	let url = '/index.php/apps/notes/api/v0.2/notes',
@@ -281,6 +287,13 @@ function apiCall( call, id, body ) {
 				$(`button[data-id="${id}"]`).removeData('favorite')
 				$(`button[data-id="${id}"]`).attr('data-favorite', body.favorite)
 			
+			break
+			
+			case 'category':
+			
+				$('#sidebar').html('')
+				apiCall('sidebar')
+				
 			break
 			
 			case 'delete': // delete note
@@ -361,14 +374,90 @@ function wrapTextToSelection( start, end ) {
 
 
 
+//note(@duncanmid): build category list
+
+function saveCategories( array ) {
+	
+	$('#categories').empty()
+	
+	let compressed = [],
+	copy = array.slice(0),
+	results = []
+	
+	for (var i = 0; i < array.length; i++) {
+	
+		var theCount = 0
+		
+		for (var w = 0; w < copy.length; w++) {
+			
+			if (array[i] == copy[w]) {
+				
+				theCount++
+				delete copy[w]
+			}
+		}
+		
+		if (theCount > 0) {
+			
+			var a = new Object()
+			a.value = array[i]
+			a.count = theCount
+			compressed.push(a)
+		}
+	}
+	
+	for ( let item of compressed ) {
+		
+		let theItem		= item.value,
+			theID 		= theItem.replace(' ', '_')
+		
+		if( theItem.length > 0 ) {
+		
+			results.push( { "item": theItem , "catID": theID } )
+			
+			$('#categories').append(`<li><button class="custom" data-catid="${theID}" data-category="${theItem}" title="${theItem}">${theItem}</button></li>`)
+		}
+	}
+	
+	$(`.categories button[data-catid="${store.get('categories.selected')}"]`).addClass( 'selected' )
+	
+	showHideCategoryIcons()
+	store.set( 'categories.list', results )
+}
+
+
+
+//note(@duncanmid): hide category icons when a custom category is selected
+
+function showHideCategoryIcons() {
+	
+	if( $('.categories button.selected').hasClass( 'custom' ) ) {
+		
+		$('#sidebar').addClass( 'hidecats' )
+		
+	} else {
+		
+		$('#sidebar').removeClass( 'hidecats' )
+	}
+}
+
+
 //note(@duncanmid): generate ordered sidebar entries
 
 function listNotes( array, sidebar ) {
 	
+	//issue(@duncanmid): invesitgate restructuring notes array
+	
+	if( sidebar !== null ) {
+		
+		database.set('notes', array)
+	}
+	
 	const date = new Date()
 	
 	let sortby 	= store.get( 'appSettings.sortby' ),
-		orderby = store.get( 'appSettings.orderby' )
+		orderby = store.get( 'appSettings.orderby' ),
+		allCats = []
 	
 	if( array.length > 1 ) {
 		
@@ -390,8 +479,12 @@ function listNotes( array, sidebar ) {
 	
 	for ( let item of array ) {
 		
-		let theDate = new Date( item.modified )
-		let formattedDate = formatDate( theDate.getTime() )
+		let theDate = new Date( item.modified ),
+			formattedDate = formatDate( theDate.getTime() )
+		
+		let	catClass = ( item.category ) ? item.category.replace(' ', '_') : '##none##'
+		
+		let	theCat = ( item.category ) ? item.category : i18n.t('app:categories.none', 'Uncategorised')
 		
 		let plainTxt = removeMarkdown( item.content.replace(/(!\[.*\]\(.*\)|<[^>]*>|>|<)/g, ''))
 		
@@ -403,18 +496,24 @@ function listNotes( array, sidebar ) {
 			
 			plainTxt = i18n.t('app:sidebar.notext', 'No additional text')
 		}
-		                                                                                     
+		
 		$('#sidebar').append(
 		`<li>
-			<button data-id="${item.id}" data-title="${item.title}" data-category="${item.category}" data-favorite="${item.favorite}">
+			<button data-id="${item.id}" data-title="${item.title}" data-content="" data-catid="${catClass}" data-category="${item.category}" data-favorite="${item.favorite}">
 				<span class="side-title">${item.title}</span>
 				<span class="side-text">${formattedDate}&nbsp;&nbsp;<span class="excerpt">${plainTxt}</span></span>
+				<span class="side-cat">${theCat}</span>
 			</button>
 		</li>
 		`)
+		
+		allCats.push( item.category )
 	}
 	
 	( sidebar ) ? getSelected( 'sidebar' ) : getSelected()
+	
+	saveCategories( allCats )
+	selectCategory( store.get('categories.selected') )
 }
 
 
@@ -560,8 +659,6 @@ function saveNote( id ) {
 		if(	!easymde.isPreviewActive() &&
 			easymde.codemirror.historySize().undo > 0 ) {
 			
-			console.log( 'SAVING!!' )
-			
 			let content = easymde.value()
 						
 			//easymde.codemirror.clearHistory()
@@ -686,11 +783,11 @@ function toggleSpellcheck( state ) {
 
 
 
-//note(@duncanmid): toggle cursor position
+//note(@duncanmid): show / hide categories
 
-function toggleCursorPosition( state ) {
+function toggleCategories( state ) {
 	
-	alert(state)
+	$('#sidebar').toggleClass( 'showcats' )
 }
 
 
@@ -719,6 +816,15 @@ ipcRenderer.on('reload-sidebar', () => {
 ipcRenderer.on('spellcheck', (event, message) => {
 	
 	toggleSpellcheck( message )
+})
+
+
+
+//note(@duncanmid): display categories
+
+ipcRenderer.on('showcats', (event, message) => {
+	
+	toggleCategories( message )
 })
 
 
@@ -804,7 +910,39 @@ ipcRenderer.on('note', (event, message) => {
 	switch( message ) {
 		
 		case 'new':
-			apiCall( 'new', null, {"content": '# ' +  i18n.t('app:sidebar.new', 'New note')} )
+			
+			let body
+			
+			switch( store.get( 'categories.selected' ) ) {
+			
+				case '##all##':
+				case '##none##':
+					
+					body = {
+						"content": '# ' +  i18n.t('app:sidebar.new', 'New note')
+					}
+					
+				break
+				
+				case '##fav##':
+					
+					body = {
+						"content": '# ' +  i18n.t('app:sidebar.new', 'New note'),
+						"favorite": true
+					}
+					
+				break
+				
+				default:
+					
+					body = {
+						"content": '# ' +  i18n.t('app:sidebar.new', 'New note'),
+						"category": $('.categories li button.selected').data('category')
+					}
+			}
+			
+			apiCall( 'new', null, body )
+			
 		break
 		
 		case 'edit':
@@ -960,12 +1098,12 @@ ipcRenderer.on('set-zoom-level', (event, message) => {
 
 
 
-//note(@duncanmid): context menu commanda
+//note(@duncanmid): context menu commands
 
 ipcRenderer.on('context-favorite', (event, message) => {
 	
-	let favorite = ( message.favorite == 'true' ) ? false : true,
-		id 		= message.id
+	let favorite 	= ( message.favorite == 'true' ) ? false : true,
+		id 			= message.id
 	
 	apiCall( 'update', id, {"favorite": favorite} )
 })
@@ -980,6 +1118,18 @@ ipcRenderer.on('context-export', (event, id) => {
 ipcRenderer.on('context-delete', (event, id) => {
 	
 	deleteCheck( id )
+})
+
+
+ipcRenderer.on('context-category', (event, message) => {
+	
+	let id 			= message.id,
+		category	= message.category,
+		notes		= database.get('notes')
+	
+	let content = notes.find( x => x.id === message.id ).content
+	
+	apiCall( 'category', id, {"content": content, "category": category} )
 })
 
 
@@ -1012,9 +1162,11 @@ $('body').on('mouseup', '#sidebar li button', function(event) {
 	event.stopPropagation()
 	
 	let data = {
-		'id': $(this).data('id'),
-		'title': $(this).data('title'),
-		'favorite': $(this).attr('data-favorite')
+		'id': 		$(this).data('id'),
+		'title': 	$(this).data('title'),
+		'favorite': $(this).attr('data-favorite'),
+		'category': $(this).attr('data-category'),
+		'catID': 	$(this).attr('data-catid')
 	}
 	
 	if( event.which === 3 ) {
@@ -1060,47 +1212,116 @@ $('body').on('click', '.editor-preview a', (event) => {
 	event.preventDefault()
 	
 	let link = event.target.href
-	//todo(@duncanmid): scroll to #anchor links
 	if( link.substr(0, 4) !== 'file' ) shell.openExternal(link)
 })
 
+
+
+//note(@duncanmid): change category
+
+$('body').on('click', '.categories button', function(event) {
+	
+	let cat = $(this).attr( 'data-category' ),
+		catid = $(this).attr( 'data-catid' )
+	
+	$('.categories button').removeClass('selected')
+	$(this).addClass('selected')
+	
+	store.set( 'categories.selected', catid )
+	
+	selectCategory( catid )
+	showHideCategoryIcons()
+})
+
+
+
+//issue(@duncanmid): find correct location for this
+
+function selectCategory( catid ) {
+	
+	switch( catid ) {
+		
+		case '##all##':
+			 
+			$(`#sidebar button`).show()
+			
+		break
+		
+		case '##fav##':
+			
+			$(`#sidebar button`).hide()
+			$(`#sidebar button[data-favorite='true']`).show()
+			
+		break
+		
+		default:
+			
+			$(`#sidebar button`).hide()
+			$(`#sidebar button[data-catid='${catid}']`).show()	
+		break
+	}
+}
 
 
 //note(@duncanmid): docready
 
 $(document).ready(function() {
 	
-	// set lang
+	//note(@duncanmid): set lang
+	
 	$('html').attr('lang', i18n.language)
 	
-	// toggle categories sidebar
+	//note(@duncanmid): display categories in sidebar 
+	
+	if( store.get( 'appSettings.showcats' ) ) {
+		
+		$('#sidebar').addClass( 'showcats' )
+	}
+	
+	
+	//note(@duncanmid): toggle categories sidebar
+	
 	if( store.get( 'appInterface.categories' ) ) {
 		
 		$('#frame, footer').addClass( 'slide' )
 	}
 	
-	// set spellcheck
+	
+	//note(@duncanmid): set spellcheck
+	
 	toggleSpellcheck( store.get('appSettings.spellcheck') )
 	
-	// set edit button title
+	
+	//note(@duncanmid): set edit button title
+	
 	$('#edit').attr('title', i18n.t('app:main.button.edit', 'Edit Note'))
 	
-	// set categories srings
-	$('#cat-title').html( i18n.t('app:categories.title', 'Categories') )
-	$('#cat-all').html( i18n.t('app:categories.all', 'All notes') )
-	$('#cat-none').html( i18n.t('app:categories.none', 'uncategorised') )
 	
-	// check login
+	//note(@duncanmid): set categories strings
+	
+	$('#cat-title').html( i18n.t('app:categories.title', 'Categories'))
+	$('#cat-all').html( i18n.t('app:categories.all', 'All notes'))
+	$('#cat-all').attr('title', i18n.t('app:categories.all', 'All notes'))
+	$('#cat-fav').html( i18n.t('app:categories.fav', 'Favorites'))
+	$('#cat-fav').attr('title', i18n.t('app:categories.fav', 'Favorites'))
+	$('#cat-none').html( i18n.t('app:categories.none', 'Uncategorised'))
+	$('#cat-none').attr('title', i18n.t('app:categories.none', 'Uncategorised'))
+	
+	
+	//note(@duncanmid): check login
+	
 	if( !server || !username || !password ) {
 		
 		openModal( 'file://' + __dirname + '/../html/login.html', 480, 180, false )
 		
 	} else {
 		
-		apiCall('all')	
+		apiCall('all')
 	}
 	
-	// edit save
+	
+	//note(@duncanmid): edit save
+	
 	$('#edit').click(function() {
 		
 		editNote()

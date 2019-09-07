@@ -81,7 +81,7 @@ gulp.task('svg', () => {
 
 gulp.task('icns', () => {
 
-	return gulp.src('./app-source/assets/Icon.iconset/icon_*.png')
+	return gulp.src('./app-source/assets/AppIcon.appiconset/icon_*.png')
 		.pipe(iconutil('icon.icns'))
 		.pipe(gulp.dest('./dist/assets/icon/'))
 })
@@ -90,7 +90,7 @@ gulp.task('icns', () => {
 
 gulp.task('icon', () => {	
 	
-	return gulp.src('./app-source/assets/Icon.iconset/icon_128x128@2x.png')
+	return gulp.src('./app-source/assets/AppIcon.appiconset/icon_128x128@2x.png')
 		.pipe(rename('icon.png'))
 		.pipe(gulp.dest('./dist/assets/icon/'))
 })

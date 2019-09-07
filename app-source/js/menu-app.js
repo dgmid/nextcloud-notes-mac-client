@@ -321,11 +321,11 @@ const template = [
 			{
 				type: 'separator'
 			},
-			/* {
+			{
 				label: i18n.t('menu:view.categories', 'Toggle Categories'),
 				accelerator: 'Cmd+Shift+C',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('toggle-categories', '') }
-			}, */
+			},
 			{
 				label: i18n.t('menu:view.fullscreen', 'Toggle Full Screen'),
 				role: 'togglefullscreen'
@@ -367,7 +367,7 @@ const template = [
 		[
 			{
 				label: i18n.t('menu:help.homepage', 'Nextcloud Notes Mac Client Homepage'),
-				click () { require('electron').shell.openExternal('https://www.midwinter-dg.com/mac-apps/nextcloud-notes-mac-client.html') }
+				click () { require('electron').shell.openExternal('https://www.midwinter-dg.com/mac-apps/nextcloud-notes-client.html') }
 			}
 		]
 	}

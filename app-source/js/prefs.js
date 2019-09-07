@@ -24,8 +24,9 @@ $(document).ready(function() {
 	$('#sortby').val( store.get('appSettings.sortby') )
 	$('#orderby').val( store.get('appSettings.orderby') )
 	$('#zoom').val( store.get('appSettings.zoom') )
-	$('#spellcheck').prop('checked', store.get('appSettings.spellcheck') )
 	$(`#${store.get('appSettings.cursor')}`).prop('checked', true)
+	$('#spellcheck').prop('checked', store.get('appSettings.spellcheck') )
+	$('#showcats').prop('checked', store.get('appSettings.showcats') )
 	
 	
 	if( localStorage.user_theme ) {
@@ -61,9 +62,15 @@ $(document).ready(function() {
 			break
 			
 			case 'spellcheck':
-				let checked = $('#spellcheck').is(':checked')
-				store.set( `appSettings.${name}`, checked )
-				ipcRenderer.send('spellcheck', checked )
+				let spellcheck = $('#spellcheck').is(':checked')
+				store.set( `appSettings.${name}`, spellcheck )
+				ipcRenderer.send('spellcheck', spellcheck )
+			break
+			
+			case 'showcats':
+				let showcats = $('#showcats').is(':checked')
+				store.set( `appSettings.${name}`, showcats )
+				ipcRenderer.send('showcats', showcats )
 			break
 			
 			case 'theme':

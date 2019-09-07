@@ -2,5 +2,7 @@
   "new": "Nuova nota",
   "favorite": "Preferita",
   "export": "Esporta come",
-  "delete": "Elimina"
+  "delete": "Elimina",
+  "move": "Sposta in",
+  "none": "Non categorizzato"
 }

@@ -7,7 +7,10 @@
       "date": "Data",
       "title": "Titolo",
       "desc": "Discendente",
-      "asc": "Ascendente"
+      "asc": "Ascendente",
+      "os": "Predefinito",
+      "light": "chiaro",
+      "dark": "scuro"
     },
     "label": {
       "sort": "Ordina per",
@@ -16,7 +19,9 @@
       "cursor": "Posizione cursore",
       "start": "inizio",
       "end": "fine",
-      "spell": "Controllo ortografico"
+      "spell": "Controllo ortografico",
+      "showcats": "Mostre categorie",
+      "theme": "Tema"
     }
   }
 }

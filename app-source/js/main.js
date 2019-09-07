@@ -37,7 +37,7 @@ let store = new Store({
 			
 			sidebar: null,
 			selected: null,
-			categories: false
+			categories: true
 		},
 		
 		appSettings: {
@@ -46,8 +46,14 @@ let store = new Store({
 			orderby: 'desc',
 			zoom: '10',
 			cursor: 'start',
-			spellcheck: true
+			spellcheck: true,
+			showcats: true
+		},
+		
+		categories: {
 			
+			selected: '##all##',
+			list: null
 		},
 		
 		exportPath: app.getPath('desktop')
@@ -180,7 +186,7 @@ app.on('open-prefs', () => {
 		prefs = new BrowserWindow({
 			
 			width: 548,
-			height: 436,
+			height: 486,
 			resizable: false,
 			minimizable: false,
 			maximizable: false,
@@ -231,6 +237,13 @@ ipcMain.on('spellcheck', (event, message) => {
 	
 	win.webContents.send('spellcheck', message)	
 })
+
+
+ipcMain.on('showcats', (event, message) => {
+	
+	win.webContents.send('showcats', message)	
+})
+
 
 ipcMain.on('update-theme', (event, message) => {
 	

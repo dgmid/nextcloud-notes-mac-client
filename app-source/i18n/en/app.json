@@ -51,6 +51,7 @@
   "categories": {
     "title": "Categories",
     "all": "All notes",
+    "fav": "Favorites",
     "none": "Uncategorised"
   },
   "date": {

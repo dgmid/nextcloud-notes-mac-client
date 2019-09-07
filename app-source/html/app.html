@@ -27,19 +27,24 @@
 	</div>
 	
 	<footer>
-		<span id="cat-title"></span>
-		
-		<ul id="fixed-categories" class="categories">
-			<li>
-				<button id="cat-all"></button>
-			</li>
-			<li>
-				<button id="cat-none"></button>
-			</li>
-		</ul>
-		
-		<ul id="categories" class="categories">
-		</ul>
+		<div class="scroll">
+			<span id="cat-title"></span>
+			
+			<ul id="fixed-categories" class="categories">
+				<li>
+					<button id="cat-all" data-catid="##all##" data-category="##all##" title="All notes"></button>
+				</li>
+				<li>
+					<button id="cat-fav" data-catid="##fav##" data-category="##fav##" title="Favorites"></button>
+				</li>
+				<li>
+					<button id="cat-none" data-catid="##none##" data-category="##none##" title="Uncategorised"></button>
+				</li>
+			</ul>
+			
+			<ul id="categories" class="categories">
+			</ul>
+		</div>
 	</footer>
 	<script>
 		require( '../js/interface.min' )

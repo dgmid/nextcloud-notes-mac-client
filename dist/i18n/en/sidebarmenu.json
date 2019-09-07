@@ -2,5 +2,8 @@
   "new": "New Note",
   "favorite": "Favorite",
   "export": "Export as",
-  "delete": "Delete"
+  "delete": "Delete",
+  "move": "Move to",
+  "none": "Uncategorised"
 }
+
