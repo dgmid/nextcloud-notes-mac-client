@@ -8,7 +8,8 @@ const 	gulp 			= require('gulp'),
 		uglify 			= require('gulp-uglify-es').default,
 		pump 			= require('pump'),
 		iconutil 		= require('gulp-iconutil'),
-		exec 			= require('child_process').exec
+		exec 			= require('child_process').exec,
+		del				= require('del')
 
 
 
@@ -105,13 +106,22 @@ gulp.task('i18n', () => {
 
 
 
-gulp.task('build', gulp.series(	'sass',
-								'html',
-								'js',
-								'svg',
-								'i18n',
-								'icns',
-								'icon'
+gulp.task('clean', done => {
+	
+	del.sync(['dist/**', '!dist'])
+	done()
+})
+
+
+gulp.task('build', gulp.series(
+	'clean',
+	'sass',
+	'html',
+	'js',
+	'svg',
+	'i18n',
+	'icns',
+	'icon'
 ), done => {
 	
 	done()

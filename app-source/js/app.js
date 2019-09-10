@@ -1127,9 +1127,14 @@ ipcRenderer.on('context-category', (event, message) => {
 		category	= message.category,
 		notes		= database.get('notes')
 	
-	let content = notes.find( x => x.id === message.id ).content
+	let note = notes.find( x => x.id === message.id )
 	
-	apiCall( 'category', id, {"content": content, "category": category} )
+	apiCall( 'category', id, {
+		
+		"modified": 	note.modified,
+		"content": 		note.content,
+		"category":		category
+	})
 })
 
 
