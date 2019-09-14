@@ -15,6 +15,9 @@
     "edit": "Modifica/anteprima nota selezionata",
     "save": "Salva nota selezionata",
     "favorite": "Attiva/disattiva preferito",
+    "move": "Sposta la nota selezionata in",
+    "newcat": "Nuova categoria…",
+    "nocat": "Non categorizzato",
     "export": "Esporta la nota selezionata come",
     "delete": "Elimina la nota selezionata"
   },

@@ -1,0 +1,16 @@
+{
+  "body": {
+    "header": "Crea una nuova categoria:",
+    "label": {
+      "new": "Nome"
+    },
+    "input": {
+      "placeholder": "alfanumerica",
+      "title": "questo campo è richiesta"
+    },
+    "button": {
+      "cancel": "Annulla",
+      "create": "Creare categoria"
+    }
+  }
+}

@@ -221,6 +221,12 @@ app.on('open-prefs', () => {
 
 
 
+ipcMain.on('new-category', (event, message) => {
+	
+	win.webContents.send('context-category', message)	
+})
+
+
 ipcMain.on('reload-sidebar', () => {
 	
 	win.webContents.send('reload-sidebar', null)	

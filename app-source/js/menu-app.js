@@ -71,7 +71,7 @@ const template = [
 		label: i18n.t('menu:note.note', 'Note'),
 		submenu: [
 			{
-				label: i18n.t('menu:note.new', 'New Notw'),
+				label: i18n.t('menu:note.new', 'New Note'),
 				accelerator: 'Cmd+n',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'new') }
 			},
@@ -92,6 +92,21 @@ const template = [
 				label: i18n.t('menu:note.favorite', 'Toggle Favorite'),
 				accelerator: 'Cmd+f',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'favorite') }
+			},
+			{
+				label: i18n.t('menu:note.move', 'Move Selected Note to'),
+				submenu: [
+					{
+						label: i18n.t('menu:note.newcat', 'New Category…'),
+						accelerator: 'Cmd+Alt+n',
+						click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'newcat') }
+					},
+					{
+						label: i18n.t('menu:note.nocat', 'Uncategorised'),
+						accelerator: 'Cmd+u',
+						click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'nocat') }
+					}
+				]
 			},
 			{
 				label: i18n.t('menu:note.export', 'Export Selected Note as') + '…',

@@ -15,6 +15,9 @@
     "edit": "Edit / Preview Selected Note",
     "save": "Save Selected Note",
     "favorite": "Toggle Favorite",
+    "move": "Move Selected Note to",
+    "newcat": "New Category…",
+    "nocat": "Uncategorised",
     "export": "Export Selected Note as",
     "delete": "Delete Selected Note"
   },

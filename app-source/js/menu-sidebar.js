@@ -56,6 +56,14 @@ ipc.on('show-sidebar-menu', ( event, message ) => {
 			}
 		]
 		
+		sidebarMenuTemplate[5].submenu.push({
+			label: i18n.t('sidebarmenu:newcategory', 'New Category…'),
+			click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('context-newcategory', message.id) }
+		},
+		{
+			type: 'separator'
+		})
+		
 		for( let category of store.get( 'categories.list' ) ) {
 			
 			let status = (message.catID == category.catID) ? false : true
@@ -63,7 +71,9 @@ ipc.on('show-sidebar-menu', ( event, message ) => {
 			sidebarMenuTemplate[5].submenu.push({
 				label: category.item,
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('context-category', {'id': message.id, 'category': category.item}) },
-				enabled: status
+				enabled: status,
+				type: 'radio',
+				checked: ( status  === false ) ? true : false
 			})
 		}
 		

@@ -446,8 +446,6 @@ function showHideCategoryIcons() {
 
 function listNotes( array, sidebar ) {
 	
-	//issue(@duncanmid): invesitgate restructuring notes array
-	
 	if( sidebar !== null ) {
 		
 		database.set('notes', array)
@@ -962,6 +960,20 @@ ipcRenderer.on('note', (event, message) => {
 			}
 		break
 		
+		case 'newcat':
+			
+			if( selected ) {
+				openModal( 'file://' + __dirname + `/../html/new-category.html?id=${selected}`, 480, 180, false )
+			}
+		break
+		
+		case 'nocat':
+			if ( selected ) {
+				
+				//todo(@duncanmid): sono qui
+			}
+		break
+		
 		case 'export':
 			if( selected ) apiCall( 'export', selected )
 		break
@@ -1123,11 +1135,11 @@ ipcRenderer.on('context-delete', (event, id) => {
 
 ipcRenderer.on('context-category', (event, message) => {
 	
-	let id 			= message.id,
+	let id 			= parseInt( message.id ),
 		category	= message.category,
 		notes		= database.get('notes')
 	
-	let note = notes.find( x => x.id === message.id )
+	let note = notes.find( x => x.id === id )
 	
 	apiCall( 'category', id, {
 		
@@ -1135,6 +1147,12 @@ ipcRenderer.on('context-category', (event, message) => {
 		"content": 		note.content,
 		"category":		category
 	})
+})
+
+
+ipcRenderer.on('context-newcategory', (event, message) => {
+	
+	openModal( 'file://' + __dirname + `/../html/new-category.html?id=${message}`, 480, 180, false )
 })
 
 
@@ -1240,7 +1258,7 @@ $('body').on('click', '.categories button', function(event) {
 
 
 
-//issue(@duncanmid): find correct location for this
+//note(@duncanmid): select category in category sidebar
 
 function selectCategory( catid ) {
 	

@@ -1,0 +1,16 @@
+{
+  "body": {
+    "header": "Create a New Category:",
+    "label": {
+      "new": "Name"
+    },
+    "input": {
+      "placeholder": "alphanumeric",
+      "title": "this field is required"
+    },
+    "button": {
+      "cancel": "Cancel",
+      "create": "Create Category"
+    }
+  }
+}

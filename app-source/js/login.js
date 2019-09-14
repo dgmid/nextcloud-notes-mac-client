@@ -113,7 +113,6 @@ $(document).ready(function() {
 		} )
 		
 		ipcRenderer.send('reload', 'reload')
-		
 		closeModal()
 	})
 })
