@@ -182,6 +182,43 @@
 	}
 }
 
+[data-theme="light"] {
+
+	.cm-header { color: var(--md-yellow-dk); }
+	.cm-formatting-header { color: var(--md-yellow-lt); }
+	
+	.cm-variable-2 { color: var(--md-orange-dk); }
+	.cm-formatting-list { color: var(--md-orange-lt); }
+	
+	.cm-comment { color: var(--md-grey-dk); }
+	.cm-formatting-code-block { color: var(--md-grey-lt); }
+	
+	.cm-quote { color: var(--md-pink-dk); }
+	.cm-formatting-quote { color: var(--md-pink-lt); }
+	
+	.cm-hr { color: var(--md-indigo-dk); }
+	
+	.cm-tag { color: var(--md-khaki-dk); }
+	.cm-bracket { color: var(--md-khaki-lt); }
+	
+	.cm-link { color: var(--md-purple-dk) }
+	.cm-formatting-link { color: var(--md-purple-lt) }
+	
+	.cm-url { color: var(--md-blue-dk) }
+	.cm-formatting-link-string { color: var(--md-blue-lt) }
+
+	.cm-formatting-image { color: var(--md-purple-lt); }
+	
+	.cm-em { color: var(--md-cyan-dk); }
+	.cm-formatting-em { color: var(--md-cyan-lt); }
+	
+	.cm-strong { color: var(--md-aqua-dk); }
+	.cm-formatting-strong { color: var(--md-aqua-lt); }
+	
+	.cm-strikethrough { color: var(--md-red-dk) !important; }
+	.cm-formatting-strikethrough { color: var(--md-red-lt) !important; }
+}
+
 
 //note(@duncanmid): dark theme
 
@@ -191,4 +228,47 @@
 		
 		font-weight: 300;
 	}
+	
+	.CodeMirror-focused .CodeMirror-selected {
+    	
+    	background: rgba(255,255,255,.2);
+	}
+	
+	.cm-header { color: var(--md-yellow-lt); }
+	.cm-formatting-header { color: var(--md-yellow-dk); }
+	
+	.cm-variable-2 { color: var(--md-orange-lt); }
+	.cm-formatting-list { color: var(--md-orange-dk); }
+	
+	.cm-comment {
+		
+		color: var(--md-grey-lt);
+		background-color: rgba(255,255,255,.1);
+	}
+	.cm-formatting-code-block { color: var(--md-grey-dk); }
+	
+	.cm-quote { color: var(--md-pink-lt); }
+	.cm-formatting-quote { color: var(--md-pink-dk); }
+	
+	.cm-hr { color: var(--md-indigo-lt); }
+	
+	.cm-tag { color: var(--md-khaki-lt); }
+	.cm-bracket { color: var(--md-khaki-dk); }
+	
+	.cm-link { color: var(--md-purple-lt) }
+	.cm-formatting-link { color: var(--md-purple-dk) }
+	
+	.cm-url { color: var(--md-blue-lt) }
+	.cm-formatting-link-string { color: var(--md-blue-dk) }
+	
+	.cm-formatting-image { color: var(--md-purple-dk); }
+	
+	.cm-em { color: var(--md-cyan-lt); }
+	.cm-formatting-em { color: var(--md-cyan-dk); }
+	
+	.cm-strong { color: var(--md-aqua-lt); }
+	.cm-formatting-strong { color: var(--md-aqua-dk); }
+	
+	.cm-strikethrough { color: var(--md-red-lt) !important; }
+	.cm-formatting-strikethrough { color: var(--md-red-dk) !important; }
 }
