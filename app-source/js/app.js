@@ -16,6 +16,8 @@ const pretty			= require( 'pretty' )
 const fs				= require( 'fs-extra' )
 const EasyMDE			= require( 'easymde' )
 
+const hljs				= require( 'highlight.js' )
+
 const 	server 		= store.get( 'loginCredentials.server' ),
 		username 	= store.get( 'loginCredentials.username' ),
 		password 	= store.get( 'loginCredentials.password' )
@@ -122,11 +124,15 @@ let easymdeSetup = {
 			'toggleSideBySide': null,
 			'toggleFullScreen': null,
 			'togglePreview': null	
+		},
+		renderingConfig: {
+			codeSyntaxHighlighting: true,
+			hljs: hljs
 		}
 	}
 
-let easymde = new EasyMDE( easymdeSetup )
-
+//let easymde = new EasyMDE( easymdeSetup )
+let easymde
 
 
 //note(@duncanmid): dateFormat i18n setup
@@ -372,6 +378,20 @@ function wrapTextToSelection( start, end ) {
 	note.replaceSelection( start + selection + end )
 }
 
+function wrapBlockToCursor( start, end ) {
+	
+	let note = easymde.codemirror.getDoc()
+	let cursor = note.getCursor()
+	note.replaceRange(
+`${start}
+
+${end}`, cursor)
+	
+	cursor = note.getCursor()
+	let line = cursor.line -1
+	note.setCursor({ line: line })
+}
+
 
 
 //note(@duncanmid): build category list
@@ -563,22 +583,30 @@ function displayNote( note ) {
 		date = dateFormat(note.modified * 1000, "d mmmm, yyyy"),
 		time = dateFormat(note.modified * 1000, "HH:MM")
 	
-	$('.CodeMirror-code').addClass('hide')
 	$('#edit').removeClass('editing')
 	
 	$('#time').html( `${date} ${prep} ${time}` )
 	
-	resetEditor()
+	if( easymde ) {
+		
+		easymde.toTextArea()
+		easymde = null
+	}
+	
+	easymde = new EasyMDE( easymdeSetup )
 	
 	if( easymde.isPreviewActive() ) easymde.togglePreview()
 	
 	$('#note').attr('data-id', note.id)
+	
 	easymde.value( note.content )
 	easymde.codemirror.clearHistory()
 	easymde.togglePreview()
+	
 	applyZoom( store.get( 'appSettings.zoom' ) )
 	
-	$('.CodeMirror-code').removeClass('hide')
+	$('time').fadeIn('fast')
+	$('.loader').fadeOut(400, function() { $(this).remove() } )
 }
 
 
@@ -865,7 +893,7 @@ function openModal( url, width, height, resize ) {
 			frame: false,
 			transparent: true,
 			webPreferences: {
-				devTools: false,
+				//devTools: false,
 				preload: path.join(__dirname, './preload.min.js'),
 				nodeIntegration: true
 			}	
@@ -967,11 +995,6 @@ ipcRenderer.on('note', (event, message) => {
 			}
 		break
 		
-		case 'nocat':
-			if ( selected ) {
-				
-				//todo(@duncanmid): sono qui
-			}
 		break
 		
 		case 'export':
@@ -1066,6 +1089,17 @@ ipcRenderer.on('html', (event, message) => {
 			case 'u':
 			case 'mark':
 				wrapTextToSelection( `<${message}>`, `</${message}>` )
+			break
+			case 'javascript':
+			case 'json':
+			case 'html':
+			case 'css':
+			case 'scss':
+			case 'php':
+			case 'objective-c':
+			case 'c-like':
+			case 'bash':
+				wrapBlockToCursor( `\`\`\` ${message}`, `\`\`\`` )
 			break
 			case 'dl':
 				insertTextAtCursor(
@@ -1165,8 +1199,8 @@ $('body').on('click', '#sidebar li button', function(event) {
 	
 	let id = $(this).data('id')
 	
-	$('#time').html('')
-	$('#note').html('<div class="loader"></div>')
+	$('#time').html('').hide()
+	$('main').append('<div class="loader"><div class="spinner"></div></div>')
 	
 	$('#sidebar li button').removeClass('selected').removeClass('above-selected')
 	$(this).addClass('selected').parent().prev().children().addClass('above-selected')
@@ -1266,24 +1300,52 @@ function selectCategory( catid ) {
 		
 		case '##all##':
 			 
-			$(`#sidebar button`).show()
+			$(`#sidebar li`).show()
 			
 		break
 		
 		case '##fav##':
 			
-			$(`#sidebar button`).hide()
-			$(`#sidebar button[data-favorite='true']`).show()
+			$(`#sidebar li`).hide()
+			$(`#sidebar button[data-favorite='true']`).parent('li').show()
 			
 		break
 		
 		default:
 			
-			$(`#sidebar button`).hide()
-			$(`#sidebar button[data-catid='${catid}']`).show()	
+			$(`#sidebar li`).hide()
+			$(`#sidebar button[data-catid='${catid}']`).parent('li').show()	
 		break
 	}
 }
+
+
+
+//note(@duncanmid): keyboard arrow keys
+
+
+document.addEventListener( 'keydown', function( event ) {
+	
+	if( easymde.isPreviewActive() ) {
+		
+		$('#sidebar button').blur()
+		
+		let items
+		
+		switch( event.which ) {
+			
+			case 38:
+				items = $('#sidebar button.selected').parent('li').prevAll('li:visible')
+				items.first().find('button').click()
+			break
+			
+			case 40:
+				items = $('#sidebar button.selected').parent('li').nextAll('li:visible')
+				items.first().find('button').click()
+			break
+		}
+	}
+})
 
 
 //note(@duncanmid): docready

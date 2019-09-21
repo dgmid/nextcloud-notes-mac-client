@@ -141,6 +141,35 @@ main {
 	
 	&::-webkit-scrollbar { width: 0 !important }
 	
+	#note {
+		
+		border: 0;
+		background-color: transparent;
+		resize: none;
+	}
+	
+	.loader {
+		
+		position: absolute;
+		top: 55px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(255,0,0,.6) var(--texture) repeat center center;
+		z-index: 1;
+		
+		.spinner {
+			
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			
+			background: var(--loader) no-repeat center center;
+		}
+	}
+	
 	#edit {
 	
 		position: fixed;
@@ -155,7 +184,7 @@ main {
 		border-radius: 3px;
 		background-image: var(--pencil);
 		opacity: .5;
-		z-index: 1;
+		z-index: 2;
 		
 		transition: all .15s ease-in-out;
 	
@@ -342,12 +371,6 @@ aside {
 	}
 }
 
-.loader {
-	
-	height: calc(100vh - 23px);
-	background: var(--loader) no-repeat center center;
-}
-
 .CodeMirror {
 	
 	border: none;
@@ -382,8 +405,6 @@ aside {
 .CodeMirror-code {
 	
 	margin-top: 22px;
-	
-	&.hide { opacity: 0 }
 }
 
 .editor-toolbar {

@@ -244,9 +244,53 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: i18n.t('menu:markdown.code', 'Code'),
-				accelerator: 'Cmd+Alt+c',
-				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'code') }
+				label: i18n.t('menu:markdown.code', 'Code…'),
+					submenu: [
+						{
+							label: i18n.t('menu:markdown.codeblockinline', 'Block / Inline'),
+							accelerator: 'Cmd+Alt+c',
+							click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'code') }
+						},
+						{
+							type: 'separator'
+						},
+						{
+							label: i18n.t('menu:markdown.javascript', 'Block: Javascript'),
+							click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('html', 'javascript') }
+						},
+						{
+							label: i18n.t('menu:markdown.json', 'Block: Json'),
+							click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('html', 'json') }
+						},
+						{
+							label: i18n.t('menu:markdown.html', 'Block: HTML'),
+							click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('html', 'html') }
+						},
+						{
+							label: i18n.t('menu:markdown.css', 'Block: CSS'),
+							click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('html', 'css') }
+						},
+						{
+							label: i18n.t('menu:markdown.scss', 'Block: SCSS'),
+							click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('html', 'scss') }
+						},
+						{
+							label: i18n.t('menu:markdown.php', 'Block: PHP'),
+							click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('html', 'php') }
+						},
+						{
+							label: i18n.t('menu:markdown.objectivec', 'Block: Objective-C'),
+							click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('html', 'objective-c') }
+						},
+						{
+							label: i18n.t('menu:markdown.clike', 'Block: C Like'),
+							click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('html', 'c-like') }
+						},
+						{
+							label: i18n.t('menu:markdown.bash', 'Block: BASH'),
+							click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('html', 'bash') }
+						}
+					]
 			},
 			{
 				label: i18n.t('menu:markdown.blockquote', 'Blockquote'),
@@ -326,13 +370,13 @@ const template = [
 					if (focusedWindow) focusedWindow.reload()
 				}
 			},
-			/* {
+			{
 				label: i18n.t('menu:view.devtools', 'Toggle Developer Tools'),
 				accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
 				click (item, focusedWindow) {
 					if (focusedWindow) focusedWindow.webContents.toggleDevTools()
 				}
-			}, */
+			},
 			{
 				type: 'separator'
 			},
