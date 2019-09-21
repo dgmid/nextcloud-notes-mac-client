@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>select hex colors</title>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		
+		<script>
+			
+			(function ( $ ) {
+			 
+			    $.fn.swatches = function() {
+			       
+			        
+			       	var str = this;
+			       	
+			       	str.css('color', 'grey');
+			       	
+			       	var hexes = str.match( /#[0-9a-fA-F]{3,6}/ );
+			        
+			       // console.log( match )
+			        
+			       return this;
+			    };
+			 
+			}( jQuery ));	
+			
+			
+			
+			$(document).ready(function() {
+				
+				$('#preview').swatches();	
+			});
+			
+		</script>
+		
+	</head>
+
+	<body>
+		
+		<div id="preview">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip #234212 ex ea commodo consequat. Duis aute irure dolor in #fff reprehenderit in voluptate velit esse cillum dolore #222 eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt #CCCCCC in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
+	</body>
+</html>
+

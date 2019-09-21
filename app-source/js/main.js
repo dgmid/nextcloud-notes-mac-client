@@ -78,7 +78,7 @@ function createWindow() {
 		minHeight: 372,
 		backgroundColor: theme,
 		webPreferences: {
-			//devTools: false,
+			devTools: false,
 			preload: path.join(__dirname, './preload.min.js'),
 			nodeIntegration: true,
 		},
@@ -156,7 +156,7 @@ ipcMain.on('loginflow', (event, message) => {
 		titleBarStyle: 'hidden',
 		backgroundColor: '#0082c9',
 		webPreferences: {
-			//devTools: false,
+			devTools: false,
 			nodeIntegration: false
 		}
 	})
@@ -193,7 +193,7 @@ app.on('open-prefs', () => {
 			show: false,
 			backgroundColor: theme,
 			webPreferences: {
-				//devTools: false,
+				devTools: false,
 				preload: path.join(__dirname, './preload.min.js'),
 				nodeIntegration: true
 			},
