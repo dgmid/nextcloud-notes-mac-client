@@ -3,8 +3,8 @@
 const i18n = require( './i18n.min' )
 
 const { ipcRenderer, shell, remote } = require( 'electron' )
-
-const path				= require('path')
+const version 			= require('electron').remote.app.getVersion()
+const path				= require( 'path' )
 const Store				= require( 'electron-store' )
 const store				= new Store()
 const dialog			= remote.dialog
@@ -15,8 +15,8 @@ const removeMarkdown	= require( 'remove-markdown' )
 const pretty			= require( 'pretty' )
 const fs				= require( 'fs-extra' )
 const EasyMDE			= require( 'easymde' )
-
 const hljs				= require( 'highlight.js' )
+const compareVersions	= require('compare-versions')
 
 const 	server 		= store.get( 'loginCredentials.server' ),
 		username 	= store.get( 'loginCredentials.username' ),
@@ -26,9 +26,6 @@ let database = new Store({
 	name: 'database',
 	notes: {}
 })
-
-
-let modal
 
 let easymdeSetup = {
 		
@@ -131,8 +128,9 @@ let easymdeSetup = {
 		}
 	}
 
-//let easymde = new EasyMDE( easymdeSetup )
-let easymde
+let easymde,
+	modal,
+	firstLoad = true
 
 
 //note(@duncanmid): dateFormat i18n setup
@@ -235,13 +233,13 @@ function apiCall( call, id, body ) {
 	if( id ) { url += `/${id}` }
 	if( body ) { init.body = JSON.stringify( body ) }
 	
-	console.log( `URL: ${server}${url}` )
+	console.info( `URL: ${server}${url}` )
 	
 	fetch(server + url, init).then(function(response) {
 	
 		if (response.ok) {
 			
-			console.log('response OK')
+			console.info( 'response OK' )
 			return response.text()
 		
 		} else {
@@ -251,7 +249,7 @@ function apiCall( call, id, body ) {
 				i18n.t('app:dialog.error.server.text', 'there was an error connecting to') + `:\n${server}`
 			)
 			
-			console.log( response.error() )
+			console.error( response.error() )
 		}
 	
 	}).then(function(message) {
@@ -267,7 +265,7 @@ function apiCall( call, id, body ) {
 				i18n.t('app:dialog.error.json.text', 'An error occured parsing the notes')
 			)
 			
-			console.log(notes['message'])	
+			console.error( notes['message'] )	
 		
 		} else {
 			
@@ -338,14 +336,14 @@ function apiCall( call, id, body ) {
 			}
 		}
 	
-	}).catch(function(error) {
+	}).catch( function( error ) {
 		
 		dialog.showErrorBox(
 			i18n.t('app:dialog.error.server.title', 'Server connection error'),
 			i18n.t('app:dialog.error.server.text', 'there was an error connecting to') + `:\n${server}`
 		)
 		
-		console.log(error)
+		console.error( error )
 	})
 }
 
@@ -607,6 +605,12 @@ function displayNote( note ) {
 	
 	$('time').fadeIn('fast')
 	$('.loader').fadeOut(400, function() { $(this).remove() } )
+	
+	if( firstLoad === true ) {
+		
+		firstLoad = 1
+		checkAppVersion()
+	}
 }
 
 
@@ -766,7 +770,7 @@ function exportNote( note ) {
 		
 		.catch(err => {
 			
-			console.error(err)
+			console.error( err )
 		})
 	}
 }
@@ -893,7 +897,7 @@ function openModal( url, width, height, resize ) {
 			frame: false,
 			transparent: true,
 			webPreferences: {
-				devTools: false,
+			devTools: true,
 				preload: path.join(__dirname, './preload.min.js'),
 				nodeIntegration: true
 			}	
@@ -1323,7 +1327,6 @@ function selectCategory( catid ) {
 
 //note(@duncanmid): keyboard arrow keys
 
-
 document.addEventListener( 'keydown', function( event ) {
 	
 	if( easymde.isPreviewActive() ) {
@@ -1346,6 +1349,53 @@ document.addEventListener( 'keydown', function( event ) {
 		}
 	}
 })
+
+
+
+//note(@duncanmid): open links in browser
+
+$('body').on('click', '#update', (event) => {
+	
+	event.preventDefault()
+	
+	let link = $('#update').attr( 'data-url' )
+	
+	shell.openExternal(link)
+})
+
+
+
+//note(@duncanmid): check app version
+
+function checkAppVersion() {
+		
+	$.getJSON( 'https://api.github.com/repos/dgmid/nextcloud-notes-mac-client/releases/latest', function( release ) {
+		
+		let latest = release.name
+		
+		console.info( `this version: ${version}` )
+		console.info( `latest version: ${latest}` )
+		
+		if( compareVersions.compare( version, latest, '<' ) ) {
+			
+			$('#update').attr('data-url', `https://www.midwinter-dg.com/mac-apps/nextcloud-notes-client.html?app`).fadeIn('slow')
+			$('#update-version').html( latest )
+		}
+	})
+	.done( function() {
+		
+		console.info( `check release succeeded` )
+	})
+	.fail( function( jqXHR, textStatus, errorThrown ) {
+		
+		console.error( `check release failed ${textStatus}` )
+	})
+	.always( function() {
+		
+		console.info( `check release ended` )
+	})
+}
+
 
 
 //note(@duncanmid): docready
@@ -1391,6 +1441,7 @@ $(document).ready(function() {
 	$('#cat-fav').attr('title', i18n.t('app:categories.fav', 'Favorites'))
 	$('#cat-none').html( i18n.t('app:categories.none', 'Uncategorised'))
 	$('#cat-none').attr('title', i18n.t('app:categories.none', 'Uncategorised'))
+	$('#update-label').html( i18n.t('app:titlebar.update', 'Update Available'))
 	
 	
 	//note(@duncanmid): check login

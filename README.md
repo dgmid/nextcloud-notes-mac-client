@@ -1,8 +1,12 @@
 # ![nextcloud-note-client-icon](https://user-images.githubusercontent.com/1267580/47951470-86220b80-df61-11e8-87bc-38ca8bd4c665.png) Nextcloud Notes Client
 
-A replacement for the Mac Notes app that syncs with the Nextcloud Notes app
+A replacement for the Mac Notes app that syncs with a Nextcloud server running the Nextcloud Notes app
 
-![nextcloud-notes-client](https://user-images.githubusercontent.com/1267580/47951471-86220b80-df61-11e8-81d3-cd37f1e2c5ea.png)
+![Nextcloud Notes Client in edit mode](https://user-images.githubusercontent.com/1267580/65714112-c539dd80-e09a-11e9-8ff8-22e2d293ace4.png)
+<small>*Nextcloud Notes Client in edit mode*</small>
+
+![Nextcloud Notes Client in preview mode](https://user-images.githubusercontent.com/1267580/65714113-c539dd80-e09a-11e9-8960-580421a0e77d.png)
+<small>*Nextcloud Notes Client in preview mode*</small>
 
 ## Requirements
 
@@ -31,18 +35,11 @@ To test the app run:
 npm start
 ```
 
-To update all files prior to packaging run:
-```shell
-gulp build
-```
-
 To package the final app run:
 ```shell
 npm run package
 ```
 The packaged app will be written to `build/Nextcloud Notes Client-darwin-x64/` in the project directory.
-
-**Note**: packaging the app runs `npm prune -production` and so you will need to run `npm install` again before making any further modifications.
 
 ## License
 

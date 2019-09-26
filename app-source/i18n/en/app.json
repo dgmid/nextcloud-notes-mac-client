@@ -1,4 +1,7 @@
 {
+  "titlebar": {
+    "update": "Update Available"
+  },
   "toolbar": {
     "heading": "Heading",
     "bold": "Bold",

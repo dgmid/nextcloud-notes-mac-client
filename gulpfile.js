@@ -1,4 +1,4 @@
-const 	gulp 			= require('gulp'),
+const	gulp 			= require('gulp'),
 		sass 			= require('gulp-sass'),
 		rename 			= require('gulp-rename'),
 		autoprefixer 	= require('gulp-autoprefixer'),
@@ -9,7 +9,8 @@ const 	gulp 			= require('gulp'),
 		pump 			= require('pump'),
 		iconutil 		= require('gulp-iconutil'),
 		exec 			= require('child_process').exec,
-		del				= require('del')
+		del				= require('del'),
+		replace			= require('gulp-string-replace')
 
 
 
@@ -109,11 +110,62 @@ gulp.task('i18n', () => {
 gulp.task('clean', done => {
 	
 	del.sync(['dist/**', '!dist'])
+	
 	done()
 })
 
 
+
+gulp.task('nodevtools', done => {
+	
+	gulp.src('./app-source/js/menu-app.js', {base: './'})
+		.pipe(replace('//@exclude', '/*'))
+		.pipe(replace('//@end', '*/'))
+		.pipe(gulp.dest('./'))
+	
+	done()
+})
+
+
+
+gulp.task('devtools', done => {
+	
+	gulp.src('./app-source/js/menu-app.js', {base: './'})
+		.pipe(replace(new RegExp('\\/\\*', 'g'), '//@exclude'))
+		.pipe(replace(new RegExp('\\*\\/', 'g'), '//@end'))
+		.pipe(gulp.dest('./'))
+	
+	done()
+})
+
+
+
+gulp.task('nowebprefs', done => {
+	
+	gulp.src( sourceJs, {base: './'})
+		.pipe(replace('devTools: true,', 'devTools: false,'))
+		.pipe(gulp.dest('./'))
+	
+	done()
+})
+
+
+
+gulp.task('webprefs', done => {
+	
+	gulp.src( sourceJs, {base: './'})
+		.pipe(replace('devTools: false,', 'devTools: true,'))
+		.pipe(gulp.dest('./'))
+	
+	done()
+})
+
+
+
 gulp.task('build', gulp.series(
+
+	'nodevtools',
+	'nowebprefs',
 	'clean',
 	'sass',
 	'html',
@@ -121,7 +173,10 @@ gulp.task('build', gulp.series(
 	'svg',
 	'i18n',
 	'icns',
-	'icon'
+	'icon',
+	'devtools',
+	'webprefs'
+
 ), done => {
 	
 	done()

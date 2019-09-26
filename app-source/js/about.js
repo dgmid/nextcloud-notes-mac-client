@@ -24,7 +24,7 @@ exports.createAbout = () => {
 			alwaysOnTop: true,
 			backgroundColor: '#fff',
 			webPreferences: {
-				devTools: false,
+				devTools: true,
 				preload: path.join(__dirname, './preload.min.js'),
 				devTools: true
 			}

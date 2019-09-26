@@ -1,4 +1,7 @@
 {
+  "titlebar": {
+    "update": "Aggiornamento disponibile"
+  },
   "toolbar": {
     "heading": "Intestazione",
     "bold": "Grassetto",

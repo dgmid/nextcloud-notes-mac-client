@@ -1,25 +1,25 @@
 'use strict'
 
 const {app, BrowserWindow, ipcMain, protocol, systemPreferences, webContents} = require('electron')
-const url = require('url') 
-const path = require('path')
-const dialog = require('electron').dialog
-const Store = require('electron-store')
 
-const marked = require( 'marked' )
-const removeMarkdown = require( 'remove-markdown' )
+const url		= require( 'url' ) 
+const path		= require( 'path' )
+const dialog	= require( 'electron' ).dialog
+const Store		= require( 'electron-store' )
+
+const marked 			= require( 'marked' )
+const removeMarkdown	= require( 'remove-markdown' )
 
 let win,
 	loginFlow,
 	prefs = null
-
-
 
 let store = new Store({
 	name: 'config',
 	defaults: {
 		
 		windowBounds: {
+			
 			width: 800,
 			height: 600,
 			x: 0,
@@ -78,7 +78,7 @@ function createWindow() {
 		minHeight: 372,
 		backgroundColor: theme,
 		webPreferences: {
-			devTools: false,
+			devTools: true,
 			preload: path.join(__dirname, './preload.min.js'),
 			nodeIntegration: true,
 		},
@@ -156,7 +156,7 @@ ipcMain.on('loginflow', (event, message) => {
 		titleBarStyle: 'hidden',
 		backgroundColor: '#0082c9',
 		webPreferences: {
-			devTools: false,
+			devTools: true,
 			nodeIntegration: false
 		}
 	})
@@ -193,7 +193,7 @@ app.on('open-prefs', () => {
 			show: false,
 			backgroundColor: theme,
 			webPreferences: {
-				devTools: false,
+				devTools: true,
 				preload: path.join(__dirname, './preload.min.js'),
 				nodeIntegration: true
 			},

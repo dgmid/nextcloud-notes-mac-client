@@ -370,13 +370,15 @@ const template = [
 					if (focusedWindow) focusedWindow.reload()
 				}
 			},
-			/* {
+			//@exclude
+			{
 				label: i18n.t('menu:view.devtools', 'Toggle Developer Tools'),
 				accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
 				click (item, focusedWindow) {
 					if (focusedWindow) focusedWindow.webContents.toggleDevTools()
 				}
-			}, */
+			},
+			//@end
 			{
 				type: 'separator'
 			},
