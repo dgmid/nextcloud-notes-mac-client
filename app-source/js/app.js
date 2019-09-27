@@ -739,7 +739,7 @@ function exportNote( note ) {
 				
 				let html = marked( note.content )
 				
-				exported = pretty( `<!doctype html><html lang="en"><head><meta charset="utf-8" /><title>${note.title}</title></head><body>${html}</body></html>`, {ocd: true} )
+				exported = pretty( `<!doctype html><html lang="${i18n.language}"><head><meta charset="utf-8" /><title>${note.title}</title></head><body>${html}</body></html>`, {ocd: true} )
 				
 				filetype = 'html'
 				
