@@ -691,7 +691,7 @@ function saveNote( id ) {
 			
 			let content = easymde.value()
 						
-			//easymde.codemirror.clearHistory()
+			easymde.codemirror.clearHistory()
 						
 			apiCall( 'save', id, {"content": content, "modified": Math.floor(Date.now() / 1000) } )
 		}
