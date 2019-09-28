@@ -16,6 +16,7 @@ const pretty			= require( 'pretty' )
 const fs				= require( 'fs-extra' )
 const EasyMDE			= require( 'easymde' )
 const hljs				= require( 'highlight.js' )
+const entities			= require( 'html-entities' ).AllHtmlEntities
 const compareVersions	= require('compare-versions')
 
 const 	server 		= store.get( 'loginCredentials.server' ),
@@ -113,7 +114,7 @@ let easymdeSetup = {
 					},
 				],
 		shortcuts: {
-			'toggleStrikethrough': 'Cmd-Alt-D',
+			'toggleStrikethrough': 'Shift-Cmd-D',
 			'toggleBlockquote': 'Cmd-\'',
 			'drawTable': 'Cmd-T',
 			'drawHorizontalRule': 'Cmd--',
@@ -593,6 +594,20 @@ function displayNote( note ) {
 	
 	easymde = new EasyMDE( easymdeSetup )
 	
+	
+	// register right click for notes menu
+	
+	easymde.codemirror.on( 'mousedown', function( instance, event ) {
+		
+		if( event.which === 3 ) {
+			
+			let selection = easymde.codemirror.doc.getSelection()
+			
+			ipcRenderer.send('show-notes-menu', {selection: selection} )
+			return
+		}
+	})
+	
 	if( easymde.isPreviewActive() ) easymde.togglePreview()
 	
 	$('#note').attr('data-id', note.id)
@@ -897,7 +912,7 @@ function openModal( url, width, height, resize ) {
 			frame: false,
 			transparent: true,
 			webPreferences: {
-			devTools: true,
+			devTools: false,
 				preload: path.join(__dirname, './preload.min.js'),
 				nodeIntegration: true
 			}	
@@ -1007,6 +1022,10 @@ ipcRenderer.on('note', (event, message) => {
 		
 		case 'delete':
 			if( selected ) deleteCheck( selected )
+		break
+		
+		case 'selectall':
+			if( !easymde.isPreviewActive() ) easymde.codemirror.execCommand('selectAll')
 		break
 	}
 })
@@ -1148,7 +1167,7 @@ ipcRenderer.on('set-zoom-level', (event, message) => {
 
 
 
-//note(@duncanmid): context menu commands
+//note(@duncanmid): sidebar context menu commands
 
 ipcRenderer.on('context-favorite', (event, message) => {
 	
@@ -1191,6 +1210,25 @@ ipcRenderer.on('context-category', (event, message) => {
 ipcRenderer.on('context-newcategory', (event, message) => {
 	
 	openModal( 'file://' + __dirname + `/../html/new-category.html?id=${message}`, 480, 180, false )
+})
+
+
+
+//note(@duncanmid): notes context menu commands
+
+ipcRenderer.on('context-note-encode', (event, message) => {
+	
+	console.log( message )
+	
+	let encoded = entities.encode( message )
+	easymde.codemirror.doc.replaceSelection( encoded )
+})
+
+
+ipcRenderer.on('context-note-decode', (event, message) => {
+	
+	let decoded = entities.decode( message )
+	easymde.codemirror.doc.replaceSelection( decoded )
 })
 
 

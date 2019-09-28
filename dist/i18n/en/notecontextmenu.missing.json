@@ -1,0 +1,11 @@
+{
+  "cut": "Cut",
+  "copy": "Copy",
+  "paste": "Paste",
+  "entities": {
+    "entities": "Encode / Decode Entites",
+    "encode": "Encode Entities",
+    "decode": "Decode Entities"
+  },
+  "paragraph": "Paragraph Styles"
+}

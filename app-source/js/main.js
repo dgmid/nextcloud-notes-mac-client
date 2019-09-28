@@ -116,6 +116,7 @@ function createWindow() {
 	
 	require( './menu-app.min' )
 	require( './menu-sidebar.min' )
+	require( './menu-notes.min' )
 	
 	
 	protocol.registerFileProtocol('nc', (request, callback) => {

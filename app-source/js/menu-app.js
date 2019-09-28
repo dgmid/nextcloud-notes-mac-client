@@ -159,7 +159,8 @@ const template = [
 			},
 			{
 				label: i18n.t('menu:edit.selectall', 'Select All'),
-				role: 'selectall'
+				accelerator: 'Cmd+a',
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'selectall') }
 			}
 		]
 	},
@@ -211,7 +212,7 @@ const template = [
 			},
 			{
 				label: i18n.t('menu:markdown.strike', 'Strikethrough'),
-				accelerator: 'Cmd+Alt+d',
+				accelerator: 'Cmd+Shift+d',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'del') }
 			},
 			{
