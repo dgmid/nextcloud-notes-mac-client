@@ -1,0 +1,8 @@
+{
+  "paragraph": "Paragraph Styles",
+  "entities": {
+    "entities": "Encode / Decode Entites",
+    "encode": "Encode Entities",
+    "decode": "Decode Entities"
+  }
+}

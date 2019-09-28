@@ -14,6 +14,7 @@ const i18nextOptions = {
 		'date',
 		'menu',
 		'sidebarmenu',
+		'notecontextmenu',
 		'newcategory',
 		'prefs',
 		'login',
