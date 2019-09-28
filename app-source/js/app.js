@@ -603,7 +603,12 @@ function displayNote( note ) {
 			
 			let selection = easymde.codemirror.doc.getSelection()
 			
-			ipcRenderer.send('show-notes-menu', {selection: selection} )
+			ipcRenderer.send('show-notes-menu',
+				{
+					selection: selection,
+					preview: false
+				}
+			)
 			return
 		}
 	})
@@ -1299,6 +1304,23 @@ $('body').on('mouseup', 'aside', function(event) {
 	if( event.which === 3 ) {
 	
 		ipcRenderer.send('show-sidebar-menu', null )
+	}
+})
+
+
+
+//note(@duncanmid): on click note preview
+
+$('body').on('mouseup', '.editor-preview-active', function(event) {
+	
+	if( event.which === 3 ) {
+		
+		ipcRenderer.send('show-notes-menu',
+			{
+				selection: '',
+				preview: true
+			}
+		)
 	}
 })
 

@@ -18,8 +18,18 @@ ipc.on('show-notes-menu', ( event, message ) => {
 	let notesMenuTemplate,
 		enable = (message.selection.length === 0 ) ? false : true
 	
-	if( message) {
+	if( message.preview ) {
 		
+		notesMenuTemplate = [
+			
+			{
+				label: i18n.t('menu:edit.copy', 'Copy'),
+				role: 'copy'
+			}
+		]
+		
+	} else {
+			
 		notesMenuTemplate = [
 			
 			{
