@@ -228,7 +228,8 @@ function apiCall( call, id, body ) {
 			'Content-Type': 'application/json',
 		},
 		mode: 'cors',
-		cache: 'no-store'
+		cache: 'no-cache',
+		credentials: 'omit'
 	}
 	
 	if( id ) { url += `/${id}` }
