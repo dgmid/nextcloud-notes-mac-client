@@ -617,7 +617,7 @@ function displayNote( note ) {
 	if( easymde.isPreviewActive() ) easymde.togglePreview()
 	
 	$('#note').attr('data-id', note.id)
-	
+		
 	easymde.value( note.content )
 	easymde.codemirror.clearHistory()
 	easymde.togglePreview()
@@ -675,7 +675,7 @@ function editNote() {
 			
 			if( easymde.codemirror.historySize().undo > 0 ) {
 			
-				let response = dialog.showMessageBox(remote.getCurrentWindow(), {
+				let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
 								message: i18n.t('app:dialog.save.title', 'You have made changes to this note'),
 								detail: i18n.t('app:dialog.save.text', 'Do you want to save them?'),
 								buttons: [i18n.t('app:dialog.button.savechanges', 'Save changes'), i18n.t('app:dialog.button.cancel', 'Cancel')]
@@ -688,10 +688,11 @@ function editNote() {
 					easymde.codemirror.clearHistory()
 					
 					apiCall( 'save', selected, {"content": content, "modified": Math.floor(Date.now() / 1000) } )
-				
+					
 				} else {
 			
 					while ( easymde.codemirror.historySize().undo > 0) easymde.codemirror.undo()
+					
 				}
 			}
 			
@@ -707,8 +708,7 @@ function editNote() {
 
 function saveNote( id ) {
 	
-		if(	!easymde.isPreviewActive() &&
-			easymde.codemirror.historySize().undo > 0 ) {
+		if(	!easymde.isPreviewActive() && easymde.codemirror.historySize().undo > 0 ) {
 			
 			let content = easymde.value()
 						
@@ -802,7 +802,7 @@ function exportNote( note ) {
 
 function deleteCheck( id ) {
 	
-	let response = dialog.showMessageBox(remote.getCurrentWindow(), {
+	let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
 							message: i18n.t('app:dialog.delete.title', 'Are you sure you want to delete this note?'),
 							detail: i18n.t('app:dialog.delete.text', 'This operation is not reversable.'),
 							buttons: [i18n.t('app:dialog.button.delete', 'Delete Note'), i18n.t('app:dialog.button.cancel', 'Cancel')]
@@ -1223,8 +1223,6 @@ ipcRenderer.on('context-newcategory', (event, message) => {
 //note(@duncanmid): notes context menu commands
 
 ipcRenderer.on('context-note-encode', (event, message) => {
-	
-	console.log( message )
 	
 	let encoded = entities.encode( message )
 	easymde.codemirror.doc.replaceSelection( encoded )
