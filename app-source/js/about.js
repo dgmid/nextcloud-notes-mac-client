@@ -26,7 +26,7 @@ exports.createAbout = () => {
 			webPreferences: {
 				devTools: true,
 				preload: path.join(__dirname, './preload.min.js'),
-				devTools: true
+				nodeIntegration: true
 			}
 		})
 		
