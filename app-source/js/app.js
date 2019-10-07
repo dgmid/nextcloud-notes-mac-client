@@ -917,6 +917,7 @@ function openModal( url, width, height, resize ) {
 			show: false,
 			frame: false,
 			transparent: true,
+			vibrancy: 'popover',
 			webPreferences: {
 			devTools: true,
 				preload: path.join(__dirname, './preload.min.js'),

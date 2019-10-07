@@ -118,7 +118,7 @@ gulp.task('clean', done => {
 
 gulp.task('nodevtools', done => {
 	
-	gulp.src('./app-source/js/menu-app.js', {base: './'})
+	gulp.src(['./app-source/js/main.js','./app-source/js/menu-app.js'], {base: './'})
 		.pipe(replace('//@exclude', '/*'))
 		.pipe(replace('//@end', '*/'))
 		.pipe(gulp.dest('./'))
@@ -130,7 +130,7 @@ gulp.task('nodevtools', done => {
 
 gulp.task('devtools', done => {
 	
-	gulp.src('./app-source/js/menu-app.js', {base: './'})
+	gulp.src(['./app-source/js/main.js','./app-source/js/menu-app.js'], {base: './'})
 		.pipe(replace(new RegExp('\\/\\*', 'g'), '//@exclude'))
 		.pipe(replace(new RegExp('\\*\\/', 'g'), '//@end'))
 		.pipe(gulp.dest('./'))

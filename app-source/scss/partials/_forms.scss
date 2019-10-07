@@ -1,11 +1,6 @@
 
 //note(@duncanmid): common / light theme
 
-body {
-	
-	background-color: var(--modal);
-}
-
 header {
 	
 	padding: 10px 40px;
@@ -148,4 +143,16 @@ footer {
 			}
 		}
 	}
+}
+
+//note(@duncanmid): user themes
+
+[data-user="light"] {
+	
+	body { background-color: #F0F0F0; }
+}
+
+[data-user="dark"] {
+	
+	body { background-color: #383838; }
 }

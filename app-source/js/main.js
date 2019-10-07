@@ -64,8 +64,11 @@ let store = new Store({
 
 function createWindow() {
 	
-	let { x, y, width, height } = store.get('windowBounds'),
-		theme = systemPreferences.isDarkMode() ? '#393837' : '#ededed'
+	let { x, y, width, height } = store.get('windowBounds')
+	let theme = 'appearance-based'
+	//@exclude
+	theme = systemPreferences.isDarkMode() ? 'dark' : 'light'
+	//@end	
 	
 	win = new BrowserWindow({
 		show: false,
@@ -76,7 +79,7 @@ function createWindow() {
 		titleBarStyle: 'hidden',
 		minWidth: 500,
 		minHeight: 372,
-		backgroundColor: theme,
+		vibrancy: theme,
 		webPreferences: {
 			devTools: true,
 			preload: path.join(__dirname, './preload.min.js'),
