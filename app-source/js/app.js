@@ -1466,6 +1466,7 @@ $(document).ready(function() {
 	
 	$('html').attr('lang', i18n.language)
 	
+	
 	//note(@duncanmid): display categories in sidebar 
 	
 	if( store.get( 'appSettings.showcats' ) ) {

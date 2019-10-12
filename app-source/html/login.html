@@ -17,14 +17,14 @@
 				<ul id="fields">
 					<li>
 						<label for="server" data-i18n="login:body.label.server">server</label>
-						<input type="url" name="server" placeholder="https://your-server-address.com" required pattern="https?://.+" title="this field is required" value="" data-i18n="[placeholder]login:body.input.placeholder; [title]login:body.input.title">
+						<input type="url" name="server" placeholder="https://your-server-address.com" required pattern="https?://.+" title="this field is required" value="" data-i18n="[placeholder]login:body.input.placeholder; [title]login:body.input.title" tabindex="1">
 					</li>
 				</ul>
 				
 				<footer>
-					<button id="cancel" type="button" data-i18n="login:body.button.cancel">Cancel</button>
-					<button id="logout" type="button" data-i18n="login:body.button.logout">‹ Logout</button>
-					<button id="update" type="submit" data-i18n="login:body.button.login">Login ›</button>
+					<button id="cancel" class="ui-button" type="button" data-i18n="login:body.button.cancel"tabindex="4">Cancel</button>
+					<button id="logout" class="ui-button" type="button" data-i18n="login:body.button.logout" tabindex="3">‹ Logout</button>
+					<button id="update" class="ui-button" type="submit" data-i18n="login:body.button.login" tabindex="2">Login ›</button>
 				</footer>
 			</form>
 		</div>

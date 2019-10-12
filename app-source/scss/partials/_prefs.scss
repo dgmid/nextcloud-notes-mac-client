@@ -36,6 +36,7 @@ section {
 		select,
 		input[type="range"] {
 			
+			background-color: transparent;
 			display: block;
 			width: calc(100% - 138px);
 			font-size: 13.5px;
@@ -48,9 +49,10 @@ section {
 		
 		input[type=range]::-webkit-slider-runnable-track {
 			
-			height: 3px;
+			height: 5px;
 			border-radius: 2px;
-			background: var(--form-control);
+			background: var(--accent-light);
+			box-shadow: inset 0 2px 0 var(--accent);
 		}
 		
 		.select-container {
@@ -135,9 +137,13 @@ section {
 			transition: .25s;
 		}
 		
-		input:checked + .slider { background-color: var(--form-control); }
+		input:checked + .slider {
 			
-		input:focus + .slider { box-shadow: 0 0 1px var(--form-control); }
+			background-color: var(--accent-light);
+			box-shadow: inset 0 2px 0 var(--accent);
+		}
+			
+		input:focus + .slider { box-shadow: 0 0 1px var(--accent); }
 			
 		input:checked + .slider:before { transform: translateX(17px); }
 		
@@ -160,6 +166,18 @@ section {
 				border-left: 0;
 				border-right: 0;
 				border-bottom: 0;
+			}
+			
+			input[type=range]::-webkit-slider-runnable-track {
+				
+				background: var(--accent);
+				box-shadow: inset 0 2px 0 var(--accent-dark);
+			}
+			
+			input:checked + .slider {
+				
+				background-color: var(--accent);
+				box-shadow: inset 0 2px 0 var(--accent-dark);
 			}
 		}
 	}

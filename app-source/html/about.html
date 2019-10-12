@@ -31,11 +31,13 @@
 			<dd id="license"></dd>
 		</dl>
 		
-		<button id="info" role="button" data-i18n="about:body.button.info">more info</button>
+		<button id="info" class="ui-button" role="button" data-i18n="about:body.button.info">more info</button>
 	</main>
 	
 	<script>
 		const i18n 					= require( '../js/i18n.min' )
+		const Store					= require( 'electron-store' )
+		const store					= new Store()
 		window.$ = window.jQuery 	= require( 'jquery' )
 		const {shell, ipcRenderer} 	= require( 'electron' )
 		const jqueryI18next 		= require( 'jquery-i18next' )
@@ -74,7 +76,6 @@
 			
 			__setTheme()
 		})
-		
 	</script>
 </body>
 </html>

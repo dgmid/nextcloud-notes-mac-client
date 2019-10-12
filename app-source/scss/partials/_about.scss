@@ -75,23 +75,11 @@ body {
 			}
 		}
 		
-		button {
+		button.ui-button {
 			
-			padding: 3px 14px;
-			border: 1px solid var(--button-border);
-			background: var(--button);
-			background-clip: border-box;
-			color: var(--button-color);
-			border-radius: 5px;
-			
-			&:active {
-				
-				color: var(--button-color-hover);
-				background-image: var(--button-hover);
-				border: 1px solid;
-				border-image: var(--button-border-hover);
-				border-image-slice: 1;
-			}
+			padding: 2px 12px;
+			font-size: 11px;
+			border-radius: 3px;
 		}
 	}
 }
@@ -105,32 +93,5 @@ body {
 		
 		background-image: var(--texture2);
 		background-size: 100px 100px;
-	}
-}
-
-
-//note(@duncanmid): dark theme
-
-[data-theme="dark"] {
-	
-	body {
-		
-		main {
-			
-			button {
-				
-				border-left: 0;
-				border-right: 0;
-				border-bottom: 0;
-				
-				&:active {
-					
-					border: 1px solid var(--button-border-hover);
-					border-left: 0;
-					border-right: 0;
-					border-bottom: 0;
-				}
-			}
-		}
 	}
 }

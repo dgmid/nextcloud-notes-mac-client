@@ -1,35 +1,42 @@
 'use strict'
 
-// https://gist.github.com/EtienneLem/7e3bc7af2ed75a15eae9006557ef790e#file-preload-js
+// based on: https://gist.github.com/EtienneLem/7e3bc7af2ed75a15eae9006557ef790e#file-preload-js
 
 const { remote } 	= require( 'electron' )
 const os 			= require( 'os' ).release()
 const parts 		= os.split( '.' )
+const color 		= require( 'color' )
+const { systemPreferences } = remote
 
 
-if (process.platform == 'darwin') {
+const setOSTheme = () => {
 	
-	const { systemPreferences } = remote
+	let theme 	= systemPreferences.isDarkMode() ? 'dark' : 'light',
+		accent 	= systemPreferences.getAccentColor().substr(0, 6)
+	
+	let light = color('#'+accent).lighten(.15).hex()
+	let dark = color('#'+accent).darken(.175).hex()
+	
+	window.localStorage.accent = `#${accent}`
+	window.localStorage.accent_light = light
+	window.localStorage.accent_dark = dark
+	
+	if( parts[0] <= 17 ) theme = 'light'
+	
+	window.localStorage.os_theme = theme
 
-	const setOSTheme = () => {
+	if ('__setTheme' in window) {
 		
-		let theme = systemPreferences.isDarkMode() ? 'dark' : 'light'
-		
-		if( parts[0] <= 17 ) theme = 'light'
-		
-		window.localStorage.os_theme = theme
-
-		if ('__setTheme' in window) {
-			
-			window.__setTheme()
-		}
+		window.__setTheme()
 	}
-
-	systemPreferences.subscribeNotification(
-		
-		'AppleInterfaceThemeChangedNotification',
-		setOSTheme,
-	)
-
-	setOSTheme()
 }
+
+
+systemPreferences.subscribeNotification(
+	
+	'AppleInterfaceThemeChangedNotification',
+	setOSTheme,
+)
+
+
+setOSTheme()

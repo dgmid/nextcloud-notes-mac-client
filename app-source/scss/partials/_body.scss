@@ -33,3 +33,33 @@ body {
 	
 	opacity: 0;
 }
+
+button.ui-button {
+	
+	padding: 3px 14px;
+	color: var(--button-color);
+	background: var(--button);
+	border: 1px solid var(--button-border);
+	background-clip: border-box;
+	font-size: 13px;
+	border-radius: 5px;
+	
+	&:focus {
+		
+		color: #fff;
+		background: var(--accent);
+		background-image: linear-gradient(var(--accent-light),var(--accent));
+		border: 1px solid var(--accent);
+		outline: none;
+	}
+	
+	&:active {
+		
+		color: #fff;
+		background: var(--accent-dark);
+		background-image: linear-gradient(var(--accent),var(--accent-dark));
+		border: 1px solid var(--accent-dark);
+	}
+	
+	&:disabled { opacity: .5; }
+}

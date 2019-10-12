@@ -62,7 +62,7 @@
 	blockquote {
 		
 		padding-left: 2ch;
-		border-left: 0.2em solid var(--app-color);
+		border-left: 0.2em solid var(--app-light);
 	}
 	
 	ul {
@@ -156,7 +156,9 @@
 	mark {
 		
 		color: var(--mark);
-		background-color: var(--app-color);
+		background-color: var(--app-light);
+		padding-left: .5ch;
+		padding-right: .5ch;
 	}
 	
 	table {
@@ -178,6 +180,25 @@
 		th, td {
 			
 			border-color: var(--table-border);
+		}
+	}
+}
+
+
+//note(@duncanmid): dark theme
+
+[data-theme="dark"] {
+	
+	.editor-preview-active {
+		
+		blockquote {
+			
+			border-left-color: var(--app-dark);
+		}
+		
+		mark {
+			
+			background-color: var(--app-dark);
 		}
 	}
 }

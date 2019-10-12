@@ -112,7 +112,7 @@ footer {
 		&.selected {
 			
 			color: #fff;
-			background-color: var(--accent);
+			background-color: var(--accent-light);
 		}
 		
 		&:focus { outline: none; }
@@ -223,7 +223,7 @@ main {
 		&:focus {
 	
 			opacity: 1;
-			background-color: var(--app-color);
+			background-color: var(--accent-light);
 			border-color: transparent;
 			outline: none;
 		}
@@ -375,7 +375,7 @@ aside {
 		&.selected {
 			
 			outline: none;
-			background-color: var(--app-color);
+			background-color: var(--app-light);
 			
 			&::after { display: none; }
 		}
@@ -464,8 +464,8 @@ aside {
 		
 		&.active {
 			
-			background-color: var(--app-color);
-			border-color: var(--app-color);
+			background-color: var(--app-light);
+			border-color: var(--app-light);
 		}
 	}
 	
@@ -539,6 +539,8 @@ aside {
 			
 			&.selected {
 				
+				background-color: var(--app-dark);
+				
 				span { color: white; }
 				
 				.excerpt,
@@ -548,6 +550,15 @@ aside {
 	}
 	
 	.editor-toolbar {
+		
+		button {
+			
+			&.active {
+				
+				background-color: var(--app-dark);
+				border-color: var(--app-dark);
+			}
+		}
 		
 		i.separator {
 			
@@ -580,6 +591,53 @@ aside {
 		
 		background-color: #1e1e1e;
 		background-image: var(--texture);
+	}
+	
+	aside {
+		
+		background-color: #1E1E1E;
+	}
+}
+
+
+//note(@duncanmid): accent text color
+
+[data-select] {
+	
+	#sidebar {
+		
+		button {
+			
+			&.selected {
+				
+				--text: #fff;
+				--text-light: rgba(255,255,255,.6);
+				
+				&[data-favorite=true] {
+					
+					.side-title::before {
+						
+						background-image: var(--favorite-selected);
+					}
+				}
+				
+				.side-cat {
+					
+					background-image: var(--category-selected);
+				}
+			}
+		}
+	}
+	
+	.editor-toolbar {
+	
+		button {
+		
+			&.active {
+				
+				color: #fff;
+			}
+		}
 	}
 }
 

@@ -1,7 +1,6 @@
 'use strict'
 
 const {app, BrowserWindow, ipcMain, protocol, systemPreferences, webContents} = require('electron')
-
 const url		= require( 'url' ) 
 const path		= require( 'path' )
 const dialog	= require( 'electron' ).dialog
@@ -88,7 +87,7 @@ function createWindow() {
 		icon: path.join(__dirname, '../assets/icon/Icon.icns')
 	})
 	
-	win.setSheetOffset( 24 )
+	win.setSheetOffset( 23 )
 	
 	function saveWindowBounds() {
 		

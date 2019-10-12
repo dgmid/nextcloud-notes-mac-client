@@ -21,6 +21,7 @@
   },
   "bugs": "https://github.com/dgmid/nextcloud-notes-mac-client/issues",
   "dependencies": {
+    "color": "^3.1.2",
     "compare-versions": "^3.5.1",
     "dateformat": "^3.0.3",
     "easymde": "^2.8.0",
@@ -28,7 +29,7 @@
     "fs-extra": "^8.1.0",
     "highlight.js": "^9.15.10",
     "html-entities": "^1.2.1",
-    "i18next": "^17.0.18",
+    "i18next": "^17.2.0",
     "i18next-electron-language-detector": "0.0.10",
     "i18next-sync-fs-backend": "^1.1.1",
     "jquery": "^3.4.1",
@@ -39,7 +40,7 @@
   },
   "devDependencies": {
     "del": "^5.1.0",
-    "electron": "^6.0.11",
+    "electron": "^6.0.12",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-cssnano": "^2.1.3",

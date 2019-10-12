@@ -3,6 +3,8 @@
 const i18n 				= require( './i18n.min' )
 const remote 			= require( 'electron' ).remote
 const {ipcRenderer} 	= require( 'electron' )
+const Store				= require( 'electron-store' )
+const store				= new Store()
 const $ 				= require( 'jquery' )
 const jqueryI18next 	= require( 'jquery-i18next' )
 
@@ -42,7 +44,6 @@ ipcRenderer.on('set-theme', (event, message) => {
 
 
 $(document).ready(function() {	
-	
 	
 	//note(@duncanmid): cancel modal
 	

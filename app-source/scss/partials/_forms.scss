@@ -4,7 +4,7 @@
 header {
 	
 	padding: 10px 40px;
-	background-color: var(--app-color);
+	background-color: var(--app-light);
 	font-size: 13px;
 	line-height: 18px;
 	text-align: center;
@@ -94,26 +94,6 @@ footer {
 	
 	text-align: right;
 	padding: 15px 0 0;
-	
-	button {
-		
-		padding: 3px 14px;
-		border: 1px solid var(--button-border);
-		background: var(--button);
-		background-clip: border-box;
-		color: var(--button-color);
-		font-size: 13px;
-		border-radius: 5px;
-		
-		&:active {
-			
-			color: var(--button-color-hover);
-			background-image: var(--button-hover);
-			border: 1px solid;
-			border-image: var(--button-border-hover);
-			border-image-slice: 1;
-		}
-	}
 }
 
 
@@ -124,24 +104,7 @@ footer {
 	header {
 		
 		color: #fff;
-	}
-	
-	footer {
-		
-		button {
-			
-			border-left: 0;
-			border-right: 0;
-			border-bottom: 0;
-			
-			&:active {
-				
-				border: 1px solid var(--button-border-hover);
-				border-left: 0;
-				border-right: 0;
-				border-bottom: 0;
-			}
-		}
+		background-color: var(--app-dark);
 	}
 }
 

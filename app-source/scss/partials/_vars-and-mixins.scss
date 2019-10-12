@@ -5,14 +5,14 @@
 	
 	--text:					#454545;
 	--text-light:			rgba(69,69,69,.7);
-	--app-color:			#fee298;
 	--app-color-focus:		rgba(254,226,152,.5);
 	--dividers:				#e6e6e6;
 	--titlebar:				#454545;
 	--header:				linear-gradient(#edebed, #d6d4d6) no-repeat border-box;
 	--header-border:		#b5b4b5;
-	--form-control:			#409BFF;
 	--accent:				#3478f6;
+	--accent-light:			#3279FF;
+	--accent-dark:			#004EE1;
 	
 	// toolbar
 	
@@ -38,10 +38,7 @@
 	
 	--button:				#ffffff;
 	--button-color:			rgba(0,0,0,.85);
-	--button-border:		#c0c0c0;
-	--button-hover:			linear-gradient(#6cb3fa, #067dff);
-	--button-color-hover:	#ffffff;
-	--button-border-hover:	linear-gradient(#50a4f9, #005cff);		
+	--button-border:		#c0c0c0;	
 	
 	// note
 	
@@ -89,13 +86,11 @@
 	
 	--text:					#dcdcdc;
 	--text-light:			rgba(255,255,255,.6);
-	--app-color:			#c5993e;
 	--app-color-focus:		#343434;
 	--dividers:				#484848;
 	--titlebar:				#c8c6c6;
 	--header:				linear-gradient(#4b4b4b, #3d3d3d) no-repeat border-box;
 	--header-border:		#000000;
-	--form-control:			#4D89F5;
 	
 	// toolbar
 	
@@ -122,14 +117,12 @@
 	--button:				#616161;
 	--button-color:			rgba(255,255,255,.85);
 	--button-border:		#7f7f7f;
-	--button-hover:			linear-gradient(#1768e5, #145ccc);
-	--button-color-hover:	#ffffff;
-	--button-border-hover:	#5895ec;
 	
 	// note
 	
 	--code:					#1e1e1e;
 	--code-color:			#ffffff;
+	--mark:					#ffffff;
 	--table-border:			#484848;
 	--table-head:			#484848;
 	--table-stripe:			rgba(255,255,255,.03);
