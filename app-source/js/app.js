@@ -462,6 +462,7 @@ function showHideCategoryIcons() {
 }
 
 
+
 //note(@duncanmid): generate ordered sidebar entries
 
 function listNotes( array, sidebar ) {

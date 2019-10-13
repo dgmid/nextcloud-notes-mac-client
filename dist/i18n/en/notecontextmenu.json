@@ -1,4 +1,9 @@
 {
+  "speech": {
+    "speech": "Speech",
+    "start": "Start Speaking",
+    "stop": "Stop Speaking"
+  },
   "paragraph": "Paragraph Styles",
   "entities": {
     "entities": "Encode / Decode Entites",

@@ -25,6 +25,22 @@ ipc.on('show-notes-menu', ( event, message ) => {
 			{
 				label: i18n.t('menu:edit.copy', 'Copy'),
 				role: 'copy'
+			},
+			{
+				type: 'separator'
+			},
+			{
+				label: i18n.t('notecontextmenu:speech.speech', 'Speech'),
+				submenu: [
+					{
+						label: i18n.t('notecontextmenu:speech.start', 'Start Speaking'),
+						role: 'startSpeaking'
+					},
+					{
+						label: i18n.t('notecontextmenu:speech.stop', 'Stop Speaking'),
+						role: 'stopSpeaking'
+					}
+				]
 			}
 		]
 		

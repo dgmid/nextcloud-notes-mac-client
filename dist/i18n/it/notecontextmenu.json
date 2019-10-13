@@ -1,4 +1,9 @@
 {
+  "speech": {
+    "speech": "Voce",
+    "start": "Inizia riproduzione",
+    "stop": "Interrompi riproduzione"
+  },
   "paragraph": "Stili paragrafo",
   "entities": {
     "entities": "Codifica / decodifica caratteri",
