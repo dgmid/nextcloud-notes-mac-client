@@ -14,16 +14,19 @@ const setOSTheme = () => {
 	let theme 	= systemPreferences.isDarkMode() ? 'dark' : 'light',
 		accent 	= systemPreferences.getAccentColor().substr(0, 6)
 	
+	if( parts[0] <= 17 ) { 
+		
+		theme = 'light'
+		accent = '0a5fff'
+	}
+	
 	let light = color('#'+accent).lighten(.15).hex()
 	let dark = color('#'+accent).darken(.175).hex()
 	
+	window.localStorage.os_theme = theme
 	window.localStorage.accent = `#${accent}`
 	window.localStorage.accent_light = light
 	window.localStorage.accent_dark = dark
-	
-	if( parts[0] <= 17 ) theme = 'light'
-	
-	window.localStorage.os_theme = theme
 
 	if ('__setTheme' in window) {
 		

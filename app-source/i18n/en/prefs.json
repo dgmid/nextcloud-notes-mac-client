@@ -15,6 +15,7 @@
     "label": {
       "sort": "Sort notes by",
       "order": "Order notes by",
+      "ordercats": "Order categories by",
       "zoom": "Default text size",
       "cursor": "Cursor position",
       "start": "start",

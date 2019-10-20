@@ -18,6 +18,7 @@ const EasyMDE			= require( 'easymde' )
 const hljs				= require( 'highlight.js' )
 const entities			= require( 'html-entities' ).AllHtmlEntities
 const compareVersions	= require('compare-versions')
+const log				= require( 'electron-log' )
 
 const 	server 		= store.get( 'loginCredentials.server' ),
 		username 	= store.get( 'loginCredentials.username' ),
@@ -133,6 +134,8 @@ let easymde,
 	modal,
 	firstLoad = true
 
+easymde = new EasyMDE( easymdeSetup )
+
 
 //note(@duncanmid): dateFormat i18n setup
 
@@ -235,13 +238,13 @@ function apiCall( call, id, body ) {
 	if( id ) { url += `/${id}` }
 	if( body ) { init.body = JSON.stringify( body ) }
 	
-	console.info( `URL: ${server}${url}` )
+	log.info( `URL: ${server}${url}` )
 	
 	fetch(server + url, init).then(function(response) {
 	
 		if (response.ok) {
 			
-			console.info( 'response OK' )
+			log.info( 'response OK' )
 			return response.text()
 		
 		} else {
@@ -251,7 +254,7 @@ function apiCall( call, id, body ) {
 				i18n.t('app:dialog.error.server.text', 'there was an error connecting to') + `:\n${server}`
 			)
 			
-			console.error( response.error() )
+			log.error( response.error() )
 		}
 	
 	}).then(function(message) {
@@ -267,7 +270,7 @@ function apiCall( call, id, body ) {
 				i18n.t('app:dialog.error.json.text', 'An error occured parsing the notes')
 			)
 			
-			console.error( notes['message'] )	
+			log.error( notes['message'] )	
 		
 		} else {
 			
@@ -345,7 +348,7 @@ function apiCall( call, id, body ) {
 			i18n.t('app:dialog.error.server.text', 'there was an error connecting to') + `:\n${server}`
 		)
 		
-		console.error( error )
+		log.error( error )
 	})
 }
 
@@ -402,7 +405,10 @@ function saveCategories( array ) {
 	
 	let compressed = [],
 	copy = array.slice(0),
+	orderby = store.get( 'appSettings.ordercats' ),
 	results = []
+	
+	if( orderby == null ) orderby = 'asc'
 	
 	for (var i = 0; i < array.length; i++) {
 	
@@ -424,6 +430,24 @@ function saveCategories( array ) {
 			a.count = theCount
 			compressed.push(a)
 		}
+	}
+	
+	if( compressed.length > 1 ) {
+		
+		compressed.sort(function(x, y) {
+			
+			var itemX = x['value']
+			var itemY = y['value']
+			
+			if( orderby === 'asc' ) {
+				
+				return (itemX < itemY) ? -1 : (itemX > itemY) ? 1 : 0
+			
+			} else {
+				
+				return (itemX > itemY) ? -1 : (itemX < itemY) ? 1 : 0
+			}
+		})
 	}
 	
 	for ( let item of compressed ) {
@@ -595,7 +619,7 @@ function displayNote( note ) {
 	}
 	
 	easymde = new EasyMDE( easymdeSetup )
-	
+	toggleSpellcheck( store.get('appSettings.spellcheck') )	
 	
 	// register right click for notes menu
 	
@@ -615,15 +639,12 @@ function displayNote( note ) {
 		}
 	})
 	
-	if( easymde.isPreviewActive() ) easymde.togglePreview()
-	
 	$('#note').attr('data-id', note.id)
-		
 	easymde.value( note.content )
 	easymde.codemirror.clearHistory()
 	easymde.togglePreview()
 	
-	applyZoom( store.get( 'appSettings.zoom' ) )
+	//applyZoom( store.get( 'appSettings.zoom' ) )
 	
 	$('time').fadeIn('fast')
 	$('.loader').fadeOut(400, function() { $(this).remove() } )
@@ -666,6 +687,9 @@ function editNote() {
 			$('#edit').attr('title', i18n.t('app:main.button.save', 'Save Note')).addClass('editing')
 			easymde.togglePreview()
 			easymde.codemirror.focus()
+			
+			//todo delete this?
+			//toggleSpellcheck( store.get('appSettings.spellcheck') )
 			
 			if( store.get('appSettings.cursor') == 'end' ) {
 				
@@ -792,7 +816,7 @@ function exportNote( note ) {
 		
 		.catch(err => {
 			
-			console.error( err )
+			log.error( err )
 		})
 	}
 }
@@ -866,6 +890,8 @@ ipcRenderer.on('reload-sidebar', () => {
 //note(@duncanmid): spellcheck
 
 ipcRenderer.on('spellcheck', (event, message) => {
+	
+	log.info(`spellcheck prefs ${message}`)
 	
 	toggleSpellcheck( message )
 })
@@ -1434,8 +1460,8 @@ function checkAppVersion() {
 		
 		let latest = release.name
 		
-		console.info( `this version: ${version}` )
-		console.info( `latest version: ${latest}` )
+		log.info( `this version: ${version}` )
+		log.info( `latest version: ${latest}` )
 		
 		if( compareVersions.compare( version, latest, '<' ) ) {
 			
@@ -1445,15 +1471,15 @@ function checkAppVersion() {
 	})
 	.done( function() {
 		
-		console.info( `check release succeeded` )
+		log.info( `check release succeeded` )
 	})
 	.fail( function( jqXHR, textStatus, errorThrown ) {
 		
-		console.error( `check release failed ${textStatus}` )
+		log.error( `check release failed ${textStatus}` )
 	})
 	.always( function() {
 		
-		console.info( `check release ended` )
+		log.info( `check release ended` )
 	})
 }
 
@@ -1482,12 +1508,6 @@ $(document).ready(function() {
 		
 		$('#frame, footer').addClass( 'slide' )
 	}
-	
-	
-	//note(@duncanmid): set spellcheck
-	
-	toggleSpellcheck( store.get('appSettings.spellcheck') )
-	
 	
 	//note(@duncanmid): set edit button title
 	

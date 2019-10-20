@@ -19,10 +19,12 @@ $('option').localize()
 $('label').localize()
 
 
+
 $(document).ready(function() {
 	
 	$('#sortby').val( store.get('appSettings.sortby') )
 	$('#orderby').val( store.get('appSettings.orderby') )
+	$('#ordercats').val( store.get('appSettings.ordercats') )
 	$('#zoom').val( store.get('appSettings.zoom') )
 	$(`#${store.get('appSettings.cursor')}`).prop('checked', true)
 	$('#spellcheck').prop('checked', store.get('appSettings.spellcheck') )
@@ -48,6 +50,7 @@ $(document).ready(function() {
 			
 			case 'sortby':
 			case 'orderby':
+			case 'ordercats':
 				store.set( `appSettings.${name}`, val )
 				ipcRenderer.send('reload-sidebar', null )
 			break

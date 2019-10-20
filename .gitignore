@@ -9,3 +9,4 @@ build
 
 # NPM debug
 npm-debug.log
+.nova/Configuration.json

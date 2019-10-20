@@ -5,6 +5,7 @@ const url		= require( 'url' )
 const path		= require( 'path' )
 const dialog	= require( 'electron' ).dialog
 const Store		= require( 'electron-store' )
+const log		= require( 'electron-log' )
 
 const marked 			= require( 'marked' )
 const removeMarkdown	= require( 'remove-markdown' )
@@ -46,7 +47,8 @@ let store = new Store({
 			zoom: '10',
 			cursor: 'start',
 			spellcheck: true,
-			showcats: true
+			showcats: true,
+			ordercats: 'asc'
 		},
 		
 		categories: {
@@ -101,11 +103,10 @@ function createWindow() {
 		slashes: true 
 	}))
 	
-	//win.webContents.toggleDevTools()
-	
 	win.once('ready-to-show', () => {
 		
-		win.show()	
+		win.show()
+		//win.webContents.toggleDevTools()
 	})
 	
 	win.on('resize', saveWindowBounds)
@@ -138,7 +139,7 @@ function createWindow() {
 	
 	}, (error) => {
 	
-		if (error) console.error('Failed to register protocol')
+		if (error) log.error('Failed to register protocol')
 	})
 }
 
@@ -189,7 +190,7 @@ app.on('open-prefs', () => {
 		prefs = new BrowserWindow({
 			
 			width: 548,
-			height: 486,
+			height: 528,
 			resizable: false,
 			minimizable: false,
 			maximizable: false,

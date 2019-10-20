@@ -59,22 +59,16 @@ $(document).ready(function() {
 		
 		if( username && password ) {
 			
-			//console.log('ALL THREE')
-			
 			$('#update').prop('disabled', true)
 			$('#logout').prop('disabled', false)
 		
 		} else {
-			
-			//console.log('ONLY SERVER')
 			
 			$('#update').prop('disabled', false)
 			$('#logout').prop('disabled', true)
 		}
 		
 	} else {
-		
-		//console.log('NONE!')
 		
 		$('#update').prop('disabled', false)
 		$('#logout').prop('disabled', true)
