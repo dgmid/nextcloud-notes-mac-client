@@ -11,12 +11,21 @@ jqueryI18next.init(i18n, $)
 
 
 
-//note(@duncanmid): set lang & localize strings
+//note(dgmid): set lang & localize strings
 
 $('html').attr('lang', i18n.language)
 $('title').localize()
 $('option').localize()
 $('label').localize()
+
+
+
+//note(dgmid): log exceptions
+
+window.onerror = function( error, url, line ) {
+	
+	ipcRenderer.send( 'error-in-render', {error, url, line} )
+}
 
 
 

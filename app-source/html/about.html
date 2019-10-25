@@ -2,7 +2,7 @@
 <html lang="">
 <head>
 	<meta charset="utf-8">
-	<title>&nbsp;</title>
+	<title data-i18n="about:head.title">About Nextcloud Notes Mac Client</title>
 	<script>
 		require( '../js/theme.min' )
 	</script>
@@ -44,15 +44,16 @@
 		jqueryI18next.init(i18n, $)
 		
 		
-		//note(@duncanmid): set lang & localize strings
+		//note(dgmid): set lang & localize strings
 		
 		$('html').attr('lang', i18n.language)
+		$('title').localize()
 		$('#description').localize()
 		$('dt').localize()
 		$('#info').localize()
 		
 		
-		//note(@duncanmid): get app data from package.json
+		//note(dgmid): get app data from package.json
 			
 		$.getJSON('../../package.json', function(json) {
 			
@@ -70,7 +71,7 @@
 		})
 		
 		
-		//note(@duncanmid): update-theme
+		//note(dgmid): update-theme
 		
 		ipcRenderer.on('set-theme', (event, message) => {
 			

@@ -1,8 +1,25 @@
 body {
 	
 	background-color: var(--window);
-	padding: 20px;
+	padding: 43px 20px 20px;
 	color: var(--text);
+}
+
+header {
+	
+	font-size: 13px;
+	line-height: 23px;
+	text-align: center;
+	height: 23px;
+	background: var(--header);
+	background-size: 100% 23px;
+	background-position: left top;
+	border-bottom: 1px solid var(--header-border);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	-webkit-app-region: drag;
 }
 
 section {
@@ -38,7 +55,7 @@ section {
 			
 			background-color: transparent;
 			display: block;
-			width: calc(100% - 138px);
+			width: calc(100% - 140px);
 			font-size: 13.5px;
 		}
 		

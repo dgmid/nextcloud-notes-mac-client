@@ -367,16 +367,15 @@ const template = [
 			{
 				label: i18n.t('menu:view.reload', 'Reload'),
 				accelerator: 'CmdOrCtrl+R',
-				click (item, focusedWindow) {
-					if (focusedWindow) focusedWindow.reload()
+				click (item, focusedWindow) { if (focusedWindow)
+					focusedWindow.webContents.send('reload-sidebar', null)
 				}
 			},
 			//@exclude
 			{
 				label: i18n.t('menu:view.devtools', 'Toggle Developer Tools'),
 				accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
-				click (item, focusedWindow) {
-					if (focusedWindow) focusedWindow.webContents.toggleDevTools()
+				click (item, focusedWindow) { if (focusedWindow) focusedWindow.webContents.toggleDevTools()
 				}
 			},
 			//@end

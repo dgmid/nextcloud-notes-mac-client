@@ -20,7 +20,7 @@ const entities			= require( 'html-entities' ).AllHtmlEntities
 const compareVersions	= require('compare-versions')
 const log				= require( 'electron-log' )
 
-const 	server 		= store.get( 'loginCredentials.server' ),
+let 	server 		= store.get( 'loginCredentials.server' ),
 		username 	= store.get( 'loginCredentials.username' ),
 		password 	= store.get( 'loginCredentials.password' )
 
@@ -32,6 +32,7 @@ let database = new Store({
 let easymdeSetup = {
 		
 		element: $('#note')[0],
+		autoDownloadFontAwesome: false,
 		autofocus: false,
 		forceSync: true,
 		status: false,
@@ -40,77 +41,77 @@ let easymdeSetup = {
 					{
 						name: "Heading",
 						action: EasyMDE.toggleHeadingSmaller,
-						className: "fa fa-header",
+						className: "icon-heading",
 						title: i18n.t('app:toolbar.heading', 'Heading'),
 					},
 					'|',
 					{
 						name: "bold",
 						action: EasyMDE.toggleBold,
-						className: "fa fa-bold",
+						className: "icon-b",
 						title: i18n.t('app:toolbar.bold', 'Bold'),
 					},
 					{
 						name: "italic",
 						action: EasyMDE.toggleItalic,
-						className: "fa fa-italic",
+						className: "icon-i",
 						title: i18n.t('app:toolbar.italic', 'Italic'),
 					},
 					{
 						name: "srtikethrough",
 						action: EasyMDE.toggleStrikethrough,
-						className: "fa fa-strikethrough",
+						className: "icon-del",
 						title: i18n.t('app:toolbar.strikethrough', 'Strikethrough'),
 					},
 					'|',
 					{
 						name: "unordered-list",
 						action: EasyMDE.toggleUnorderedList,
-						className: "fa fa-list-ul",
+						className: "icon-ul",
 						title: i18n.t('app:toolbar.ul', 'Generic List'),
 					},
 					{
 						name: "ordered-list",
 						action: EasyMDE.toggleOrderedList,
-						className: "fa fa-list-ol",
+						className: "icon-ol",
 						title: i18n.t('app:toolbar.ol', 'Numbered List'),
 					},
 					'|',
 					{
 						name: "link",
 						action: EasyMDE.drawLink,
-						className: "fa fa-link",
+						className: "icon-a",
 						title: i18n.t('app:toolbar.link', 'Create Link'),
 					},
 					{
 						name: "image",
 						action: EasyMDE.drawImage,
-						className: "fa fa-picture-o",
+						className: "icon-img",
 						title: i18n.t('app:toolbar.image', 'Insert Image'),
 					},
 					'|',
 					{
 						name: "code",
 						action: EasyMDE.toggleCodeBlock,
-						className: "fa fa-code",
+						className: "icon-code",
 						title: i18n.t('app:toolbar.code', 'Code'),
 					},
 					{
 						name: "quote",
 						action: EasyMDE.toggleBlockquote,
-						className: "fa fa-quote-left",
+						className: "icon-blockquote",
 						title: i18n.t('app:toolbar.quote', 'Quote'),
 					},
 					{
 						name: "table",
 						action: EasyMDE.drawTable,
-						className: "fa fa-table",
+						className: "icon-table",
 						title: i18n.t('app:toolbar.table', 'Insert Table'),
 					},
 					{
 						name: "horizontal-rule",
 						action: EasyMDE.drawHorizontalRule,
-						className: "fa fa-minus",
+						className: "icon-hr",
 						title: i18n.t('app:toolbar.hr', 'Insert Horizontal Line'),
 					},
 				],
@@ -137,7 +138,7 @@ let easymde,
 easymde = new EasyMDE( easymdeSetup )
 
 
-//note(@duncanmid): dateFormat i18n setup
+//note(dgmid): dateFormat i18n setup
 
 dateFormat.i18n = {
 	dayNames: [
@@ -196,7 +197,16 @@ dateFormat.i18n = {
 
 
 
-//note(@duncanmid): call notes api
+//note(dgmid): log exceptions
+
+window.onerror = function( error, url, line ) {
+	
+	ipcRenderer.send( 'error-in-render', {error, url, line} )
+}
+
+
+
+//note(dgmid): call notes api
 
 function apiCall( call, id, body ) {
 	
@@ -365,7 +375,7 @@ function resetEditor() {
 
 
 
-//note(@duncanmid): codeMirror - insert / wrap text
+//note(dgmid): codeMirror - insert / wrap text
 
 function insertTextAtCursor( text ) {
 	
@@ -397,7 +407,7 @@ ${end}`, cursor)
 
 
 
-//note(@duncanmid): build category list
+//note(dgmid): build category list
 
 function saveCategories( array ) {
 	
@@ -471,7 +481,7 @@ function saveCategories( array ) {
 
 
 
-//note(@duncanmid): hide category icons when a custom category is selected
+//note(dgmid): hide category icons when a custom category is selected
 
 function showHideCategoryIcons() {
 	
@@ -487,7 +497,7 @@ function showHideCategoryIcons() {
 
 
 
-//note(@duncanmid): generate ordered sidebar entries
+//note(dgmid): generate ordered sidebar entries
 
 function listNotes( array, sidebar ) {
 	
@@ -561,7 +571,7 @@ function listNotes( array, sidebar ) {
 
 
 
-//note(@duncanmid): formatDate
+//note(dgmid): formatDate
 
 function formatDate( timestamp ) {
 	
@@ -600,7 +610,7 @@ function formatDate( timestamp ) {
 
 
 
-//note(@duncanmid): display single note
+//note(dgmid): display single note
 
 function displayNote( note ) {
 	
@@ -658,7 +668,7 @@ function displayNote( note ) {
 
 
 
-//note(@duncanmid): get selected note
+//note(dgmid): get selected note
 
 function getSelected( sidebar ) {
 	
@@ -674,7 +684,7 @@ function getSelected( sidebar ) {
 
 
 
-//note(@duncanmid): edit note
+//note(dgmid): edit note
 
 function editNote() {
 	
@@ -729,7 +739,7 @@ function editNote() {
 
 
 
-//note(@duncanmid): save note
+//note(dgmid): save note
 
 function saveNote( id ) {
 	
@@ -745,7 +755,7 @@ function saveNote( id ) {
 
 
 
-//note(@duncanmid): export note
+//note(dgmid): export note
 
 function exportNote( note ) {
 	
@@ -823,7 +833,7 @@ function exportNote( note ) {
 
 
 
-//note(@duncanmid): delete check
+//note(dgmid): delete check
 
 function deleteCheck( id ) {
 	
@@ -841,7 +851,7 @@ function deleteCheck( id ) {
 
 
 
-//note(@duncanmid): apply zoom level
+//note(dgmid): apply zoom level
 
 function applyZoom( level ) {
 	
@@ -850,7 +860,7 @@ function applyZoom( level ) {
 
 
 
-//note(@duncanmid): toggle spellcheck
+//note(dgmid): toggle spellcheck
 
 function toggleSpellcheck( state ) {
 	
@@ -859,7 +869,7 @@ function toggleSpellcheck( state ) {
 
 
 
-//note(@duncanmid): show / hide categories
+//note(dgmid): show / hide categories
 
 function toggleCategories( state ) {
 	
@@ -868,7 +878,7 @@ function toggleCategories( state ) {
 
 
 
-//note(@duncanmid): set zoom slider
+//note(dgmid): set zoom slider
 
 ipcRenderer.on('set-zoom-slider', (event, message) => {
 	
@@ -877,9 +887,18 @@ ipcRenderer.on('set-zoom-slider', (event, message) => {
 
 
 
-//note(@duncanmid): reload sidebar
+//note(dgmid): reload sidebar
 
-ipcRenderer.on('reload-sidebar', () => {
+ipcRenderer.on('reload-sidebar', (event, message) => {
+	
+	if( message === 'login' || message === 'logout' ) {
+	
+		server 		= store.get( 'loginCredentials.server' ),
+		username 	= store.get( 'loginCredentials.username' ),
+		password 	= store.get( 'loginCredentials.password' )
+	
+		log.info( `${message} completed` )
+	}
 	
 	$('#sidebar').html('')
 	apiCall('all')
@@ -887,7 +906,7 @@ ipcRenderer.on('reload-sidebar', () => {
 
 
 
-//note(@duncanmid): spellcheck
+//note(dgmid): spellcheck
 
 ipcRenderer.on('spellcheck', (event, message) => {
 	
@@ -898,7 +917,7 @@ ipcRenderer.on('spellcheck', (event, message) => {
 
 
 
-//note(@duncanmid): display categories
+//note(dgmid): display categories
 
 ipcRenderer.on('showcats', (event, message) => {
 	
@@ -907,7 +926,7 @@ ipcRenderer.on('showcats', (event, message) => {
 
 
 
-//note(@duncanmid): update-theme
+//note(dgmid): update-theme
 
 ipcRenderer.on('set-theme', (event, message) => {
 	
@@ -916,7 +935,7 @@ ipcRenderer.on('set-theme', (event, message) => {
 
 
 
-//note(@duncanmid): toggle-sidebar
+//note(dgmid): toggle-sidebar
 
 ipcRenderer.on('toggle-categories', (event, message) => {
 	
@@ -927,7 +946,7 @@ ipcRenderer.on('toggle-categories', (event, message) => {
 })
 
 
-//note(@duncanmid): modal
+//note(dgmid): modal
 
 function openModal( url, width, height, resize ) {
 	
@@ -962,7 +981,7 @@ function openModal( url, width, height, resize ) {
 
 
 
-//note(@duncanmid): log in modal
+//note(dgmid): log in modal
 
 ipcRenderer.on('open-login-modal', (event, message) => {
 	
@@ -971,7 +990,7 @@ ipcRenderer.on('open-login-modal', (event, message) => {
 
 
 
-//note(@duncanmid): close login modal
+//note(dgmid): close login modal
 
 ipcRenderer.on('close-login-modal', (event, message) => {
 	
@@ -980,7 +999,7 @@ ipcRenderer.on('close-login-modal', (event, message) => {
 
 
 
-//note(@duncanmid): note menu commands
+//note(dgmid): note menu commands
 
 ipcRenderer.on('note', (event, message) => {
 	
@@ -1066,7 +1085,7 @@ ipcRenderer.on('note', (event, message) => {
 
 
 
-//note(@duncanmid): markdown menu commands
+//note(dgmid): markdown menu commands
 
 ipcRenderer.on('markdown', (event, message) => {
 	
@@ -1131,7 +1150,7 @@ ipcRenderer.on('markdown', (event, message) => {
 
 
 
-//note(@duncanmid): html submenu menu commands
+//note(dgmid): html submenu menu commands
 
 ipcRenderer.on('html', (event, message) => {
 	
@@ -1173,7 +1192,7 @@ ipcRenderer.on('html', (event, message) => {
 
 
 
-//note(@duncanmid): view menu - zoom levels
+//note(dgmid): view menu - zoom levels
 
 ipcRenderer.on('set-zoom-level', (event, message) => {
 	
@@ -1201,7 +1220,7 @@ ipcRenderer.on('set-zoom-level', (event, message) => {
 
 
 
-//note(@duncanmid): sidebar context menu commands
+//note(dgmid): sidebar context menu commands
 
 ipcRenderer.on('context-favorite', (event, message) => {
 	
@@ -1248,7 +1267,7 @@ ipcRenderer.on('context-newcategory', (event, message) => {
 
 
 
-//note(@duncanmid): notes context menu commands
+//note(dgmid): notes context menu commands
 
 ipcRenderer.on('context-note-encode', (event, message) => {
 	
@@ -1265,7 +1284,7 @@ ipcRenderer.on('context-note-decode', (event, message) => {
 
 
 
-//note(@duncanmid): on click sidebar button
+//note(dgmid): on click sidebar button
 
 $('body').on('click', '#sidebar li button', function(event) {
 	
@@ -1286,7 +1305,7 @@ $('body').on('click', '#sidebar li button', function(event) {
 
 
 
-//note(@duncanmid): on right click sidebar button
+//note(dgmid): on right click sidebar button
 
 $('body').on('mouseup', '#sidebar li button', function(event) {
 	
@@ -1324,7 +1343,7 @@ $('body').on('focusout', '#sidebar li button', function(event) {
 
 
 
-//note(@duncanmid): on click empty sidebar
+//note(dgmid): on click empty sidebar
 
 $('body').on('mouseup', 'aside', function(event) {
 	
@@ -1336,7 +1355,7 @@ $('body').on('mouseup', 'aside', function(event) {
 
 
 
-//note(@duncanmid): on click note preview
+//note(dgmid): on click note preview
 
 $('body').on('mouseup', '.editor-preview-active', function(event) {
 	
@@ -1353,7 +1372,7 @@ $('body').on('mouseup', '.editor-preview-active', function(event) {
 
 
 
-//note(@duncanmid): open links in browser
+//note(dgmid): open links in browser
 
 $('body').on('click', '.editor-preview a', (event) => {
 	
@@ -1365,7 +1384,7 @@ $('body').on('click', '.editor-preview a', (event) => {
 
 
 
-//note(@duncanmid): change category
+//note(dgmid): change category
 
 $('body').on('click', '.categories button', function(event) {
 	
@@ -1383,7 +1402,7 @@ $('body').on('click', '.categories button', function(event) {
 
 
 
-//note(@duncanmid): select category in category sidebar
+//note(dgmid): select category in category sidebar
 
 function selectCategory( catid ) {
 	
@@ -1412,7 +1431,7 @@ function selectCategory( catid ) {
 
 
 
-//note(@duncanmid): keyboard arrow keys
+//note(dgmid): keyboard arrow keys
 
 document.addEventListener( 'keydown', function( event ) {
 	
@@ -1439,7 +1458,7 @@ document.addEventListener( 'keydown', function( event ) {
 
 
 
-//note(@duncanmid): open links in browser
+//note(dgmid): open links in browser
 
 $('body').on('click', '#update', (event) => {
 	
@@ -1452,7 +1471,7 @@ $('body').on('click', '#update', (event) => {
 
 
 
-//note(@duncanmid): check app version
+//note(dgmid): check app version
 
 function checkAppVersion() {
 		
@@ -1485,16 +1504,16 @@ function checkAppVersion() {
 
 
 
-//note(@duncanmid): docready
+//note(dgmid): docready
 
 $(document).ready(function() {
 	
-	//note(@duncanmid): set lang
+	//note(dgmid): set lang
 	
 	$('html').attr('lang', i18n.language)
 	
 	
-	//note(@duncanmid): display categories in sidebar 
+	//note(dgmid): display categories in sidebar 
 	
 	if( store.get( 'appSettings.showcats' ) ) {
 		
@@ -1502,19 +1521,19 @@ $(document).ready(function() {
 	}
 	
 	
-	//note(@duncanmid): toggle categories sidebar
+	//note(dgmid): toggle categories sidebar
 	
 	if( store.get( 'appInterface.categories' ) ) {
 		
 		$('#frame, footer').addClass( 'slide' )
 	}
 	
-	//note(@duncanmid): set edit button title
+	//note(dgmid): set edit button title
 	
 	$('#edit').attr('title', i18n.t('app:main.button.edit', 'Edit Note'))
 	
 	
-	//note(@duncanmid): set categories strings
+	//note(dgmid): set categories strings
 	
 	$('#cat-title').html( i18n.t('app:categories.title', 'Categories'))
 	$('#cat-all').html( i18n.t('app:categories.all', 'All notes'))
@@ -1526,7 +1545,7 @@ $(document).ready(function() {
 	$('#update-label').html( i18n.t('app:titlebar.update', 'Update Available'))
 	
 	
-	//note(@duncanmid): check login
+	//note(dgmid): check login
 	
 	if( !server || !username || !password ) {
 		
@@ -1538,7 +1557,7 @@ $(document).ready(function() {
 	}
 	
 	
-	//note(@duncanmid): edit save
+	//note(dgmid): edit save
 	
 	$('#edit').click(function() {
 		

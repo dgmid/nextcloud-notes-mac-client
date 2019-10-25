@@ -11,7 +11,7 @@ let	min 	= 200,
 
 
 
-//note(@duncanmid): draggable sidebar
+//note(dgmid): draggable sidebar
 
 $('#divider').mousedown(function (e) {
 	

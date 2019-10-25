@@ -12,7 +12,16 @@ jqueryI18next.init(i18n, $)
 
 
 
-//note(@duncanmid): set lang & localize strings
+//note(dgmid): log exceptions
+
+window.onerror = function( error, url, line ) {
+	
+	ipcRenderer.send( 'error-in-render', {error, url, line} )
+}
+
+
+
+//note(dgmid): set lang & localize strings
 
 $('html').attr('lang', i18n.language)
 $('header').localize()
@@ -22,9 +31,9 @@ $('button').localize()
 
 
 
-//note(@duncanmid): get login credentials
+//note(dgmid): get login credentials
 
-const 	server 		= store.get( 'loginCredentials.server' ),
+let 	server 		= store.get( 'loginCredentials.server' ),
 		username 	= store.get( 'loginCredentials.username' ),
 		password 	= store.get( 'loginCredentials.password' )
 
@@ -32,7 +41,7 @@ if( server ) { $('input[name="server"]').val( server ) }
 
 
 
-//note(@duncanmid): close modal
+//note(dgmid): close modal
 
 function closeModal() {
 	
@@ -42,7 +51,7 @@ function closeModal() {
 
 
 
-//note(@duncanmid): update-theme
+//note(dgmid): update-theme
 
 ipcRenderer.on('set-theme', (event, message) => {
 	
@@ -53,7 +62,7 @@ ipcRenderer.on('set-theme', (event, message) => {
 
 $(document).ready(function() {	
 	
-	//note(@duncanmid): set button states
+	//note(dgmid): set button states
 	
 	if( server ) {
 		
@@ -74,7 +83,7 @@ $(document).ready(function() {
 		$('#logout').prop('disabled', true)
 	}
 	
-	//note(@duncanmid): cancel modal
+	//note(dgmid): cancel modal
 	
 	$('#cancel').click( function() {
 		
@@ -82,7 +91,7 @@ $(document).ready(function() {
 	})
 	
 	
-	//note(@duncanmid): update data
+	//note(dgmid): update data
 	
 	$('#modal-form').submit( function( e ) {
 		
@@ -95,7 +104,7 @@ $(document).ready(function() {
 	})
 	
 	
-	//note(@duncanmid): logout
+	//note(dgmid): logout
 	
 	$('#logout').click( function() {
 		
@@ -106,7 +115,7 @@ $(document).ready(function() {
 			password: ''
 		} )
 		
-		ipcRenderer.send('reload', 'reload')
+		win.webContents.send('reload-sidebar', 'logout')
 		closeModal()
 	})
 })

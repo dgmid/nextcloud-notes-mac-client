@@ -11,7 +11,7 @@ const $ = require( 'jquery' )
 
 $('html').attr('lang', i18n.language)
 
-//note(@duncanmid): open loginflow webview
+//note(dgmid): open loginflow webview
 
 function loginFlow( theserver ) {
 	

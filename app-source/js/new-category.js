@@ -14,7 +14,17 @@ let urlParams = new URLSearchParams( window.location.search )
 let id = urlParams.get( 'id' )
 
 
-//note(@duncanmid): set lang & localize strings
+
+//note(dgmid): log exceptions
+
+window.onerror = function( error, url, line ) {
+	
+	ipcRenderer.send( 'error-in-render', {error, url, line} )
+}
+
+
+
+//note(dgmid): set lang & localize strings
 
 $('html').attr('lang', i18n.language)
 $('header').localize()
@@ -24,7 +34,7 @@ $('button').localize()
 
 
 
-//note(@duncanmid): close modal
+//note(dgmid): close modal
 
 function closeModal() {
 	
@@ -34,7 +44,7 @@ function closeModal() {
 
 
 
-//note(@duncanmid): update-theme
+//note(dgmid): update-theme
 
 ipcRenderer.on('set-theme', (event, message) => {
 	
@@ -45,7 +55,7 @@ ipcRenderer.on('set-theme', (event, message) => {
 
 $(document).ready(function() {	
 	
-	//note(@duncanmid): cancel modal
+	//note(dgmid): cancel modal
 	
 	$('#cancel').click( function() {
 		
@@ -53,7 +63,7 @@ $(document).ready(function() {
 	})
 	
 	
-	//note(@duncanmid): update data
+	//note(dgmid): update data
 	
 	$('#modal-form').submit( function( e ) {
 		
