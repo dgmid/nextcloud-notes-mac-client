@@ -12,10 +12,11 @@ A replacement for the Mac Notes app that syncs with a Nextcloud server running t
 
 [node.js / npm](https://www.npmjs.com/get-npm)
 
-To modify a/o build this project you will need to install electron packager
+To build this project you will need to install **electron packager** and **asar**
 
 ```shell
-npm install electron-packager -g
+npm install -g electron-packager
+npm install -g asar
 ```
 
 ## Usage
