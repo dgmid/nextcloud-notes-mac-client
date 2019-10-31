@@ -45,6 +45,7 @@
     "strike": "Strikethrough",
     "ul": "Unordered List",
     "ol": "Ordered List",
+    "cl": "Checkbox List",
     "link": "Create Link",
     "image": "Insert Image",
     "code": "Code…",

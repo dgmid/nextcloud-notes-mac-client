@@ -20,8 +20,8 @@ let store = new Store({
 		
 		windowBounds: {
 			
-			width: 800,
-			height: 600,
+			width: 1000,
+			height: 680,
 			x: 0,
 			y: 0
 		},

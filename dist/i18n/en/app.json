@@ -9,6 +9,7 @@
     "strikethrough": "Strikethrough",
     "ul": "Generic List",
     "ol": "Numbered List",
+    "checklist": "Checkbox list (Cmd-⌥-^)",
     "link": "Create Link",
     "image": "Insert Image",
     "code": "Code",

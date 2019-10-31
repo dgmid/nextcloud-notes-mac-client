@@ -105,7 +105,12 @@ ipc.on('show-notes-menu', ( event, message ) => {
 						label: i18n.t('menu:markdown.ol', 'Ordered List'),
 						accelerator: 'Cmd+Alt+l',
 						click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'ol') }
-					}
+					},
+					{
+						label: i18n.t('menu:markdown.cl', 'Checkbox List'),
+						accelerator: 'Cmd+Alt+Ctrl+l',
+						click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'cl') }
+					},
 				]
 			},
 			{

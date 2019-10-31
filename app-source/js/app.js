@@ -3,7 +3,6 @@
 const i18n = require( './i18n.min' )
 
 const { ipcRenderer, shell, remote } = require( 'electron' )
-const version 			= require('electron').remote.app.getVersion()
 const path				= require( 'path' )
 const Store				= require( 'electron-store' )
 const store				= new Store()
@@ -17,7 +16,6 @@ const fs				= require( 'fs-extra' )
 const EasyMDE			= require( 'easymde' )
 const hljs				= require( 'highlight.js' )
 const entities			= require( 'html-entities' ).AllHtmlEntities
-const compareVersions	= require('compare-versions')
 const log				= require( 'electron-log' )
 
 let 	server 		= store.get( 'loginCredentials.server' ),
@@ -75,6 +73,15 @@ let easymdeSetup = {
 						action: EasyMDE.toggleOrderedList,
 						className: "icon-ol",
 						title: i18n.t('app:toolbar.ol', 'Numbered List'),
+					},
+					{
+						name: "checklist",
+						action: (e) => {
+							e.codemirror.replaceSelection('- [ ]  ')
+							e.codemirror.focus()
+						},
+						className: "icon-checklist",
+						title: i18n.t('app:toolbar.checklist', 'Checkbox list (Cmd-⌥-^)'),
 					},
 					'|',
 					{
@@ -653,8 +660,7 @@ function displayNote( note ) {
 	easymde.value( note.content )
 	easymde.codemirror.clearHistory()
 	easymde.togglePreview()
-	
-	//applyZoom( store.get( 'appSettings.zoom' ) )
+	setCheckLists()
 	
 	$('time').fadeIn('fast')
 	$('.loader').fadeOut(400, function() { $(this).remove() } )
@@ -698,8 +704,22 @@ function editNote() {
 			easymde.togglePreview()
 			easymde.codemirror.focus()
 			
-			//todo delete this?
-			//toggleSpellcheck( store.get('appSettings.spellcheck') )
+			
+			// init checkboxes
+			
+			function initCheckboxes() {
+				
+				$('.cm-formatting-task').on("click", function (event) {
+					
+					event.stopPropagation()
+					event.preventDefault()
+					toggleEditorCheckboxes( $(this) )
+				})
+			}
+			
+			initCheckboxes()
+			easymde.codemirror.on("changes", initCheckboxes)
+			
 			
 			if( store.get('appSettings.cursor') == 'end' ) {
 				
@@ -733,8 +753,30 @@ function editNote() {
 			
 			easymde.togglePreview()
 			$('#edit').attr('title', i18n.t('app:main.button.edit', 'Edit Note')).removeClass('editing').focus()
+			setCheckLists()
 		}
 	}
+}
+
+
+
+//note(dgmid): toggle editor checkboxes - based on https://github.com/nextcloud/notes/issues/117
+
+function toggleEditorCheckboxes( element ) {
+	
+	let doc 	= easymde.codemirror.getDoc(),
+		index 	= element.parents( '.CodeMirror-line' ).index(),
+		line 	= doc.getLineHandle( index )
+
+	let newvalue = ( element.text() == '[x]' ) ? '[ ]' : '[x]'
+	
+	doc.replaceRange(
+		newvalue,
+		{line: index, ch: line.text.indexOf('[')},
+		{line: index, ch: line.text.indexOf(']') + 1}
+	)
+
+	easymde.codemirror.execCommand( 'goLineEnd' )
 }
 
 
@@ -1126,6 +1168,10 @@ ipcRenderer.on('markdown', (event, message) => {
 			case 'ol':
 				easymde.toggleOrderedList()
 			break
+			case 'cl':
+				easymde.codemirror.replaceSelection('- [ ]  ')
+				easymde.codemirror.focus()
+			break
 			case 'a':
 				easymde.drawLink()
 			break
@@ -1372,14 +1418,12 @@ $('body').on('mouseup', '.editor-preview-active', function(event) {
 
 
 
-//note(dgmid): open links in browser
+//note(dgmid): open links in default browser
 
-$('body').on('click', '.editor-preview a', (event) => {
+$(document).on('click', 'a[href^="http"]', function(event) {
 	
 	event.preventDefault()
-	
-	let link = event.target.href
-	if( link.substr(0, 4) !== 'file' ) shell.openExternal(link)
+	shell.openExternal(this.href)
 })
 
 
@@ -1471,10 +1515,21 @@ $('body').on('click', '#update', (event) => {
 
 
 
+//note(dgmid): remove bullets from checkbox lists
+
+function setCheckLists() {
+	
+	$('input[type="checkbox"]').parent().css('list-style-type', 'none')
+}
+
+
 //note(dgmid): check app version
 
 function checkAppVersion() {
-		
+	
+	const version 			= require('electron').remote.app.getVersion()
+	const compareVersions	= require('compare-versions')
+	
 	$.getJSON( 'https://api.github.com/repos/dgmid/nextcloud-notes-mac-client/releases/latest', function( release ) {
 		
 		let latest = release.name
@@ -1486,6 +1541,24 @@ function checkAppVersion() {
 			
 			$('#update').attr('data-url', `https://www.midwinter-dg.com/mac-apps/nextcloud-notes-client.html?app`).fadeIn('slow')
 			$('#update-version').html( latest )
+		}
+		
+		if( compareVersions.compare( version, latest, '>' ) ) {
+						
+			if( version.includes('-a') ) {
+				
+				$('header').append( `<span id="dev" class="α">DEV: v${version}</span>` )
+				
+			} else if ( version.includes('-b') ) {
+				
+				$('header').append( `<span id="dev" class="β">DEV: v${version}</span>` )
+				
+			} else {
+				
+				$('header').append( `<span id="dev">DEV: v${version}</span>` )
+			}
+			
+			$('#dev').fadeIn('slow')
 		}
 	})
 	.done( function() {

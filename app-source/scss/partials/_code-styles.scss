@@ -83,6 +83,36 @@
 	.cm-formatting-strong { color: var(--code-aqua-dk); }
 	.cm-strikethrough { color: var(--code-red-lt) !important; }
 	.cm-formatting-strikethrough { color: var(--code-red-dk) !important; }
+	
+	//note(dgmid): checkboxes
+	.cm-formatting-task {
+		
+		width: 15px;
+	    height: 15px;
+	    display: inline-block;
+		vertical-align: -1px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-indent: -100em;
+		cursor: default;
+		background-color: var(--text);
+		mask-repeat: no-repeat;
+		
+		&.cm-meta {
+			
+			mask: var(--unchecked);
+		}
+		
+		&.cm-property {
+			
+			mask: var(--checked);
+		}
+		
+		&.CodeMirror-selectedtext {
+			
+			width: 0;
+		}
+	}
 }
 
 

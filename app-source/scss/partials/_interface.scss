@@ -22,7 +22,8 @@ header {
 	right: 0;
 	-webkit-app-region: drag;
 	
-	#update {
+	#update,
+	#dev {
 		
 		position: absolute;
 		top: 2px;
@@ -31,13 +32,28 @@ header {
 		font-size: 11px;
 		font-weight: 500;
 		color: #fff;
-		background-color: #6236FF;
 		border: 0;
 		border-radius: 3px;
 		display: none;
+	}
+	
+	#update {
+		
+		
+		background-color: #6236FF;
 		
 		&:active { background-color: #9164FF; }
 		&:focus { outline: none; }
+	}
+	
+	#dev {
+		
+		padding: 1px 6px;
+		margin-top: 1px;
+		background-color: var(--code-green-lt);
+		
+		&.α { background-color: var(--code-red-lt); }
+		&.β { background-color: var(--code-blue-lt); }
 	}
 }
 
@@ -483,6 +499,7 @@ aside {
 		&.icon-del i { mask: var(--icon-del) no-repeat center center; }
 		&.icon-ul i { mask: var(--icon-ul) no-repeat center top 7px; }
 		&.icon-ol i { mask: var(--icon-ol) no-repeat center center; }
+		&.icon-checklist i { mask: var(--icon-checklist) no-repeat center center; }
 		&.icon-a i { mask: var(--icon-a) no-repeat center center; }
 		&.icon-img i { mask: var(--icon-img) no-repeat center center; }
 		&.icon-code i { mask: var(--icon-code) no-repeat center center; }

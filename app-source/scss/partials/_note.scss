@@ -82,6 +82,29 @@
 	li {
 		
 		margin-bottom: .2em;
+		
+		input[type="checkbox"] {
+			
+			appearance: none;
+			font-size: 1em;
+			width: 1em;
+			height: 1em;
+			display: inline-block;
+			margin-left: -1.55em;
+			margin-right: .25em;
+			vertical-align: -0.35em;
+			background-color: var(--text);
+			mask: var(--unchecked);
+			mask-repeat: no-repeat;
+			mask-position: left bottom;
+			background-size: cover;
+			
+			&[checked] {
+				
+				background-color: var(--app-dark);
+				mask: var(--checked);
+			}
+		}
 	}
 	
 	dt {
@@ -184,12 +207,53 @@
 	}
 }
 
+//test
+
+/*
+
+checkbox
+
+margin-left: -1.8em;
+    margin-right: 1ch;
+    vertical-align: text-bottom;
+    font-size: 1ch;
+    -webkit-appearance: none;
+    background-color: red;
+    width: 2.2ch;
+    height: 2.2ch;
+
+*/
+
+.cm-formatting-task {
+
+}
+
+.cm-formatting-task.cm-meta::before {
+
+}
+
+.cm-formatting-task.cm-property::before {
+
+}
+
+//test
 
 //note(dgmid): dark theme
 
 [data-theme="dark"] {
 	
 	.editor-preview-active {
+		
+		li {
+		
+			input[type="checkbox"] {
+			
+				&[checked] {
+				
+					background-color: var(--app-light);
+				}
+			}
+		}
 		
 		blockquote {
 			

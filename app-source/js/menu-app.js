@@ -229,6 +229,11 @@ const template = [
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'ol') }
 			},
 			{
+				label: i18n.t('menu:markdown.cl', 'Checkbox List'),
+				accelerator: 'Cmd+Alt+Ctrl+l',
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'cl') }
+			},
+			{
 				type: 'separator'
 			},
 			{
