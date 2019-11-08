@@ -1,16 +1,18 @@
 'use strict'
 
-const i18n = require( './i18n.min' )
-const electron = require( 'electron' )
-const {Menu, shell} = require( 'electron' )
-const app = electron.app
-const ipc = electron.ipcMain
-const path = require( 'path' )
-const name = app.getName()
+const i18n 				= require( './i18n.min' )
+const electron 			= require( 'electron' )
+const {Menu, shell} 	= require( 'electron' )
+const app 				= electron.app
+const ipc 				= electron.ipcMain
+const path 				= require( 'path' )
+const name 				= app.getName()
+const Store				= require( 'electron-store' )
+const store				= new Store()
 
-const about = require( './about.min' )
+const about 			= require( './about.min' )
 
-
+let ordercats = ( store.get( 'appSettings.ordercats' ) === 'asc' ) ? true : false
 
 const template = [
 	{
@@ -161,7 +163,18 @@ const template = [
 				label: i18n.t('menu:edit.selectall', 'Select All'),
 				accelerator: 'Cmd+a',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'selectall') }
-			}
+			},
+			{
+				type: 'separator'
+			},
+			{
+				label: i18n.t('menu:edit.spellcheck', 'Spellcheck'),
+				accelerator: 'Cmd+:',
+				type: 'checkbox',
+				checked: store.get( 'appSettings.spellcheck' ),
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('spellcheck', store.get( 'appSettings.spellcheck' )) }
+			},
+			
 		]
 	},
 	{
@@ -230,7 +243,7 @@ const template = [
 			},
 			{
 				label: i18n.t('menu:markdown.cl', 'Checkbox List'),
-				accelerator: 'Cmd+Alt+Ctrl+l',
+				accelerator: 'Cmd+Alt+Shift+l',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'cl') }
 			},
 			{
@@ -250,7 +263,7 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: i18n.t('menu:markdown.code', 'Code…'),
+				label: i18n.t('menu:markdown.code', 'Code'),
 					submenu: [
 						{
 							label: i18n.t('menu:markdown.codeblockinline', 'Block / Inline'),
@@ -370,6 +383,52 @@ const template = [
 				type: 'separator'
 			},
 			{
+				label: i18n.t('menu:view.categories', 'Show Categories'),
+				accelerator: 'Cmd+Shift+C',
+				type: 'checkbox',
+				checked: store.get( 'appInterface.categories' ),
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('toggle-categories', '') }
+			},
+			 {
+				 label: i18n.t('menu:view.caticons', 'Show Category Icons'),
+				 accelerator: 'Cmd+Ctrl+Shift+C',
+				 type: 'checkbox',
+				 checked: store.get('appSettings.showcats'),
+				 click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('toggle-caticons', '') }
+			 },
+			{
+				label: i18n.t('menu:view.catcount', 'Show Category Count'),
+				accelerator: 'Cmd+Alt+Shift+C',
+				type: 'checkbox',
+				checked: store.get('appSettings.catcount'),
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('toggle-catcount', '') }
+			},
+			{
+				type: 'separator'
+			},
+			{
+				label: i18n.t('menu:view.sortcategories', 'Sort Categories by'),
+					submenu: [
+						{
+							label: i18n.t('menu:view.catasc', 'Ascending'),
+							accelerator: 'Cmd+]',
+							type: 'radio',
+							'checked': ordercats,
+							click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('category-order', 'asc') }
+						},
+						{
+							label: i18n.t('menu:view.catdesc', 'Descending'),
+							accelerator: 'Cmd+[',
+							type: 'radio',
+							'checked': (ordercats === true) ? false : true,
+							click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('category-order', 'desc') }
+						}
+					]
+			},
+			{
+				type: 'separator'
+			},
+			{
 				label: i18n.t('menu:view.reload', 'Reload'),
 				accelerator: 'CmdOrCtrl+R',
 				click (item, focusedWindow) { if (focusedWindow)
@@ -386,11 +445,6 @@ const template = [
 			//@end
 			{
 				type: 'separator'
-			},
-			{
-				label: i18n.t('menu:view.categories', 'Toggle Categories'),
-				accelerator: 'Cmd+Shift+C',
-				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('toggle-categories', '') }
 			},
 			{
 				label: i18n.t('menu:view.fullscreen', 'Toggle Full Screen'),

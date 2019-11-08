@@ -30,7 +30,8 @@
     "paste": "Paste",
     "match": "Paste and Match Style",
     "delete": "Delete",
-    "selectall": "Select All"
+    "selectall": "Select All",
+    "spellcheck": "Spellcheck"
   },
   "markdown": {
     "insert": "Insert Markdown",
@@ -48,7 +49,7 @@
     "cl": "Checkbox List",
     "link": "Create Link",
     "image": "Insert Image",
-    "code": "Code…",
+    "code": "Code",
     "codeblockinline": "Block / Inline",
     "javascript": "Block: Javascript",
     "json": "Block: Json",
@@ -77,7 +78,11 @@
     "actualsize": "Actual Size",
     "reload": "Reload",
     "devtools": "Toggle Developer Tools",
-    "categories": "Toggle Categories",
+    "categories": "Show Categories",
+    "catcount": "Show Category Count",
+    "sortcategories": "Sort Categories by",
+    "catasc": "Ascending",
+    "catdesc": "Descending",
     "fullscreen": "Toggle Full Screen"
   },
   "window": {

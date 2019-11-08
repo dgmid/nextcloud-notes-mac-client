@@ -1,6 +1,8 @@
 {
+  "head": {
+    "title": "About Nextcloud Notes Mac Client"
+  },
   "body": {
-    "title": "About Nextcloud Notes Mac Client",
     "description": "Access and edit your Nextcloud Notes on the Mac",
     "label": {
       "version": "version:",

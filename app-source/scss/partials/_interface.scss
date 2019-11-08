@@ -106,7 +106,13 @@ footer {
 		padding: 10px;
 	}
 	
-	ul:first-of-type { margin-bottom: 16px; }
+	ul {
+		
+		display: flex;
+		flex-direction: column;
+		
+		&:first-of-type { margin-bottom: 16px; }
+	}
 	
 	button {
 		
@@ -119,9 +125,6 @@ footer {
 		background-color: transparent;
 		font-size: 14px;
 		line-height: 24px;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
 		
 		transition: background-color .15s;
 		
@@ -138,6 +141,9 @@ footer {
 		
 		button {
 			
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 			background-position: left 8px center;
 			background-repeat: no-repeat;
 			
@@ -163,15 +169,37 @@ footer {
 	
 	#categories {
 		
+		&.asc 	{ flex-direction: column; }
+		&.desc 	{ flex-direction: column-reverse; }
+		
 		button {
 			
 			background-image: var(--category);
 			background-position: left 8px center;
 			background-repeat: no-repeat;
+			display: flex;
+			flex-direction: row;
+			
+			.cat-name {
+				
+				flex-grow: 2;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				padding-right: 5px;
+			}
 			
 			&.selected {
 				
 				background-image: var(--category-selected);
+			}
+			
+			.cat-count {
+				
+				opacity: .5;
+				display: none;
+				
+				&.show { display: block; }
 			}
 		}
 	}
@@ -272,6 +300,40 @@ main {
 		&:active {
 			
 			background-image: var(--eye-white);
+		}
+	}
+	
+	samp {
+		
+		display: block;
+		position: absolute;
+		left: 1px;
+		bottom: 0;
+		z-index: 2;
+		font-size: 0;
+		padding: 2px 12px;
+		color: var(--text);
+		background-color: var(--window);
+		border-top: 1px solid var(--dividers);
+		border-right: 1px solid var(--dividers);
+		border-radius: 0 3px 0 0;
+		max-width: 0;
+		opacity: 0;
+		transition: all .25s;
+		
+		&.show {
+			
+			font-size: 11px;
+			max-width: calc(100% - 70px);
+			opacity: 1;
+		}
+		
+		span {
+			
+			display: block;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 	}
 }

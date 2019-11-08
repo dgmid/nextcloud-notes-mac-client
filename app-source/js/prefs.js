@@ -33,11 +33,8 @@ $(document).ready(function() {
 	
 	$('#sortby').val( store.get('appSettings.sortby') )
 	$('#orderby').val( store.get('appSettings.orderby') )
-	$('#ordercats').val( store.get('appSettings.ordercats') )
 	$('#zoom').val( store.get('appSettings.zoom') )
 	$(`#${store.get('appSettings.cursor')}`).prop('checked', true)
-	$('#spellcheck').prop('checked', store.get('appSettings.spellcheck') )
-	$('#showcats').prop('checked', store.get('appSettings.showcats') )
 	
 	
 	if( localStorage.user_theme ) {
@@ -59,7 +56,6 @@ $(document).ready(function() {
 			
 			case 'sortby':
 			case 'orderby':
-			case 'ordercats':
 				store.set( `appSettings.${name}`, val )
 				ipcRenderer.send('reload-sidebar', null )
 			break
@@ -71,18 +67,6 @@ $(document).ready(function() {
 			
 			case 'cursor':
 				store.set( `appSettings.${name}`, val )
-			break
-			
-			case 'spellcheck':
-				let spellcheck = $('#spellcheck').is(':checked')
-				store.set( `appSettings.${name}`, spellcheck )
-				ipcRenderer.send('spellcheck', spellcheck )
-			break
-			
-			case 'showcats':
-				let showcats = $('#showcats').is(':checked')
-				store.set( `appSettings.${name}`, showcats )
-				ipcRenderer.send('showcats', showcats )
 			break
 			
 			case 'theme':

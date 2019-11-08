@@ -81,7 +81,7 @@ let easymdeSetup = {
 							e.codemirror.focus()
 						},
 						className: "icon-checklist",
-						title: i18n.t('app:toolbar.checklist', 'Checkbox list (Cmd-⌥-^)'),
+						title: i18n.t('app:toolbar.checklist', 'Checkbox list (Shift-Cmd-Alt-L)'),
 					},
 					'|',
 					{
@@ -418,14 +418,14 @@ ${end}`, cursor)
 
 function saveCategories( array ) {
 	
-	$('#categories').empty()
-	
 	let compressed = [],
 	copy = array.slice(0),
 	orderby = store.get( 'appSettings.ordercats' ),
 	results = []
 	
 	if( orderby == null ) orderby = 'asc'
+	
+	$('#categories').empty().addClass( orderby )
 	
 	for (var i = 0; i < array.length; i++) {
 	
@@ -456,27 +456,26 @@ function saveCategories( array ) {
 			var itemX = x['value']
 			var itemY = y['value']
 			
-			if( orderby === 'asc' ) {
-				
-				return (itemX < itemY) ? -1 : (itemX > itemY) ? 1 : 0
-			
-			} else {
-				
-				return (itemX > itemY) ? -1 : (itemX < itemY) ? 1 : 0
-			}
+			return (itemX < itemY) ? -1 : (itemX > itemY) ? 1 : 0
 		})
 	}
 	
 	for ( let item of compressed ) {
 		
 		let theItem		= item.value,
-			theID 		= theItem.replace(' ', '_')
+			theCount	= item.count,
+			theID 		= theItem.replace(' ', '_'),
+			showcount	= (store.get( 'appSettings.catcount' )) ? ' show' : ''
 		
 		if( theItem.length > 0 ) {
 		
-			results.push( { "item": theItem , "catID": theID } )
+			results.push( {
+				"item": theItem ,
+				"catID": theID,
+				"count": theCount
+			} )
 			
-			$('#categories').append(`<li><button class="custom" data-catid="${theID}" data-category="${theItem}" title="${theItem}">${theItem}</button></li>`)
+			$('#categories').append(`<li><button class="custom" data-catid="${theID}" data-category="${theItem}" title="${theItem}"><span class="cat-name">${theItem}</span><span class="cat-count${showcount}">${theCount}</span></button></li>`)
 		}
 	}
 	
@@ -703,20 +702,6 @@ function editNote() {
 			$('#edit').attr('title', i18n.t('app:main.button.save', 'Save Note')).addClass('editing')
 			easymde.togglePreview()
 			easymde.codemirror.focus()
-			
-			
-			// init checkboxes
-			
-			function initCheckboxes() {
-				
-				$('.cm-formatting-task').on("click", function (event) {
-					
-					event.stopPropagation()
-					event.preventDefault()
-					toggleEditorCheckboxes( $(this) )
-				})
-			}
-			
 			initCheckboxes()
 			easymde.codemirror.on("changes", initCheckboxes)
 			
@@ -760,20 +745,43 @@ function editNote() {
 
 
 
-//note(dgmid): toggle editor checkboxes - based on https://github.com/nextcloud/notes/issues/117
+//editor checkboxes - based on https://github.com/nextcloud/notes/issues/117
+
+//note(dgmid): init checkboxes
+
+function initCheckboxes() {
+	
+	$('.cm-formatting-task').off('click.toggleEditorCheckboxes').on('click.toggleEditorCheckboxes', function (event) {
+		
+		$('.cm-formatting-task').off('click.toggle_checkbox')
+		
+		event.stopPropagation()
+		event.preventDefault()
+		toggleEditorCheckboxes( $(this) )
+	})
+}
+
+
+//note(dgmid): toggle checkbox state
 
 function toggleEditorCheckboxes( element ) {
 	
 	let doc 	= easymde.codemirror.getDoc(),
 		index 	= element.parents( '.CodeMirror-line' ).index(),
 		line 	= doc.getLineHandle( index )
-
+	
 	let newvalue = ( element.text() == '[x]' ) ? '[ ]' : '[x]'
 	
 	doc.replaceRange(
 		newvalue,
-		{line: index, ch: line.text.indexOf('[')},
-		{line: index, ch: line.text.indexOf(']') + 1}
+		{
+			line: index,
+			ch: line.text.indexOf( '[' )
+		},
+		{
+			line: index,
+			ch: line.text.indexOf( ']' ) + 1
+		}
 	)
 
 	easymde.codemirror.execCommand( 'goLineEnd' )
@@ -952,9 +960,10 @@ ipcRenderer.on('reload-sidebar', (event, message) => {
 
 ipcRenderer.on('spellcheck', (event, message) => {
 	
-	log.info(`spellcheck prefs ${message}`)
+	let state = ( message ) ? false : true
 	
-	toggleSpellcheck( message )
+	store.set('appSettings.spellcheck', state)
+	toggleSpellcheck( state )
 })
 
 
@@ -985,6 +994,30 @@ ipcRenderer.on('toggle-categories', (event, message) => {
 	
 	let cats = store.get( 'appInterface.categories' ) ? false : true
 	store.set( 'appInterface.categories', cats )
+})
+
+
+
+//note(dgmid): toggle category count
+
+ipcRenderer.on('toggle-catcount', (event, message) => {
+	
+	$('.cat-count').toggleClass('show')
+	
+	let count = store.get( 'appSettings.catcount' ) ? false : true
+	store.set( 'appSettings.catcount', count )
+})
+
+
+
+//note(dgmid): toggle category icons is sidebar
+
+ipcRenderer.on('toggle-caticons', (event, message) => {
+	
+	$('#sidebar').toggleClass('showcats')
+	
+	let icons = store.get( 'appSettings.showcats' ) ? false : true
+	store.set( 'appSettings.showcats', icons )
 })
 
 
@@ -1312,6 +1345,13 @@ ipcRenderer.on('context-newcategory', (event, message) => {
 })
 
 
+ipcRenderer.on('category-order', (event, message) => {
+	
+	store.set( 'appSettings.ordercats', message )
+	
+	$('#categories').removeClass( 'asc desc' ).addClass( message )
+})
+
 
 //note(dgmid): notes context menu commands
 
@@ -1575,7 +1615,16 @@ function checkAppVersion() {
 	})
 }
 
+$('body').on('mouseenter', 'main a', function() {
+	
+	$('#location').empty().html( this.href )
+	$('samp').addClass('show')
+})
 
+$('body').on('mouseleave', 'main a', function() {
+	
+	$('samp').removeClass('show')
+})
 
 //note(dgmid): docready
 
@@ -1586,7 +1635,7 @@ $(document).ready(function() {
 	$('html').attr('lang', i18n.language)
 	
 	
-	//note(dgmid): display categories in sidebar 
+	//note(dgmid): display category icons in sidebar 
 	
 	if( store.get( 'appSettings.showcats' ) ) {
 		
@@ -1594,12 +1643,21 @@ $(document).ready(function() {
 	}
 	
 	
-	//note(dgmid): toggle categories sidebar
+	//note(dgmid): show or hide categories sidebar
 	
 	if( store.get( 'appInterface.categories' ) ) {
 		
 		$('#frame, footer').addClass( 'slide' )
 	}
+	
+	
+	//note(dgmid): show or hide category counts
+	
+	if( store.get( 'appSettings.catcount' ) ) {
+		
+		$('.cat-count').addClass('show')
+	}
+	
 	
 	//note(dgmid): set edit button title
 	

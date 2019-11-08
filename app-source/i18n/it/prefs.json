@@ -15,12 +15,10 @@
     "label": {
       "sort": "Ordina per",
       "order": "In ordine",
-      "ordercats": "Ordina le categorie per",
       "zoom": "Dimensione testo predefinita",
       "cursor": "Posizione cursore",
       "start": "inizio",
       "end": "fine",
-      "spell": "Controllo ortografico",
       "showcats": "Mostre categorie",
       "theme": "Tema"
     }

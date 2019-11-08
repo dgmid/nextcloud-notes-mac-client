@@ -30,7 +30,8 @@
     "paste": "Incolla",
     "match": "Incolla e associa stile",
     "delete": "Elimina",
-    "selectall": "Seleziona tutto"
+    "selectall": "Seleziona tutto",
+    "spellcheck": "Controllo ortografico"
   },
   "markdown": {
     "insert": "Inserisci Markdown",
@@ -48,7 +49,7 @@
     "cl": "Elenco di controllo",
     "link": "Crea collegamento",
     "image": "Inserisci immagine",
-    "code": "Codice…",
+    "code": "Codice",
     "codeblockinline": "Blocco / In Linea",
     "javascript": "Blocco: Javascript",
     "json": "Blocco: Json",
@@ -77,7 +78,11 @@
     "actualsize": "Dimensione reale",
     "reload": "Ricaricare",
     "devtools": "Attiva/disattiva Developer Tools",
-    "categories": "Mostra/nascondere le categorie",
+    "categories": "Mostra categorie",
+    "catcount": "Mostra conteggio categorie",
+    "sortcategories": "Ordina categorie per",
+    "catasc": "Ascendente",
+    "catdesc": "Discendente",
     "fullscreen": "Attiva/disattiva modalità a tutto schermo"
   },
   "window": {

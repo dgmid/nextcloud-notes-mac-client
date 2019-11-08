@@ -1,6 +1,18 @@
 
 //note(dgmid): common / light theme
 
+@keyframes pulse {
+	0% {
+		color: var(--link);
+	}
+	70% {
+	  	color: var(--hover);
+	}
+	100% {
+	  	color: var(--link);
+	}
+}
+
 .CodeMirror-code {
 	
 	* { font-size: inherit !important; }
@@ -159,9 +171,10 @@
 		text-decoration: none;
 		transition: color .15s;
 		
-		&:hover { color: var(--hover); }
-		
-		
+		&:hover {
+			
+			animation: pulse 2s infinite;
+		}
 		
 		&:focus {
 			
@@ -207,23 +220,6 @@
 	}
 }
 
-//test
-
-/*
-
-checkbox
-
-margin-left: -1.8em;
-    margin-right: 1ch;
-    vertical-align: text-bottom;
-    font-size: 1ch;
-    -webkit-appearance: none;
-    background-color: red;
-    width: 2.2ch;
-    height: 2.2ch;
-
-*/
-
 .cm-formatting-task {
 
 }
@@ -235,8 +231,6 @@ margin-left: -1.8em;
 .cm-formatting-task.cm-property::before {
 
 }
-
-//test
 
 //note(dgmid): dark theme
 

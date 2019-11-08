@@ -108,7 +108,7 @@ ipc.on('show-notes-menu', ( event, message ) => {
 					},
 					{
 						label: i18n.t('menu:markdown.cl', 'Checkbox List'),
-						accelerator: 'Cmd+Alt+Ctrl+l',
+						accelerator: 'Cmd+Alt+Shift+l',
 						click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'cl') }
 					},
 				]

@@ -48,7 +48,8 @@ let store = new Store({
 			cursor: 'start',
 			spellcheck: true,
 			showcats: true,
-			ordercats: 'asc'
+			ordercats: 'asc',
+			catcount: false
 		},
 		
 		categories: {
@@ -240,7 +241,7 @@ app.on('open-prefs', () => {
 		prefs = new BrowserWindow({
 			
 			width: 548,
-			height: 528,
+			height: 375,
 			resizable: false,
 			minimizable: false,
 			maximizable: false,
@@ -310,12 +311,6 @@ ipcMain.on('reload-sidebar', () => {
 ipcMain.on('set-zoom-slider', (event, message) => {
 	
 	win.webContents.send('set-zoom-slider', message)	
-})
-
-
-ipcMain.on('spellcheck', (event, message) => {
-	
-	win.webContents.send('spellcheck', message)	
 })
 
 
