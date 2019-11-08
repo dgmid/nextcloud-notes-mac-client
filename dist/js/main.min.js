@@ -298,25 +298,19 @@ app.on('open-prefs', () => {
 
 ipcMain.on('new-category', (event, message) => {
 	
-	win.webContents.send('context-category', message)	
+	win.webContents.send('context-category', message)
 })
 
 
 ipcMain.on('reload-sidebar', () => {
 	
-	win.webContents.send('reload-sidebar', null)	
+	win.webContents.send('reload-sidebar', null)
 })
 
 
 ipcMain.on('set-zoom-slider', (event, message) => {
 	
-	win.webContents.send('set-zoom-slider', message)	
-})
-
-
-ipcMain.on('showcats', (event, message) => {
-	
-	win.webContents.send('showcats', message)	
+	win.webContents.send('set-zoom-slider', message)
 })
 
 

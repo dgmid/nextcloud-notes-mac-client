@@ -19,7 +19,6 @@
       "cursor": "Cursor position",
       "start": "start",
       "end": "end",
-      "showcats": "Display categories",
       "theme": "Theme"
     }
   }

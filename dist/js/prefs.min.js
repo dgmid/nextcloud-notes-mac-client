@@ -15,6 +15,7 @@ jqueryI18next.init(i18n, $)
 
 $('html').attr('lang', i18n.language)
 $('title').localize()
+$('header').localize()
 $('option').localize()
 $('label').localize()
 

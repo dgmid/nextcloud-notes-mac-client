@@ -80,6 +80,7 @@
     "devtools": "Toggle Developer Tools",
     "categories": "Show Categories",
     "catcount": "Show Category Count",
+    "caticons": "Show Category Icons",
     "sortcategories": "Sort Categories by",
     "catasc": "Ascending",
     "catdesc": "Descending",
