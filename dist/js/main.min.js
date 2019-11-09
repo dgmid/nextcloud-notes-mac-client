@@ -79,7 +79,7 @@ function createWindow() {
 		width: width,
 		height: height,
 		titleBarStyle: 'hidden',
-		minWidth: 500,
+		minWidth: 800,
 		minHeight: 372,
 		vibrancy: theme,
 		webPreferences: {
