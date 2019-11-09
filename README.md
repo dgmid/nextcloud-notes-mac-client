@@ -1,4 +1,5 @@
-# ![nextcloud-note-client-icon](https://user-images.githubusercontent.com/1267580/47951470-86220b80-df61-11e8-87bc-38ca8bd4c665.png) Nextcloud Notes Client
+# Nextcloud Notes Client
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dgmid/nextcloud-notes-mac-client?label=latest%20release&logo=github)](https://github.com/dgmid/nextcloud-notes-mac-client/releases/latest) ![GitHub All Releases](https://img.shields.io/github/downloads/dgmid/nextcloud-notes-mac-client/total)
 
 A replacement for the Mac Notes app that syncs with a Nextcloud server running the Nextcloud Notes app
 
@@ -41,7 +42,3 @@ To package the final app run:
 npm run package
 ```
 The packaged app will be written to `build/Nextcloud Notes Client-darwin-x64/` in the project directory.
-
-## License
-
-**Nextcloud Notes Client** is released under the MIT License
