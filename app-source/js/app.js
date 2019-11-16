@@ -464,7 +464,7 @@ function saveCategories( array ) {
 		
 		let theItem		= item.value,
 			theCount	= item.count,
-			theID 		= theItem.replace(' ', '_'),
+			theID 		= theItem.split(' ').join('_'),
 			showcount	= (store.get( 'appSettings.catcount' )) ? ' show' : ''
 		
 		if( theItem.length > 0 ) {
@@ -511,7 +511,7 @@ function listNotes( array, sidebar ) {
 		
 		database.set('notes', array)
 	}
-	
+		
 	const date = new Date()
 	
 	let sortby 	= store.get( 'appSettings.sortby' ),
@@ -541,7 +541,7 @@ function listNotes( array, sidebar ) {
 		let theDate = new Date( item.modified ),
 			formattedDate = formatDate( theDate.getTime() )
 		
-		let	catClass = ( item.category ) ? item.category.replace(' ', '_') : '##none##'
+		let	catClass = ( item.category ) ? item.category.split(' ').join('_') : '##none##'
 		
 		let	theCat = ( item.category ) ? item.category : i18n.t('app:categories.none', 'Uncategorised')
 		

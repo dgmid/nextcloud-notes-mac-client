@@ -1,6 +1,4 @@
 
-//note(dgmid): markdown light
-
 .cm-comment,
 .cm-bracket,
 .cm-tag,
@@ -12,11 +10,48 @@
 	font-size: 0.9em !important;
 }
 
+//note(dgmid): checkboxes
+	.cm-formatting-task {
+		
+		width: 15px;
+		height: 15px;
+		display: inline-block;
+		vertical-align: -1px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-indent: -100em;
+		cursor: default;
+		background-color: var(--text);
+		mask-repeat: no-repeat;
+		
+		&.cm-meta {
+			
+			mask: var(--unchecked);
+		}
+		
+		&.cm-property {
+			
+			mask: var(--checked);
+			
+			+ .cm-variable-2,
+			+ .cm-variable-3,
+			+ .cm-keyword {
+				
+				color: var(--code-orange-lt);
+				text-decoration: line-through solid var(--code-orange-dk);
+			}
+		}
+	}
+
+//note(dgmid): markdown light
+
 [data-theme="light"] {
 
 	.cm-header { color: var(--code-yellow-dk); }
 	.cm-formatting-header { color: var(--code-yellow-lt); }
-	.cm-variable-2 { color: var(--code-orange-dk); }
+	.cm-variable-2,
+	.cm-variable-3,
+	.cm-keyword { color: var(--code-orange-dk); }
 	.cm-formatting-list { color: var(--code-orange-lt); }
 	.cm-comment { color: var(--code-grey-dk); }
 	.cm-formatting-code-block { color: var(--code-grey-lt); }
@@ -57,7 +92,9 @@
 	
 	.cm-header { color: var(--code-yellow-lt); }
 	.cm-formatting-header { color: var(--code-yellow-dk); }
-	.cm-variable-2 { color: var(--code-orange-lt); }
+	.cm-variable-2,
+	.cm-variable-3,
+	.cm-keyword { color: var(--code-orange-lt); }
 	.cm-formatting-list { color: var(--code-orange-dk); }
 	.cm-comment {
 		
@@ -84,28 +121,17 @@
 	.cm-strikethrough { color: var(--code-red-lt) !important; }
 	.cm-formatting-strikethrough { color: var(--code-red-dk) !important; }
 	
-	//note(dgmid): checkboxes
 	.cm-formatting-task {
-		
-		width: 15px;
-	    height: 15px;
-	    display: inline-block;
-		vertical-align: -1px;
-		white-space: nowrap;
-		overflow: hidden;
-		text-indent: -100em;
-		cursor: default;
-		background-color: var(--text);
-		mask-repeat: no-repeat;
-		
-		&.cm-meta {
-			
-			mask: var(--unchecked);
-		}
-		
+
 		&.cm-property {
 			
-			mask: var(--checked);
+			+ .cm-variable-2,
+			+ .cm-variable-3,
+			+ .cm-keyword {
+				
+				color: var(--code-orange-dk);
+				text-decoration: line-through solid var(--code-orange-lt);
+			}
 		}
 	}
 }
