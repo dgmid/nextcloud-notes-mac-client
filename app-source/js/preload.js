@@ -7,11 +7,12 @@ const os 			= require( 'os' ).release()
 const parts 		= os.split( '.' )
 const color 		= require( 'color' )
 const { systemPreferences } = remote
+const { nativeTheme } = remote
 
 
 const setOSTheme = () => {
 	
-	let theme 	= systemPreferences.isDarkMode() ? 'dark' : 'light',
+	let theme 	= nativeTheme.shouldUseDarkColors ? 'dark' : 'light',
 		accent 	= systemPreferences.getAccentColor().substr(0, 6)
 	
 	if( parts[0] <= 17 ) { 

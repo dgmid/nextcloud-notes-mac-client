@@ -801,14 +801,14 @@ function toggleEditorCheckboxes( element ) {
 
 function saveNote( id ) {
 	
-		if(	!easymde.isPreviewActive() && easymde.codemirror.historySize().undo > 0 ) {
-			
-			let content = easymde.value()
-						
-			easymde.codemirror.clearHistory()
-						
-			apiCall( 'save', id, {"content": content, "modified": Math.floor(Date.now() / 1000) } )
-		}
+	if(	!easymde.isPreviewActive() && easymde.codemirror.historySize().undo > 0 ) {
+		
+		let content = easymde.value()
+					
+		easymde.codemirror.clearHistory()
+					
+		apiCall( 'save', id, {"content": content, "modified": Math.floor(Date.now() / 1000) } )
+	}
 }
 
 
@@ -821,12 +821,12 @@ function exportNote( note ) {
 	
 	dialog.showSaveDialog(remote.getCurrentWindow(), {
 			
-			defaultPath: `${exportPath}/${note.title}`,
-			buttonLabel: i18n.t('app:dialog.button.export', 'Export Note'),
-			properties: [	'openDirectory',
-							'createDirectory'
-						],
-			filters: [
+		defaultPath: `${exportPath}/${note.title}`,
+		buttonLabel: i18n.t('app:dialog.button.export', 'Export Note'),
+		properties: [	'openDirectory',
+						'createDirectory'
+					],
+		filters: [
 				{	name:		i18n.t('app:dialog.format.html', 'html'),
 					extensions:	['html']
 				},
@@ -837,10 +837,14 @@ function exportNote( note ) {
 					extensions:	['txt']
 				}
 			]
-		},		
+		}
+	).then((data) =>{
 		
-		runExportProcess
-	)
+		if( data.canceled === false ) {
+			
+			runExportProcess( data.filePath )
+		}
+	})
 	
 	function runExportProcess( filename ) {
 		
@@ -874,7 +878,7 @@ function exportNote( note ) {
 		
 		fs.outputFile(filename, exported)
 		.then(() => fs.readFile(filename, 'utf8'))
-		.then(data => {
+		.then((data) => {
 			
 			let exportNotification = new Notification('Nextcloud Notes Client', {
 				

@@ -1,6 +1,6 @@
 'use strict'
 
-const {app, BrowserWindow, ipcMain, protocol, systemPreferences, webContents} = require('electron')
+const {app, BrowserWindow, ipcMain, protocol, nativeTheme, webContents} = require('electron')
 const url		= require( 'url' ) 
 const path		= require( 'path' )
 const dialog	= require( 'electron' ).dialog
@@ -69,7 +69,7 @@ function createWindow() {
 	let { x, y, width, height } = store.get('windowBounds')
 	let theme = 'appearance-based'
 	//@exclude
-	theme = systemPreferences.isDarkMode() ? 'dark' : 'light'
+	theme = nativeTheme.shouldUseDarkColors ? 'dark' : 'light'
 	//@end	
 	
 	win = new BrowserWindow({
@@ -235,7 +235,7 @@ app.on('open-prefs', () => {
 		
 		let theme = 'appearance-based'
 		//@exclude
-		theme = systemPreferences.isDarkMode() ? 'dark' : 'light'
+		theme = nativeTheme.shouldUseDarkColors ? 'dark' : 'light'
 		//@end
 		
 		prefs = new BrowserWindow({
