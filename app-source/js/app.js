@@ -296,14 +296,12 @@ function apiCall( call, id, body ) {
 			case 'new': // create new note
 				
 				store.set('appInterface.selected', notes.id)
-				$('#sidebar').html('')
 				apiCall('all')
 				
 			break
 			
 			case 'save': // save note
 				
-				$('#sidebar').html('')
 				apiCall('sidebar')
 				
 			break
@@ -317,7 +315,6 @@ function apiCall( call, id, body ) {
 			
 			case 'category':
 			
-				$('#sidebar').html('')
 				apiCall('sidebar')
 				
 			break
@@ -335,7 +332,6 @@ function apiCall( call, id, body ) {
 					$('#time, #note').html('')
 				}
 				
-				$('#sidebar').html('')
 				apiCall('all')
 			
 			break
@@ -507,15 +503,11 @@ function showHideCategoryIcons() {
 
 function listNotes( array, sidebar ) {
 	
-	if( sidebar !== null ) {
-		
-		database.set('notes', array)
-	}
-		
-	const date = new Date()
+	if( sidebar !== null ) database.set('notes', array)
 	
 	let sortby 	= store.get( 'appSettings.sortby' ),
 		orderby = store.get( 'appSettings.orderby' ),
+		noteList = '',
 		allCats = []
 	
 	if( array.length > 1 ) {
@@ -538,43 +530,59 @@ function listNotes( array, sidebar ) {
 	
 	for ( let item of array ) {
 		
-		let theDate = new Date( item.modified ),
-			formattedDate = formatDate( theDate.getTime() )
-		
-		let	catClass = ( item.category ) ? item.category.split(' ').join('_') : '##none##'
-		
-		let	theCat = ( item.category ) ? item.category : i18n.t('app:categories.none', 'Uncategorised')
-		
-		let plainTxt = removeMarkdown( item.content.replace(/(!\[.*\]\(.*\)|<[^>]*>|>|<)/g, ''))
-		
-		if( plainTxt ) {
-
-			plainTxt = plainTxt.substr(0, 120).slice(item.title.length)
-			
-		} else {
-			
-			plainTxt = i18n.t('app:sidebar.notext', 'No additional text')
-		}
-		
-		$('#sidebar').append(
-		`<li>
-			<button data-id="${item.id}" data-title="${item.title}" data-content="" data-catid="${catClass}" data-category="${item.category}" data-favorite="${item.favorite}">
-				<span class="side-title">${item.title}</span>
-				<span class="side-text">${formattedDate}&nbsp;&nbsp;<span class="excerpt">${plainTxt}</span></span>
-				<span class="side-cat">${theCat}</span>
-			</button>
-		</li>
-		`)
-		
+		noteList += addSidebarEntry( item )
 		allCats.push( item.category )
 	}
 	
-	( sidebar ) ? getSelected( 'sidebar' ) : getSelected()
+	$('#sidebar').html( noteList )
+	
+	if( sidebar ) {
+		
+		getSelected( 'sidebar' )
+	
+	} else {
+		
+		getSelected()
+	}
 	
 	saveCategories( allCats )
 	selectCategory( store.get('categories.selected') )
 }
 
+
+
+//note(dgmid): add sidebar entry
+
+function addSidebarEntry( item ) {
+	
+	let theDate = new Date( item.modified ),
+		formattedDate = formatDate( theDate.getTime() )
+	
+	let	catClass = ( item.category ) ? item.category.split(' ').join('_') : '##none##'
+	
+	let	theCat = ( item.category ) ? item.category : i18n.t('app:categories.none', 'Uncategorised')
+	
+	let plainTxt = removeMarkdown( item.content.replace(/(!\[.*\]\(.*\)|<[^>]*>|>|<)/g, ''))
+	
+	if( plainTxt ) {
+
+		plainTxt = plainTxt.substr(0, 120).slice(item.title.length)
+		
+	} else {
+		
+		plainTxt = i18n.t('app:sidebar.notext', 'No additional text')
+	}
+	
+	let entry = `<li data-id="${item.id}">
+					<button data-id="${item.id}" data-title="${item.title}" data-content="" data-catid="${catClass}" data-category="${item.category}" data-favorite="${item.favorite}">
+						<span class="side-title">${item.title}</span>
+						<span class="side-text">${formattedDate}&nbsp;&nbsp;<span class="excerpt">${plainTxt}</span></span>
+						<span class="side-cat">${theCat}</span>
+					</button>
+				</li>`
+	
+	return entry
+}
 
 
 //note(dgmid): formatDate
@@ -950,7 +958,6 @@ ipcRenderer.on('reload-sidebar', (event, message) => {
 		log.info( `${message} completed` )
 	}
 	
-	$('#sidebar').html('')
 	apiCall('all')
 })
 
