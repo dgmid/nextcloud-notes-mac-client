@@ -137,5 +137,5 @@ ipc.on('show-notes-menu', ( event, message ) => {
 	const notesMenu = Menu.buildFromTemplate( notesMenuTemplate )
 	
 	const win = BrowserWindow.fromWebContents( event.sender )
-	notesMenu.popup( win )
+	let notescontextmenu = notesMenu.popup( win )
 })

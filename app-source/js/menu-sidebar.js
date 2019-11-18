@@ -100,5 +100,5 @@ ipc.on('show-sidebar-menu', ( event, message ) => {
 	const sidebarMenu = Menu.buildFromTemplate( sidebarMenuTemplate )
 	
 	const win = BrowserWindow.fromWebContents( event.sender )
-	sidebarMenu.popup( win )
+	let sidebarcontextmenu = sidebarMenu.popup( win )
 })
