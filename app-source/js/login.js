@@ -115,7 +115,7 @@ $(document).ready(function() {
 			password: ''
 		} )
 		
-		win.webContents.send('reload-sidebar', 'logout')
+		ipcRenderer.send('reload-sidebar', 'logout')
 		closeModal()
 	})
 })

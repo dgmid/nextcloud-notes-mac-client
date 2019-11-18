@@ -145,22 +145,25 @@ function createWindow() {
 	
 	protocol.registerFileProtocol('nc', (request) => {
 		
-		const url = request.url.split( '&' )
+		if( request.url ) {
 		
-		const 	user = url[1].replace('user:', ''),
-				pass = url[2].replace('password:', '')
-		
-		store.set( 'loginCredentials.username', user )
-		store.set( 'loginCredentials.password', pass )
-		
-		loginFlow.close()
-		
-		win.webContents.send('close-login-modal', 'close-login-modal')
-		win.webContents.send('reload-sidebar', 'login')
-	
-	}, (error) => {
-	
-		if (error) log.error('Failed to register nc protocol')
+			const url = request.url.split( '&' )
+			
+			const 	user = url[1].replace('user:', ''),
+					pass = url[2].replace('password:', '')
+			
+			store.set( 'loginCredentials.username', user )
+			store.set( 'loginCredentials.password', pass )
+			
+			loginFlow.close()
+			
+			win.webContents.send('close-login-modal', 'close-login-modal')
+			win.webContents.send('reload-sidebar', 'login')
+			
+		} else {
+			
+			log.error('Failed to register nc protocol')
+		}
 	})
 }
 

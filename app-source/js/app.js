@@ -953,16 +953,22 @@ ipcRenderer.on('set-zoom-slider', (event, message) => {
 
 ipcRenderer.on('reload-sidebar', (event, message) => {
 	
-	if( message === 'login' || message === 'logout' ) {
-	
+	if( message === 'login' ) {
+		
 		server 		= store.get( 'loginCredentials.server' ),
 		username 	= store.get( 'loginCredentials.username' ),
 		password 	= store.get( 'loginCredentials.password' )
-	
+		
 		log.info( `${message} completed` )
-	}
+		apiCall('all')
 	
-	apiCall('all')
+	} else {
+		
+		server = username = password = null
+		
+		resetEditor()
+		$('#sidebar, #categories').empty()
+	}
 })
 
 
