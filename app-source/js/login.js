@@ -113,7 +113,7 @@ $(document).ready(function() {
 			server: '',
 			username: '',
 			password: ''
-		} )
+		})
 		
 		ipcRenderer.send('reload-sidebar', 'logout')
 		closeModal()

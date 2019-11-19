@@ -962,12 +962,16 @@ ipcRenderer.on('reload-sidebar', (event, message) => {
 		log.info( `${message} completed` )
 		apiCall('all')
 	
-	} else {
+	} else if( message === 'logout' ) {
 		
 		server = username = password = null
 		
 		resetEditor()
 		$('#sidebar, #categories').empty()
+	
+	} else {
+		
+		apiCall('sidebar')
 	}
 })
 

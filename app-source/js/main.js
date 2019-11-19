@@ -305,9 +305,9 @@ ipcMain.on('new-category', (event, message) => {
 })
 
 
-ipcMain.on('reload-sidebar', () => {
+ipcMain.on('reload-sidebar', (event, message) => {
 	
-	win.webContents.send('reload-sidebar', null)
+	win.webContents.send('reload-sidebar', message)
 })
 
 
