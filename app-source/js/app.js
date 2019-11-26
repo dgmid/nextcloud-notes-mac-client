@@ -257,28 +257,24 @@ function apiCall( call, id, body ) {
 	
 	log.info( `URL: ${server}${url}` )
 	
-	fetch(server + url, init).then(function(response) {
-	
-		if (response.ok) {
-			
-			log.info( 'response OK' )
-			return response.text()
+	fetch(server + url, init)
+	.then(function(response) {
 		
+		if(!response.ok) {
+			
+			log.warn(`fetch error`)
+			console.table(response)
+			throw Error(response.status)
+			
 		} else {
-			
-			dialog.showErrorBox(
-				i18n.t('app:dialog.error.server.title', 'Server connection error'),
-				i18n.t('app:dialog.error.server.text', 'there was an error connecting to') + `:\n${server}`
-			)
-			
-			log.error( response.error() )
+		
+			log.info( `response ok` )
+			return response.text()
 		}
 	
 	}).then(function(message) {
 		
-		
 		let notes = JSON.parse(message)
-		
 		
 		if (notes['status'] == 'error') {
 			
@@ -287,7 +283,7 @@ function apiCall( call, id, body ) {
 				i18n.t('app:dialog.error.json.text', 'An error occured parsing the notes')
 			)
 			
-			log.error( notes['message'] )	
+			log.error( notes['message'] )
 		
 		} else {
 			
@@ -357,8 +353,8 @@ function apiCall( call, id, body ) {
 	}).catch( function( error ) {
 		
 		dialog.showErrorBox(
-			i18n.t('app:dialog.error.server.title', 'Server connection error'),
-			i18n.t('app:dialog.error.server.text', 'there was an error connecting to') + `:\n${server}`
+			i18n.t('app:dialog.error.server.title', 'Server error'),
+			i18n.t('app:dialog.error.server.text', 'there was an error retrieving') + `:\n${url}\n\n${error}`
 		)
 		
 		log.error( error )
@@ -1081,7 +1077,7 @@ function openModal( url, width, height, resize ) {
 
 ipcRenderer.on('open-login-modal', (event, message) => {
 	
-	openModal( 'file://' + __dirname + '/../html/login.html', 480, 180, false )
+	openModal( 'file://' + __dirname + '/../html/login.html', 480, 210, false )
 })
 
 
@@ -1701,7 +1697,7 @@ $(document).ready(function() {
 	
 	if( !server || !username || !password ) {
 		
-		openModal( 'file://' + __dirname + '/../html/login.html', 480, 180, false )
+		openModal( 'file://' + __dirname + '/../html/login.html', 480, 210, false )
 		
 	} else {
 		

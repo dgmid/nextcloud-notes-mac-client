@@ -49,7 +49,8 @@ let store = new Store({
 			spellcheck: true,
 			showcats: true,
 			ordercats: 'asc',
-			catcount: false
+			catcount: false,
+			nocertificate: false
 		},
 		
 		categories: {
@@ -167,7 +168,33 @@ function createWindow() {
 	})
 }
 
-app.on('ready', createWindow) 
+app.on('ready', createWindow)
+
+
+
+app.on('certificate-error', (event, webContents, url, error, certificate, callback) => {
+	
+	if( store.get('appSettings.nocertificate') ) {
+		
+		log.info(`certificate ignored`)
+		event.preventDefault()
+		callback(true)
+		
+	} else {
+		
+		const i18n = require( './i18n.min' )
+		
+		log.error(error)
+		callback(false)
+		let server = store.get( 'loginCredentials.server' )
+		
+		dialog.showErrorBox(
+			i18n.t('main:dialog.error.cert.title', 'Your connection is not private'),
+			`${error}\n\n` +
+			i18n.t('main:dialog.error.cert.text', {server: server})
+		)
+	}
+})
 
 
 

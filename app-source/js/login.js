@@ -5,8 +5,10 @@ const remote 			= require( 'electron' ).remote
 const {ipcRenderer} 	= require( 'electron' )
 const Store 			= require( 'electron-store' )
 const store 			= new Store()
+const log				= require( 'electron-log' )
 const $ 				= require( 'jquery' )
 const jqueryI18next 	= require( 'jquery-i18next' )
+
 
 jqueryI18next.init(i18n, $)
 
@@ -27,6 +29,7 @@ $('html').attr('lang', i18n.language)
 $('header').localize()
 $('label').localize()
 $('input').localize()
+$('.cert-warning span').localize()
 $('button').localize()
 
 
@@ -82,6 +85,28 @@ $(document).ready(function() {
 		$('#update').prop('disabled', false)
 		$('#logout').prop('disabled', true)
 	}
+	
+	$('#nocertificate').prop('checked', store.get('appSettings.nocertificate'))
+	
+	
+	//note(dgmid): no certificate
+	
+	$('#nocertificate').click(function() {
+		
+		let cert = $(this).is(':checked')
+		
+		if( cert === true ) {
+			
+			log.warn(`allowing unsecure connection`)
+		
+		} else {
+			
+			log.info(`using secure connection`)
+		}
+		
+		store.set('appSettings.nocertificate', cert)
+	})
+	
 	
 	//note(dgmid): cancel modal
 	

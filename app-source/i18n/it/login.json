@@ -8,6 +8,10 @@
       "placeholder": "https://il-tuo-indirizzo-server.com",
       "title": "questo campo è richiesta"
     },
+    "certificate": {
+      "title": "Ignora il certificato del server",
+      "text": "la tua connessione non sarà sicura"
+    },
     "button": {
       "cancel": "Annulla",
       "logout": "‹ Disconnettersi",

@@ -55,14 +55,26 @@ form {
 					
 					content: ':';
 				}
+				
+				&[for="nocertificate"]::after {
+					
+					display: none;
+				}
+				
+				svg {
+					
+					fill: var(--code-yellow-lt);
+				}
 			}
 			
-			input {
+			input[type="url"],
+			input[type="text"] {
 				
 				display: block;
 				padding-left: 10px;
 				padding-right: 28px;
 				width: calc(100% - 80px);
+				height: 28px;
 				color: var(--input-color);
 				background-color: var(--input-background);
 				border: 1px solid var(--input-border);
@@ -85,7 +97,17 @@ form {
 				}
 			}
 			
-			input { height: 28px; }
+			input[type="checkbox"] {
+				
+				vertical-align: 2px;
+			}
+			
+			.cert-warning {
+				
+				display: inline-block;
+				font-size: 10px;
+				opacity: .5;
+			}
 		}
 	}
 }

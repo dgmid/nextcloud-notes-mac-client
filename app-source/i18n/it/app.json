@@ -20,8 +20,8 @@
   "dialog": {
     "error": {
       "server": {
-        "title": "Errore di connessione al server",
-        "text": "si è verificato un errore durante la connessione a"
+        "title": "Errore del server",
+        "text": "si è verificato un errore"
       },
       "json": {
         "title": "Errore di analisi JSON",

@@ -10,6 +10,7 @@ const i18nextOptions = {
 	fallbackLng: 'en',
 	debug: false,
 	ns: [
+		'main',
 		'app',
 		'date',
 		'menu',

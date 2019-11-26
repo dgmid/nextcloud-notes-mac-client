@@ -20,8 +20,8 @@
   "dialog": {
     "error": {
       "server": {
-        "title": "Server connection error",
-        "text": "there was an error connecting to"
+        "title": "Server error",
+        "text": "there was an error retrieving"
       },
       "json": {
         "title": "JSON parsing error",

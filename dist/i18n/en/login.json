@@ -8,6 +8,10 @@
       "placeholder": "https://your-server-address.com",
       "title": "this field is required"
     },
+    "certificate": {
+      "title": "Ignore server certificate",
+      "text": "your connection will not be secure"
+    },
     "button": {
       "cancel": "Cancel",
       "logout": "‹ Logout",

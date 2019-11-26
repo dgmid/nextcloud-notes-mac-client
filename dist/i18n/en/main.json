@@ -1,0 +1,10 @@
+{
+  "dialog": {
+    "error": {
+      "cert": {
+        "title": "Your connection is not private",
+        "text": "The certificate for {{- server}} is not trusted by your operating system.\n\nYou must trust the certificate in Keychain Access or proceed with an unsecure connection."
+      }
+    }
+  }
+}

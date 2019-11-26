@@ -1,0 +1,10 @@
+{
+  "dialog": {
+    "error": {
+      "cert": {
+        "title": "La tua connessione non è privata",
+        "text": "Il certificato per {{- server}} non è attendibile dal tuo sistema operativo.\n\nDevi fidarti del certificato in Keychain Access o procedere con una connessione non sicura."
+      }
+    }
+  }
+}
