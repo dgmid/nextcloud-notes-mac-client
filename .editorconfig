@@ -1,0 +1,21 @@
+root = true
+
+[*]
+indent_style = tab
+charset = utf-8
+trim_trailing_whitespace = false
+end_of_line = lf
+insert_final_newline = true
+
+[*.js]
+indent_size = 4
+
+[*.html]
+indent_size = 4
+
+[*.sass]
+indent_size = 4
+
+[*.json]
+indent_style = space
+indent_size = 2
