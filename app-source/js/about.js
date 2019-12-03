@@ -1,6 +1,6 @@
 'use strict'
 
-const {app, BrowserWindow, systemPreferences} = require('electron')
+const {app, BrowserWindow} = require('electron')
 const url = require('url')
 const path = require('path')
 
@@ -12,17 +12,13 @@ exports.createAbout = () => {
 	
 	if( about === null ) {
 		
-		let theme = 'appearance-based'
-		//@exclude
-		theme = systemPreferences.isDarkMode() ? 'dark' : 'light'
-		//@end	
-		
 		about = new BrowserWindow({
+			
 			show: false,
 			width: 340,
 			height: 360,
 			titleBarStyle: 'hidden',
-			vibrancy: theme,
+			vibrancy: 'under-window',
 			resizable: false,
 			minimizable: false,
 			maximizable: false,

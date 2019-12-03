@@ -1,25 +1,27 @@
 'use strict'
 
 let i18n = require('./i18n.min')
-const electron = require( 'electron' )
-const { app } = require( 'electron' )
-const BrowserWindow = electron.BrowserWindow
-const Menu = electron.Menu
-const MenuItem = electron.MenuItem
-const ipc = electron.ipcMain
-
+const {
+	app,
+	BrowserWindow,
+	Menu,
+	MenuItem,
+	ipcMain
+} = require( 'electron' )
+const log	= require( 'electron-log' )
 const Store = require( 'electron-store' )
 const store = new Store()
 
 
+let sidebarcontextmenu,
+	sidebarMenuTemplate
 
-ipc.on('show-sidebar-menu', ( event, message ) => {
-	
-	let sidebarMenuTemplate
+ipcMain.on('show-sidebar-menu', ( event, message ) => {
 	
 	if( message) {
 		
-		let favorite = (message.favorite == 'true') ? true : false,
+		let categories = store.get( 'categories.list' ),
+			favorite = (message.favorite == 'true') ? true : false,
 			noCategory = (message.catID == '##none##') ? false : true
 		
 		sidebarMenuTemplate = [
@@ -64,7 +66,7 @@ ipc.on('show-sidebar-menu', ( event, message ) => {
 			type: 'separator'
 		})
 		
-		for( let category of store.get( 'categories.list' ) ) {
+		for( let category of categories ) {
 			
 			let status = (message.catID == category.catID) ? false : true
 			
@@ -95,10 +97,9 @@ ipc.on('show-sidebar-menu', ( event, message ) => {
 			}
 		]
 	}
-	
-	
+		
 	const sidebarMenu = Menu.buildFromTemplate( sidebarMenuTemplate )
 	
 	const win = BrowserWindow.fromWebContents( event.sender )
-	let sidebarcontextmenu = sidebarMenu.popup( win )
+	sidebarcontextmenu = sidebarMenu.popup( win )
 })

@@ -1,22 +1,22 @@
 'use strict'
 
 let i18n = require('./i18n.min')
-const electron = require( 'electron' )
-const { app } = require( 'electron' )
-const BrowserWindow = electron.BrowserWindow
-const Menu = electron.Menu
-const MenuItem = electron.MenuItem
-const ipc = electron.ipcMain
-
+const {
+	app,
+	BrowserWindow,
+	Menu,
+	MenuItem,
+	ipcMain
+} = require( 'electron' )
+const log	= require( 'electron-log' )
 const Store = require( 'electron-store' )
 const store = new Store()
 
 
+let notescontextmenu,
+	notesMenuTemplate
 
-ipc.on('show-notes-menu', ( event, message ) => {
-	
-	let notesMenuTemplate,
-		enable = (message.selection.length === 0 ) ? false : true
+ipcMain.on('show-notes-menu', ( event, message ) => {
 	
 	if( message.preview ) {
 		
@@ -45,7 +45,9 @@ ipc.on('show-notes-menu', ( event, message ) => {
 		]
 		
 	} else {
-			
+		
+		let enable = (message.selection.length === 0 ) ? false : true
+		
 		notesMenuTemplate = [
 			
 			{
@@ -137,5 +139,5 @@ ipc.on('show-notes-menu', ( event, message ) => {
 	const notesMenu = Menu.buildFromTemplate( notesMenuTemplate )
 	
 	const win = BrowserWindow.fromWebContents( event.sender )
-	let notescontextmenu = notesMenu.popup( win )
+	notescontextmenu = notesMenu.popup( win )
 })

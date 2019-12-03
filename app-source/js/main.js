@@ -1,6 +1,6 @@
 'use strict'
 
-const {app, BrowserWindow, ipcMain, protocol, nativeTheme, webContents} = require('electron')
+const {app, BrowserWindow, ipcMain, protocol, webContents} = require('electron')
 const url		= require( 'url' ) 
 const path		= require( 'path' )
 const dialog	= require( 'electron' ).dialog
@@ -68,10 +68,6 @@ let store = new Store({
 function createWindow() {
 	
 	let { x, y, width, height } = store.get('windowBounds')
-	let theme = 'appearance-based'
-	//@exclude
-	theme = nativeTheme.shouldUseDarkColors ? 'dark' : 'light'
-	//@end	
 	
 	win = new BrowserWindow({
 		show: false,
@@ -82,7 +78,7 @@ function createWindow() {
 		titleBarStyle: 'hidden',
 		minWidth: 800,
 		minHeight: 372,
-		vibrancy: theme,
+		vibrancy: 'sidebar',
 		webPreferences: {
 			devTools: true,
 			preload: path.join(__dirname, './preload.min.js'),
@@ -140,10 +136,6 @@ function createWindow() {
 		log.info( `main window is responding` )
 	})
 	
-	require( './menu-app.min' )
-	require( './menu-sidebar.min' )
-	require( './menu-notes.min' )
-	
 	protocol.registerFileProtocol('nc', (request) => {
 		
 		if( request.url ) {
@@ -166,6 +158,10 @@ function createWindow() {
 			log.error('Failed to register nc protocol')
 		}
 	})
+	
+	require( './menu-app.min' )
+	require( './menu-sidebar.min' )
+	require( './menu-notes.min' )
 }
 
 app.on('ready', createWindow)
@@ -263,11 +259,6 @@ app.on('open-prefs', () => {
 	
 	if( prefs === null ) {
 		
-		let theme = 'appearance-based'
-		//@exclude
-		theme = nativeTheme.shouldUseDarkColors ? 'dark' : 'light'
-		//@end
-		
 		prefs = new BrowserWindow({
 			
 			width: 548,
@@ -277,7 +268,7 @@ app.on('open-prefs', () => {
 			maximizable: false,
 			show: false,
 			titleBarStyle: 'hidden',
-			vibrancy: theme,
+			vibrancy: 'under-window',
 			webPreferences: {
 				devTools: true,
 				preload: path.join(__dirname, './preload.min.js'),
