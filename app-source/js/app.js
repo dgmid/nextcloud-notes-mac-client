@@ -7,7 +7,6 @@ const path				= require( 'path' )
 const Store				= require( 'electron-store' )
 const store				= new Store()
 const dialog			= remote.dialog
-const dateFormat		= require( 'dateformat' )
 const $					= require( 'jquery' )
 const marked			= require( 'marked' )
 const removeMarkdown	= require( 'remove-markdown' )
@@ -17,6 +16,9 @@ const EasyMDE			= require( 'easymde' )
 const hljs				= require( 'highlight.js' )
 const entities			= require( 'html-entities' ).AllHtmlEntities
 const log				= require( 'electron-log' )
+
+const fetch				= require( './fetch.min' )
+const dates				= require( './dates.min' )
 
 let 	server 		= store.get( 'loginCredentials.server' ),
 		username 	= store.get( 'loginCredentials.username' ),
@@ -77,7 +79,7 @@ let easymdeSetup = {
 					{
 						name: "checklist",
 						action: (e) => {
-							e.codemirror.replaceSelection('- [ ]  ')
+							e.codemirror.replaceSelection('- [ ] ')
 							e.codemirror.focus()
 						},
 						className: "icon-checklist",
@@ -145,64 +147,6 @@ let easymde,
 easymde = new EasyMDE( easymdeSetup )
 
 
-//note(dgmid): dateFormat i18n setup
-
-dateFormat.i18n = {
-	dayNames: [
-		i18n.t('date:sun', 'Sun'),
-		i18n.t('date:mon', 'Mon'),
-		i18n.t('date:tue', 'Tue'),
-		i18n.t('date:wed', 'Wed'),
-		i18n.t('date:thu', 'Thu'),
-		i18n.t('date:fri', 'Fri'),
-		i18n.t('date:sat', 'Sat'),
-		i18n.t('date:sunday', 'Sunday'),
-		i18n.t('date:monday', 'Monday'),
-		i18n.t('date:tuesday', 'Tuesday'),
-		i18n.t('date:wednesday', 'Wednesday'),
-		i18n.t('date:thursday', 'Thursday'),
-		i18n.t('date:friday', 'Friday'),
-		i18n.t('date:saturday', 'Saturday')
-	],
-	monthNames: [
-		i18n.t('date:jan', 'Jan'),
-		i18n.t('date:feb', 'Feb'),
-		i18n.t('date:mar', 'Mar'),
-		i18n.t('date:apr', 'Apr'),
-		i18n.t('date:_may', 'May'),
-		i18n.t('date:jun', 'Jun'),
-		i18n.t('date:jul', 'Jul'),
-		i18n.t('date:aug', 'Aug'),
-		i18n.t('date:sep', 'Sep'),
-		i18n.t('date:oct', 'Oct'),
-		i18n.t('date:nov', 'Nov'),
-		i18n.t('date:dec', 'Dec'),
-		i18n.t('date:january', 'January'),
-		i18n.t('date:february', 'February'),
-		i18n.t('date:march', 'March'),
-		i18n.t('date:april', 'April'),
-		i18n.t('date:may', 'May'),
-		i18n.t('date:june', 'June'),
-		i18n.t('date:july', 'July'),
-		i18n.t('date:august', 'August'),
-		i18n.t('date:september', 'September'),
-		i18n.t('date:october', 'October'),
-		i18n.t('date:november', 'November'),
-		i18n.t('date:december', 'December')
-	],
-	timeNames: [
-		i18n.t('date:a', 'a'),
-		i18n.t('date:p', 'p'),
-		i18n.t('date:am', 'am'),
-		i18n.t('date:pm', 'pm'),
-		i18n.t('date:_a', 'A'),
-		i18n.t('date:_p', 'P'),
-		i18n.t('date:_am', 'AM'),
-		i18n.t('date:_pm', 'PM')
-	]
-}
-
-
 
 //note(dgmid): log exceptions
 
@@ -213,152 +157,81 @@ window.onerror = function( error, url, line ) {
 
 
 
-//note(dgmid): call notes api
-
-function apiCall( call, id, body ) {
-	
-	let method
+function  fetchResult( call, id, body, notes ) {
 	
 	switch( call ) {
-		
-		case 'new':
-			method = 'POST'
+			
+		case 'new': // create new note
+			
+			store.set('appInterface.selected', notes.id)
+			fetch.apiCall( 'all', null, null, function( call, id, body, notes ) {
+				
+				fetchResult( call, id, body, notes )
+			})
+			
 		break
 		
-		case 'save':
-		case 'update':
+		case 'save': // save note
+			
+			fetch.apiCall( 'sidebar', null, null, function( call, id, body, notes ) {
+				
+				fetchResult( call, id, body, notes )
+			})
+			
+		break
+		
+		case 'update': // modify existing note
+			
+			$(`button[data-id="${id}"]`).removeData('favorite')
+			$(`button[data-id="${id}"]`).attr('data-favorite', body.favorite)
+		
+		break
+		
 		case 'category':
-			method = 'PUT'
+		
+			fetch.apiCall( 'sidebar', null, null, function( call, id, body, notes ) {
+				
+				fetchResult( call, id, body, notes )
+			})
+			
 		break
 		
-		case 'delete':
-			method = 'DELETE'
-		break
-		
-		default: //all, single or export
-			method = 'GET'
-	}
-	
-	let url = '/index.php/apps/notes/api/v0.2/notes',
-	init = {
-		
-		method: method,
-		headers: {
-			'Authorization': 'Basic ' + btoa( username + ':' + password ),
-			'Content-Type': 'application/json',
-		},
-		mode: 'cors',
-		cache: 'no-cache',
-		credentials: 'omit'
-	}
-	
-	if( id ) { url += `/${id}` }
-	if( body ) { init.body = JSON.stringify( body ) }
-	
-	log.info( `URL: ${server}${url}` )
-	
-	fetch(server + url, init)
-	.then(function(response) {
-		
-		if(!response.ok) {
+		case 'delete': // delete note
 			
-			log.warn(`fetch error`)
-			console.table(response)
-			throw Error(response.status)
+			let selected = $('#sidebar li button.selected').attr('data-id')
 			
-		} else {
-		
-			log.info( `response ok` )
-			return response.text()
-		}
-	
-	}).then(function(message) {
-		
-		let notes = JSON.parse(message)
-		
-		if (notes['status'] == 'error') {
-			
-			dialog.showErrorBox(
-				i18n.t('app:dialog.error.json.title', 'JSON parsing error'),
-				i18n.t('app:dialog.error.json.text', 'An error occured parsing the notes')
-			)
-			
-			log.error( notes['message'] )
-		
-		} else {
-			
-			switch( call ) {
+			if( selected == id) {
 				
-			case 'new': // create new note
+				resetEditor()
 				
-				store.set('appInterface.selected', notes.id)
-				apiCall('all')
-				
-			break
-			
-			case 'save': // save note
-				
-				apiCall('sidebar')
-				
-			break
-			
-			case 'update': // modify existing note
-				
-				$(`button[data-id="${id}"]`).removeData('favorite')
-				$(`button[data-id="${id}"]`).attr('data-favorite', body.favorite)
-			
-			break
-			
-			case 'category':
-			
-				apiCall('sidebar')
-				
-			break
-			
-			case 'delete': // delete note
-				
-				let selected = $('#sidebar li button.selected').attr('data-id')
-				
-				if( selected == id) {
-					
-					resetEditor()
-					
-					store.set( 'appInterface.selected', null )
-					$('#note').attr('data-id', null)
-					$('#time, #note').html('')
-				}
-				
-				apiCall('all')
-			
-			break
-			
-			case 'export':
-				
-				exportNote( notes )
-				
-			break
-			
-			case 'sidebar':
-				
-				listNotes( notes, 'sidebar' )
-				
-			break
-			
-			default: // get single note or all notes
-				
-				(id) ? displayNote( notes ) : listNotes( notes )
+				store.set( 'appInterface.selected', null )
+				$('#note').attr('data-id', null)
+				$('#time, #note').html('')
 			}
-		}
-	
-	}).catch( function( error ) {
+			
+			fetch.apiCall( 'all', null, null, function( call, id, body, notes ) {
+				
+				fetchResult( call, id, body, notes )
+			})
 		
-		dialog.showErrorBox(
-			i18n.t('app:dialog.error.server.title', 'Server error'),
-			i18n.t('app:dialog.error.server.text', 'there was an error retrieving') + `:\n${url}\n\n${error}`
-		)
+		break
 		
-		log.error( error )
-	})
+		case 'export':
+			
+			exportNote( notes )
+			
+		break
+		
+		case 'sidebar':
+			
+			listNotes( notes, 'sidebar' )
+			
+		break
+		
+		default: // get single note or all notes
+			
+			(id) ? displayNote( notes ) : listNotes( notes )
+	}
 }
 
 
@@ -552,7 +425,7 @@ function listNotes( array, sidebar ) {
 function addSidebarEntry( item ) {
 	
 	let theDate = new Date( item.modified ),
-		formattedDate = formatDate( theDate.getTime() )
+		formattedDate = dates.sidebarDate( theDate.getTime() )
 	
 	let	catClass = ( item.category ) ? item.category.split(' ').join('_') : '##none##'
 	
@@ -581,56 +454,14 @@ function addSidebarEntry( item ) {
 }
 
 
-//note(dgmid): formatDate
-
-function formatDate( timestamp ) {
-	
-	let today		= new Date(),
-		yesterday	= new Date(),
-		week		= new Date()
-	
-	today.setHours( 0, 0, 0, 0 )
-	yesterday.setHours( 0, 0, 0, 0 )
-	yesterday.setDate( yesterday.getDate() - 1 )
-	week.setHours( 0, 0, 0, 0 )
-	week.setDate( week.getDate() - 7 )
-	
-	
-	if( ( today.getTime() / 1000 ) < timestamp ) {
-		
-		//if today - show time
-		return dateFormat( timestamp * 1000, 'H:MM' )
-	
-	} else if ( ( yesterday.getTime() / 1000 ) < timestamp ) {
-		
-		//if yesterday - show string
-		return i18n.t('date:yesterday', 'yesterday')
-	
-	} else if ( ( week.getTime() / 1000 ) < timestamp ) {
-		
-		//if last week - show day
-		return dateFormat( timestamp * 1000, 'dddd' )
-	
-	} else {
-		
-		//else - show date
-		return dateFormat( timestamp * 1000, 'dd/mm/yy' )
-	}
-}
-
-
 
 //note(dgmid): display single note
 
 function displayNote( note ) {
 	
-	let prep = i18n.t('app:date.titlebar', 'at'),
-		date = dateFormat(note.modified * 1000, "d mmmm, yyyy"),
-		time = dateFormat(note.modified * 1000, "HH:MM")
-	
 	$('#edit').removeClass('editing')
 	
-	$('#time').html( `${date} ${prep} ${time}` )
+	$('#time').html( dates.titlebarDate( note.modified ) )
 	
 	if( easymde ) {
 		
@@ -687,7 +518,13 @@ function getSelected( sidebar ) {
 		
 		$(`button[data-id="${selected}"]`).addClass('selected').parent().prev().children().addClass('above-selected')
 		
-		if( !sidebar ) apiCall( 'single', selected )
+		if( !sidebar ) {
+			
+			fetch.apiCall( 'single', selected, null, function( call, id, body, notes ) {
+				
+				fetchResult( call, id, body, notes )
+			})
+		}
 	}
 }
 
@@ -727,11 +564,17 @@ function editNote() {
 				
 				if( response === 0 ) {
 					
-					let content = easymde.value()
+					let body = {	
+						"content": easymde.value(),
+						"modified": Math.floor(Date.now() / 1000)
+					}
 					
 					easymde.codemirror.clearHistory()
 					
-					apiCall( 'save', selected, {"content": content, "modified": Math.floor(Date.now() / 1000) } )
+					fetch.apiCall( 'save', selected, body, function( call, id, body, notes ) {
+						
+						fetchResult( call, id, body, notes )
+					})
 					
 				} else {
 			
@@ -799,11 +642,19 @@ function saveNote( id ) {
 	
 	if(	!easymde.isPreviewActive() && easymde.codemirror.historySize().undo > 0 ) {
 		
-		let content = easymde.value()
+		let body = {
+			"content": easymde.value(),
+			"modified": Math.floor(Date.now() / 1000)
+		}
 					
 		easymde.codemirror.clearHistory()
-					
-		apiCall( 'save', id, {"content": content, "modified": Math.floor(Date.now() / 1000) } )
+		
+		fetch.apiCall( 'save', id, body, function( call, id, body, notes ) {
+			
+			fetchResult( call, id, body, notes )
+		})
+		
+		
 	}
 }
 
@@ -903,7 +754,10 @@ function deleteCheck( id ) {
 		
 	if( response === 0 ) {
 		
-		apiCall( 'delete', id )
+		fetch.apiCall( 'delete', id, null, function( call, id, body, notes ) {
+			
+			fetchResult( call, id, body, notes )
+		})
 	}
 }
 
@@ -956,7 +810,11 @@ ipcRenderer.on('reload-sidebar', (event, message) => {
 		password 	= store.get( 'loginCredentials.password' )
 		
 		log.info( `${message} completed` )
-		apiCall('all')
+		
+		fetch.apiCall( 'all', null, null, function( call, id, body, notes ) {
+			
+			fetchResult( call, id, body, notes )
+		})
 	
 	} else if( message === 'logout' ) {
 		
@@ -967,7 +825,10 @@ ipcRenderer.on('reload-sidebar', (event, message) => {
 	
 	} else {
 		
-		apiCall('sidebar')
+		fetch.apiCall( 'sidebar', null, null, function( call, id, body, notes ) {
+			
+			fetchResult( call, id, body, notes )
+		})
 	}
 })
 
@@ -1057,7 +918,7 @@ function openModal( url, width, height, resize ) {
 			transparent: true,
 			vibrancy: 'popover',
 			webPreferences: {
-			devTools: true,
+			devTools: false,
 				preload: path.join(__dirname, './preload.min.js'),
 				nodeIntegration: true
 			}	
@@ -1131,7 +992,10 @@ ipcRenderer.on('note', (event, message) => {
 					}
 			}
 			
-			apiCall( 'new', null, body )
+			fetch.apiCall( 'new', null, body, function( call, id, body, notes ) {
+				
+				fetchResult( call, id, body, notes )
+			})
 			
 		break
 		
@@ -1147,8 +1011,11 @@ ipcRenderer.on('note', (event, message) => {
 			if( selected ) {
 			
 				let favorite = ( $(`#sidebar li button[data-id="${selected}"]`).attr('data-favorite') == 'true' ) ? false : true
-			
-				apiCall( 'update', selected, {"favorite": favorite} )
+				
+				fetch.apiCall( 'update', selected, {"favorite": favorite}, function( call, id, body, notes ) {
+					
+					fetchResult( call, id, body, notes )
+				})
 			}
 		break
 		
@@ -1162,7 +1029,13 @@ ipcRenderer.on('note', (event, message) => {
 		break
 		
 		case 'export':
-			if( selected ) apiCall( 'export', selected )
+			if( selected ) {
+				
+				fetch.apiCall( 'export', selected, null, function( call, id, body, notes ) {
+					
+					fetchResult( call, id, body, notes )
+				})
+			}
 		break
 		
 		case 'delete':
@@ -1323,13 +1196,19 @@ ipcRenderer.on('context-favorite', (event, message) => {
 	let favorite 	= ( message.favorite == 'true' ) ? false : true,
 		id 			= message.id
 	
-	apiCall( 'update', id, {"favorite": favorite} )
+	fetch.apiCall( 'update', id, {"favorite": favorite}, function( call, id, body, notes ) {
+			
+		fetchResult( call, id, body, notes )
+	})
 })
 
 
 ipcRenderer.on('context-export', (event, id) => {
 	
-	apiCall( 'export', id )
+	fetch.apiCall( 'export', id, null, function( call, id, body, notes ) {
+			
+		fetchResult( call, id, body, notes )
+	})
 })
 
 
@@ -1345,13 +1224,17 @@ ipcRenderer.on('context-category', (event, message) => {
 		category	= message.category,
 		notes		= database.get('notes')
 	
-	let note = notes.find( x => x.id === id )
-	
-	apiCall( 'category', id, {
+	let note = notes.find( x => x.id === id ),
+		body = {
 		
 		"modified": 	note.modified,
 		"content": 		note.content,
 		"category":		category
+	}
+	
+	fetch.apiCall( 'category', id, body, function( call, id, body, notes ) {
+			
+		fetchResult( call, id, body, notes )
 	})
 })
 
@@ -1395,13 +1278,16 @@ $('body').on('click', '#sidebar li button', function(event) {
 	
 	let id = $(this).data('id')
 	
-	$('#time').html('').hide()
+	$('#time').empty().hide()
 	$('main').append('<div class="loader"><div class="spinner"></div></div>')
 	
 	$('#sidebar li button').removeClass('selected').removeClass('above-selected')
 	$(this).addClass('selected').parent().prev().children().addClass('above-selected')
 	
-	apiCall( 'single', id )
+	fetch.apiCall( 'single', id, null, function( call, id, body, notes ) {
+			
+			fetchResult( call, id, body, notes )
+		})
 	
 	store.set( 'appInterface.selected', id )
 })
@@ -1701,7 +1587,10 @@ $(document).ready(function() {
 		
 	} else {
 		
-		apiCall('all')
+		fetch.apiCall( 'all', null, null, function( call, id, body, notes ) {
+			
+			fetchResult( call, id, body, notes )
+		})
 	}
 	
 	

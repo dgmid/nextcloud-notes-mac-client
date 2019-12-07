@@ -45,5 +45,6 @@
   "_p": "P",
   "_am": "AM",
   "_pm": "PM",
-  "yesterday": "yesterday"
+  "yesterday": "yesterday",
+  "at": "at"
 }

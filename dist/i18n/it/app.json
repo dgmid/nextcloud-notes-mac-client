@@ -9,7 +9,7 @@
     "strikethrough": "Barrato",
     "ul": "Lista non ordinata",
     "ol": "Lista ordinata",
-    "checklist": "Elenco di controllo (Shift-Cmd-Alt-L)"
+    "checklist": "Elenco di controllo (Shift-Cmd-Alt-L)",
     "link": "Crea collegamento",
     "image": "Inserisci immagine",
     "code": "Codice",
@@ -56,9 +56,6 @@
     "title": "Categorie",
     "all": "Tutte le note",
     "none": "Non categorizzato"
-  },
-  "date": {
-    "titlebar": "alle"
   },
   "notification": {
     "export": {

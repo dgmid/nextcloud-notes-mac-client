@@ -58,9 +58,6 @@
     "fav": "Favorites",
     "none": "Uncategorised"
   },
-  "date": {
-    "titlebar": "at"
-  },
   "notification": {
     "export": {
       "text": "The note {{title}} has been exported as {{filetype}}"
