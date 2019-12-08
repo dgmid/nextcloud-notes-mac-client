@@ -3,15 +3,11 @@
 const i18n = require( './i18n.min' )
 
 const { ipcRenderer, shell, remote } = require( 'electron' )
-const path				= require( 'path' )
 const Store				= require( 'electron-store' )
 const store				= new Store()
 const dialog			= remote.dialog
 const $					= require( 'jquery' )
-const marked			= require( 'marked' )
 const removeMarkdown	= require( 'remove-markdown' )
-const pretty			= require( 'pretty' )
-const fs				= require( 'fs-extra' )
 const EasyMDE			= require( 'easymde' )
 const hljs				= require( 'highlight.js' )
 const entities			= require( 'html-entities' ).AllHtmlEntities
@@ -19,6 +15,7 @@ const log				= require( 'electron-log' )
 
 const fetch				= require( './fetch.min' )
 const dates				= require( './dates.min' )
+const modalWindow		= require( './modal.min' )
 
 let 	server 		= store.get( 'loginCredentials.server' ),
 		username 	= store.get( 'loginCredentials.username' ),
@@ -141,7 +138,6 @@ let easymdeSetup = {
 	}
 
 let easymde,
-	modal,
 	firstLoad = true
 
 easymde = new EasyMDE( easymdeSetup )
@@ -218,7 +214,8 @@ function  fetchResult( call, id, body, notes ) {
 		
 		case 'export':
 			
-			exportNote( notes )
+			const exportnote = require( './export.min' )
+			exportnote.exportNote( notes )
 			
 		break
 		
@@ -660,88 +657,6 @@ function saveNote( id ) {
 
 
 
-//note(dgmid): export note
-
-function exportNote( note ) {
-	
-	const exportPath = store.get('exportPath')
-	
-	dialog.showSaveDialog(remote.getCurrentWindow(), {
-			
-		defaultPath: `${exportPath}/${note.title}`,
-		buttonLabel: i18n.t('app:dialog.button.export', 'Export Note'),
-		properties: [	'openDirectory',
-						'createDirectory'
-					],
-		filters: [
-				{	name:		i18n.t('app:dialog.format.html', 'html'),
-					extensions:	['html']
-				},
-				{	name:		i18n.t('app:dialog.format.md', 'markdown'),
-					extensions:	['md']
-				},
-				{	name:		i18n.t('app:dialog.format.txt', 'text'),
-					extensions:	['txt']
-				}
-			]
-		}
-	).then((data) =>{
-		
-		if( data.canceled === false ) {
-			
-			runExportProcess( data.filePath )
-		}
-	})
-	
-	function runExportProcess( filename ) {
-		
-		let exported,
-			filetype
-		
-		switch( filename.split('.').pop() ) {
-			
-			case 'html':
-				
-				let html = marked( note.content )
-				
-				exported = pretty( `<!doctype html><html lang="${i18n.language}"><head><meta charset="utf-8" /><title>${note.title}</title></head><body>${html}</body></html>`, {ocd: true} )
-				
-				filetype = 'html'
-				
-			break
-			
-			case 'txt':
-				
-				exported = removeMarkdown( note.content )
-				filetype = 'text'
-			
-			break
-			
-			default: //markdown
-				
-				exported = note.content
-				filetype = 'markdown'
-		}
-		
-		fs.outputFile(filename, exported)
-		.then(() => fs.readFile(filename, 'utf8'))
-		.then((data) => {
-			
-			let exportNotification = new Notification('Nextcloud Notes Client', {
-				
-				body: i18n.t('app:notification.export.text', 'The note {{title}} has been exported as {{filetype}}', {title: note.title, filetype: filetype})
-			})
-		})
-		
-		.catch(err => {
-			
-			log.error( err )
-		})
-	}
-}
-
-
-
 //note(dgmid): delete check
 
 function deleteCheck( id ) {
@@ -899,46 +814,12 @@ ipcRenderer.on('toggle-caticons', (event, message) => {
 })
 
 
-//note(dgmid): modal
-
-function openModal( url, width, height, resize ) {
-	
-	modal = new remote.BrowserWindow({
-		
-			parent: remote.getCurrentWindow(),
-			modal: true,
-			width: width,
-			minWidth: width,
-			maxWidth: width,
-			height: height,
-			minHeight: height,
-			resizable: resize,
-			show: false,
-			frame: false,
-			transparent: true,
-			vibrancy: 'popover',
-			webPreferences: {
-			devTools: false,
-				preload: path.join(__dirname, './preload.min.js'),
-				nodeIntegration: true
-			}	
-		})
-		
-	modal.loadURL( url )
-	
-	modal.once('ready-to-show', () => {
-		
-		modal.show()
-	})
-}
-
-
 
 //note(dgmid): log in modal
 
 ipcRenderer.on('open-login-modal', (event, message) => {
 	
-	openModal( 'file://' + __dirname + '/../html/login.html', 480, 210, false )
+	modalWindow.openModal( 'file://' + __dirname + '/../html/login.html', 480, 210, false )
 })
 
 
@@ -947,7 +828,7 @@ ipcRenderer.on('open-login-modal', (event, message) => {
 
 ipcRenderer.on('close-login-modal', (event, message) => {
 	
-	modal.close()
+	modalWindow.closeModal
 })
 
 
@@ -1022,7 +903,7 @@ ipcRenderer.on('note', (event, message) => {
 		case 'newcat':
 			
 			if( selected ) {
-				openModal( 'file://' + __dirname + `/../html/new-category.html?id=${selected}`, 480, 180, false )
+				modalWindow.openModal( 'file://' + __dirname + `/../html/new-category.html?id=${selected}`, 480, 180, false )
 			}
 		break
 		
@@ -1241,7 +1122,7 @@ ipcRenderer.on('context-category', (event, message) => {
 
 ipcRenderer.on('context-newcategory', (event, message) => {
 	
-	openModal( 'file://' + __dirname + `/../html/new-category.html?id=${message}`, 480, 180, false )
+	modalWindow.openModal( 'file://' + __dirname + `/../html/new-category.html?id=${message}`, 480, 180, false )
 })
 
 
@@ -1583,7 +1464,7 @@ $(document).ready(function() {
 	
 	if( !server || !username || !password ) {
 		
-		openModal( 'file://' + __dirname + '/../html/login.html', 480, 210, false )
+		modalWindow.openModal( 'file://' + __dirname + '/../html/login.html', 480, 210, false )
 		
 	} else {
 		
