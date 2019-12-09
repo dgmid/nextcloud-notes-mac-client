@@ -498,9 +498,23 @@ function displayNote( note ) {
 	
 	if( firstLoad === true ) {
 		
+		const check = require( './version.min' )		
 		firstLoad = 1
-		checkAppVersion()
+		check.appVersion( function( details ) {
+			
+			displayVersion( details )
+		})
 	}
+}
+
+
+
+//note(dgmid): display version status in titlebar
+
+function displayVersion( details ) {
+	
+	$('header').append( details )
+	$('.fadein').fadeIn( 'slow' )
 }
 
 
@@ -1347,57 +1361,6 @@ function setCheckLists() {
 }
 
 
-//note(dgmid): check app version
-
-function checkAppVersion() {
-	
-	const version 			= require('electron').remote.app.getVersion()
-	const compareVersions	= require('compare-versions')
-	
-	$.getJSON( 'https://api.github.com/repos/dgmid/nextcloud-notes-mac-client/releases/latest', function( release ) {
-		
-		let latest = release.name
-		
-		log.info( `this version: ${version}` )
-		log.info( `latest version: ${latest}` )
-		
-		if( compareVersions.compare( version, latest, '<' ) ) {
-			
-			$('#update').attr('data-url', `https://www.midwinter-dg.com/mac-apps/nextcloud-notes-client.html?app`).fadeIn('slow')
-			$('#update-version').html( latest )
-		}
-		
-		if( compareVersions.compare( version, latest, '>' ) ) {
-						
-			if( version.includes('-a') ) {
-				
-				$('header').append( `<span id="dev" class="α">DEV: v${version}</span>` )
-				
-			} else if ( version.includes('-b') ) {
-				
-				$('header').append( `<span id="dev" class="β">DEV: v${version}</span>` )
-				
-			} else {
-				
-				$('header').append( `<span id="dev">DEV: v${version}</span>` )
-			}
-			
-			$('#dev').fadeIn('slow')
-		}
-	})
-	.done( function() {
-		
-		log.info( `check release succeeded` )
-	})
-	.fail( function( jqXHR, textStatus, errorThrown ) {
-		
-		log.error( `check release failed ${textStatus}` )
-	})
-	.always( function() {
-		
-		log.info( `check release ended` )
-	})
-}
 
 $('body').on('mouseenter', 'main a', function() {
 	
@@ -1457,7 +1420,6 @@ $(document).ready(function() {
 	$('#cat-fav').attr('title', i18n.t('app:categories.fav', 'Favorites'))
 	$('#cat-none').html( i18n.t('app:categories.none', 'Uncategorised'))
 	$('#cat-none').attr('title', i18n.t('app:categories.none', 'Uncategorised'))
-	$('#update-label').html( i18n.t('app:titlebar.update', 'Update Available'))
 	
 	
 	//note(dgmid): check login

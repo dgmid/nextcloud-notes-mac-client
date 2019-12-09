@@ -68,7 +68,7 @@ exports.exportNote = function( note ) {
 			
 			break
 			
-			default: //markdown
+			default:
 				
 				exported = note.content
 				filetype = 'markdown'

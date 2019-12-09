@@ -34,7 +34,6 @@ header {
 		color: #fff;
 		border: 0;
 		border-radius: 3px;
-		display: none;
 	}
 	
 	#update {
@@ -55,6 +54,8 @@ header {
 		&.α { background-color: var(--code-red-lt); }
 		&.β { background-color: var(--code-blue-lt); }
 	}
+	
+	.fadein { display: none; }
 }
 
 #time {

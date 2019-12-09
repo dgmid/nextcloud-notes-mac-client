@@ -4,13 +4,13 @@ const i18n = require( './i18n.min' )
 
 const {  remote }	= require( 'electron' )
 const dialog		= remote.dialog
-const Store				= require( 'electron-store' )
-const store				= new Store()
+const Store			= require( 'electron-store' )
+const store			= new Store()
 const log			= require( 'electron-log' )
 
-let 	server 		= store.get( 'loginCredentials.server' ),
-		username 	= store.get( 'loginCredentials.username' ),
-		password 	= store.get( 'loginCredentials.password' )
+let server 		= store.get( 'loginCredentials.server' ),
+	username 	= store.get( 'loginCredentials.username' ),
+	password 	= store.get( 'loginCredentials.password' )
 
 
 exports.apiCall = function ( call, id, body, callback ) {
