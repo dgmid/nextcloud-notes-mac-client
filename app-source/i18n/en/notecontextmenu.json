@@ -9,5 +9,11 @@
     "entities": "Encode / Decode Entites",
     "encode": "Encode Entities",
     "decode": "Decode Entities"
+  },
+  "transformations": {
+    "transformations": "Transformations",
+    "upper": "Make Uppercase",
+    "lower": "Make Lowercase",
+    "caps": "Capitalize"
   }
 }

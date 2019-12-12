@@ -132,6 +132,26 @@ ipcMain.on('show-notes-menu', ( event, message ) => {
 						click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('context-note-decode', message.selection) }
 					}
 				]
+			},
+			{
+				label: i18n.t('notecontextmenu:transformations.transformations', 'Transformations'),
+				submenu: [
+					{
+						label: i18n.t('notecontextmenu:transformations.upper', 'Make Uppercase'),
+						enabled: enable,
+						click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('context-note-upper', message.selection) }
+					},
+					{
+						label: i18n.t('notecontextmenu:transformations.lower', 'Make Lowercase'),
+						enabled: enable,
+						click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('context-note-lower', message.selection) }
+					},
+					{
+						label: i18n.t('notecontextmenu:transformations.caps', 'Capitalize'),
+						enabled: enable,
+						click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('context-note-caps', message.selection) }
+					}
+				]
 			}
 		]
 	}

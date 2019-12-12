@@ -9,5 +9,11 @@
     "entities": "Codifica / decodifica caratteri",
     "encode": "Codifica",
     "decode": "Decodifica"
+  },
+  "transformations": {
+    "transformations": "Transformazioni",
+    "upper": "Scrivi in lettere maiuscole",
+    "lower": "Scrivi in lettere minuscole",
+    "caps": "Iniziali maiuscole"
   }
 }

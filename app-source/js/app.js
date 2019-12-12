@@ -604,7 +604,6 @@ function editNote() {
 
 
 //editor checkboxes - based on https://github.com/nextcloud/notes/issues/117
-
 //note(dgmid): init checkboxes
 
 function initCheckboxes() {
@@ -618,6 +617,7 @@ function initCheckboxes() {
 		toggleEditorCheckboxes( $(this) )
 	})
 }
+
 
 
 //note(dgmid): toggle checkbox state
@@ -1164,6 +1164,39 @@ ipcRenderer.on('context-note-decode', (event, message) => {
 })
 
 
+ipcRenderer.on('context-note-upper', (event, message) => {
+	
+	easymde.codemirror.doc.replaceSelection(
+		message.toLocaleUpperCase( i18n.language )
+	)
+})
+
+
+ipcRenderer.on('context-note-lower', (event, message) => {
+	
+	easymde.codemirror.doc.replaceSelection(
+		message.toLocaleLowerCase( i18n.language )
+	)
+})
+
+
+ipcRenderer.on('context-note-caps', (event, message) => {
+	
+	let selection = message.toLocaleLowerCase( i18n.language )
+	easymde.codemirror.doc.replaceSelection(
+		capitalize( selection )
+	)
+})
+
+function capitalize( string ) {
+
+    return string.replace(/(?:^|\s)\S/g,
+		function(a) {
+			return a.toLocaleUpperCase( i18n.language )
+	})
+}
+
+
 
 //note(dgmid): on click sidebar button
 
@@ -1340,7 +1373,7 @@ document.addEventListener( 'keydown', function( event ) {
 
 
 
-//note(dgmid): open links in browser
+//note(dgmid): open update link in default browser
 
 $('body').on('click', '#update', (event) => {
 	
