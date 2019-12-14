@@ -122,7 +122,7 @@
 			margin-left: -1.55em;
 			margin-right: .25em;
 			vertical-align: -0.35em;
-			background-color: var(--text);
+			background-color: #b8b8b8;
 			mask: var(--unchecked);
 			mask-repeat: no-repeat;
 			mask-position: left bottom;
@@ -258,7 +258,7 @@
 		li {
 		
 			input[type="checkbox"] {
-			
+				
 				&[checked] {
 				
 					background-color: var(--app-light);

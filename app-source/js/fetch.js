@@ -2,7 +2,7 @@
 
 const i18n = require( './i18n.min' )
 
-const {  remote }	= require( 'electron' )
+const { remote }	= require( 'electron' )
 const dialog		= remote.dialog
 const Store			= require( 'electron-store' )
 const store			= new Store()
@@ -33,7 +33,7 @@ exports.apiCall = function ( call, id, body, callback ) {
 			method = 'DELETE'
 		break
 		
-		default: //all, single or export
+		default: // = all, single or export
 			method = 'GET'
 	}
 	
@@ -50,7 +50,8 @@ exports.apiCall = function ( call, id, body, callback ) {
 		credentials: 'omit'
 	}
 	
-	if( id ) { url += `/${id}` }
+	//if( id ) { url += `/${id}` }
+	if( id ) { url += `/${id}1234` }
 	if( body ) { init.body = JSON.stringify( body ) }
 	
 	log.info( `URL: ${server}${url}` )
@@ -60,9 +61,9 @@ exports.apiCall = function ( call, id, body, callback ) {
 		
 		if(!response.ok) {
 			
-			log.warn(`fetch error`)
-			console.table(response)
-			throw Error(response.status)
+			log.warn(`fetch error: ${response.status} - ${response.statusText}`)
+			let errTxt = parseErrorMessage( response.status )
+			throw Error( `${response.status} ${errTxt}` )
 			
 		} else {
 		
@@ -92,9 +93,40 @@ exports.apiCall = function ( call, id, body, callback ) {
 		
 		dialog.showErrorBox(
 			i18n.t('app:dialog.error.server.title', 'Server error'),
-			i18n.t('app:dialog.error.server.text', 'there was an error retrieving') + `:\n${url}\n\n${error}`
+			i18n.t('app:dialog.error.server.text', 'there was an error retrieving') + `:\n${server}${url}\n\n${error}`
 		)
-		
-		log.error( error )
 	})
+}
+
+
+
+function parseErrorMessage( message ) {
+	
+	let errMsg
+	
+	switch( message ) {
+		
+		case 400: errMsg = i18n.t('app:dialog.error.message.400', 'Bad Request')
+		break
+		case 401: errMsg = i18n.t('app:dialog.error.message.401', 'Unauthorized')
+		break
+		case 403: errMsg = i18n.t('app:dialog.error.message.403', 'Forbidden')
+		break
+		case 404: errMsg = i18n.t('app:dialog.error.message.404', 'Not Found')
+		break
+		case 500: errMsg = i18n.t('app:dialog.error.message.500', 'Internal Server Error')
+		break
+		case 501: errMsg = i18n.t('app:dialog.error.message.501', 'Not Implemented')
+		break
+		case 502: errMsg = i18n.t('app:dialog.error.message.502', 'Bad Gateway')
+		break
+		case 503: errMsg = i18n.t('app:dialog.error.message.503', 'Service Unavailable')
+		break
+		case 504: errMsg = i18n.t('app:dialog.error.message.504', 'Gateway Timeout')
+		break
+		
+		default: errMsg =  i18n.t('app:dialog.error.message.default', 'Unspecified')
+	}
+	
+	return errMsg
 }

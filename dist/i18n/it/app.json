@@ -26,6 +26,18 @@
       "json": {
         "title": "Errore di analisi JSON",
         "text": "Si è verificato un errore durante l’analisi delle note"
+      },
+      "message": {
+        "400": "Richiesta sbagliata",
+        "401": "Non autorizzato",
+        "403": "Proibito",
+        "404": "Non trovato",
+        "500": "Errore interno del server",
+        "501": "Non implementato",
+        "502": "Errore di connessione",
+        "503": "Servizio non disponibile",
+        "504": "Gateway Time-out",
+        "default": "Non specificato"
       }
     },
     "button": {
