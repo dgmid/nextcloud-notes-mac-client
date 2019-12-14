@@ -50,8 +50,7 @@ exports.apiCall = function ( call, id, body, callback ) {
 		credentials: 'omit'
 	}
 	
-	//if( id ) { url += `/${id}` }
-	if( id ) { url += `/${id}1234` }
+	if( id ) { url += `/${id}` }
 	if( body ) { init.body = JSON.stringify( body ) }
 	
 	log.info( `URL: ${server}${url}` )
