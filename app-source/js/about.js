@@ -7,8 +7,7 @@ const path = require('path')
 let about = null
 
 
-
-exports.createAbout = () => {
+module.exports.createAbout = () => {
 	
 	if( about === null ) {
 		

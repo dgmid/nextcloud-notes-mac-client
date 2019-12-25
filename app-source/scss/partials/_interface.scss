@@ -91,8 +91,9 @@ footer {
 	top: 23px;
 	left: -200px;
 	bottom: 0;
-	overflow-x: hidden; 
-	overflow-y: scroll;
+	overflow: hidden; 
+	display: flex;
+	flex-direction: column;
 	
 	transition: left .25s ease-out;
 	
@@ -107,6 +108,13 @@ footer {
 		padding: 10px;
 	}
 	
+	.scroll {
+		
+		overflow-x: hidden;
+		overflow-y: scroll;
+		flex-grow: 2;
+	}
+	
 	ul {
 		
 		display: flex;
@@ -115,12 +123,42 @@ footer {
 		&:first-of-type { margin-bottom: 16px; }
 	}
 	
+	.search-field {
+		
+		height: 40px;
+		padding: 8px 10px;
+		position: relative;
+		
+		#search {
+			
+			color: var(--text-color);
+			width: 100%;
+			height: 22px;
+			font-size: 13px;
+			padding: 0 24px;
+			background: #ffffff var(--icon-search) no-repeat left 5px center;
+			border: 1px solid #b9b9b9;
+			border-radius: 3px;
+			box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
+		}
+		
+		#clear {
+			
+			display: none;
+			width: 20px;
+			height: 20px;
+			background: var(--icon-clear) no-repeat center;
+			position: absolute;
+			top: 9px;
+			right: 11px;
+		}
+	}
+	
 	button {
 		
 		border: 0;
 		border-radius: 0;
 		width: 100%;
-		padding: 0 10px 0 30px;
 		text-align: left;
 		color: var(--text);
 		background-color: transparent;
@@ -142,6 +180,7 @@ footer {
 		
 		button {
 			
+			padding: 0 10px 0 30px;
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
@@ -175,6 +214,7 @@ footer {
 		
 		button {
 			
+			padding: 0 10px 0 30px;
 			background-image: var(--category);
 			background-position: left 8px center;
 			background-repeat: no-repeat;
@@ -599,6 +639,16 @@ aside {
 	footer {
 		
 		border-right: 1px solid var(--header-border);
+		
+		.search-field {
+			
+			#search {
+				
+				background-color: rgba(255,255,255,.05);
+				border-color: rgba(255,255,255,.05);
+				box-shadow: inset 0 2px 2px rgba(0,0,0,0.1);
+			}
+		}
 	}
 	
 	main {

@@ -13,7 +13,7 @@ let server 		= store.get( 'loginCredentials.server' ),
 	password 	= store.get( 'loginCredentials.password' )
 
 
-exports.apiCall = function ( call, id, body, callback ) {
+module.exports.apiCall = function ( call, id, body, callback ) {
 	
 	let method
 	
@@ -89,6 +89,8 @@ exports.apiCall = function ( call, id, body, callback ) {
 		}
 	
 	}).catch( function( error ) {
+		
+		log.error(error)
 		
 		dialog.showErrorBox(
 			i18n.t('app:dialog.error.server.title', 'Server error'),

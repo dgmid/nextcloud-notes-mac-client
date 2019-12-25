@@ -30,7 +30,7 @@
 	</div>
 	
 	<footer>
-		<div class="scroll">
+		<div class="fixed">
 			<span id="cat-title"></span>
 			
 			<ul id="fixed-categories" class="categories">
@@ -44,9 +44,16 @@
 					<button id="cat-none" data-catid="##none##" data-category="##none##" title="Uncategorised"></button>
 				</li>
 			</ul>
-			
+		</div>
+		
+		<div class="scroll">	
 			<ul id="categories" class="categories">
 			</ul>
+		</div>
+		
+		<div class="search-field">
+			<input id="search" placeholder="search">
+			<button id="clear"></button>
 		</div>
 	</footer>
 	<script>

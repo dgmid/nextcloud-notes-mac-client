@@ -61,7 +61,7 @@ dateFormat.i18n = {
 
 
 
-exports.titlebarDate = function( timestamp ) {
+module.exports.titlebarDate = function( timestamp ) {
 	
 	let date = dateFormat(timestamp * 1000, "d mmmm, yyyy"),
 		time = dateFormat(timestamp * 1000, "HH:MM"),
@@ -72,7 +72,7 @@ exports.titlebarDate = function( timestamp ) {
 
 
 
-exports.sidebarDate = function ( timestamp ) {
+module.exports.sidebarDate = function ( timestamp ) {
 	
 	let today		= new Date(),
 		yesterday	= new Date(),

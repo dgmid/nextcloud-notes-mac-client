@@ -2,7 +2,7 @@
 
 const i18n 				= require( './i18n.min' )
 const electron 			= require( 'electron' )
-const {Menu, shell} 	= require( 'electron' )
+const { Menu, shell } 	= require( 'electron' )
 const app 				= electron.app
 const ipc 				= electron.ipcMain
 const path 				= require( 'path' )
@@ -92,7 +92,7 @@ const template = [
 			},
 			{
 				label: i18n.t('menu:note.favorite', 'Toggle Favorite'),
-				accelerator: 'Cmd+f',
+				accelerator: 'Cmd+Alt+f',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'favorite') }
 			},
 			{
@@ -166,6 +166,11 @@ const template = [
 			},
 			{
 				type: 'separator'
+			},
+			{
+				label: i18n.t('menu:edit.find', 'Find…'),
+				accelerator: 'Cmd+f',
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'find') }
 			},
 			{
 				label: i18n.t('menu:edit.spellcheck', 'Spellcheck'),

@@ -15,132 +15,20 @@ const log				= require( 'electron-log' )
 
 const fetch				= require( './fetch.min' )
 const dates				= require( './dates.min' )
+const editor			= require( './editor.min' )
 const modalWindow		= require( './modal.min' )
+const sanitize			= require( './sanitize-category.min' )
+const search			= require( './search.min' )
 
-let 	server 		= store.get( 'loginCredentials.server' ),
-		username 	= store.get( 'loginCredentials.username' ),
-		password 	= store.get( 'loginCredentials.password' )
-
-let database = new Store({
-	name: 'database',
-	notes: {}
-})
-
-let easymdeSetup = {
-		
-		element: $('#note')[0],
-		autoDownloadFontAwesome: false,
-		autofocus: false,
-		forceSync: true,
-		status: false,
-		spellChecker: true,
-		toolbar: [	
-					{
-						name: "Heading",
-						action: EasyMDE.toggleHeadingSmaller,
-						className: "icon-heading",
-						title: i18n.t('app:toolbar.heading', 'Heading'),
-					},
-					'|',
-					{
-						name: "bold",
-						action: EasyMDE.toggleBold,
-						className: "icon-b",
-						title: i18n.t('app:toolbar.bold', 'Bold'),
-					},
-					{
-						name: "italic",
-						action: EasyMDE.toggleItalic,
-						className: "icon-i",
-						title: i18n.t('app:toolbar.italic', 'Italic'),
-					},
-					{
-						name: "srtikethrough",
-						action: EasyMDE.toggleStrikethrough,
-						className: "icon-del",
-						title: i18n.t('app:toolbar.strikethrough', 'Strikethrough'),
-					},
-					'|',
-					{
-						name: "unordered-list",
-						action: EasyMDE.toggleUnorderedList,
-						className: "icon-ul",
-						title: i18n.t('app:toolbar.ul', 'Generic List'),
-					},
-					{
-						name: "ordered-list",
-						action: EasyMDE.toggleOrderedList,
-						className: "icon-ol",
-						title: i18n.t('app:toolbar.ol', 'Numbered List'),
-					},
-					{
-						name: "checklist",
-						action: (e) => {
-							e.codemirror.replaceSelection('- [ ] ')
-							e.codemirror.focus()
-						},
-						className: "icon-checklist",
-						title: i18n.t('app:toolbar.checklist', 'Checkbox list (Shift-Cmd-Alt-L)'),
-					},
-					'|',
-					{
-						name: "link",
-						action: EasyMDE.drawLink,
-						className: "icon-a",
-						title: i18n.t('app:toolbar.link', 'Create Link'),
-					},
-					{
-						name: "image",
-						action: EasyMDE.drawImage,
-						className: "icon-img",
-						title: i18n.t('app:toolbar.image', 'Insert Image'),
-					},
-					'|',
-					{
-						name: "code",
-						action: EasyMDE.toggleCodeBlock,
-						className: "icon-code",
-						title: i18n.t('app:toolbar.code', 'Code'),
-					},
-					{
-						name: "quote",
-						action: EasyMDE.toggleBlockquote,
-						className: "icon-blockquote",
-						title: i18n.t('app:toolbar.quote', 'Quote'),
-					},
-					{
-						name: "table",
-						action: EasyMDE.drawTable,
-						className: "icon-table",
-						title: i18n.t('app:toolbar.table', 'Insert Table'),
-					},
-					{
-						name: "horizontal-rule",
-						action: EasyMDE.drawHorizontalRule,
-						className: "icon-hr",
-						title: i18n.t('app:toolbar.hr', 'Insert Horizontal Line'),
-					},
-				],
-		shortcuts: {
-			'toggleStrikethrough': 'Shift-Cmd-D',
-			'toggleBlockquote': 'Cmd-\'',
-			'drawTable': 'Cmd-T',
-			'drawHorizontalRule': 'Cmd--',
-			'cleanBlock': null,
-			'toggleSideBySide': null,
-			'toggleFullScreen': null,
-			'togglePreview': null	
-		},
-		renderingConfig: {
-			codeSyntaxHighlighting: true,
-			hljs: hljs
-		}
-	}
-
-let easymde,
-	firstLoad = true
-
-easymde = new EasyMDE( easymdeSetup )
+let server 		= store.get( 'loginCredentials.server' ),
+	username 	= store.get( 'loginCredentials.username' ),
+	password 	= store.get( 'loginCredentials.password' ),
+	easymde 	= new EasyMDE( editor.easymdeSetup ),
+	firstLoad 	= true,
+	database 	= new Store({
+					name: 'database',
+					notes: {}
+				})
 
 
 
@@ -153,7 +41,7 @@ window.onerror = function( error, url, line ) {
 
 
 
-function  fetchResult( call, id, body, notes ) {
+function fetchResult( call, id, body, notes ) {
 	
 	switch( call ) {
 			
@@ -326,7 +214,7 @@ function saveCategories( array ) {
 		
 		let theItem		= item.value,
 			theCount	= item.count,
-			theID 		= theItem.split(' ').join('_'),
+			theID 		= sanitize.sanitizeCategory( theItem ),
 			showcount	= (store.get( 'appSettings.catcount' )) ? ' show' : ''
 		
 		if( theItem.length > 0 ) {
@@ -424,7 +312,7 @@ function addSidebarEntry( item ) {
 	let theDate = new Date( item.modified ),
 		formattedDate = dates.sidebarDate( theDate.getTime() )
 	
-	let	catClass = ( item.category ) ? item.category.split(' ').join('_') : '##none##'
+	let	catClass = ( item.category ) ? sanitize.sanitizeCategory( item.category ) : '##none##'
 	
 	let	theCat = ( item.category ) ? item.category : i18n.t('app:categories.none', 'Uncategorised')
 	
@@ -466,7 +354,8 @@ function displayNote( note ) {
 		easymde = null
 	}
 	
-	easymde = new EasyMDE( easymdeSetup )
+	easymde = new EasyMDE( editor.easymdeSetup )
+	
 	toggleSpellcheck( store.get('appSettings.spellcheck') )	
 	
 	// register right click for notes menu
@@ -938,7 +827,24 @@ ipcRenderer.on('note', (event, message) => {
 		break
 		
 		case 'selectall':
-			if( !easymde.isPreviewActive() ) easymde.codemirror.execCommand('selectAll')
+			if( !easymde.isPreviewActive() ) {
+				
+				easymde.codemirror.execCommand('selectAll')
+			
+			} else if( $('#search:focus') ) {
+				
+				$('#search').select()
+			}
+		break
+		
+		case 'find':
+			if( store.get( 'appInterface.categories' ) === false ) {
+				
+				$('#frame, footer').addClass('slide')
+				store.set( 'appInterface.categories', true )
+			}
+			
+			$('#search').focus()
 		break
 	}
 })
@@ -1406,6 +1312,43 @@ $('body').on('mouseleave', 'main a', function() {
 	$('samp').removeClass('show')
 })
 
+
+
+//note(dgmid): search
+
+$('#search').bind( 'keyup', function() {
+	
+	let str = $(this).val(),
+		clear = $('#clear')
+	
+	let state = ( str.length > 0 ) ? $('#clear').show() : $('#clear').hide()
+	
+	search.searchNotes( str, function( result ) {
+		
+		searchResult( result )
+	})
+})
+
+
+function searchResult( result ) {
+		
+	$(`#sidebar li`).hide()
+	
+	for( let id of result ) {
+		
+		$(`#sidebar li[data-id='${id}']`).show()	
+	}
+}
+
+
+$('#clear').click(function() {
+	
+	$('#search').val('')
+	selectCategory( store.get( 'categories.selected' ) )
+	$( this ).hide()
+})
+
+
 //note(dgmid): docready
 
 $(document).ready(function() {
@@ -1453,6 +1396,7 @@ $(document).ready(function() {
 	$('#cat-fav').attr('title', i18n.t('app:categories.fav', 'Favorites'))
 	$('#cat-none').html( i18n.t('app:categories.none', 'Uncategorised'))
 	$('#cat-none').attr('title', i18n.t('app:categories.none', 'Uncategorised'))
+	$('#search').attr('placeholder', i18n.t('app:sidebar.search', 'Search'))
 	
 	
 	//note(dgmid): check login

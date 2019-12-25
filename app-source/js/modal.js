@@ -6,7 +6,7 @@ const path = require( 'path' )
 let modal
 
 
-exports.openModal = function( url, width, height, resize ) {
+module.exports.openModal = function( url, width, height, resize ) {
 	
 	modal = new remote.BrowserWindow({
 	
@@ -39,7 +39,7 @@ exports.openModal = function( url, width, height, resize ) {
 
 
 
-exports.closeModal = function() {
+module.exports.closeModal = function() {
 	
 	modal.close()
 }

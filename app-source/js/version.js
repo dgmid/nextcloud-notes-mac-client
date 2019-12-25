@@ -7,8 +7,7 @@ const $					= require( 'jquery' )
 const log				= require( 'electron-log' )
 
 
-
-exports.appVersion = function( callback ) {
+module.exports.appVersion = function( callback ) {
 	
 	$.getJSON( 'https://api.github.com/repos/dgmid/nextcloud-notes-mac-client/releases/latest', function( release ) {
 		

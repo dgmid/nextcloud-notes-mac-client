@@ -13,7 +13,7 @@ const fs				= require( 'fs-extra' )
 const log				= require( 'electron-log' )
 
 
-exports.exportNote = function( note ) {
+module.exports.exportNote = function( note ) {
 	
 	const exportPath = store.get('exportPath')
 	

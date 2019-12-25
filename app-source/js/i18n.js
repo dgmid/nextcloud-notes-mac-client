@@ -5,6 +5,7 @@ const i18nextBackend = require( 'i18next-sync-fs-backend' )
 const LanguageDetector = require( 'i18next-electron-language-detector' )
 const path = require( 'path' )
 
+
 const i18nextOptions = {
 
 	fallbackLng: 'en',
