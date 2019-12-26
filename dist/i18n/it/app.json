@@ -62,7 +62,8 @@
   },
   "sidebar": {
     "notext": "Nessun testo aggiuntivo",
-    "new": "Nuova nota"
+    "new": "Nuova nota",
+    "search": "Cerca"
   },
   "categories": {
     "title": "Categorie",

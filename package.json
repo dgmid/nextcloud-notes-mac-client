@@ -29,7 +29,7 @@
     "compare-versions": "^3.5.1",
     "dateformat": "^3.0.3",
     "easymde": "^2.8.0",
-    "electron-log": "^4.0.0",
+    "electron-log": "^4.0.1",
     "electron-store": "^5.1.0",
     "fs-extra": "^8.1.0",
     "highlight.js": "^9.17.1",
