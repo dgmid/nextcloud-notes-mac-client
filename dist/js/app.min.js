@@ -1227,6 +1227,9 @@ $('body').on('click', '.categories button', function(event) {
 
 function selectCategory( catid ) {
 	
+	$('#search').val( '' )
+	$('#clear').hide()
+	
 	switch( catid ) {
 		
 		case '##all##':
