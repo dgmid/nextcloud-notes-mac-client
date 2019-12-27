@@ -169,11 +169,20 @@ footer {
 		
 		&.selected {
 			
+			background-color: rgba(0,0,0,.2);
+		}
+		
+		&:focus {
+			
+			background-color: rgba(0,0,0,.15);
+			outline: none;
+		}
+		
+		&.selected:focus {
+			
 			color: #fff;
 			background-color: var(--accent-light);
 		}
-		
-		&:focus { outline: none; }
 	}
 	
 	#fixed-categories {
@@ -195,14 +204,11 @@ footer {
 				background-position-x: 10px;
 			}
 			
-			&.selected {
+			&.selected:focus {
 				
 				&#cat-all	{ background-image: var(--all-selected); }
 				&#cat-fav	{ background-image: var(--favorite-selected); }
-				&#cat-none	{
-					
-					background-image: var(--none-selected);
-				}
+				&#cat-none	{ background-image: var(--none-selected); }
 			}
 		}
 	}
@@ -230,7 +236,7 @@ footer {
 				padding-right: 5px;
 			}
 			
-			&.selected {
+			&.selected:focus {
 				
 				background-image: var(--category-selected);
 			}
@@ -483,6 +489,11 @@ aside {
 			}
 		}
 		
+		&.selected {
+			
+			background-color: var(--app-color-focus);
+		}
+		
 		&:focus {
 			
 			outline: none;
@@ -491,7 +502,7 @@ aside {
 			&::after { display: none; }
 		}
 		
-		&.selected {
+		&.selected:focus {
 			
 			outline: none;
 			background-color: var(--app-light);
@@ -649,6 +660,23 @@ aside {
 				box-shadow: inset 0 2px 2px rgba(0,0,0,0.1);
 			}
 		}
+		
+		button {
+			
+			&.selected { background-color: rgba(255,255,255,.15); }
+			
+			&:focus {
+				
+				background-color: rgba(255,255,255,.075);
+				outline: none;
+			}
+			
+			&.selected:focus {
+				
+				color: #fff;
+				background-color: var(--accent-light);
+			}
+		}
 	}
 	
 	main {
@@ -690,7 +718,7 @@ aside {
 	
 		button {
 			
-			&.selected {
+			&.selected:focus {
 				
 				background-color: var(--app-dark);
 				
@@ -761,7 +789,12 @@ aside {
 		
 		button {
 			
-			&.selected {
+			&:focus {
+				
+				
+			}
+			
+			&.selected:focus {
 				
 				--text: #fff;
 				--text-light: rgba(255,255,255,.6);

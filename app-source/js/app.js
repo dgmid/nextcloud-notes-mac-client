@@ -1252,26 +1252,30 @@ function selectCategory( catid ) {
 
 
 
-//note(dgmid): keyboard arrow keys
+//note(dgmid): keyboard arrow and enter keys
 
 document.addEventListener( 'keydown', function( event ) {
 	
 	if( easymde.isPreviewActive() ) {
 		
-		$('#sidebar button').blur()
-		
 		let items
 		
 		switch( event.which ) {
 			
+			case 13:
+				$(':focus').click().focus()
+			break
+			
 			case 38:
+				$('#sidebar button').blur()
 				items = $('#sidebar button.selected').parent('li').prevAll('li:visible')
-				items.first().find('button').click()
+				items.first().find('button').click().focus()
 			break
 			
 			case 40:
+				$('#sidebar button').blur()
 				items = $('#sidebar button.selected').parent('li').nextAll('li:visible')
-				items.first().find('button').click()
+				items.first().find('button').click().focus()
 			break
 		}
 	}
