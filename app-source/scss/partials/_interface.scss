@@ -392,8 +392,30 @@ aside {
 	height: calc(100vh - 23px);
 	border-right: 1px solid var(--dividers);
 	position: relative;
-	overflow-x: hidden; 
-	overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+	
+	#result {
+		
+		min-height: 30px;
+		font-size: 12px;
+		font-weight: 500;
+		line-height: 30px;
+		color: var(--text-light);
+		background: #f6f6f6;
+		border-bottom: 1px solid #fff;
+		padding: 0 15px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: none;
+	}
+	
+	.inner {
+		
+		overflow-x: hidden; 
+		overflow-y: scroll;	
+	}
 }
 
 #divider {
@@ -712,6 +734,12 @@ aside {
 		
 		border-right: 1px solid var(--header-border);
 		background-color: rgba(30,30,30,.75);
+		
+		#result {
+			
+			background: #2e2e2e;
+			border-bottom: 1px solid var(--header-border);
+		}
 	}
 	
 	#sidebar {

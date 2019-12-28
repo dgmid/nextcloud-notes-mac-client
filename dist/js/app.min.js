@@ -1229,6 +1229,7 @@ function selectCategory( catid ) {
 	
 	$('#search').val( '' )
 	$('#clear').hide()
+	$('#result').empty().hide()
 	
 	switch( catid ) {
 		
@@ -1330,16 +1331,17 @@ $('#search').bind( 'keyup', function() {
 	
 	let state = ( str.length > 0 ) ? $('#clear').show() : $('#clear').hide()
 	
-	search.searchNotes( str, function( result ) {
+	search.searchNotes( str, function( result, clean ) {
 		
-		searchResult( result )
+		searchResult( result, clean )
 	})
 })
 
 
-function searchResult( result ) {
+function searchResult( result, clean ) {
 		
 	$(`#sidebar li`).hide()
+	$('#result').html( clean ).show()
 	
 	for( let id of result ) {
 		
@@ -1351,6 +1353,7 @@ function searchResult( result ) {
 $('#clear').click(function() {
 	
 	$('#search').val('')
+	$('#result').empty().hide()
 	selectCategory( store.get( 'categories.selected' ) )
 	$( this ).hide()
 })

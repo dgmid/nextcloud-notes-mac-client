@@ -54,5 +54,5 @@ module.exports.searchNotes = function( term, callback ) {
 		result.push( item.id )
 	}
 	
-	callback( result )
+	callback( result, clean )
 }
