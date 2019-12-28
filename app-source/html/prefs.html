@@ -73,6 +73,26 @@
 	
 	<section>
 		<div>
+			<label data-i18n="prefs:body.label.search">Search</label>
+			<label class="switch">
+				<input type="checkbox" id="stopwords" name="stopwords">
+				<span class="slider"></span>
+			</label>
+			<label for="stopwords" data-i18n="prefs:body.label.stopwords">Ignore common terms: a, the, and etc.</label>
+		</div>
+		
+		<div>
+			<label class="empty">&nbsp;</label>
+			<label class="switch">
+				<input type="checkbox" id="stemming" name="stemming">
+				<span class="slider"></span>
+			</label>
+			<label for="stemming" data-i18n="prefs:body.label.stemming">Find similar terms, eg: searching, searched, search</label>
+		</div>
+	</section>
+	
+	<section>
+		<div>
 			<label data-i18n="prefs:body.label.theme">Theme</label>
 			<ul>
 				<li>

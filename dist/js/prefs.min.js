@@ -36,6 +36,8 @@ $(document).ready(function() {
 	$('#orderby').val( store.get('appSettings.orderby') )
 	$('#zoom').val( store.get('appSettings.zoom') )
 	$(`#${store.get('appSettings.cursor')}`).prop('checked', true)
+	$('#stopwords').prop('checked', store.get('appSettings.stopwords') )
+	$('#stemming').prop('checked', store.get('appSettings.stemming') )
 	
 	
 	if( localStorage.user_theme ) {
@@ -68,6 +70,16 @@ $(document).ready(function() {
 			
 			case 'cursor':
 				store.set( `appSettings.${name}`, val )
+			break
+			
+			case 'stopwords':
+				let stopwords = $('#stopwords').is(':checked')
+				store.set( `appSettings.${name}`, stopwords )
+			break
+			
+			case 'stemming':
+				let stemming = $('#stemming').is(':checked')
+				store.set( `appSettings.${name}`, stemming )
 			break
 			
 			case 'theme':

@@ -46,6 +46,8 @@ section {
 			padding-right: 10px;
 			
 			&::after { content: ':'; }
+			
+			&.empty::after { content: ''; }
 		}
 		
 		ul { margin-left: 158px; }
@@ -119,6 +121,16 @@ section {
 			display: inline-block;
 			width: 40px;
 			height: 18px;
+			
+			&+ label {
+				
+				display: inline;
+				float: none;
+				padding: 0 0 0 2px;
+				font-size: 11px;
+				
+				&::after { content: ''; }
+			}
 		}
 		
 		.switch input {

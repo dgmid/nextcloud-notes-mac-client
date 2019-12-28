@@ -50,7 +50,9 @@ let store = new Store({
 			showcats: true,
 			ordercats: 'asc',
 			catcount: false,
-			nocertificate: false
+			nocertificate: false,
+			stopwords: false,
+			stemming: false
 		},
 		
 		categories: {
@@ -262,7 +264,7 @@ app.on('open-prefs', () => {
 		prefs = new BrowserWindow({
 			
 			width: 548,
-			height: 375,
+			height: 454,
 			resizable: false,
 			minimizable: false,
 			maximizable: false,

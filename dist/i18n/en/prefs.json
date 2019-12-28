@@ -19,6 +19,9 @@
       "cursor": "Cursor position",
       "start": "start",
       "end": "end",
+      "search": "Search",
+      "stopwords": "Ignore common terms: a, the, and etc.",
+      "stemming": "Find similar terms, eg: searching, searched, search",
       "theme": "Theme"
     }
   }

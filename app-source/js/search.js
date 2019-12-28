@@ -23,10 +23,18 @@ module.exports.searchNotes = function( term, callback ) {
 		cat 	= store.get('categories.selected'),
 		lang	= i18n.language.substring(0, 2),
 		notes	= [],
-		result	= []
+		result	= [],
+		clean
 	
-	let cleanArr 	= sw.removeStopwords( termArr, sw[lang] )
-	let clean 		= cleanArr.join( ' ' )
+	if( store.get( 'appSettings.stopwords' ) ) {
+		
+		let cleanArr 	= sw.removeStopwords( termArr, sw[checkStopwordLang( lang )] )
+			clean 		= cleanArr.join( ' ' )
+	
+	} else {
+	
+		clean = term
+	}
 	
 	for( let item of data ) {
 		
@@ -43,7 +51,10 @@ module.exports.searchNotes = function( term, callback ) {
 	
 	let search = new JsSearch.Search( 'id' )
 	
-	search.tokenizer = new JsSearch.StemmingTokenizer( stemmer, new JsSearch.SimpleTokenizer())
+	if( store.get( 'appSettings.stemming' ) ) {
+	
+		search.tokenizer = new JsSearch.StemmingTokenizer( stemmer, new JsSearch.SimpleTokenizer() )
+	}
 	
 	search.addIndex( 'content' )
 	search.addDocuments( notes )
@@ -55,4 +66,20 @@ module.exports.searchNotes = function( term, callback ) {
 	}
 	
 	callback( result, clean )
+}
+
+
+
+function checkStopwordLang( theLang ) {
+	
+	const langArr = ['af', 'ar', 'bn', 'br', 'da', 'de', 'es', 'fa', 'fi', 'fr', 'ha', 'he', 'hi', 'id', 'it', 'ja', 'nl', 'no', 'pl', 'pt', 'pa', 'ru', 'so', 'st', 'sv', 'sw', 'vi', 'yo', 'zh']
+	
+	if( langArr.includes( theLang ) ) {
+		
+		return theLang
+		
+	} else {
+		
+		return 'en'
+	}
 }
