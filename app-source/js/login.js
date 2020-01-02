@@ -126,6 +126,7 @@ $(document).ready(function() {
 		
 		store.set( 'loginCredentials.server', theserver )
 		ipcRenderer.send( 'loginflow', theserver )
+		closeModal()
 	})
 	
 	

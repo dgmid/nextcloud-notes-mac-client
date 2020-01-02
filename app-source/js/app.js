@@ -1355,7 +1355,8 @@ $('#clear').click(function() {
 	$('#search').val('')
 	$('#result').empty().hide()
 	selectCategory( store.get( 'categories.selected' ) )
-	$( this ).hide()
+	$('.categories button.selected').focus()
+	$(this).hide()
 })
 
 

@@ -1,9 +1,0 @@
-{
-  "body": {
-    "label": {
-      "search": "Search",
-      "stopwords": "Ignore common terms: a, the, and etc.",
-      "stemming": "Find similar terms: searching, searched, search"
-    }
-  }
-}

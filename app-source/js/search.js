@@ -26,7 +26,7 @@ module.exports.searchNotes = function( term, callback ) {
 		result	= [],
 		clean
 	
-	if( store.get( 'appSettings.stopwords' ) ) {
+	if( store.get( 'appSettings.stopwords' ) === true ) {
 		
 		let cleanArr 	= sw.removeStopwords( termArr, sw[checkStopwordLang( lang )] )
 			clean 		= cleanArr.join( ' ' )
@@ -51,7 +51,9 @@ module.exports.searchNotes = function( term, callback ) {
 	
 	let search = new JsSearch.Search( 'id' )
 	
-	if( store.get( 'appSettings.stemming' ) ) {
+	//todo(dgmid): at the moment stemming is only available in English
+	
+	if( store.get( 'appSettings.stemming' ) === true && lang === 'en' ) {
 	
 		search.tokenizer = new JsSearch.StemmingTokenizer( stemmer, new JsSearch.SimpleTokenizer() )
 	}

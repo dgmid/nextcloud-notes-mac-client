@@ -8,13 +8,12 @@ const Store			= require( 'electron-store' )
 const store			= new Store()
 const log			= require( 'electron-log' )
 
-let server 		= store.get( 'loginCredentials.server' ),
-	username 	= store.get( 'loginCredentials.username' ),
-	password 	= store.get( 'loginCredentials.password' )
-
-
 module.exports.apiCall = function ( call, id, body, callback ) {
 	
+	let server 		= store.get( 'loginCredentials.server' ),
+		username 	= store.get( 'loginCredentials.username' ),
+		password 	= store.get( 'loginCredentials.password' )
+		
 	let method
 	
 	switch( call ) {
