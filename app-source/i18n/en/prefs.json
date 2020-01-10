@@ -21,7 +21,7 @@
       "end": "end",
       "search": "Search",
       "stopwords": "Ignore common terms: a, the, and etc.",
-      "stemming": "Find similar terms, eg: searching, searched, search (EN only)",
+      "stemming": "Find similar terms, eg: searching, searched, search",
       "theme": "Theme"
     }
   }

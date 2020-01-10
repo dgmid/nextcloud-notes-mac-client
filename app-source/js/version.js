@@ -7,46 +7,55 @@ const $					= require( 'jquery' )
 const log				= require( 'electron-log' )
 
 
-module.exports.appVersion = function( callback ) {
+module.exports = {
 	
-	$.getJSON( 'https://api.github.com/repos/dgmid/nextcloud-notes-mac-client/releases/latest', function( release ) {
-		
-		let latest = release.name
-		
-		log.info( `this version: ${version}` )
-		log.info( `latest version: ${latest}` )
-		
-		if( compareVersions.compare( version, latest, '<' ) ) {
+	appVersion: function() {
+	
+		$.getJSON( 'https://api.github.com/repos/dgmid/nextcloud-notes-mac-client/releases/latest', function( release ) {
 			
-			callback( `<button id="update" class="fadein" type="button" tabindex="-1" data-url="https://www.midwinter-dg.com/mac-apps/nextcloud-notes-client.html?app"><span id="update-version">${latest}</span> <span id="update-label">${i18n.t('app:titlebar.update', 'Update Available')}</span> &rarr;</button>` )
-		}
-		
-		if( compareVersions.compare( version, latest, '>' ) ) {
+			let latest = release.name
+			
+			log.info( `this version: ${version}` )
+			log.info( `latest version: ${latest}` )
+			
+			if( compareVersions.compare( version, latest, '<' ) ) {
 				
-			if( version.includes('-a') ) {
-				
-				callback( `<span id="dev" class="α fadein">DEV: v${version}</span>` )
-				
-			} else if ( version.includes('-b') ) {
-				
-				callback( `<span id="dev" class="β fadein">DEV: v${version}</span>` )
-				
-			} else {
-				
-				callback( `<span id="dev" class="fadein">DEV: v${version}</span>` )
+				module.exports.displayVersion( `<button id="update" class="fadein" type="button" tabindex="-1" data-url="https://www.midwinter-dg.com/mac-apps/nextcloud-notes-client.html?app"><span id="update-version">${latest}</span> <span id="update-label">${i18n.t('app:titlebar.update', 'Update Available')}</span> &rarr;</button>` )
 			}
-		}
-	})
-	.done( function() {
+			
+			if( compareVersions.compare( version, latest, '>' ) ) {
+					
+				if( version.includes('-a') ) {
+					
+					module.exports.displayVersion( `<span id="dev" class="α fadein">DEV: v${version}</span>` )
+					
+				} else if ( version.includes('-b') ) {
+					
+					module.exports.displayVersion( `<span id="dev" class="β fadein">DEV: v${version}</span>` )
+					
+				} else {
+					
+					module.exports.displayVersion( `<span id="dev" class="fadein">DEV: v${version}</span>` )
+				}
+			}
+		})
+		.done( function() {
+			
+			log.info( `check release succeeded` )
+		})
+		.fail( function( jqXHR, textStatus, errorThrown ) {
+			
+			log.error( `check release failed ${textStatus}` )
+		})
+		.always( function() {
+			
+			log.info( `check release ended` )
+		})
+	},
+	
+	displayVersion: function( details ) {
 		
-		log.info( `check release succeeded` )
-	})
-	.fail( function( jqXHR, textStatus, errorThrown ) {
-		
-		log.error( `check release failed ${textStatus}` )
-	})
-	.always( function() {
-		
-		log.info( `check release ended` )
-	})
+		$('header').append( details )
+		$('.fadein').fadeIn( 'slow' )
+	}
 }

@@ -16,9 +16,9 @@ const log				= require( 'electron-log' )
 const fetch				= require( './fetch.min' )
 const dates				= require( './dates.min' )
 const editor			= require( './editor.min' )
-const modalWindow		= require( './modal.min' )
-const sanitize			= require( './sanitize-category.min' )
+const categories		= require( './categories.min' )
 const search			= require( './search.min' )
+const modalWindow		= require( './modal.min' )
 
 let server 		= store.get( 'loginCredentials.server' ),
 	username 	= store.get( 'loginCredentials.username' ),
@@ -164,95 +164,6 @@ ${end}`, cursor)
 
 
 
-//note(dgmid): build category list
-
-function saveCategories( array ) {
-	
-	let compressed = [],
-	copy = array.slice(0),
-	orderby = store.get( 'appSettings.ordercats' ),
-	results = []
-	
-	if( orderby == null ) orderby = 'asc'
-	
-	$('#categories').empty().addClass( orderby )
-	
-	for (var i = 0; i < array.length; i++) {
-	
-		var theCount = 0
-		
-		for (var w = 0; w < copy.length; w++) {
-			
-			if (array[i] == copy[w]) {
-				
-				theCount++
-				delete copy[w]
-			}
-		}
-		
-		if (theCount > 0) {
-			
-			var a = new Object()
-			a.value = array[i]
-			a.count = theCount
-			compressed.push(a)
-		}
-	}
-	
-	if( compressed.length > 1 ) {
-		
-		compressed.sort(function(x, y) {
-			
-			var itemX = x['value']
-			var itemY = y['value']
-			
-			return (itemX < itemY) ? -1 : (itemX > itemY) ? 1 : 0
-		})
-	}
-	
-	for ( let item of compressed ) {
-		
-		let theItem		= item.value,
-			theCount	= item.count,
-			theID 		= sanitize.sanitizeCategory( theItem ),
-			showcount	= (store.get( 'appSettings.catcount' )) ? ' show' : ''
-		
-		if( theItem.length > 0 ) {
-		
-			results.push( {
-				"item": theItem ,
-				"catID": theID,
-				"count": theCount
-			} )
-			
-			$('#categories').append(`<li><button class="custom" data-catid="${theID}" data-category="${theItem}" title="${theItem}"><span class="cat-name">${theItem}</span><span class="cat-count${showcount}">${theCount}</span></button></li>`)
-		}
-	}
-	
-	$(`.categories button[data-catid="${store.get('categories.selected')}"]`).addClass( 'selected' )
-	
-	showHideCategoryIcons()
-	store.set( 'categories.list', results )
-}
-
-
-
-//note(dgmid): hide category icons when a custom category is selected
-
-function showHideCategoryIcons() {
-	
-	if( $('.categories button.selected').hasClass( 'custom' ) ) {
-		
-		$('#sidebar').addClass( 'hidecats' )
-		
-	} else {
-		
-		$('#sidebar').removeClass( 'hidecats' )
-	}
-}
-
-
-
 //note(dgmid): generate ordered sidebar entries
 
 function listNotes( array, sidebar ) {
@@ -299,8 +210,8 @@ function listNotes( array, sidebar ) {
 		getSelected()
 	}
 	
-	saveCategories( allCats )
-	selectCategory( store.get('categories.selected') )
+	categories.categoryList( allCats )
+	categories.selectCategory( store.get('categories.selected') )
 }
 
 
@@ -312,7 +223,7 @@ function addSidebarEntry( item ) {
 	let theDate = new Date( item.modified ),
 		formattedDate = dates.sidebarDate( theDate.getTime() )
 	
-	let	catClass = ( item.category ) ? sanitize.sanitizeCategory( item.category ) : '##none##'
+	let	catClass = ( item.category ) ? categories.sanitizeCategory( item.category ) : '##none##'
 	
 	let	theCat = ( item.category ) ? item.category : i18n.t('app:categories.none', 'Uncategorised')
 	
@@ -389,21 +300,8 @@ function displayNote( note ) {
 		
 		const check = require( './version.min' )		
 		firstLoad = 1
-		check.appVersion( function( details ) {
-			
-			displayVersion( details )
-		})
+		check.appVersion()
 	}
-}
-
-
-
-//note(dgmid): display version status in titlebar
-
-function displayVersion( details ) {
-	
-	$('header').append( details )
-	$('.fadein').fadeIn( 'slow' )
 }
 
 
@@ -599,15 +497,6 @@ function toggleSpellcheck( state ) {
 
 
 
-//note(dgmid): show / hide categories
-
-function toggleCategories( state ) {
-	
-	$('#sidebar').toggleClass( 'showcats' )
-}
-
-
-
 //note(dgmid): set zoom slider
 
 ipcRenderer.on('set-zoom-slider', (event, message) => {
@@ -668,7 +557,7 @@ ipcRenderer.on('spellcheck', (event, message) => {
 
 ipcRenderer.on('showcats', (event, message) => {
 	
-	toggleCategories( message )
+	categories.toggleCategories( message )
 })
 
 
@@ -1217,42 +1106,9 @@ $('body').on('click', '.categories button', function(event) {
 	
 	store.set( 'categories.selected', catid )
 	
-	selectCategory( catid )
-	showHideCategoryIcons()
+	categories.selectCategory( catid )
+	categories.showHideCategoryIcons()
 })
-
-
-
-//note(dgmid): select category in category sidebar
-
-function selectCategory( catid ) {
-	
-	$('#search').val( '' )
-	$('#clear').hide()
-	$('#result').empty().hide()
-	
-	switch( catid ) {
-		
-		case '##all##':
-			 
-			$(`#sidebar li`).show()
-			
-		break
-		
-		case '##fav##':
-			
-			$(`#sidebar li`).hide()
-			$(`#sidebar button[data-favorite='true']`).parent('li').show()
-			
-		break
-		
-		default:
-			
-			$(`#sidebar li`).hide()
-			$(`#sidebar button[data-catid='${catid}']`).parent('li').show()	
-		break
-	}
-}
 
 
 
@@ -1338,23 +1194,12 @@ $('#search').bind( 'keyup', function() {
 })
 
 
-function searchResult( result, clean ) {
-		
-	$(`#sidebar li`).hide()
-	$('#result').html( clean ).show()
-	
-	for( let id of result ) {
-		
-		$(`#sidebar li[data-id='${id}']`).show()	
-	}
-}
-
 
 $('#clear').click(function() {
 	
 	$('#search').val('')
 	$('#result').empty().hide()
-	selectCategory( store.get( 'categories.selected' ) )
+	categories.selectCategory( store.get( 'categories.selected' ) )
 	$('.categories button.selected').focus()
 	$(this).hide()
 })

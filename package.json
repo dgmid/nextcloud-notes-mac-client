@@ -1,13 +1,13 @@
 {
   "name": "nextcloud-notes-client",
-  "version": "1.4.0-alpha",
+  "version": "1.4.0-beta",
   "productName": "Nextcloud Notes Client",
   "description": "Access and edit your Nextcloud Notes on the Mac",
   "main": "dist/js/main.min.js",
   "scripts": {
     "start": "electron .",
     "debug": "electron . --debug-brk = 5858",
-    "package": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=7.1.7 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;"
+    "package": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=7.1.8 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;"
   },
   "author": {
     "name": "D.G. Midwinter",
@@ -43,13 +43,14 @@
     "marked": "^0.8.0",
     "pretty": "^2.0.0",
     "remove-markdown": "^0.3.0",
-    "stemmer": "^1.0.4",
+    "snowball": "^0.3.1",
     "stopword": "^0.3.4"
+    
   },
   "devDependencies": {
     "del": "^5.1.0",
     "devtron": "^1.4.0",
-    "electron": "^7.1.7",
+    "electron": "^7.1.8",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-cssnano": "^2.1.3",
