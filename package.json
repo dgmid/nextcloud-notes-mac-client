@@ -1,6 +1,6 @@
 {
   "name": "nextcloud-notes-client",
-  "version": "1.4.0-beta",
+  "version": "1.4.0",
   "productName": "Nextcloud Notes Client",
   "description": "Access and edit your Nextcloud Notes on the Mac",
   "main": "dist/js/main.min.js",
@@ -29,12 +29,12 @@
     "compare-versions": "^3.5.1",
     "dateformat": "^3.0.3",
     "easymde": "^2.8.0",
-    "electron-log": "^4.0.2",
+    "electron-log": "^4.0.3",
     "electron-store": "^5.1.0",
     "fs-extra": "^8.1.0",
     "highlight.js": "^9.17.1",
     "html-entities": "^1.2.1",
-    "i18next": "^19.0.2",
+    "i18next": "^19.0.3",
     "i18next-electron-language-detector": "0.0.10",
     "i18next-sync-fs-backend": "^1.1.1",
     "jquery": "^3.4.1",
@@ -45,7 +45,6 @@
     "remove-markdown": "^0.3.0",
     "snowball": "^0.3.1",
     "stopword": "^0.3.4"
-    
   },
   "devDependencies": {
     "del": "^5.1.0",

@@ -21,7 +21,7 @@
       "end": "fine",
       "search": "Cerca",
       "stopwords": "Ignora i termini comuni: una, il, questo ecc.",
-      "stemming": "Trova termini simili, es: cerca, cercare, cercata",
+      "stemming": "Trova termini simili, es: cerca = cercare = cercata",
       "theme": "Tema"
     }
   }

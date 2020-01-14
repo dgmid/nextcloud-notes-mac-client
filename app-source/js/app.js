@@ -301,6 +301,7 @@ function displayNote( note ) {
 		const check = require( './version.min' )		
 		firstLoad = 1
 		check.appVersion()
+		setFocus()
 	}
 }
 
@@ -1194,7 +1195,6 @@ $('#search').bind( 'keyup', function() {
 })
 
 
-
 $('#clear').click(function() {
 	
 	$('#search').val('')
@@ -1203,6 +1203,23 @@ $('#clear').click(function() {
 	$('.categories button.selected').focus()
 	$(this).hide()
 })
+
+
+
+//note(dgmid): initial focus
+
+function setFocus() {
+	
+	if( store.get( 'appInterface.categories' ) ) {
+	
+		$('.categories button.selected').focus()
+		
+	} else {
+		
+		$('#sidebar button.selected').focus()
+	} 
+}
+
 
 
 //note(dgmid): docready
@@ -1246,12 +1263,9 @@ $(document).ready(function() {
 	//note(dgmid): set categories strings
 	
 	$('#cat-title').html( i18n.t('app:categories.title', 'Categories'))
-	$('#cat-all').html( i18n.t('app:categories.all', 'All notes'))
-	$('#cat-all').attr('title', i18n.t('app:categories.all', 'All notes'))
-	$('#cat-fav').html( i18n.t('app:categories.fav', 'Favorites'))
-	$('#cat-fav').attr('title', i18n.t('app:categories.fav', 'Favorites'))
-	$('#cat-none').html( i18n.t('app:categories.none', 'Uncategorised'))
-	$('#cat-none').attr('title', i18n.t('app:categories.none', 'Uncategorised'))
+	$('#cat-all').html( i18n.t('app:categories.all', 'All notes')).attr('title', i18n.t('app:categories.all', 'All notes'))
+	$('#cat-fav').html( i18n.t('app:categories.fav', 'Favorites')).attr('title', i18n.t('app:categories.fav', 'Favorites'))
+	$('#cat-none').html( i18n.t('app:categories.none', 'Uncategorised')).attr('title', i18n.t('app:categories.none', 'Uncategorised'))
 	$('#search').attr('placeholder', i18n.t('app:sidebar.search', 'Search'))
 	
 	
