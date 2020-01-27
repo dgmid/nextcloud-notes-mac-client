@@ -386,6 +386,7 @@ function editNote() {
 			}
 			
 			easymde.togglePreview()
+			$('.editor-toolbar button').removeClass('active')
 			$('#edit').attr('title', i18n.t('app:main.button.edit', 'Edit Note')).removeClass('editing').focus()
 			setCheckLists()
 		}
