@@ -167,17 +167,13 @@ footer {
 		
 		transition: background-color .15s;
 		
-		&.selected {
-			
-			background-color: rgba(0,0,0,.2);
-		}
-		
 		&:focus {
 			
 			background-color: rgba(0,0,0,.15);
 			outline: none;
 		}
 		
+		&.selected,
 		&.selected:focus {
 			
 			color: #fff;
@@ -485,6 +481,24 @@ aside {
 			font-size: 12px;
 			
 			.excerpt { color: var(--text-light); }
+			
+			.checked,
+			.unchecked {
+				
+				appearance: none;
+				font-size: 10px;
+				width: 10px;
+				height: 10px;
+				display: inline-block;
+				vertical-align: -1px;
+				background-color: var(--text-light);
+				mask-repeat: no-repeat;
+				mask-position: left bottom;
+				background-size: cover;
+			}
+			
+			.checked { mask: var(--checked); }
+			.unchecked { mask: var(--unchecked); }
 		}
 		
 		.side-cat {
@@ -511,11 +525,6 @@ aside {
 			}
 		}
 		
-		&.selected {
-			
-			background-color: var(--app-color-focus);
-		}
-		
 		&:focus {
 			
 			outline: none;
@@ -524,6 +533,7 @@ aside {
 			&::after { display: none; }
 		}
 		
+		&.selected,
 		&.selected:focus {
 			
 			outline: none;
@@ -685,14 +695,13 @@ aside {
 		
 		button {
 			
-			&.selected { background-color: rgba(255,255,255,.15); }
-			
 			&:focus {
 				
 				background-color: rgba(255,255,255,.075);
 				outline: none;
 			}
 			
+			&.selected,
 			&.selected:focus {
 				
 				color: #fff;
@@ -746,6 +755,7 @@ aside {
 	
 		button {
 			
+			&.selected,
 			&.selected:focus {
 				
 				background-color: var(--app-dark);

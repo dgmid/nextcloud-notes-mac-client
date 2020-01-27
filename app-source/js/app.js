@@ -11,6 +11,7 @@ const removeMarkdown	= require( 'remove-markdown' )
 const EasyMDE			= require( 'easymde' )
 const hljs				= require( 'highlight.js' )
 const entities			= require( 'html-entities' ).AllHtmlEntities
+const replaceString		= require('replace-string')
 const log				= require( 'electron-log' )
 
 const fetch				= require( './fetch.min' )
@@ -232,6 +233,8 @@ function addSidebarEntry( item ) {
 	if( plainTxt ) {
 
 		plainTxt = plainTxt.substr(0, 120).slice(item.title.length)
+		plainTxt = replaceString(plainTxt, '[x]', '<span class="checked"></span>')
+		plainTxt = replaceString(plainTxt, '[ ]', '<span class="unchecked"></span>')
 		
 	} else {
 		

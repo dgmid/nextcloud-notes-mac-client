@@ -33,9 +33,9 @@
 			
 			mask: var(--checked);
 			
-			+ .cm-variable-2,
-			+ .cm-variable-3,
-			+ .cm-keyword {
+			~ .cm-variable-2,
+			~ .cm-variable-3,
+			~ .cm-keyword {
 				
 				color: var(--code-orange-lt);
 				text-decoration: line-through solid var(--code-orange-dk);
@@ -125,9 +125,9 @@
 
 		&.cm-property {
 			
-			+ .cm-variable-2,
-			+ .cm-variable-3,
-			+ .cm-keyword {
+			~ .cm-variable-2,
+			~ .cm-variable-3,
+			~ .cm-keyword {
 				
 				color: var(--code-orange-dk);
 				text-decoration: line-through solid var(--code-orange-lt);
