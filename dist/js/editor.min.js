@@ -64,9 +64,8 @@ module.exports.easymdeSetup = {
 				'|',
 				{
 					name: "link",
-					action: EasyMDE.drawLink,
 					className: "icon-a",
-					title: i18n.t('app:toolbar.link', 'Create Link'),
+					title: i18n.t('app:toolbar.link', 'Create Link (Cmd-K)'),
 				},
 				{
 					name: "image",
@@ -101,6 +100,7 @@ module.exports.easymdeSetup = {
 				},
 			],
 	shortcuts: {
+		'drawLink': null,
 		'toggleStrikethrough': 'Shift-Cmd-D',
 		'toggleBlockquote': 'Cmd-\'',
 		'drawTable': 'Cmd-T',

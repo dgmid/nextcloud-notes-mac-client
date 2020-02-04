@@ -325,6 +325,12 @@ ipcMain.on('new-category', (event, message) => {
 })
 
 
+ipcMain.on('hyperlink', (event, message) => {
+	
+	win.webContents.send('add-hyperlink', message)
+})
+
+
 ipcMain.on('reload-sidebar', (event, message) => {
 	
 	win.webContents.send('reload-sidebar', message)

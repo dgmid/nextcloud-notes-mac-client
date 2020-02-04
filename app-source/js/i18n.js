@@ -18,6 +18,7 @@ const i18nextOptions = {
 		'sidebarmenu',
 		'notecontextmenu',
 		'newcategory',
+		'inserthyperlink',
 		'prefs',
 		'login',
 		'about'

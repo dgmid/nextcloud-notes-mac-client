@@ -1,0 +1,16 @@
+{
+  "body": {
+    "header": "Inserisci un collegamento ipertestuale:",
+    "label": {
+      "url": "Collegamento"
+    },
+    "input": {
+      "placeholder": "https://esempio.com",
+      "title": "questo campo è richiesta"
+    },
+    "button": {
+      "cancel": "Annulla",
+      "create": "Inserisci"
+    }
+  }
+}

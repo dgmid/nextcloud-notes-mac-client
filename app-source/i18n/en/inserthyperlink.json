@@ -1,0 +1,16 @@
+{
+  "body": {
+    "header": "Insert a hyperlink:",
+    "label": {
+      "url": "Hyperlink"
+    },
+    "input": {
+      "placeholder": "https://example.com",
+      "title": "this field is required"
+    },
+    "button": {
+      "cancel": "Cancel",
+      "create": "Insert"
+    }
+  }
+}

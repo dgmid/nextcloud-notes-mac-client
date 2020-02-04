@@ -144,15 +144,19 @@ function insertTextAtCursor( text ) {
 
 function wrapTextToSelection( start, end ) {
 	
-	let note = easymde.codemirror.getDoc()
-	let selection = note.getSelection()
+	let note 		= easymde.codemirror.getDoc(),
+		selection 	= note.getSelection()
 	note.replaceSelection( start + selection + end )
 }
 
-function wrapBlockToCursor( start, end ) {
+function wrapBlockToSelection( start, end ) {
 	
-	let note = easymde.codemirror.getDoc()
-	let cursor = note.getCursor()
+	let note 		= easymde.codemirror.getDoc(),
+		selection 	= note.getSelection(),
+		cursor 		= note.getCursor()
+	
+	if(selection.length < 1) {
+	
 	note.replaceRange(
 `${start}
 
@@ -161,6 +165,15 @@ ${end}`, cursor)
 	cursor = note.getCursor()
 	let line = cursor.line -1
 	note.setCursor({ line: line })
+
+	} else {
+		
+		wrapTextToSelection(
+`${start}
+`,
+`
+${end}` )
+	}
 }
 
 
@@ -616,7 +629,7 @@ ipcRenderer.on('toggle-caticons', (event, message) => {
 
 ipcRenderer.on('open-login-modal', (event, message) => {
 	
-	modalWindow.openModal( 'file://' + __dirname + '/../html/login.html', 480, 210, false )
+	modalWindow.openModal( `file://${__dirname}/../html/login.html`, 480, 210, false )
 })
 
 
@@ -700,7 +713,7 @@ ipcRenderer.on('note', (event, message) => {
 		case 'newcat':
 			
 			if( selected ) {
-				modalWindow.openModal( 'file://' + __dirname + `/../html/new-category.html?id=${selected}`, 480, 180, false )
+				modalWindow.openModal( `file://${__dirname}/../html/new-category.html?id=${selected}`, 480, 180, false )
 			}
 		break
 		
@@ -791,7 +804,7 @@ ipcRenderer.on('markdown', (event, message) => {
 				easymde.codemirror.focus()
 			break
 			case 'a':
-				easymde.drawLink()
+				modalWindow.openModal( `file://${__dirname}/../html/insert-hyperlink.html`, 480, 180, false )
 			break
 			case 'img':
 				easymde.drawImage()
@@ -839,7 +852,7 @@ ipcRenderer.on('html', (event, message) => {
 			case 'objective-c':
 			case 'c-like':
 			case 'bash':
-				wrapBlockToCursor( `\`\`\` ${message}`, `\`\`\`` )
+				wrapBlockToSelection( `\`\`\` ${message}`, `\`\`\`` )
 			break
 			case 'dl':
 				insertTextAtCursor(
@@ -936,7 +949,7 @@ ipcRenderer.on('context-category', (event, message) => {
 
 ipcRenderer.on('context-newcategory', (event, message) => {
 	
-	modalWindow.openModal( 'file://' + __dirname + `/../html/new-category.html?id=${message}`, 480, 180, false )
+	modalWindow.openModal( `file://${__dirname}/../html/new-category.html?id=${message}`, 480, 180, false )
 })
 
 
@@ -995,6 +1008,24 @@ function capitalize( string ) {
 			return a.toLocaleUpperCase( i18n.language )
 	})
 }
+
+
+
+ipcRenderer.on('add-hyperlink', (event, message) => {
+	
+	//todo(dgmid): when selection < 1
+	
+	//if selection
+	
+	wrapTextToSelection( `[`, `](${message})` )
+	
+	// else
+	
+	// get cursor position
+	// insert link: [](${message})
+	//move cursor inside []
+	
+})
 
 
 
@@ -1084,6 +1115,17 @@ $('body').on('mouseup', '.editor-preview-active', function(event) {
 				preview: true
 			}
 		)
+	}
+})
+
+
+
+//note(dgmid): add link from toolbar
+$('body').on('click', '.editor-toolbar .link', (event) => {
+	
+	if( $('#edit').hasClass('editing') ) {
+		
+		modalWindow.openModal( `file://${__dirname}/../html/insert-hyperlink.html`, 480, 180, false )
 	}
 })
 
@@ -1277,7 +1319,7 @@ $(document).ready(function() {
 	
 	if( !server || !username || !password ) {
 		
-		modalWindow.openModal( 'file://' + __dirname + '/../html/login.html', 480, 210, false )
+		modalWindow.openModal( `file://${__dirname}/../html/login.html`, 480, 210, false )
 		
 	} else {
 		
@@ -1286,7 +1328,7 @@ $(document).ready(function() {
 			fetchResult( call, id, body, notes )
 		})
 	}
-	
+
 	
 	//note(dgmid): edit save
 	
