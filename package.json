@@ -7,7 +7,7 @@
   "scripts": {
     "start": "electron .",
     "debug": "electron . --debug-brk = 5858",
-    "package": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=7.1.11 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;"
+    "package": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=8.0.0 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;"
   },
   "author": {
     "name": "D.G. Midwinter",
@@ -26,10 +26,10 @@
   ],
   "dependencies": {
     "color": "^3.1.2",
-    "compare-versions": "^3.5.1",
+    "compare-versions": "^3.6.0",
     "dateformat": "^3.0.3",
     "easymde": "^2.9.0",
-    "electron-log": "^4.0.5",
+    "electron-log": "^4.0.6",
     "electron-store": "^5.1.0",
     "fs-extra": "^8.1.0",
     "highlight.js": "^9.18.1",
@@ -50,7 +50,7 @@
   "devDependencies": {
     "del": "^5.1.0",
     "devtron": "^1.4.0",
-    "electron": "^7.1.11",
+    "electron": "^8.0.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-cssnano": "^2.1.3",
