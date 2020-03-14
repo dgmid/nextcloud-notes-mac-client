@@ -1,6 +1,6 @@
 {
   "name": "nextcloud-notes-client",
-  "version": "1.4.1-alpha",
+  "version": "1.4.1-beta",
   "productName": "Nextcloud Notes Client",
   "description": "Access and edit your Nextcloud Notes on the Mac",
   "main": "dist/js/main.min.js",
