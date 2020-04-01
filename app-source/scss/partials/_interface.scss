@@ -9,71 +9,11 @@ body {
 	overflow: hidden;
 }
 
-header {
-	
-	height: 23px;
-	background: var(--header);
-	background-size: 100% 23px;
-	background-position: left top;
-	border-bottom: 1px solid var(--header-border);
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	-webkit-app-region: drag;
-	
-	#update,
-	#dev {
-		
-		position: absolute;
-		top: 2px;
-		right: 2px;
-		height: 15px;
-		font-size: 11px;
-		font-weight: 500;
-		color: #fff;
-		border: 0;
-		border-radius: 3px;
-	}
-	
-	#update {
-		
-		
-		background-color: #6236FF;
-		
-		&:active { background-color: #9164FF; }
-		&:focus { outline: none; }
-	}
-	
-	#dev {
-		
-		padding: 1px 6px;
-		margin-top: 1px;
-		background-color: var(--code-green-lt);
-		
-		&.α { background-color: var(--code-red-lt); }
-		&.β { background-color: var(--code-blue-lt); }
-	}
-	
-	.fadein { display: none; }
-}
-
-#time {
-	
-	display: block;
-	color: var(--titlebar);
-	font-size: 13px;
-	height: 23px;
-	line-height: 23px;
-	font-weight: 400;
-	text-align: center;
-}
-
 #frame {
 	
 	background-image: var(--texture);
 	position: absolute;
-	top: 23px;
+	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -88,7 +28,7 @@ footer {
 	width: 200px;
 	border-right: 1px solid var(--dividers);
 	position: absolute;
-	top: 23px;
+	top: 0;
 	left: -200px;
 	bottom: 0;
 	overflow: hidden; 
@@ -252,7 +192,7 @@ main {
 
 	margin-left: 200px;
 	padding: 0;
-	height: calc(100vh - 23px);
+	height: 100vh;
 	font-size: 16px;
 	line-height: 1.4;
 	overflow-y: scroll;
@@ -379,13 +319,49 @@ main {
 			text-overflow: ellipsis;
 		}
 	}
+	
+	#update,
+	#dev {
+		
+		position: absolute;
+		top: -20px;
+		right: 0;
+		height: 15px;
+		font-size: 11px;
+		line-height: 11px;
+		font-weight: 500;
+		color: #fff;
+		border: 0;
+		border-radius: 0 0 0 3px;
+		
+		transition: top .5s;
+		
+		&.slidedown { top: -1px; }
+	}
+	
+	#update {
+		
+		background-color: #6236FF;
+		
+		&:active { background-color: #9164FF; }
+		&:focus { outline: none; }
+	}
+	
+	#dev {
+		
+		padding: 1px 6px;
+		background-color: var(--code-green-lt);
+		
+		&.α { background-color: var(--code-red-lt); }
+		&.β { background-color: var(--code-blue-lt); }
+	}
 }
 
 aside {
 
 	width: 200px;
 	float: left;
-	height: calc(100vh - 23px);
+	height: 100vh;
 	border-right: 1px solid var(--dividers);
 	position: relative;
 	display: flex;

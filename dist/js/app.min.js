@@ -91,7 +91,8 @@ function fetchResult( call, id, body, notes ) {
 				
 				store.set( 'appInterface.selected', null )
 				$('#note').attr('data-id', null)
-				$('#time, #note').html('')
+				$('#note').html('')
+				ipcRenderer.send( 'update-titlebar', '' )
 			}
 			
 			fetch.apiCall( 'all', null, null, function( call, id, body, notes ) {
@@ -273,7 +274,7 @@ function displayNote( note ) {
 	
 	$('#edit').removeClass('editing')
 	
-	$('#time').html( dates.titlebarDate( note.modified ) )
+	ipcRenderer.send( 'update-titlebar', dates.titlebarDate( note.modified ) )
 	
 	if( easymde ) {
 		
@@ -1037,7 +1038,8 @@ $('body').on('click', '#sidebar li button', function(event) {
 	
 	let id = $(this).data('id')
 	
-	$('#time').empty().hide()
+	ipcRenderer.send( 'update-titlebar', '' )
+	
 	$('main').append('<div class="loader"><div class="spinner"></div></div>')
 	
 	$('#sidebar li button').removeClass('selected').removeClass('above-selected')

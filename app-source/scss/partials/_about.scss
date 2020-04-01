@@ -7,16 +7,6 @@ body {
 	padding: 0;
 	background-image: var(--texture);
 	
-	header {
-	
-	height: 23px;
-	background: var(--header);
-	background-size: 100% 23px;
-	border-bottom: 1px solid  var(--header-border);
-	
-	-webkit-app-region: drag;
-	}
-	
 	main {
 		
 		padding: 10px 20px 0;

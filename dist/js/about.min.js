@@ -16,7 +16,7 @@ module.exports.createAbout = () => {
 			show: false,
 			width: 340,
 			height: 360,
-			titleBarStyle: 'hidden',
+			title: '',
 			vibrancy: 'under-window',
 			resizable: false,
 			minimizable: false,

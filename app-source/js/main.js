@@ -77,9 +77,9 @@ function createWindow() {
 		y: y,
 		width: width,
 		height: height,
-		titleBarStyle: 'hidden',
 		minWidth: 800,
 		minHeight: 372,
+		title: '',
 		vibrancy: 'sidebar',
 		webPreferences: {
 			devTools: true,
@@ -89,7 +89,7 @@ function createWindow() {
 		icon: path.join(__dirname, '../assets/icon/Icon.icns')
 	})
 	
-	win.setSheetOffset( 23 )
+	//win.setSheetOffset( 23 )
 	
 	function saveWindowBounds() {
 		
@@ -268,7 +268,6 @@ app.on('open-prefs', () => {
 			minimizable: false,
 			maximizable: false,
 			show: false,
-			titleBarStyle: 'hidden',
 			vibrancy: 'under-window',
 			webPreferences: {
 				devTools: true,
@@ -316,6 +315,12 @@ app.on('open-prefs', () => {
 	}
 })
 
+
+
+ipcMain.on('update-titlebar', (event, message) => {
+	
+	win.setTitle( message )
+})
 
 
 ipcMain.on('new-category', (event, message) => {
