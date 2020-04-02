@@ -470,8 +470,6 @@ function saveNote( id ) {
 			
 			fetchResult( call, id, body, notes )
 		})
-		
-		
 	}
 }
 
@@ -1035,6 +1033,36 @@ ipcRenderer.on('add-hyperlink', (event, message) => {
 $('body').on('click', '#sidebar li button', function(event) {
 	
 	event.stopPropagation()
+	let selected = store.get( 'appInterface.selected' )
+	
+	if( selected &&  easymde.codemirror.historySize().undo > 0 ) {
+	
+		let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
+						message: i18n.t('app:dialog.save.title', 'You have made changes to this note'),
+						detail: i18n.t('app:dialog.save.text', 'Do you want to save them?'),
+						buttons: [i18n.t('app:dialog.button.savechanges', 'Save changes'), i18n.t('app:dialog.button.cancel', 'Cancel')]
+					})
+		
+		if( response === 0 ) {
+			
+			let body = {	
+				"content": easymde.value(),
+				"modified": Math.floor(Date.now() / 1000)
+			}
+			
+			easymde.codemirror.clearHistory()
+			
+			fetch.apiCall( 'save', selected, body, function( call, id, body, notes ) {
+				
+				fetchResult( call, id, body, notes )
+			})
+			
+		} else {
+	
+			while ( easymde.codemirror.historySize().undo > 0) easymde.codemirror.undo()
+			
+		}
+	}
 	
 	let id = $(this).data('id')
 	
