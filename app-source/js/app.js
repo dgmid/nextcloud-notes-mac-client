@@ -338,6 +338,7 @@ function displayNote( note ) {
 		const check = require( './version.min' )
 		firstLoad = 1
 		check.appVersion()
+		
 		setFocus()
 	}
 }
@@ -1309,14 +1310,17 @@ $('#clear').click(function() {
 
 function setFocus() {
 	
-	if( store.get( 'appInterface.categories' ) ) {
+	if( store.get( 'appSettings.editing' ) === false ) {
 	
-		$('.categories button.selected').focus()
+		if( store.get( 'appInterface.categories' ) ) {
 		
-	} else {
-		
-		$('#sidebar button.selected').focus()
-	} 
+			$('.categories button.selected').focus()
+			
+		} else {
+			
+			$('#sidebar button.selected').focus()
+		}
+	}
 }
 
 
