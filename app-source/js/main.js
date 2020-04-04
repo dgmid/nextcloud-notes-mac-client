@@ -52,7 +52,8 @@ let store = new Store({
 			catcount: false,
 			nocertificate: false,
 			stopwords: false,
-			stemming: false
+			stemming: false,
+			editing: false
 		},
 		
 		categories: {

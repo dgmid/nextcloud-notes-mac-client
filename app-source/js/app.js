@@ -272,7 +272,12 @@ function addSidebarEntry( item ) {
 
 function displayNote( note ) {
 	
-	$('#edit').removeClass('editing')
+	let editing = store.get( 'appSettings.editing' )
+	
+	if ( editing === false ) {
+		
+		$('#edit').removeClass('editing')
+	}
 	
 	ipcRenderer.send( 'update-titlebar', dates.titlebarDate( note.modified ) )
 	
@@ -283,12 +288,13 @@ function displayNote( note ) {
 	}
 	
 	easymde = new EasyMDE( editor.easymdeSetup )
-	
-	toggleSpellcheck( store.get('appSettings.spellcheck') )	
+	toggleSpellcheck( store.get('appSettings.spellcheck') )
 	
 	// register right click for notes menu
 	
 	easymde.codemirror.on( 'mousedown', function( instance, event ) {
+		
+		initCheckboxes()
 		
 		if( event.which === 3 ) {
 			
@@ -307,15 +313,29 @@ function displayNote( note ) {
 	$('#note').attr('data-id', note.id)
 	easymde.value( note.content )
 	easymde.codemirror.clearHistory()
-	easymde.togglePreview()
-	setCheckLists()
 	
-	$('time').fadeIn('fast')
+	if( !editing ) {
+		
+		easymde.togglePreview()
+		setCheckLists()
+	
+	} else {
+			
+			easymde.codemirror.on("changes", initCheckboxes)
+			
+			if( store.get('appSettings.cursor') == 'end' ) {
+				
+				easymde.codemirror.setCursor(easymde.codemirror.lineCount(), 0)
+			}
+			
+		easymde.codemirror.focus()
+	}
+	
 	$('.loader').fadeOut(400, function() { $(this).remove() } )
 	
 	if( firstLoad === true ) {
 		
-		const check = require( './version.min' )		
+		const check = require( './version.min' )
 		firstLoad = 1
 		check.appVersion()
 		setFocus()
@@ -351,7 +371,7 @@ function getSelected( sidebar ) {
 function editNote() {
 	
 	let selected = store.get( 'appInterface.selected' )
-		
+	
 	if( selected ) {
 		
 		if( easymde.isPreviewActive() ) {
@@ -362,6 +382,7 @@ function editNote() {
 			initCheckboxes()
 			easymde.codemirror.on("changes", initCheckboxes)
 			
+			store.set( 'appSettings.editing', true  )
 			
 			if( store.get('appSettings.cursor') == 'end' ) {
 				
@@ -403,6 +424,8 @@ function editNote() {
 			$('.editor-toolbar button').removeClass('active')
 			$('#edit').attr('title', i18n.t('app:main.button.edit', 'Edit Note')).removeClass('editing').focus()
 			setCheckLists()
+			
+			store.set( 'appSettings.editing', false  )
 		}
 	}
 }
