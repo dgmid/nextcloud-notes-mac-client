@@ -773,6 +773,7 @@ ipcRenderer.on('note', (event, message) => {
 				
 			} else if( !easymde.isPreviewActive() ) {
 				
+				
 				easymde.codemirror.execCommand('selectAll')
 			
 			} else {
@@ -781,6 +782,7 @@ ipcRenderer.on('note', (event, message) => {
 					range,
 					element = $('.editor-preview-active')[0]
 				
+				window.getSelection().empty()
 				selection = window.getSelection()
 				
 				if( selection.toString() == '' ) {

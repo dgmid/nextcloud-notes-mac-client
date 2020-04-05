@@ -27,6 +27,11 @@ ipcMain.on('show-notes-menu', ( event, message ) => {
 				role: 'copy'
 			},
 			{
+				label: i18n.t('menu:edit.selectall', 'Select All'),
+				accelerator: 'Cmd+a',
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'selectall') }
+			},
+			{
 				type: 'separator'
 			},
 			{
