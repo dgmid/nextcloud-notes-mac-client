@@ -12,7 +12,8 @@ const removeMarkdown	= require( 'remove-markdown' )
 
 let win,
 	loginFlow,
-	prefs = null
+	prefs = null,
+	willQuit = false
 
 let store = new Store({
 	name: 'config',
@@ -112,9 +113,14 @@ function createWindow() {
 	win.on('resize', saveWindowBounds)
 	win.on('move', saveWindowBounds)
 	
-	win.on('closed', () => {
+	win.on('close', (e) => {
 		
-		app.quit()
+		if(willQuit === false) {
+			e.preventDefault()
+			win.webContents.send('before-quit', '')
+			
+			willQuit = true
+		}
 	})
 	
 	win.webContents.on('did-fail-load', () => {
@@ -317,6 +323,13 @@ app.on('open-prefs', () => {
 })
 
 
+
+ ipcMain.on('quit-app', (event, message) => {
+	 
+	 if( willQuit ) app.quit()
+ })
+ 
+ 
 
 ipcMain.on('update-titlebar', (event, message) => {
 	

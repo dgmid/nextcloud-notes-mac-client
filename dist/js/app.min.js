@@ -393,32 +393,8 @@ function editNote() {
 		} else {
 			
 			if( easymde.codemirror.historySize().undo > 0 ) {
-			
-				let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
-								message: i18n.t('app:dialog.save.title', 'You have made changes to this note'),
-								detail: i18n.t('app:dialog.save.text', 'Do you want to save them?'),
-								buttons: [i18n.t('app:dialog.button.savechanges', 'Save changes'), i18n.t('app:dialog.button.cancel', 'Cancel')]
-							})
 				
-				if( response === 0 ) {
-					
-					let body = {	
-						"content": easymde.value(),
-						"modified": Math.floor(Date.now() / 1000)
-					}
-					
-					easymde.codemirror.clearHistory()
-					
-					fetch.apiCall( 'save', selected, body, function( call, id, body, notes ) {
-						
-						fetchResult( call, id, body, notes )
-					})
-					
-				} else {
-			
-					while ( easymde.codemirror.historySize().undo > 0) easymde.codemirror.undo()
-					
-				}
+				saveDialog( selected )
 			}
 			
 			easymde.togglePreview()
@@ -473,6 +449,39 @@ function toggleEditorCheckboxes( element ) {
 	)
 
 	easymde.codemirror.execCommand( 'goLineEnd' )
+}
+
+
+
+//note(dgmid): save dialog
+
+function saveDialog( selected ) {
+	
+	let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
+					message: i18n.t('app:dialog.save.title', 'You have made changes to this note'),
+					detail: i18n.t('app:dialog.save.text', 'Do you want to save them?'),
+					buttons: [i18n.t('app:dialog.button.savechanges', 'Save changes'), i18n.t('app:dialog.button.cancel', 'Cancel')]
+				})
+	
+	if( response === 0 ) {
+		
+		let body = {	
+			"content": easymde.value(),
+			"modified": Math.floor(Date.now() / 1000)
+		}
+		
+		easymde.codemirror.clearHistory()
+		
+		fetch.apiCall( 'save', selected, body, function( call, id, body, notes ) {
+			
+			fetchResult( call, id, body, notes )
+		})
+		
+	} else {
+
+		while ( easymde.codemirror.historySize().undo > 0) easymde.codemirror.undo()
+		ipcRenderer.send( 'quit-app', '' )	
+	}
 }
 
 
@@ -1075,6 +1084,27 @@ ipcRenderer.on('add-hyperlink', (event, message) => {
 
 
 
+//note(dgmid): on quit without saving
+
+ipcRenderer.on('before-quit', (event, message) => {
+	
+	if( easymde.codemirror.historySize().undo > 0 ) {
+		
+		let selected = store.get( 'appInterface.selected' )
+		
+		if( selected ) {
+		
+			saveDialog( selected )
+		}
+		
+	} else {
+		
+		ipcRenderer.send( 'quit-app', '' )
+	}
+})
+
+
+
 //note(dgmid): on click sidebar button
 
 $('body').on('click', '#sidebar li button', function(event) {
@@ -1084,31 +1114,7 @@ $('body').on('click', '#sidebar li button', function(event) {
 	
 	if( selected &&  easymde.codemirror.historySize().undo > 0 ) {
 	
-		let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
-						message: i18n.t('app:dialog.save.title', 'You have made changes to this note'),
-						detail: i18n.t('app:dialog.save.text', 'Do you want to save them?'),
-						buttons: [i18n.t('app:dialog.button.savechanges', 'Save changes'), i18n.t('app:dialog.button.cancel', 'Cancel')]
-					})
-		
-		if( response === 0 ) {
-			
-			let body = {	
-				"content": easymde.value(),
-				"modified": Math.floor(Date.now() / 1000)
-			}
-			
-			easymde.codemirror.clearHistory()
-			
-			fetch.apiCall( 'save', selected, body, function( call, id, body, notes ) {
-				
-				fetchResult( call, id, body, notes )
-			})
-			
-		} else {
-	
-			while ( easymde.codemirror.historySize().undo > 0) easymde.codemirror.undo()
-			
-		}
+		saveDialog( selected )
 	}
 	
 	let id = $(this).data('id')
