@@ -3,11 +3,17 @@
 
 A replacement for the Mac Notes app that syncs with a Nextcloud server running the Nextcloud Notes app
 
-![Nextcloud Notes Client in edit mode](https://user-images.githubusercontent.com/1267580/65714112-c539dd80-e09a-11e9-8ff8-22e2d293ace4.png)
-<small>*Nextcloud Notes Client in edit mode*</small>
+![Nextcloud Notes Client in edit mode](https://user-images.githubusercontent.com/1267580/78501862-14557f00-775e-11ea-8c6a-8d5cf2ab9a83.png)
+<small>*Nextcloud Notes Client in edit mode (dark theme)*</small>
 
-![Nextcloud Notes Client in preview mode](https://user-images.githubusercontent.com/1267580/65714113-c539dd80-e09a-11e9-8960-580421a0e77d.png)
-<small>*Nextcloud Notes Client in preview mode*</small>
+![Nextcloud Notes Client in edit mode](https://user-images.githubusercontent.com/1267580/78501864-1a4b6000-775e-11ea-8d7f-808181def3da.png)
+<small>*Nextcloud Notes Client in edit mode (light theme)*</small>
+
+![Nextcloud Notes Client in preview mode](https://user-images.githubusercontent.com/1267580/78501977-ea508c80-775e-11ea-881e-c22e4c7f2c53.png)
+<small>*Nextcloud Notes Client in preview mode (dark theme)*</small>
+
+![Nextcloud Notes Client in preview mode](https://user-images.githubusercontent.com/1267580/78501983-f0df0400-775e-11ea-9e56-1fa0b6ccbe34.png)
+<small>*Nextcloud Notes Client in preview mode (light theme)*</small>
 
 ## Requirements
 
