@@ -1,9 +1,10 @@
 'use strict'
 
-const i18n 		= require( './i18n.min' )
-const hljs		= require( 'highlight.js' )
-const EasyMDE	= require( 'easymde' )
+const i18n 			= require( './i18n.min' )
+const hljs			= require( 'highlight.js' )
+const EasyMDE		= require( 'easymde' )
 
+const modalWindow	= require( './modal.min' )
 
 module.exports.easymdeSetup = {
 	
@@ -64,6 +65,15 @@ module.exports.easymdeSetup = {
 				'|',
 				{
 					name: "link",
+					action: () => {
+						
+						let editor = document.getElementById('edit')
+						
+						if( editor.classList.contains('editing') ) {
+							
+							modalWindow.openModal( `file://${__dirname}/../html/insert-hyperlink.html`, 480, 180, false )
+						}	
+					},
 					className: "icon-a",
 					title: i18n.t('app:toolbar.link', 'Create Link (Cmd-K)'),
 				},

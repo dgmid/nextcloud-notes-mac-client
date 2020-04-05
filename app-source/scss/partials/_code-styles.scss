@@ -46,7 +46,14 @@
 //note(dgmid): markdown light
 
 [data-theme="light"] {
-
+	
+	.CodeMirror-selected { background: rgba(0,0,0,.05); }
+	
+	.CodeMirror-focused {
+		
+		 .CodeMirror-selected { background: rgba(0,0,0,.15); }
+	}
+	
 	.cm-header { color: var(--code-yellow-dk); }
 	.cm-formatting-header { color: var(--code-yellow-lt); }
 	.cm-variable-2,
@@ -85,9 +92,11 @@
 		font-weight: 300;
 	}
 	
+	.CodeMirror-selected { background: rgba(255,255,255,.05); }
+	
 	.CodeMirror-focused {
 		
-		 .CodeMirror-selected { background: rgba(255,255,255,.2); }
+		 .CodeMirror-selected { background: rgba(255,255,255,.15); }
 	}
 	
 	.cm-header { color: var(--code-yellow-lt); }

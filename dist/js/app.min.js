@@ -757,13 +757,32 @@ ipcRenderer.on('note', (event, message) => {
 		break
 		
 		case 'selectall':
-			if( !easymde.isPreviewActive() ) {
+			
+			if( $('#search').is(':focus') ) {
+				
+				$('#search').select()
+				
+			} else if( !easymde.isPreviewActive() ) {
 				
 				easymde.codemirror.execCommand('selectAll')
 			
-			} else if( $('#search:focus') ) {
+			} else {
 				
-				$('#search').select()
+				let selection,
+					range,
+					element = $('.editor-preview-active')[0]
+				
+				selection = window.getSelection()
+				
+				if( selection.toString() == '' ) {
+					
+					window.setTimeout(function(){
+						range = document.createRange()
+						range.selectNodeContents(element)
+						selection.removeAllRanges()
+						selection.addRange(range)
+					}, 1)
+				}
 			}
 		break
 		
@@ -1036,18 +1055,22 @@ function capitalize( string ) {
 
 ipcRenderer.on('add-hyperlink', (event, message) => {
 	
-	//todo(dgmid): when selection < 1
+	// SONO QUI
 	
-	//if selection
+	let note 		= easymde.codemirror.getDoc(),
+		selection 	= note.getSelection()
 	
 	wrapTextToSelection( `[`, `](${message})` )
+		easymde.codemirror.focus()
 	
-	// else
-	
-	// get cursor position
-	// insert link: [](${message})
-	//move cursor inside []
-	
+	if( selection.length < 1 ) {
+		
+		let cursor = note.getCursor()
+		let line = cursor.line
+		let ch = cursor.ch
+		
+		note.setCursor({ line: line, ch: (ch - 3 - message.length) })
+	}
 })
 
 
@@ -1169,17 +1192,6 @@ $('body').on('mouseup', '.editor-preview-active', function(event) {
 				preview: true
 			}
 		)
-	}
-})
-
-
-
-//note(dgmid): add link from toolbar
-$('body').on('click', '.editor-toolbar .link', (event) => {
-	
-	if( $('#edit').hasClass('editing') ) {
-		
-		modalWindow.openModal( `file://${__dirname}/../html/insert-hyperlink.html`, 480, 180, false )
 	}
 })
 
@@ -1358,9 +1370,16 @@ $(document).ready(function() {
 	}
 	
 	
-	//note(dgmid): set edit button title
+	//note(dgmid): set edit button state
 	
-	$('#edit').attr('title', i18n.t('app:main.button.edit', 'Edit Note'))
+	if( store.get( 'appSettings.editing' ) === false ) {
+		
+		$('#edit').attr('title', i18n.t('app:main.button.edit', 'Edit Note'))
+	
+	} else {
+		
+		$('#edit').attr('title', i18n.t('app:main.button.save', 'Save Note')).addClass('editing')
+	}
 	
 	
 	//note(dgmid): set categories strings
