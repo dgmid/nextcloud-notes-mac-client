@@ -19,6 +19,7 @@ const i18nextOptions = {
 		'notecontextmenu',
 		'newcategory',
 		'inserthyperlink',
+		'inserttable',
 		'prefs',
 		'login',
 		'about'

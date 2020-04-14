@@ -869,7 +869,7 @@ ipcRenderer.on('markdown', (event, message) => {
 				easymde.toggleBlockquote()
 			break
 			case 'table':
-				easymde.drawTable()
+				modalWindow.openModal( `file://${__dirname}/../html/insert-table.html`, 480, 220, false )
 			break
 			case 'hr':
 				easymde.drawHorizontalRule()
@@ -1066,8 +1066,6 @@ function capitalize( string ) {
 
 ipcRenderer.on('add-hyperlink', (event, message) => {
 	
-	// SONO QUI
-	
 	let note 		= easymde.codemirror.getDoc(),
 		selection 	= note.getSelection()
 	
@@ -1082,6 +1080,43 @@ ipcRenderer.on('add-hyperlink', (event, message) => {
 		
 		note.setCursor({ line: line, ch: (ch - 3 - message.length) })
 	}
+})
+
+
+
+ipcRenderer.on('add-table', (event, message) => {
+	
+	let cols 	= message.cols,
+		rows 	= message.rows,
+		table 	= '|'
+	
+	for ( let x = 0; x < cols; x++ ) {
+		
+		table += ` col ${x+1} |`
+	}
+	
+	table += '\n|'
+	
+	for ( let x = 0; x < cols; x++ ) {
+		
+		table += ` --- |`
+	}
+	
+	table += '\n|'
+	
+	for ( let y = 0; y < rows; y++ ) {
+		
+		for ( let x = 0; x < cols; x++ ) {
+			
+			table += ` txt |`
+		}
+		
+		table += '\n'
+		if(y < rows - 1) table += '|'
+	}
+	
+	insertTextAtCursor( table )
+	easymde.codemirror.focus()
 })
 
 

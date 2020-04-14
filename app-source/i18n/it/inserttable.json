@@ -1,0 +1,16 @@
+{
+  "body": {
+    "header": "Inserisci una tabella:",
+    "label": {
+      "columns": "Colonne",
+      "rows": "Righe"
+    },
+    "input": {
+      "title": "questo campo è richiesta"
+    },
+    "button": {
+      "cancel": "Annulla",
+      "create": "Inserisci"
+    }
+  }
+}

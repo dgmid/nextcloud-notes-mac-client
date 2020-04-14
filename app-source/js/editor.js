@@ -14,7 +14,7 @@ module.exports.easymdeSetup = {
 	forceSync: true,
 	status: false,
 	spellChecker: true,
-	toolbar: [	
+	toolbar: [
 				{
 					name: "Heading",
 					action: EasyMDE.toggleHeadingSmaller,
@@ -98,7 +98,15 @@ module.exports.easymdeSetup = {
 				},
 				{
 					name: "table",
-					action: EasyMDE.drawTable,
+					action: () => {
+						
+						let editor = document.getElementById('edit')
+						
+						if( editor.classList.contains('editing') ) {
+							
+							modalWindow.openModal( `file://${__dirname}/../html/insert-table.html`, 480, 220, false )
+						}	
+					},
 					className: "icon-table",
 					title: i18n.t('app:toolbar.table', 'Insert Table'),
 				},
@@ -113,12 +121,12 @@ module.exports.easymdeSetup = {
 		'drawLink': null,
 		'toggleStrikethrough': 'Shift-Cmd-D',
 		'toggleBlockquote': 'Cmd-\'',
-		'drawTable': 'Cmd-T',
+		'drawTable': null,
 		'drawHorizontalRule': 'Cmd--',
 		'cleanBlock': null,
 		'toggleSideBySide': null,
 		'toggleFullScreen': null,
-		'togglePreview': null	
+		'togglePreview': null
 	},
 	renderingConfig: {
 		codeSyntaxHighlighting: true,

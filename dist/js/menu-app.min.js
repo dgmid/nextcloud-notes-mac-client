@@ -255,7 +255,7 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: i18n.t('menu:markdown.link', 'Create Link'),
+				label: i18n.t('menu:markdown.link', 'Create Link…'),
 				accelerator: 'Cmd+k',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'a') }
 			},
@@ -322,7 +322,7 @@ const template = [
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'blockquote') }
 			},
 			{
-				label: i18n.t('menu:markdown.table', 'Table'),
+				label: i18n.t('menu:markdown.table', 'Table…'),
 				accelerator: 'Cmd+t',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('markdown', 'table') }
 			},

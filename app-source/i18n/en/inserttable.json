@@ -1,0 +1,16 @@
+{
+  "body": {
+    "header": "Insert a table:",
+    "label": {
+      "columns": "Columns",
+      "rows": "Rows"
+    },
+    "input": {
+      "title": "this field is required"
+    },
+    "button": {
+      "cancel": "Cancel",
+      "create": "Insert"
+    }
+  }
+}

@@ -21,17 +21,26 @@ header {
 
 .scroll {
 	
+	padding: 20px 40px 0;
 	position: fixed;
 	top: 38px;
 	left: 0;
 	right: 0;
 	bottom: 0;
 	overflow-y: scroll;
+	
+	.columns {
+		
+		display: flex;
+		
+		>div {
+			
+			width: 50%;
+		}
+	}
 }
 
 form {
-	
-	padding: 20px 40px 0;
 	
 	ul {
 		
@@ -68,7 +77,8 @@ form {
 			}
 			
 			input[type="url"],
-			input[type="text"] {
+			input[type="text"],
+			input[type="number"] {
 				
 				display: block;
 				padding-left: 10px;
@@ -95,6 +105,11 @@ form {
 						background-image: var(--check);
 					}
 				}
+			}
+			
+			input[type="number"] {
+				
+				padding-right: 5px;
 			}
 			
 			input[type="checkbox"] {
@@ -128,6 +143,8 @@ footer {
 		color: #fff;
 		background-color: var(--app-dark);
 	}
+	
+	canvas { filter: invert(100%); }
 }
 
 //note(dgmid): user themes
