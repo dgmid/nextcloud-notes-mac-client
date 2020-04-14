@@ -13,7 +13,9 @@ module.exports.easymdeSetup = {
 	autofocus: false,
 	forceSync: true,
 	status: false,
-	spellChecker: true,
+	spellChecker: false,
+	inputStyle: "contenteditable",
+	nativeSpellcheck: true,
 	toolbar: [
 				{
 					name: "Heading",

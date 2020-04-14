@@ -542,7 +542,12 @@ function applyZoom( level ) {
 
 function toggleSpellcheck( state ) {
 	
-	( state ) ? $('.CodeMirror').addClass('spellcheck') : $('.CodeMirror').removeClass('spellcheck')
+	( state ) ? $('.CodeMirror-code').attr('spellcheck', true)  : $('.CodeMirror-code').attr('spellcheck', false)
+	
+	$('.CodeMirror').each( function( i, element ) {
+		
+		element.CodeMirror.refresh()
+	})
 }
 
 
