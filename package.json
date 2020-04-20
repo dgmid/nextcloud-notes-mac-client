@@ -7,7 +7,7 @@
   "scripts": {
     "start": "electron .",
     "debug": "electron . --debug-brk = 5858",
-    "package": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=8.2.2 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;"
+    "package": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=8.2.3 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;"
   },
   "author": {
     "name": "D.G. Midwinter",
@@ -34,7 +34,7 @@
     "fs-extra": "^9.0.0",
     "highlight.js": "^9.18.1",
     "html-entities": "^1.3.1",
-    "i18next": "^19.4.1",
+    "i18next": "^19.4.3",
     "i18next-electron-language-detector": "0.0.10",
     "i18next-sync-fs-backend": "^1.1.1",
     "jquery": "^3.5.0",
@@ -51,7 +51,7 @@
   "devDependencies": {
     "del": "^5.1.0",
     "devtron": "^1.4.0",
-    "electron": "^8.2.2",
+    "electron": "^8.2.3",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-cssnano": "^2.1.3",
