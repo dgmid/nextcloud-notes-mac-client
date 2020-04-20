@@ -41,6 +41,7 @@
     "jquery-i18next": "^1.2.1",
     "js-search": "^2.0.0",
     "marked": "^0.8.2",
+    "mousetrap": "^1.6.5",
     "pretty": "^2.0.0",
     "remove-markdown": "^0.3.0",
     "replace-string": "^3.0.0",

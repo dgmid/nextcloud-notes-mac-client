@@ -5,6 +5,8 @@ const remote 			= require( 'electron' ).remote
 const {ipcRenderer} 	= require( 'electron' )
 const Store				= require( 'electron-store' )
 const store				= new Store()
+const Mousetrap 		= require( 'mousetrap' )
+
 const $ 				= require( 'jquery' )
 const jqueryI18next 	= require( 'jquery-i18next' )
 
@@ -34,6 +36,15 @@ $('header').localize()
 $('label').localize()
 $('input').localize()
 $('button').localize()
+
+
+
+//note(dgmid): register kbd shortcut
+
+Mousetrap.bind('command+.', function() {
+	
+	closeModal()
+})
 
 
 
