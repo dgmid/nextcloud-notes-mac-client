@@ -7,6 +7,11 @@ body {
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
+	
+	&.blurred {
+		
+		background-color: #f6f6f6;
+	}
 }
 
 #frame {
@@ -771,7 +776,18 @@ aside {
 	}
 }
 
+//note(dgmid): dark theme
 
+[data-theme="dark"] {
+
+	body {
+		
+		&.blurred {
+			
+			background-color: rgb(57, 57, 57);
+		}
+	}
+}
 
 //note(dgmid): user themes
 
