@@ -48,3 +48,13 @@ To package the final app run:
 npm run package
 ```
 The packaged app will be written to `build/Nextcloud Notes Client-darwin-x64/` in the project directory.
+
+## i18n
+Translations for this app are by:
+
+| language | translator |
+| --- | --- |
+| EN | [dgmid](https://github.com/dgmid) |
+| IT | [dgmid](https://github.com/dgmid) |
+| DE | [stratmaster](https://github.com/stratmaster) |
+
