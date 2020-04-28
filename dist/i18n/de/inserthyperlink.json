@@ -1,0 +1,16 @@
+{
+  "body": {
+    "header": "Eine Verknüpfung einfügen:",
+    "label": {
+      "url": "Verknüpfung"
+    },
+    "input": {
+      "placeholder": "https://beispiel.de",
+      "title": "Dieses Feld ist erforderlich"
+    },
+    "button": {
+      "cancel": "Abbrechen",
+      "create": "Einfügen"
+    }
+  }
+}
