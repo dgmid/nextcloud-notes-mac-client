@@ -1,13 +1,13 @@
 {
   "app": {
-    "about": "Informazioni su",
+    "about": "Informazioni su {{name}}",
     "login": "Accesso/disconnettersi a Nextcloud",
     "prefs": "Preferenze",
     "services": "Servizi",
-    "hide": "Nascondi",
+    "hide": "Nascondi {{name}}",
     "hideothers": "Nascondi altre",
     "showall": "Mostra tutti",
-    "quit": "Esci da"
+    "quit": "Esci da {{name}}"
   },
   "note": {
     "note": "Nota",

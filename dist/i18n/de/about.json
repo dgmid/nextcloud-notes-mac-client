@@ -1,0 +1,13 @@
+{
+  "body": {
+    "description": "Zugriff auf und Bearbeitung von Nextcloud Notizen auf dem Mac",
+    "label": {
+      "version": "Version:",
+      "author": "Author:",
+      "license": "Lizenz:"
+    },
+    "button": {
+      "info": "Mehr Informationen"
+    }
+  }
+}

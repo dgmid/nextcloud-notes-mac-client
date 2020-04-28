@@ -19,7 +19,7 @@ const template = [
 		label: name,
 		submenu: [
 			{
-				label: i18n.t('menu:app.about', 'About') + ` ${name}`,
+				label: i18n.t('menu:app.about', 'About {{name}}', {name: name}),
 				click() { about.createAbout() }
 			},
 			{
@@ -49,7 +49,7 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: i18n.t('menu:app.hide', 'Hide') + ` ${name}`,
+				label: i18n.t('menu:app.hide', 'Hide {{name}}', {name: name}),
 				role: 'hide'
 			},
 			{
@@ -64,7 +64,7 @@ const template = [
 				type: 'separator'
 			},
 			{
-				label: i18n.t('menu:app.quit', 'Quit') + ` ${name}`,
+				label: i18n.t('menu:app.quit', 'Quit {{name}}', {name: name}),
 				role: 'quit'
 			}
 		]

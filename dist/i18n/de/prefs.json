@@ -1,0 +1,28 @@
+{
+  "head": {
+    "title": "Einstellungen"
+  },
+  "body": {
+    "option": {
+      "date": "Datum",
+      "title": "Titel",
+      "desc": "Absteigend",
+      "asc": "Aufsteigend",
+      "os": "OS Standardeinstellung",
+      "light": "hell",
+      "dark": "dunkel"
+    },
+    "label": {
+      "sort": "Notizen sortieren nach",
+      "order": "Notizen anordnen nach",
+      "zoom": "Standard-Textgröße",
+      "cursor": "Cursor-Position",
+      "start": "Anfang",
+      "end": "Ende",
+      "search": "Suche",
+      "stopwords": "Ignoriere gängige Begriffe: die, der, und etc.",
+      "stemming": "Ähnliche Begriffe finden, z.B.: suchen = gesucht = suchen",
+      "theme": "Thema"
+    }
+  }
+}

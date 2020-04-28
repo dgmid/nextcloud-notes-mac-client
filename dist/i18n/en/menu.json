@@ -1,13 +1,13 @@
 {
   "app": {
-    "about": "About",
+    "about": "About {{name}}",
     "login": "Log in/out to Nextcloud",
     "prefs": "Preferences",
     "services": "Services",
-    "hide": "Hide",
+    "hide": "Hide {{name}}",
     "hideothers": "Hide Others",
     "showall": "Show All",
-    "quit": "Quit"
+    "quit": "Quit {{name}}"
   },
   "note": {
     "note": "Note",
