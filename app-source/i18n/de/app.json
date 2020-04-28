@@ -1,0 +1,87 @@
+{
+  "titlebar": {
+    "update": "Aktualisierung verfügbar"
+  },
+  "toolbar": {
+    "heading": "Überschrift",
+    "bold": "Fett",
+    "italic": "Kursiv",
+    "strikethrough": "Durchgestrichen",
+    "ul": "Unsortierte Liste",
+    "ol": "Nummerierte Liste",
+    "checklist": "Kontrollkästchen Liste (Shift-Cmd-Alt-L)",
+    "link": "Verknüpfung erstellen (Cmd-K)",
+    "image": "Bild einfügen",
+    "code": "Code",
+    "quote": "Zitat",
+    "table": "Tabelle einfügen",
+    "hr": "Horizontale Linie einfügen"
+  },
+  "dialog": {
+    "error": {
+      "server": {
+        "title": "Server-Fehler",
+        "text": "Es gab einen Fehler beim Abrufen"
+      },
+      "json": {
+        "title": "JSON Parsing-Fehler",
+        "text": "Beim Parsen der Notizen ist ein Fehler aufgetreten"
+      },
+      "message": {
+        "400": "Ungültige Anfrage",
+        "401": "Unautorisiert",
+        "403": "Verboten",
+        "404": "Nicht gefunden",
+        "500": "Interner Server-Fehler",
+        "501": "Nicht implementiert",
+        "502": "Schlechtes Portal",
+        "503": "Dienst nicht verfügbar",
+        "504": "Portal-Auszeit",
+        "default": "Unspezifiziert"
+      }
+    },
+    "button": {
+      "export": "Notiz exportieren",
+      "savechanges": "Änderungen speichern",
+      "cancel": "Abbrechen",
+      "delete": "Notiz löschen"
+    },
+    "format": {
+      "html": "html",
+      "md": "markdown",
+      "txt": "text"
+    },
+    "save": {
+      "title": "Sie haben Änderungen an dieser Notiz vorgenommen",
+      "text": "Wollen Sie diese speichern?"
+    },
+    "delete": {
+      "title": "Sind Sie sicher, dass Sie diese Notiz löschen möchten?",
+      "text": "Dieser Vorgang ist nicht umkehrbar."
+    }
+  },
+  "sidebar": {
+    "notext": "Kein zusätzlicher Text",
+    "new": "Neue Notiz",
+    "search": "Suche"
+  },
+  "categories": {
+    "title": "Kategorien",
+    "all": "Alle Notizen",
+    "fav": "Favoriten",
+    "none": "Unkategorisiert"
+  },
+  "notification": {
+    "export": {
+      "text": "Die Notiz {{title}} wurde als {{filetype}} exportiert"
+    }
+  },
+  "main": {
+    "title": "Titel",
+    "description": "Beschreibung",
+    "button": {
+      "edit": "Notiz bearbeiten",
+      "save": "Notiz speichern"
+    }
+  }
+}

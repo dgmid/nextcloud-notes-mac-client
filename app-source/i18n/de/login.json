@@ -1,0 +1,21 @@
+{
+  "body": {
+    "header": "Anmeldung bei Nextcloud:",
+    "label": {
+      "server": "Server"
+    },
+    "input": {
+      "placeholder": "https://deine-server-addresse.de",
+      "title": "Dieses Feld ist erforderlich"
+    },
+    "certificate": {
+      "title": "Server-Zertifikat ignorieren",
+      "text": "Die Verbindung wird nicht sicher sein"
+    },
+    "button": {
+      "cancel": "Abbrechen",
+      "logout": "‹ Abmelden",
+      "login": "Anmelden ›"
+    }
+  }
+}
