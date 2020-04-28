@@ -4,10 +4,10 @@
     "login": "Anmeldung/Abmeldung bei Nextcloud",
     "prefs": "Einstellungen",
     "services": "Dienste",
-    "hide": "Verbergen",
-    "hideothers": "Andere verbergen",
-    "showall": "Alle anzeigen",
-    "quit": "Beenden"
+    "hide": "ausblenden",
+    "hideothers": "Andere ausblenden",
+    "showall": "Alle einblenden",
+    "quit": "beenden"
   },
   "note": {
     "note": "Notiz",
