@@ -120,6 +120,7 @@ module.exports.easymdeSetup = {
 				},
 			],
 	shortcuts: {
+		'toggleHeadingSmaller': 'Cmd-Alt-H',
 		'drawLink': null,
 		'toggleStrikethrough': 'Shift-Cmd-D',
 		'toggleBlockquote': 'Cmd-\'',
