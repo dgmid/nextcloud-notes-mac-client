@@ -1,0 +1,16 @@
+{
+  "body": {
+    "header": "Eine neue Kategorie erstellen:",
+    "label": {
+      "new": "Name"
+    },
+    "input": {
+      "placeholder": "alphanumerisch",
+      "title": "Dieses Feld ist erforderlich"
+    },
+    "button": {
+      "cancel": "Abbrechen",
+      "create": "Kategorie erstellen"
+    }
+  }
+}

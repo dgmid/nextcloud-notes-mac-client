@@ -1,0 +1,16 @@
+{
+  "body": {
+    "header": "Eine Tabelle einfügen:",
+    "label": {
+      "columns": "Spalten",
+      "rows": "Zeilen"
+    },
+    "input": {
+      "title": "Dieses Feld ist erforderlich"
+    },
+    "button": {
+      "cancel": "Abbrechen",
+      "create": "Einfügen"
+    }
+  }
+}

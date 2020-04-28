@@ -1,0 +1,19 @@
+{
+  "speech": {
+    "speech": "Sprache",
+    "start": "Mit dem Sprechen beginnen",
+    "stop": "Aufhören zu sprechen"
+  },
+  "paragraph": "Absatzformate",
+  "entities": {
+    "entities": "Einheiten enkodieren/dekodieren",
+    "encode": "Einheiten enkodieren",
+    "decode": "Einheiten dekodieren"
+  },
+  "transformations": {
+    "transformations": "Transformationen",
+    "upper": "Großbuchstaben",
+    "lower": "Kleinbuchstaben",
+    "caps": "Kapitälchen"
+  }
+}

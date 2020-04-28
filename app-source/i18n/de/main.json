@@ -1,0 +1,10 @@
+{
+  "dialog": {
+    "error": {
+      "cert": {
+        "title": "Die Verbindung ist nicht privat",
+        "text": "Das Zertifikat für {{{- Server}} wird von Ihrem Betriebssystem nicht als vertrauenswürdig eingestuft.\n\nSie müssen dem Zertifikat im Schlüsselbund vertrauen oder mit einer unsicheren Verbindung fortfahren."
+      }
+    }
+  }
+}
