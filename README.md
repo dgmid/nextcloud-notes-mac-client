@@ -57,3 +57,5 @@ Translations for this app are by:
 | EN | [dgmid](https://github.com/dgmid) |
 | IT | [dgmid](https://github.com/dgmid) |
 | DE | [stratmaster](https://github.com/stratmaster) |
+| ES | Juan Velasco |
+
