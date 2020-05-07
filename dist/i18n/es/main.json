@@ -1,0 +1,10 @@
+{
+  "dialog": {
+    "error": {
+      "cert": {
+        "title": "Su conexión no es privada",
+        "text": "Su sistema operativo no confía en el certificado para {{- server}} .\n\nDebe confiar el certificado en Acceso a Llaveros o proceder con una conexión insegura."
+      }
+    }
+  }
+}

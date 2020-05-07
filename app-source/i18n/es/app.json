@@ -1,0 +1,87 @@
+{
+  "titlebar": {
+    "update": "Actualización Disponible"
+  },
+  "toolbar": {
+    "heading": "Título",
+    "bold": "Negrita",
+    "italic": "Itálica",
+    "strikethrough": "Tachada",
+    "ul": "Lista Genérica",
+    "ol": "Lista Numerada",
+    "checklist": "Casillas de Verificación (Shift-Cmd-Alt-L)",
+    "link": "Crear Enlace  (Cmd-K)",
+    "image": "Insertar Imagen",
+    "code": "Código",
+    "quote": "Citar",
+    "table": "Insertar Tabla",
+    "hr": "Insertar Línea Horizontal"
+  },
+  "dialog": {
+    "error": {
+      "server": {
+        "title": "Error del Servidor",
+        "text": "se produjo un error al recuperar"
+      },
+      "json": {
+        "title": "JSON error de sintáxis",
+        "text": "Se produjo un error al analizar las notas"
+      },
+      "message": {
+        "400": "Solicitud Incorrecta",
+        "401": "No Autorizado",
+        "403": "Prohibido",
+        "404": "No Encontrado",
+        "500": "Error Interno del Servidor",
+        "501": "No Implementado",
+        "502": "Puerta de Enlace Incorrecta",
+        "503": "Servicio no Disponible",
+        "504": "Tiempo de espera agotado para la Puerta de Enlace",
+        "default": "Sin especificar"
+      }
+    },
+    "button": {
+      "export": "Exportar Nota",
+      "savechanges": "Guardar Cambios",
+      "cancel": "Cancelar",
+      "delete": "Eliminar Nota"
+    },
+    "format": {
+      "html": "html",
+      "md": "markdown",
+      "txt": "text"
+    },
+    "save": {
+      "title": "Ha realizado cambios en esta nota",
+      "text": "¿Quiere guardarlos?"
+    },
+    "delete": {
+      "title": "¿Está seguro de que desea eliminar esta nota?",
+      "text": "Esta operación es irreversible."
+    }
+  },
+  "sidebar": {
+    "notext": "Sin texto adicional",
+    "new": "Nueva nota",
+    "search": "Buscar"
+  },
+  "categories": {
+    "title": "Categorías",
+    "all": "Todas las notas",
+    "fav": "Favoritos",
+    "none": "Sin categoría"
+  },
+  "notification": {
+    "export": {
+      "text": "La nota {{title}} se ha exportado como {{filetype}}"
+    }
+  },
+  "main": {
+    "title": "título",
+    "description": "descripción",
+    "button": {
+      "edit": "Editar nota",
+      "save": "Guardar nota"
+    }
+  }
+}

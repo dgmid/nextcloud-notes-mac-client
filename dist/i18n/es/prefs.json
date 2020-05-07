@@ -1,0 +1,28 @@
+{
+  "head": {
+    "title": "Preferencias"
+  },
+  "body": {
+    "option": {
+      "date": "Fecha",
+      "title": "Título",
+      "desc": "Descendente",
+      "asc": "Ascendente",
+      "os": "Predeterminado del SO",
+      "light": "Claro",
+      "dark": "Oscuro"
+    },
+    "label": {
+      "sort": "Ordenar notas por",
+      "order": "En el orden",
+      "zoom": "Tamaño de fuente predeterminado",
+      "cursor": "Posición del cursor",
+      "start": "al inicio",
+      "end": "al final",
+      "search": "Buscar",
+      "stopwords": "Ignorar los términos comunes: un, el, y etc.",
+      "stemming": "Buscar términos similares, por ejem: buscando = buscado = buscar",
+      "theme": "Tema"
+    }
+  }
+}

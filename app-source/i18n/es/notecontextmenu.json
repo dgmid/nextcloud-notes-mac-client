@@ -1,0 +1,19 @@
+{
+  "speech": {
+    "speech": "Hablar",
+    "start": "Comienza a Hablar",
+    "stop": "Deja de hablar"
+  },
+  "paragraph": "Estilos de Párrafo",
+  "entities": {
+    "entities": "Codificar / Descodificar Entidades",
+    "encode": "Codificar Entidades",
+    "decode": "Descodificar Entidades"
+  },
+  "transformations": {
+    "transformations": "Transformaciones",
+    "upper": "Hacer Mayúsculas",
+    "lower": "Hacer Minúsculas",
+    "caps": "Capitalizar"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "body": {
+    "header": "Insertar una tabla:",
+    "label": {
+      "columns": "Columnas",
+      "rows": "Filas"
+    },
+    "input": {
+      "title": "este campo es obligatorio"
+    },
+    "button": {
+      "cancel": "Cancelar",
+      "create": "Insertar"
+    }
+  }
+}

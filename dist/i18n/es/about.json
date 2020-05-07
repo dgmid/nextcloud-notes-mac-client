@@ -1,0 +1,13 @@
+{
+  "body": {
+    "description": "Acceda y edite sus notas de Nextcloud en la Mac",
+    "label": {
+      "version": "versión:",
+      "author": "autor:",
+      "license": "licencia:"
+    },
+    "button": {
+      "info": "más información"
+    }
+  }
+}

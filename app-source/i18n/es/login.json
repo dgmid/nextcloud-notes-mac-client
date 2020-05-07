@@ -1,0 +1,21 @@
+{
+  "body": {
+    "header": "Inicie sesión en Nextcloud:",
+    "label": {
+      "server": "servidor"
+    },
+    "input": {
+      "placeholder": "https://dirección-de-su-servidor.com",
+      "title": "este campo es obligatorio"
+    },
+    "certificate": {
+      "title": "Ignorar el certificado del servidor",
+      "text": "su conexión no será segura"
+    },
+    "button": {
+      "cancel": "Cancelar",
+      "logout": "‹ Cerrar sesión",
+      "login": "Iniciar sesión ›"
+    }
+  }
+}

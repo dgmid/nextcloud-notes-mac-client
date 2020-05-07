@@ -1,0 +1,16 @@
+{
+  "body": {
+    "header": "Insertar un hipervínculo:",
+    "label": {
+      "url": "Hipervínculo"
+    },
+    "input": {
+      "placeholder": "https://ejemplo.com",
+      "title": "este campo es obligatorio"
+    },
+    "button": {
+      "cancel": "Cancelar",
+      "create": "Insertar"
+    }
+  }
+}

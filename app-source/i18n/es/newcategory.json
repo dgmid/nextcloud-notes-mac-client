@@ -1,0 +1,16 @@
+{
+  "body": {
+    "header": "Crear una Nueva Nategoría:",
+    "label": {
+      "new": "Nombre"
+    },
+    "input": {
+      "placeholder": "alfanumérico",
+      "title": "este campo es obligatorio"
+    },
+    "button": {
+      "cancel": "Cancelar",
+      "create": "Crear Categoría"
+    }
+  }
+}
