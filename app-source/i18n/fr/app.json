@@ -1,0 +1,87 @@
+{
+  "titlebar": {
+    "update": "Mise à jour disponible"
+  },
+  "toolbar": {
+    "heading": "Capitale",
+    "bold": "Gras",
+    "italic": "Italique",
+    "strikethrough": "Barré",
+    "ul": "Liste générique",
+    "ol": "Liste numérotée",
+    "checklist": "Liste à cocher (Shift-Cmd-Alt-L)",
+    "link": "Générer un lien (Cmd-K)",
+    "image": "Insérer une image",
+    "code": "Code",
+    "quote": "Notation",
+    "table": "Insérer un tableau",
+    "hr": "Insérer une ligne horizontale"
+  },
+  "dialog": {
+    "error": {
+      "server": {
+        "title": "Erreur du serveur",
+        "text": "Erreur de récupération"
+      },
+      "json": {
+        "title": "JSON parsing error",
+        "text": "Erreur dans l’analyse des notes"
+      },
+      "message": {
+        "400": "Mauvaise requête",
+        "401": "Non autorisé",
+        "403": "Interdit",
+        "404": "Non trouvé",
+        "500": "Erreur du serveur",
+        "501": "N’est pas implémenté",
+        "502": "Mauvaise passerelle",
+        "503": "Service indisponible",
+        "504": "Temps d’attente expiré",
+        "default": "Non spécifié"
+      }
+    },
+    "button": {
+      "export": "Exporter la note",
+      "savechanges": "Enregistrer les changements",
+      "cancel": "Ferner",
+      "delete": "Supprimer la note"
+    },
+    "format": {
+      "html": "html",
+      "md": "markdown",
+      "txt": "texte"
+    },
+    "save": {
+      "title": "Vous avez fait des changements pour cette note",
+      "text": "Voulez-vous la sauvegarder?"
+    },
+    "delete": {
+      "title": "Êtes-vous sûr de vouloir supprimer cette note?",
+      "text": "Cette opération est irréversible."
+    }
+  },
+  "sidebar": {
+    "notext": "Pas d’autre texte",
+    "new": "Nouvelle note",
+    "search": "Rechercher"
+  },
+  "categories": {
+    "title": "Catégories",
+    "all": "Toutes les notes",
+    "fav": "Favoris",
+    "none": "Sans catégorie"
+  },
+  "notification": {
+    "export": {
+      "text": "Cette note {{title}} a été exportée comme {{filetype}}"
+    }
+  },
+  "main": {
+    "title": "Titre",
+    "description": "Description",
+    "button": {
+      "edit": "Éditer la note",
+      "save": "Sauvegarder la note"
+    }
+  }
+}

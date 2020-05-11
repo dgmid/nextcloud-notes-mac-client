@@ -1,0 +1,13 @@
+{
+  "body": {
+    "description": "Accédez et Éditez vos notes Nextcloud sous Mac",
+    "label": {
+      "version": "Version:",
+      "author": "Auteur:",
+      "license": "Licence:"
+    },
+    "button": {
+      "info": "Plus d’information"
+    }
+  }
+}

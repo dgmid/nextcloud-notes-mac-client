@@ -1,0 +1,16 @@
+{
+  "body": {
+    "header": "Insérer un lien:",
+    "label": {
+      "url": "Lien"
+    },
+    "input": {
+      "placeholder": "https://exemple.com",
+      "title": "Ce champ est obligatoire"
+    },
+    "button": {
+      "cancel": "Ferner",
+      "create": "Insérer"
+    }
+  }
+}

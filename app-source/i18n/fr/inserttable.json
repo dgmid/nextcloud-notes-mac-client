@@ -1,0 +1,16 @@
+{
+  "body": {
+    "header": "Insérer un tableau:",
+    "label": {
+      "columns": "Colonne",
+      "rows": "Ligne"
+    },
+    "input": {
+      "title": "Ce champ est obligatoire"
+    },
+    "button": {
+      "cancel": "Fermer",
+      "create": "Insérer"
+    }
+  }
+}

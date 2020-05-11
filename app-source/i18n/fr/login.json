@@ -1,0 +1,21 @@
+{
+  "body": {
+    "header": "Connexion Nextcloud:",
+    "label": {
+      "server": "Serveur"
+    },
+    "input": {
+      "placeholder": "https://votre-serveur-addresse.com",
+      "title": "Ce champ est obligatoire"
+    },
+    "certificate": {
+      "title": "Ignorer le certificat du serveur",
+      "text": "Votre connexion ne sera pas sécurisée"
+    },
+    "button": {
+      "cancel": "Fermer",
+      "logout": "‹ Déconnexion",
+      "login": "Connexion ›"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "dialog": {
+    "error": {
+      "cert": {
+        "title": "Votre connexion n’est pas privée",
+        "text": "Le certificat pour {{- server}} n’est pas reconnue par votre système d’exploitation.\n\nVous devez accepter le certificat pour accéder au gestionnaire ou précéder avec une connexion non sécurisée."
+      }
+    }
+  }
+}

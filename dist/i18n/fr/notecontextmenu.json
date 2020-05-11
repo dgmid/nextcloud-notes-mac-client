@@ -1,0 +1,19 @@
+{
+  "speech": {
+    "speech": "Parole",
+    "start": "Commencez à parler",
+    "stop": "Cesser de parler"
+  },
+  "paragraph": "Styles des paragraphes",
+  "entities": {
+    "entities": "Encoder / décoder les intitulés",
+    "encode": "Encoder l’intitulé",
+    "decode": "Décoder l’intitulé"
+  },
+  "transformations": {
+    "transformations": "Tranformations",
+    "upper": "Mettre en majuscule",
+    "lower": "Mettre en minuscule",
+    "caps": "Immobiliser"
+  }
+}

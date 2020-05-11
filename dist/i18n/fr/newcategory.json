@@ -1,0 +1,16 @@
+{
+  "body": {
+    "header": "Créer une nouvelle catégorie:",
+    "label": {
+      "new": "Nom"
+    },
+    "input": {
+      "placeholder": "Alphanumérique",
+      "title": "Ce champ est obligatoire"
+    },
+    "button": {
+      "cancel": "Fermer",
+      "create": "Créer une catégorie"
+    }
+  }
+}

@@ -58,4 +58,4 @@ Translations for this app are by:
 | IT | [dgmid](https://github.com/dgmid) |
 | DE | [stratmaster](https://github.com/stratmaster) |
 | ES | Juan Velasco |
-
+| FR | Alain Grau |

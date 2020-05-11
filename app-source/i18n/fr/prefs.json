@@ -1,0 +1,28 @@
+{
+  "head": {
+    "title": "Préférences"
+  },
+  "body": {
+    "option": {
+      "date": "Date",
+      "title": "Titre",
+      "desc": "Descendant",
+      "asc": "Ascendant",
+      "os": "Système par défaut",
+      "light": "Clair",
+      "dark": "Sombre"
+    },
+    "label": {
+      "sort": "Trier les notes par",
+      "order": "Organiser les notes par",
+      "zoom": "Taille du texte par défaut",
+      "cursor": "Position du curseur",
+      "start": "Début",
+      "end": "Fin",
+      "search": "Rechercher",
+      "stopwords": "Ignorer les mots communs: un, le, et, etc.",
+      "stemming": "Trouver un mot ressemblant, ex.: chercher = cherché = recherche",
+      "theme": "Thème"
+    }
+  }
+}
