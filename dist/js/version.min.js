@@ -20,7 +20,7 @@ module.exports = {
 			
 			if( compareVersions.compare( version, latest, '<' ) ) {
 				
-				module.exports.displayVersion( `<button id="update" class="version" type="button" tabindex="-1" data-url="https://www.midwinter-dg.com/mac-apps/nextcloud-notes-client.html?app"><span id="update-version">${latest}</span> <span id="update-label">${i18n.t('app:titlebar.update', 'Update Available')}</span> &rarr;</button>` )
+				module.exports.displayVersion( `<button id="update" class="version" type="button" tabindex="-1" data-url="https://github.com/dgmid/nextcloud-notes-mac-client/releases/latest"><span id="update-version">${latest}</span> <span id="update-label">${i18n.t('app:titlebar.update', 'Update Available')}</span> &rarr;</button>` )
 			}
 			
 			if( compareVersions.compare( version, latest, '>' ) ) {
