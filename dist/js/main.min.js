@@ -88,11 +88,8 @@ function createWindow() {
 			preload: path.join(__dirname, './preload.min.js'),
 			nodeIntegration: true,
 			spellcheck: true
-		},
-		icon: path.join(__dirname, '../assets/icon/Icon.icns')
+		}
 	})
-	
-	//win.setSheetOffset( 23 )
 	
 	function saveWindowBounds() {
 		
