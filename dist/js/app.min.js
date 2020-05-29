@@ -1126,22 +1126,6 @@ ipcRenderer.on('add-table', (event, message) => {
 
 
 
-//note(dgmid): window state
-
-ipcRenderer.on('state', (event, message) => {
-	
-	if( message === 'blur' ) {
-		
-		$('body').addClass( 'blurred' )
-		
-	} else {
-		
-		$('body').removeClass( 'blurred' )
-	}
-})
-
-
-
 //note(dgmid): on quit without saving
 
 ipcRenderer.on('before-quit', (event, message) => {

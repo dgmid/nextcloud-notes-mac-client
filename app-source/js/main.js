@@ -113,12 +113,12 @@ function createWindow() {
 
 	win.on('blur', () => {
 		
-		win.webContents.send('state', 'blur')
+		win.setVibrancy( 'window' )
 	})
 	
 	win.on('focus', () => {
 		
-		win.webContents.send('state', 'focus')
+		win.setVibrancy( 'sidebar' )
 	})
 	
 	win.on('close', (e) => {
