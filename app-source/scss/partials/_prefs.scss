@@ -38,15 +38,29 @@ section {
 		select,
 		input[type="range"] {
 			
+			appearance: none;
 			background-color: transparent;
 			display: block;
 			width: calc(100% - 160px);
 			font-size: 13.5px;
 		}
 		
+		input[type="range"] {
+			
+			background-image: var(--datalist);
+			background-repeat: no-repeat;
+			background-position: right 7px top;
+		}
+		
 		input[type=range]::-webkit-slider-thumb {
 			
+			appearance: none;
+			width: 15px;
+			height: 15px;
+			border-radius: 50%;
 			margin-top: -5px;
+			background-image: linear-gradient(to bottom, #f8f8f8, #ececec);
+			border: 1px solid #a8a8a8;
 		}
 		
 		input[type=range]::-webkit-slider-runnable-track {
@@ -55,6 +69,17 @@ section {
 			border-radius: 2px;
 			background: var(--accent-light);
 			box-shadow: inset 0 2px 0 var(--accent);
+		}
+		
+		input[type="range"]:focus {
+			
+			outline: none;
+			
+			&::-webkit-slider-thumb {
+				
+				border-color: var(--accent);
+				box-shadow: 0 0 2px 3px var(--accent-light);
+			}
 		}
 		
 		.select-container {
