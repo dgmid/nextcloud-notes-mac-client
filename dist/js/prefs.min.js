@@ -32,6 +32,14 @@ window.onerror = function( error, url, line ) {
 
 $(document).ready(function() {
 	
+	$( 'input[type="radio"]' ).each(function( i, obj ) {
+		
+		let radio = document.querySelector( '#radio-svg' ),
+			clone = radio.content.cloneNode( true )
+			
+			$( obj ).after( clone )
+	})
+	
 	$('#sortby').val( store.get('appSettings.sortby') )
 	$('#orderby').val( store.get('appSettings.orderby') )
 	$('#zoom').val( store.get('appSettings.zoom') )
