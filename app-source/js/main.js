@@ -278,7 +278,7 @@ app.on('open-prefs', () => {
 		prefs = new BrowserWindow({
 			
 			width: 548,
-			height: 454,
+			height: 474,
 			resizable: false,
 			minimizable: false,
 			maximizable: false,

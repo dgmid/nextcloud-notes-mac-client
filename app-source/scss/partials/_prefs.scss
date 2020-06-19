@@ -271,7 +271,10 @@ section {
 				
 				& + svg {
 					
-					.radio-back { fill: url(#dark-back); }
+					.radio-back {
+						
+						fill: url(#dark-back);
+					}
 					.radio-border-light { fill: transparent; }
 					.radio-border-dark { fill: rgba(255,255,255,.3); }
 				}
