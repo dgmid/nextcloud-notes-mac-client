@@ -81,7 +81,7 @@ section {
 			&::-webkit-slider-thumb {
 				
 				border-color: var(--accent);
-				box-shadow: 0 0 2px 3px var(--accent-light);
+				box-shadow: 0 0 3px 2px var(--accent-light);
 			}
 		}
 		
@@ -102,7 +102,7 @@ section {
 				
 				outline: none;
 				border-color: var(--accent);
-				box-shadow: 0 0 2px 3px var(--accent-light);
+				box-shadow: 0 0 3px 2px var(--accent-light);
 			}
 			
 			& + svg {
@@ -170,7 +170,7 @@ section {
 				
 				outline: none;
 				border-color: var(--accent);
-				box-shadow: 0 0 2px 3px var(--accent-light);
+				box-shadow: 0 0 3px 2px var(--accent-light);
 			}
 		}
 		
@@ -234,7 +234,7 @@ section {
 		input:focus + .slider {
 			
 			border-color: var(--accent);
-			box-shadow: 0 0 2px 3px var(--accent-light);
+			box-shadow: 0 0 3px 2px var(--accent-light);
 		}
 			
 		input:checked + .slider:before { transform: translateX(21px); }
@@ -282,7 +282,7 @@ section {
 			input:focus + .slider {
 				
 				border-color: var(--accent);
-				box-shadow: 0 0 2px 3px var(--accent-light);
+				box-shadow: 0 0 3px 2px var(--accent-light);
 			}
 			
 			input[type="radio"] {
