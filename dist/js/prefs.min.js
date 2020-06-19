@@ -32,6 +32,14 @@ window.onerror = function( error, url, line ) {
 
 $(document).ready(function() {
 	
+	$( '.select-container select' ).each(function( i, obj ) {
+		
+		let select = document.querySelector( '#select-svg' ),
+		clone = select.content.cloneNode( true )
+		
+		$( obj ).after( clone )
+	})
+	
 	$( 'input[type="radio"]' ).each(function( i, obj ) {
 		
 		let radio = document.querySelector( '#radio-svg' ),

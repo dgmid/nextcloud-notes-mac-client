@@ -85,19 +85,7 @@ section {
 			}
 		}
 		
-		.select-container {
-			
-			position: relative;
-			
-			&::after {
-				
-				content: var(--select-arrow);
-				position: absolute;
-				top: 0;
-				right: 8px;
-				pointer-events: none;
-			}
-		}
+		.select-container { position: relative; }
 		
 		select {
 			
@@ -115,6 +103,18 @@ section {
 				outline: none;
 				border-color: var(--accent);
 				box-shadow: 0 0 2px 3px var(--accent-light);
+			}
+			
+			& + svg {
+				
+				pointer-events: none;
+				
+				position: absolute;
+				top: 0;
+				right: 2px;
+				
+				.select-back { fill: url(#light-gradient); }
+				.select-border-dark { opacity: 0; }
 			}
 		}
 		
@@ -246,6 +246,13 @@ section {
 				border-left: 0;
 				border-right: 0;
 				border-bottom: 0;
+				
+				& + svg {
+					
+					.select-back { fill: var(--accent); }
+					.select-border-light { opacity: 0; }
+					.select-border-dark { opacity: 1; }
+				}
 			}
 			
 			input[type=range]::-webkit-slider-runnable-track {
