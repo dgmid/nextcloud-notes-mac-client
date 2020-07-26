@@ -161,7 +161,7 @@ function createWindow() {
 			const 	user = url[1].replace('user:', ''),
 					pass = url[2].replace('password:', '')
 			
-			store.set( 'loginCredentials.username', user )
+			store.set( 'loginCredentials.username', decodeURIComponent(user) )
 			store.set( 'loginCredentials.password', pass )
 			
 			loginFlow.close()

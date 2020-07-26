@@ -19,7 +19,6 @@ module.exports.openModal = function( url, width, height, resize ) {
 		minHeight: height,
 		resizable: resize,
 		show: false,
-		frame: false,
 		transparent: true,
 		vibrancy: 'popover',
 		webPreferences: {
