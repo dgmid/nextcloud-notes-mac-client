@@ -24,8 +24,9 @@ module.exports.createAbout = () => {
 			alwaysOnTop: true,
 			webPreferences: {
 				devTools: true,
-				preload: path.join(__dirname, './preload.min.js'),
-				nodeIntegration: true
+				nodeIntegration: true,
+				enableRemoteModule: true,
+				preload: path.join(__dirname, './preload.min.js')
 			}
 		})
 		

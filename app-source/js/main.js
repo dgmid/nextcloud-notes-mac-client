@@ -85,8 +85,9 @@ function createWindow() {
 		vibrancy: 'sidebar',
 		webPreferences: {
 			devTools: true,
-			preload: path.join(__dirname, './preload.min.js'),
 			nodeIntegration: true,
+			enableRemoteModule: true,
+			preload: path.join(__dirname, './preload.min.js'),
 			spellcheck: true
 		}
 	})
@@ -286,8 +287,9 @@ app.on('open-prefs', () => {
 			vibrancy: 'under-window',
 			webPreferences: {
 				devTools: true,
-				preload: path.join(__dirname, './preload.min.js'),
-				nodeIntegration: true
+				nodeIntegration: true,
+				enableRemoteModule: true,
+				preload: path.join(__dirname, './preload.min.js')
 			},
 		})
 		
@@ -334,7 +336,7 @@ app.on('open-prefs', () => {
 
  ipcMain.on('quit-app', (event, message) => {
 	 
-	 if( willQuit ) app.quit()
+	if( willQuit ) app.quit()
  })
  
  
