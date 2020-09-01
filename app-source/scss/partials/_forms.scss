@@ -50,7 +50,7 @@ form {
 			
 			padding-bottom: 10px;
 			
-			label {
+			label:not(.cert-warning) {
 				
 				display: block;
 				float: left;
@@ -73,6 +73,7 @@ form {
 				svg {
 					
 					fill: var(--code-yellow-lt);
+					margin-bottom: 2px;
 				}
 			}
 			
@@ -92,6 +93,12 @@ form {
 				background-repeat: no-repeat;
 				
 				transition: background-color .15s;
+				
+				&:focus {
+					
+					outline: 2px solid var(--accent);
+					box-shadow: 0 0 3px 2px var(--accent-light);
+				}
 				
 				&[required] {
 				
@@ -114,7 +121,28 @@ form {
 			
 			input[type="checkbox"] {
 				
-				vertical-align: 2px;
+				appearance: none;
+				
+				& + svg {
+					
+					.checkbox-back { fill: #fff; }
+					.border-light { fill: var(--accent-dark); }
+					.border-dark { fill: transparent; }
+					.check { opacity: 0; }
+				}
+				
+				&:checked + svg {
+					
+					.checkbox-back { fill: var(--accent-light); }
+					.border-light { fill: var(--accent-dark); }
+					.check { opacity: 1; }
+				}
+				
+				&:focus + svg {
+					
+					border-radius: 3px;
+					box-shadow: 0 0 3px 2px var(--accent-light);
+				}
 			}
 			
 			.cert-warning {
@@ -163,6 +191,24 @@ footer {
 					box-shadow:
 						inset 0 0 1px rgba(255,255,255,.5),
 						inset 0 6px 4px -4px rgba(0,0,0,.2);
+				}
+				
+				input[type="checkbox"] {
+					
+					appearance: none;
+					
+					& + svg {
+						
+						.checkbox-back { fill: url(#dark-back); }
+						.border-light { fill: transparent; }
+						.border-dark { fill: rgba(255,255,255,.3); }
+					}
+					
+					&:checked + svg {
+						
+						.checkbox-back { fill: var(--accent); }
+						.border-light { fill: transparent; }
+					}
 				}
 			}
 		}
