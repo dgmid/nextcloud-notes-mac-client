@@ -1365,6 +1365,16 @@ $('#clear').click(function() {
 })
 
 
+$('#search').blur( function() {
+	
+	if( $(this).val().length < 1 ) {
+		
+		$('#result').hide()
+		categories.selectCategory( store.get( 'categories.selected' ) )
+		$('.categories button.selected').focus()
+	}
+})
+
 
 //note(dgmid): initial focus
 

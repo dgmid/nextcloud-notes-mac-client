@@ -84,7 +84,7 @@ function createWindow() {
 		title: '',
 		vibrancy: 'sidebar',
 		webPreferences: {
-			devTools: false,
+			devTools: true,
 			nodeIntegration: true,
 			enableRemoteModule: true,
 			preload: path.join(__dirname, './preload.min.js'),
@@ -232,7 +232,7 @@ ipcMain.on('loginflow', (event, message) => {
 		titleBarStyle: 'hidden',
 		backgroundColor: '#0082c9',
 		webPreferences: {
-			devTools: false,
+			devTools: true,
 			nodeIntegration: false
 		}
 	})
@@ -286,7 +286,7 @@ app.on('open-prefs', () => {
 			show: false,
 			vibrancy: 'under-window',
 			webPreferences: {
-				devTools: false,
+				devTools: true,
 				nodeIntegration: true,
 				enableRemoteModule: true,
 				preload: path.join(__dirname, './preload.min.js')

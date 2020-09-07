@@ -163,6 +163,6 @@ function searchResult( result, clean ) {
 	
 	for( let id of result ) {
 		
-		$(`#sidebar li[data-id='${id}']`).show()	
+		$(`#sidebar li[data-id='${id}']`).show()
 	}
 }
