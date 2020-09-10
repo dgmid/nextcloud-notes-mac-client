@@ -19,7 +19,8 @@
     "newcat": "Neue Kategorie…",
     "nocat": "Unkategorisiert",
     "export": "Ausgewählte Notiz exportieren als",
-    "delete": "Ausgewählte Notiz löschen"
+    "delete": "Ausgewählte Notiz löschen",
+    "print": "Drucken…"
   },
   "edit": {
     "edit": "Bearbeiten",
