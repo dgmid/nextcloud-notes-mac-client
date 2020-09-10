@@ -123,6 +123,14 @@ const template = [
 				accelerator: 'Cmd+d',
 				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'delete') }
 			},
+			{
+				type: 'separator'
+			},
+			{
+				label: i18n.t('menu:note.print', 'Print…'),
+				accelerator: 'Cmd+p',
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'print') }
+			}
 		]
 	},
 	{

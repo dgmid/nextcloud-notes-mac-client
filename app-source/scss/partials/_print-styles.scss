@@ -1,0 +1,38 @@
+
+:root {
+	
+	--text:	black;
+	--table-head: #ddd;
+	--table-stripe: #ddd;
+	--table-border: grey;
+}
+
+body {
+	
+	-webkit-print-color-adjust: exact;
+}
+
+#document {
+	
+	line-height: 1.4;
+	padding: 22px;
+}
+
+.editor-preview-active {
+
+	th, td {
+		
+		border-width: 1px;
+		border-style: solid;
+	}
+	
+	pre {
+		
+		tab-size: 1;
+	}
+	
+	hr {
+		
+		border-color: var(--table-border);
+	}
+}

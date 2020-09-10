@@ -6,6 +6,7 @@
   "main": "dist/js/main.min.js",
   "scripts": {
     "start": "electron .",
+    "rebuild": "./node_modules/.bin/electron-rebuild",
     "debug": "electron . --debug-brk = 5858",
     "package": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=10.1.1 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;"
   },
@@ -52,6 +53,7 @@
     "del": "^5.1.0",
     "devtron": "^1.4.0",
     "electron": "^10.1.1",
+    "electron-rebuild": "^2.0.2",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-cssnano": "^2.1.3",

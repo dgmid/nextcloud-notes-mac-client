@@ -770,6 +770,13 @@ ipcRenderer.on('note', (event, message) => {
 			if( selected ) deleteCheck( selected )
 		break
 		
+		case 'print':
+			
+			let note = $('.editor-preview').html()
+			ipcRenderer.send( 'print-preview', note )
+			
+		break
+		
 		case 'selectall':
 			
 			if( $('#search').is(':focus') ) {

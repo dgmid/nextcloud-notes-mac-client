@@ -19,7 +19,8 @@
     "newcat": "New Category…",
     "nocat": "Uncategorised",
     "export": "Export Selected Note as",
-    "delete": "Delete Selected Note"
+    "delete": "Delete Selected Note",
+    "print": "Print…"
   },
   "edit": {
     "edit": "Edit",
