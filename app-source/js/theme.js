@@ -43,6 +43,7 @@ window.__setTheme = () => {
 	}
 	
 	document.documentElement.setAttribute( 'style', `--accent: ${accent}; --accent-light: ${accent_light}; --accent-dark: ${accent_dark}; --app-light: ${app_light}; --app-dark: ${app_dark};`)
+	document.documentElement.setAttribute( 'data-colors', `["${accent}","${accent_light}","${accent_dark}","${app_light}","${app_dark}"]` )
 }
 
 __setTheme()

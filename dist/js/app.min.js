@@ -453,6 +453,7 @@ function prepareToSave( selected ) {
 	}
 	
 	easymde.togglePreview()
+	
 	$('.editor-toolbar button').removeClass('active')
 	$('#edit').attr('title', i18n.t('app:main.button.edit', 'Edit Note')).removeClass('editing').focus()
 	setCheckLists()
@@ -781,14 +782,14 @@ ipcRenderer.on('note', (event, message) => {
 		
 		case 'print':
 			
+			let colors = $('html').data( 'colors' )
+			
 			if( easymde.isPreviewActive() ) {
 			
 				let note = $('.editor-preview').html()
-				ipcRenderer.send( 'print-preview', note )
+				ipcRenderer.send( 'print-preview', { "note": note, "colors": colors } )
 			
 			} else {
-				
-				//sono qui
 				
 				prepareToSave( selected )
 				
@@ -805,7 +806,7 @@ ipcRenderer.on('note', (event, message) => {
 				store.set( 'appSettings.editing', false  )
 				
 				let note = $('.editor-preview').html()
-				ipcRenderer.send( 'print-preview', note )
+				ipcRenderer.send( 'print-preview', { "note": note, "colors": colors } )
 			}
 			
 		break
