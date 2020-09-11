@@ -403,7 +403,7 @@ ipcMain.on('print-preview', (event, message) => {
 	
 	printWindow = new BrowserWindow({
 		
-		show: false,
+		show: true,
 		webPreferences: {
 			devTools: true,
 			nodeIntegration: true,
@@ -412,9 +412,10 @@ ipcMain.on('print-preview', (event, message) => {
 	})
 	
 	
-	let css = fs.readFileSync(path.join(__dirname, '../css/print.min.css') ,'utf8')
+	let css		= fs.readFileSync(path.join(__dirname, '../css/print.min.css') ,'utf8'),
+		zoom 	= store.get( 'appSettings.zoom' )
 	
-	let head = `<html><head><meta charset="utf-8"><style>${css}</style></head><body style="--accent: #923796; --accent-light: #A83FAD; --accent-dark: #782D7C; --app-light: #A83FAD; --app-dark: #782D7C;"><div class="editor-preview-active" style="padding: 22px;">`,
+	let head = `<html><head><meta charset="utf-8"><style>${css}</style></head><body style="--accent: #923796; --accent-light: #A83FAD; --accent-dark: #782D7C; --app-light: #A83FAD; --app-dark: #782D7C;"><div class="editor-preview-active" style="padding: 22px; font-size: ${zoom/10}rem">`,
 		foot = `</div></body>`
 	
 	printWindow.loadURL( `data:text/html;charset=UTF-8,${encodeURIComponent(head + message + foot)}` )
