@@ -35,6 +35,14 @@ ipcMain.on('show-notes-menu', ( event, message ) => {
 				type: 'separator'
 			},
 			{
+				label: i18n.t('menu:note.print', 'Print…'),
+				accelerator: 'Cmd+p',
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'print') }
+			},
+			{
+				type: 'separator'
+			},
+			{
 				label: i18n.t('notecontextmenu:speech.speech', 'Speech'),
 				submenu: [
 					{
