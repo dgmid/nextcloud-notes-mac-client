@@ -403,6 +403,7 @@ ipcMain.on('print-preview', (event, message) => {
 	
 	printWindow = new BrowserWindow({
 		
+		show: false,
 		webPreferences: {
 			devTools: true,
 			nodeIntegration: true,

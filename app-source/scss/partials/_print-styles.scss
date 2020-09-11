@@ -19,6 +19,12 @@ body {
 }
 
 .editor-preview-active {
+	
+	table,
+	pre {
+		
+		page-break-inside: avoid;
+	}
 
 	th, td {
 		
