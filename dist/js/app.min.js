@@ -318,6 +318,7 @@ function displayNote( note ) {
 		
 		easymde.togglePreview()
 		setCheckLists()
+		applyZoom( store.get( 'appSettings.zoom' ) )
 	
 	} else {
 			
