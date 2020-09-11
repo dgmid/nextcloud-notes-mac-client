@@ -392,17 +392,7 @@ function editNote() {
 		
 		} else {
 			
-			if( easymde.codemirror.historySize().undo > 0 ) {
-				
-				saveDialog( selected )
-			}
-			
-			easymde.togglePreview()
-			$('.editor-toolbar button').removeClass('active')
-			$('#edit').attr('title', i18n.t('app:main.button.edit', 'Edit Note')).removeClass('editing').focus()
-			setCheckLists()
-			
-			store.set( 'appSettings.editing', false  )
+			prepareToSave( selected )
 		}
 	}
 }
@@ -453,6 +443,25 @@ function toggleEditorCheckboxes( element ) {
 
 
 
+//note(dgmid): prepare to save
+
+function prepareToSave( selected ) {
+	
+	if( easymde.codemirror.historySize().undo > 0 ) {
+		
+		saveDialog( selected )
+	}
+	
+	easymde.togglePreview()
+	$('.editor-toolbar button').removeClass('active')
+	$('#edit').attr('title', i18n.t('app:main.button.edit', 'Edit Note')).removeClass('editing').focus()
+	setCheckLists()
+	
+	store.set( 'appSettings.editing', false  )
+}
+
+
+
 //note(dgmid): save dialog
 
 function saveDialog( selected ) {
@@ -465,7 +474,7 @@ function saveDialog( selected ) {
 	
 	if( response === 0 ) {
 		
-		let body = {	
+		let body = {
 			"content": easymde.value(),
 			"modified": Math.floor(Date.now() / 1000)
 		}
@@ -480,7 +489,7 @@ function saveDialog( selected ) {
 	} else {
 
 		while ( easymde.codemirror.historySize().undo > 0) easymde.codemirror.undo()
-		ipcRenderer.send( 'quit-app', '' )	
+		ipcRenderer.send( 'quit-app', '' )
 	}
 }
 
@@ -772,8 +781,32 @@ ipcRenderer.on('note', (event, message) => {
 		
 		case 'print':
 			
-			let note = $('.editor-preview').html()
-			ipcRenderer.send( 'print-preview', note )
+			if( easymde.isPreviewActive() ) {
+			
+				let note = $('.editor-preview').html()
+				ipcRenderer.send( 'print-preview', note )
+			
+			} else {
+				
+				//sono qui
+				
+				prepareToSave( selected )
+				
+				if( easymde.codemirror.historySize().undo > 0 ) {
+					
+					saveDialog( selected )
+				}
+				
+				easymde.togglePreview()
+				$('.editor-toolbar button').removeClass('active')
+				$('#edit').attr('title', i18n.t('app:main.button.edit', 'Edit Note')).removeClass('editing').focus()
+				setCheckLists()
+				
+				store.set( 'appSettings.editing', false  )
+				
+				let note = $('.editor-preview').html()
+				ipcRenderer.send( 'print-preview', note )
+			}
 			
 		break
 		
@@ -784,7 +817,6 @@ ipcRenderer.on('note', (event, message) => {
 				$('#search').select()
 				
 			} else if( !easymde.isPreviewActive() ) {
-				
 				
 				easymde.codemirror.execCommand('selectAll')
 			
