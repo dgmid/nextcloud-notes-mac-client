@@ -765,6 +765,48 @@ ipcRenderer.on('note', (event, message) => {
 			}
 		break
 		
+		case 'import':
+			
+			const importfile = require( './import.min' )
+			
+			importfile.importFile( function( file ) {
+				
+				let body
+				
+				switch( store.get( 'categories.selected' ) ) {
+				
+					case '##all##':
+					case '##none##':
+						
+						body = {
+							"content": file
+						}
+						
+					break
+					
+					case '##fav##':
+						
+						body = {
+							"content": file,
+							"favorite": true
+						}
+						
+					break
+					
+					default:
+						
+						body = {
+							"content": file,
+							"category": $('.categories li button.selected').data('category')
+						}
+				}
+				
+				fetch.apiCall( 'new', null, body, function( call, id, body, notes ) {
+					
+					fetchResult( call, id, body, notes )
+				})
+			})
+			
 		break
 		
 		case 'export':

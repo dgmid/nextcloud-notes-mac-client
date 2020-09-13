@@ -18,7 +18,7 @@ module.exports.exportNote = function( note ) {
 	const exportPath = store.get('exportPath')
 	
 	dialog.showSaveDialog(remote.getCurrentWindow(), {
-			
+		
 		defaultPath: `${exportPath}/${note.title}`,
 		buttonLabel: i18n.t('app:dialog.button.export', 'Export Note'),
 		properties: [	'openDirectory',
@@ -36,7 +36,7 @@ module.exports.exportNote = function( note ) {
 				}
 			]
 		}
-	).then((data) =>{
+	).then((data) => {
 		
 		if( data.canceled === false ) {
 			

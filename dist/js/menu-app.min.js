@@ -1,16 +1,16 @@
 'use strict'
 
-const i18n 				= require( './i18n.min' )
-const electron 			= require( 'electron' )
-const { Menu, shell } 	= require( 'electron' )
-const app 				= electron.app
-const ipc 				= electron.ipcMain
-const path 				= require( 'path' )
-const name 				= app.name
+const i18n				= require( './i18n.min' )
+const electron			= require( 'electron' )
+const { Menu, shell }	= require( 'electron' )
+const app				= electron.app
+const ipc				= electron.ipcMain
+const path				= require( 'path' )
+const name				= app.name
 const Store				= require( 'electron-store' )
 const store				= new Store()
 
-const about 			= require( './about.min' )
+const about				= require( './about.min' )
 
 let ordercats = ( store.get( 'appSettings.ordercats' ) === 'asc' ) ? true : false
 
@@ -109,6 +109,14 @@ const template = [
 						click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'nocat') }
 					}
 				]
+			},
+			{
+				type: 'separator'
+			},
+			{
+				label: i18n.t('menu:note.import', 'Import') + '…',
+				accelerator: 'Cmd+Alt+Ctrl+i',
+				click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'import') }
 			},
 			{
 				label: i18n.t('menu:note.export', 'Export Selected Note as') + '…',
