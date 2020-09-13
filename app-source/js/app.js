@@ -804,6 +804,11 @@ ipcRenderer.on('note', (event, message) => {
 				fetch.apiCall( 'new', null, body, function( call, id, body, notes ) {
 					
 					fetchResult( call, id, body, notes )
+					
+					let importNotification = new Notification('Nextcloud Notes Client', {
+						
+						body: i18n.t('app:notification.import.text', 'The file has been imported')
+					})
 				})
 			})
 			
