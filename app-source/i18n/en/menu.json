@@ -18,6 +18,7 @@
     "move": "Move Selected Note to",
     "newcat": "New Category…",
     "nocat": "Uncategorised",
+    "import": "Import",
     "export": "Export Selected Note as",
     "delete": "Delete Selected Note",
     "print": "Print…"
