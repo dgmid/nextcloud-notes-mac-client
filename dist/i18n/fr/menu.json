@@ -18,6 +18,7 @@
     "move": "Déplacer la note vers",
     "newcat": "Nouvelle catégorie…",
     "nocat": "Sans catégorie",
+    "import": "Importer",
     "export": "Exporter la note sous",
     "delete": "Supprimer la note",
     "print": "Imprimer…"

@@ -40,7 +40,11 @@
         "default": "Unspezifiziert"
       }
     },
+    "message": {
+      "import": "Sie können die folgenden Dateiformate importieren: .md, .txt"
+    },
     "button": {
+      "import": "Datei importieren",
       "export": "Notiz exportieren",
       "savechanges": "Änderungen speichern",
       "cancel": "Abbrechen",
@@ -72,6 +76,9 @@
     "none": "Unkategorisiert"
   },
   "notification": {
+    "import": {
+      "text": "Die Datei wurde importiert"
+    },
     "export": {
       "text": "Die Notiz {{title}} wurde als {{filetype}} exportiert"
     }
