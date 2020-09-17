@@ -5,6 +5,7 @@ const i18n				= require( './i18n.min' )
 const { remote }		= require( 'electron' )
 const app				= remote.app
 const dialog			= remote.dialog
+const path				= require('path')
 const fs				= require( 'fs-extra' )
 const log				= require( 'electron-log' )
 
@@ -30,14 +31,16 @@ module.exports.importFile = function( callback ) {
 		
 		if( data.canceled === false ) {
 			
-			fs.readFile( data.filePaths[0], 'utf8', function ( err, file ) {
+			let filename = path.basename( data.filePaths[0] )
+			
+			fs.readFile( data.filePaths[0], 'utf8', function ( err, filecontents ) {
 			
 				if ( err ) {
 					
 					return log.info( err )
 				}
 				
-				callback( file )
+				callback( filename, filecontents )
 			})
 		}
 	})

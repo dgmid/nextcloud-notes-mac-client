@@ -76,7 +76,7 @@
   },
   "notification": {
     "import": {
-      "text": "Il file è stato importato"
+      "text": "Il file {{filename}} è stato importato"
     },
     "export": {
       "text": "La nota {{title}} è stato esportato come {{filetype}}"

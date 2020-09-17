@@ -160,7 +160,6 @@ function wrapBlockToSelection( start, end ) {
 	
 	note.replaceRange(
 `${start}
-
 ${end}`, cursor)
 	
 	cursor = note.getCursor()
@@ -769,7 +768,7 @@ ipcRenderer.on('note', (event, message) => {
 			
 			const importfile = require( './import.min' )
 			
-			importfile.importFile( function( file ) {
+			importfile.importFile( function( filename, filecontents ) {
 				
 				let body
 				
@@ -779,7 +778,7 @@ ipcRenderer.on('note', (event, message) => {
 					case '##none##':
 						
 						body = {
-							"content": file
+							"content": filecontents
 						}
 						
 					break
@@ -787,7 +786,7 @@ ipcRenderer.on('note', (event, message) => {
 					case '##fav##':
 						
 						body = {
-							"content": file,
+							"content": filecontents,
 							"favorite": true
 						}
 						
@@ -796,7 +795,7 @@ ipcRenderer.on('note', (event, message) => {
 					default:
 						
 						body = {
-							"content": file,
+							"content": filecontents,
 							"category": $('.categories li button.selected').data('category')
 						}
 				}
@@ -807,7 +806,7 @@ ipcRenderer.on('note', (event, message) => {
 					
 					let importNotification = new Notification('Nextcloud Notes Client', {
 						
-						body: i18n.t('app:notification.import.text', 'The file has been imported')
+						body: i18n.t('app:notification.import.text', 'The file {{filename}} has been imported', { filename: filename })
 					})
 				})
 			})
@@ -1149,7 +1148,7 @@ ipcRenderer.on('context-note-caps', (event, message) => {
 
 function capitalize( string ) {
 
-    return string.replace(/(?:^|\s)\S/g,
+	return string.replace(/(?:^|\s)\S/g,
 		function(a) {
 			return a.toLocaleUpperCase( i18n.language )
 	})
