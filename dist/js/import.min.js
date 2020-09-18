@@ -6,6 +6,8 @@ const { remote }		= require( 'electron' )
 const app				= remote.app
 const dialog			= remote.dialog
 const path				= require('path')
+const Store				= require( 'electron-store' )
+const store				= new Store()
 const fs				= require( 'fs-extra' )
 const log				= require( 'electron-log' )
 
@@ -31,7 +33,7 @@ module.exports.importFile = function( callback ) {
 		
 		if( data.canceled === false ) {
 			
-			let filename = path.basename( data.filePaths[0] )
+			let	filename = path.basename( data.filePaths[0] )
 			
 			fs.readFile( data.filePaths[0], 'utf8', function ( err, filecontents ) {
 			
@@ -40,7 +42,37 @@ module.exports.importFile = function( callback ) {
 					return log.info( err )
 				}
 				
-				callback( filename, filecontents )
+				let body
+				
+				switch( store.get( 'categories.selected' ) ) {
+				
+					case '##all##':
+					case '##none##':
+						
+						body = {
+							"content": filecontents
+						}
+						
+					break
+					
+					case '##fav##':
+						
+						body = {
+							"content": filecontents,
+							"favorite": true
+						}
+						
+					break
+					
+					default:
+						
+						body = {
+							"content": filecontents,
+							"category": $('.categories li button.selected').data('category')
+						}
+				}
+				
+				callback( filename, body )
 			})
 		}
 	})

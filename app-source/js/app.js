@@ -768,37 +768,7 @@ ipcRenderer.on('note', (event, message) => {
 			
 			const importfile = require( './import.min' )
 			
-			importfile.importFile( function( filename, filecontents ) {
-				
-				let body
-				
-				switch( store.get( 'categories.selected' ) ) {
-				
-					case '##all##':
-					case '##none##':
-						
-						body = {
-							"content": filecontents
-						}
-						
-					break
-					
-					case '##fav##':
-						
-						body = {
-							"content": filecontents,
-							"favorite": true
-						}
-						
-					break
-					
-					default:
-						
-						body = {
-							"content": filecontents,
-							"category": $('.categories li button.selected').data('category')
-						}
-				}
+			importfile.importFile( function( filename, body ) {
 				
 				fetch.apiCall( 'new', null, body, function( call, id, body, notes ) {
 					
