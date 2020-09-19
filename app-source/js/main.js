@@ -1,7 +1,7 @@
 'use strict'
 
 const {app, BrowserWindow, ipcMain, protocol, webContents} = require('electron')
-const url		= require( 'url' ) 
+const url		= require( 'url' )
 const path		= require( 'path' )
 const dialog	= require( 'electron' ).dialog
 const Store		= require( 'electron-store' )
@@ -11,10 +11,11 @@ const log		= require( 'electron-log' )
 const marked 			= require( 'marked' )
 const removeMarkdown	= require( 'remove-markdown' )
 
+const preferences = require( './window-prefs.min' )
+const ncLoginflow = require( './window-nc-loginflow.min' )
+
 
 let win,
-	loginFlow,
-	prefs = null,
 	willQuit = false
 
 let store = new Store({
@@ -167,7 +168,8 @@ function createWindow() {
 			store.set( 'loginCredentials.username', decodeURIComponent(user) )
 			store.set( 'loginCredentials.password', pass )
 			
-			loginFlow.close()
+			//loginFlow.close()
+			ncLoginflow.closeLoginflow()
 			
 			win.webContents.send('close-login-modal', 'close-login-modal')
 			win.webContents.send('reload-sidebar', 'login')
@@ -223,119 +225,14 @@ process.on('uncaughtException', (err, origin) => {
 
 ipcMain.on('loginflow', (event, message) => {
 	
-	loginFlow = new BrowserWindow({
-		
-		width: 800,
-		height: 600,
-		resizable: false,
-		minimizable: false,
-		maximizable: false,
-		show: false,
-		titleBarStyle: 'hidden',
-		backgroundColor: '#0082c9',
-		webPreferences: {
-			devTools: true,
-			nodeIntegration: false
-		}
-	})
-	
-	loginFlow.loadURL( message + '/index.php/login/flow' , {
-		
-		userAgent: 'Nextcloud Notes Client - Macintosh',
-		extraHeaders: 'OCS-APIRequest: true'
-	})
-	
-	loginFlow.once('ready-to-show', () => {
-		
-		loginFlow.show()
-	})
-	
-	loginFlow.webContents.on('did-fail-load', () => {
-		
-		log.error( `loginflow window did not load` )
-	})
-	
-	loginFlow.webContents.on( 'crashed', ( event, killed ) => {
-		
-		log.info( `loginflow window has crashed:` )
-		log.error( event )
-	})
-	
-	loginFlow.on( 'unresponsive', () => {
-		
-		log.info( `loginflow window is not responding…` )
-	})
-	
-	loginFlow.on( 'responsive', () => {
-		
-		log.info( `loginflow window is responding` )
-	})
+	ncLoginflow.openLoginflow( message )
 })
 
 
 
 app.on('open-prefs', () => {
 	
-	if( prefs === null ) {
-		
-		prefs = new BrowserWindow({
-			
-			width: 548,
-			height: 474,
-			resizable: false,
-			minimizable: false,
-			maximizable: false,
-			show: false,
-			vibrancy: 'under-window',
-			webPreferences: {
-				devTools: true,
-				nodeIntegration: true,
-				enableRemoteModule: true,
-				preload: path.join(__dirname, './preload.min.js')
-			},
-		})
-		
-		prefs.loadURL(url.format ({ 
-			
-			pathname: path.join(__dirname, '../html/prefs.html'), 
-			protocol: 'file:', 
-			slashes: true 
-		}))
-		
-		prefs.once('ready-to-show', () => {
-			
-			prefs.show()
-		})
-		
-		prefs.webContents.on('did-fail-load', () => {
-			
-			log.error( `prefs window did not load` )
-		})
-		
-		prefs.webContents.on( 'crashed', ( event, killed ) => {
-			
-			log.info( `prefs window has crashed:` )
-			log.error( event )
-		})
-		
-		prefs.on( 'unresponsive', () => {
-			
-			log.info( `prefs window is not responding…` )
-		})
-		
-		prefs.on( 'responsive', () => {
-			
-			log.info( `prefs window is responding` )
-		})
-		
-		prefs.on('close', () => {
-			prefs = null
-		})
-	
-	} else {
-		
-		prefs.focus()
-	}
+	preferences.openPrefs()
 })
 
 
