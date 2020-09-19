@@ -7,7 +7,7 @@ const path = require('path')
 let about = null
 
 
-module.exports.createAbout = () => {
+module.exports.openAbout = () => {
 	
 	if( about === null ) {
 		

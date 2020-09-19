@@ -10,7 +10,7 @@ const name				= app.name
 const Store				= require( 'electron-store' )
 const store				= new Store()
 
-const about				= require( './about.min' )
+const about				= require( './window-about.min' )
 
 let ordercats = ( store.get( 'appSettings.ordercats' ) === 'asc' ) ? true : false
 
@@ -20,7 +20,7 @@ const template = [
 		submenu: [
 			{
 				label: i18n.t('menu:app.about', 'About {{name}}', {name: name}),
-				click() { about.createAbout() }
+				click() { about.openAbout() }
 			},
 			{
 				type: 'separator'
