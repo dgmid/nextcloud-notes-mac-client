@@ -64,7 +64,7 @@ ipcRenderer.on('set-theme', (event, message) => {
 
 
 
-$(document).ready(function() {	
+$(document).ready(function() {
 	
 	//note(dgmid): cancel modal
 	

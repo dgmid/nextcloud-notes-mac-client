@@ -64,64 +64,65 @@ dateFormat.i18n = {
 
 
 
-module.exports.titlebarDate = function( timestamp ) {
+module.exports = {
 	
-	let date,
-		time = dateFormat(timestamp * 1000, "HH:MM"),
-		prep = i18n.t('date:at', 'at')
-	
-	if( locale.startsWith('de') ) {
+	titlebarDate: function( timestamp ) {
 		
-		date = dateFormat(timestamp * 1000, "dd. mmmm yyyy")
+		let date,
+			time = dateFormat(timestamp * 1000, "HH:MM"),
+			prep = i18n.t('date:at', 'at')
 		
-	} else {
-		
-		date = dateFormat(timestamp * 1000, "d mmmm, yyyy")
-	}
-		
-	return `${date} ${prep} ${time}`
-}
-
-
-
-module.exports.sidebarDate = function ( timestamp ) {
-	
-	let today		= new Date(),
-		yesterday	= new Date(),
-		week		= new Date()
-	
-	today.setHours( 0, 0, 0, 0 )
-	yesterday.setHours( 0, 0, 0, 0 )
-	yesterday.setDate( yesterday.getDate() - 1 )
-	week.setHours( 0, 0, 0, 0 )
-	week.setDate( week.getDate() - 7 )
-	
-	
-	if( ( today.getTime() / 1000 ) < timestamp ) {
-		
-		//if today - show time
-		return dateFormat( timestamp * 1000, 'H:MM' )
-	
-	} else if ( ( yesterday.getTime() / 1000 ) < timestamp ) {
-		
-		//if yesterday - show string
-		return i18n.t('date:yesterday', 'yesterday')
-	
-	} else if ( ( week.getTime() / 1000 ) < timestamp ) {
-		
-		//if last week - show day
-		return dateFormat( timestamp * 1000, 'dddd' )
-	
-	} else {
-		
-		//else - show date
 		if( locale.startsWith('de') ) {
 			
-			return dateFormat( timestamp * 1000, 'dd.mm.yyyy' )
+			date = dateFormat(timestamp * 1000, "dd. mmmm yyyy")
+			
+		} else {
+			
+			date = dateFormat(timestamp * 1000, "d mmmm, yyyy")
+		}
+			
+		return `${date} ${prep} ${time}`
+	},
+	
+	sidebarDate: function ( timestamp ) {
+		
+		let today		= new Date(),
+			yesterday	= new Date(),
+			week		= new Date()
+		
+		today.setHours( 0, 0, 0, 0 )
+		yesterday.setHours( 0, 0, 0, 0 )
+		yesterday.setDate( yesterday.getDate() - 1 )
+		week.setHours( 0, 0, 0, 0 )
+		week.setDate( week.getDate() - 7 )
+		
+		
+		if( ( today.getTime() / 1000 ) < timestamp ) {
+			
+			//if today - show time
+			return dateFormat( timestamp * 1000, 'H:MM' )
+		
+		} else if ( ( yesterday.getTime() / 1000 ) < timestamp ) {
+			
+			//if yesterday - show string
+			return i18n.t('date:yesterday', 'yesterday')
+		
+		} else if ( ( week.getTime() / 1000 ) < timestamp ) {
+			
+			//if last week - show day
+			return dateFormat( timestamp * 1000, 'dddd' )
 		
 		} else {
 			
-			return dateFormat( timestamp * 1000, 'dd/mm/yy' )
+			//else - show date
+			if( locale.startsWith('de') ) {
+				
+				return dateFormat( timestamp * 1000, 'dd.mm.yyyy' )
+			
+			} else {
+				
+				return dateFormat( timestamp * 1000, 'dd/mm/yy' )
+			}
 		}
 	}
 }

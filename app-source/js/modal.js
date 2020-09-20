@@ -6,40 +6,41 @@ const path = require( 'path' )
 let modal
 
 
-module.exports.openModal = function( url, width, height, resize ) {
+module.exports = {
 	
-	modal = new remote.BrowserWindow({
-	
-		parent: remote.getCurrentWindow(),
-		modal: true,
-		width: width,
-		minWidth: width,
-		maxWidth: width,
-		height: height,
-		minHeight: height,
-		resizable: resize,
-		show: false,
-		transparent: true,
-		vibrancy: 'popover',
-		webPreferences: {
-			devTools: true,
-			nodeIntegration: true,
-			enableRemoteModule: true,
-			preload: path.join(__dirname, './preload.min.js')
-		}	
-	})
+	openModal: function( url, width, height, resize ) {
 		
-	modal.loadURL( url )
-	
-	modal.once('ready-to-show', () => {
+		modal = new remote.BrowserWindow({
 		
-		modal.show()
-	})	
-}
-
-
-
-module.exports.closeModal = function() {
+			parent: remote.getCurrentWindow(),
+			modal: true,
+			width: width,
+			minWidth: width,
+			maxWidth: width,
+			height: height,
+			minHeight: height,
+			resizable: resize,
+			show: false,
+			transparent: true,
+			vibrancy: 'popover',
+			webPreferences: {
+				devTools: true,
+				nodeIntegration: true,
+				enableRemoteModule: true,
+				preload: path.join(__dirname, './preload.min.js')
+			}	
+		})
+			
+		modal.loadURL( url )
+		
+		modal.once('ready-to-show', () => {
+			
+			modal.show()
+		})	
+	},
 	
-	modal.close()
+	closeModal: function() {
+		
+		modal.close()
+	}
 }
