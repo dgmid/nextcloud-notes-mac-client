@@ -389,7 +389,9 @@ function editNote() {
 				
 				easymde.codemirror.setCursor(easymde.codemirror.lineCount(), 0)
 			}
-		
+			
+			ipcRenderer.send( 'update-touchbar', true )
+			
 		} else {
 			
 			prepareToSave( selected )
@@ -458,7 +460,9 @@ function prepareToSave( selected ) {
 	$('#edit').attr('title', i18n.t('app:main.button.edit', 'Edit Note')).removeClass('editing').focus()
 	setCheckLists()
 	
-	store.set( 'appSettings.editing', false  )
+	store.set( 'appSettings.editing', false )
+	
+	ipcRenderer.send( 'update-touchbar', false )
 }
 
 

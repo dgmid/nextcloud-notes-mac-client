@@ -7,6 +7,7 @@ const Store		= require( 'electron-store' )
 const log		= require( 'electron-log' )
 
 const ncLoginflow = require( './window-nc-loginflow.min' )
+const touchbar = require( './touchbar.min' )
 
 let win,
 	willQuit = false
@@ -181,6 +182,18 @@ module.exports.windowWillQuit = function() {
 	
 	return willQuit
 }
+
+
+app.whenReady().then( () => {
+	
+	touchbar.createTouchbar( win, store.get( 'appSettings.editing' ) )
+})
+
+
+ipcMain.on('update-touchbar', (event, message) => {
+	
+	touchbar.createTouchbar( win, message )
+})
 
 
 ipcMain.on('update-titlebar', (event, message) => {
