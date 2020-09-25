@@ -192,7 +192,7 @@ app.whenReady().then( () => {
 
 ipcMain.on('update-touchbar', (event, message) => {
 	
-	touchbar.createTouchbar( win, message )
+	touchbar.switchTouchbar( win, message )
 })
 
 
