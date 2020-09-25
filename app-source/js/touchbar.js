@@ -1,7 +1,9 @@
 'use strict'
 
-const { TouchBar } = require('electron')
-const log	= require( 'electron-log' )
+const { TouchBar }	= require('electron')
+const path			= require( 'path' )
+const nativeImage	= require('electron').nativeImage
+const log			= require( 'electron-log' )
 
 const { TouchBarButton, TouchBarSpacer } = TouchBar
 let previewTouchbar, editTouchbar
@@ -18,13 +20,15 @@ module.exports = {
 				
 				new TouchBarButton({
 					
-					label: 'New',
+					accessibilityLabel: 'New',
+					icon: nativeImage.createFromPath( path.join(__dirname, '../assets/png/new_2x.png') ),
 					click: () => { window.webContents.send( 'note', 'new' ) }
 				}),
 				
 				new TouchBarButton({
 					
-					label: 'Delete',
+					accessibilityLabel: 'Delete',
+					icon: nativeImage.createFromPath( path.join(__dirname, '../assets/png/delete_2x.png') ),
 					click: () => { window.webContents.send( 'note', 'delete' ) }
 				}),
 				
@@ -32,13 +36,15 @@ module.exports = {
 				
 				new TouchBarButton({
 					
-					label: 'Export',
+					accessibilityLabel: 'Export',
+					icon: nativeImage.createFromPath( path.join(__dirname, '../assets/png/export_2x.png') ),
 					click: () => { window.webContents.send( 'note', 'export' ) }
 				}),
 				
 				new TouchBarButton({
 					
-					label: 'Print',
+					accessibilityLabel: 'Print',
+					icon: nativeImage.createFromPath( path.join(__dirname, '../assets/png/print_2x.png') ),
 					click: () => { window.webContents.send( 'note', 'print' ) }
 				}),
 				
@@ -46,13 +52,15 @@ module.exports = {
 				
 				new TouchBarButton({
 					
-					label: 'Search',
+					accessibilityLabel: 'Search',
+					icon: nativeImage.createFromPath( path.join(__dirname, '../assets/png/search_2x.png') ),
 					click: () => { window.webContents.send( 'note', 'find' ) }
 				}),
 				
 				new TouchBarButton({
 					
-					label: 'Categories',
+					accessibilityLabel: 'Categories',
+					icon: nativeImage.createFromPath( path.join(__dirname, '../assets/png/categories_2x.png') ),
 					click: () => { window.webContents.send( 'toggle-categories', '' ) }
 				})
 			]
@@ -64,7 +72,8 @@ module.exports = {
 			
 				new TouchBarButton({
 					
-					label: 'Save',
+					accessibilityLabel: 'Save',
+					icon: nativeImage.createFromPath( path.join(__dirname, '../assets/png/save_2x.png') ),
 					click: () => { window.webContents.send( 'note', 'save' ) }
 				})
 			]
@@ -72,13 +81,15 @@ module.exports = {
 		
 		previewTouchbar.escapeItem = new TouchBarButton({
 			
-			label: 'Edit',
+			accessibilityLabel: 'Edit',
+			icon: nativeImage.createFromPath( path.join(__dirname, '../assets/png/edit_2x.png') ),
 			click: () => { window.webContents.send( 'note', 'edit' ) }
 		}),
 		
 		editTouchbar.escapeItem = new TouchBarButton({
 			
-			label: 'Preview',
+			accessibilityLabel: 'Preview',
+			icon: nativeImage.createFromPath( path.join(__dirname, '../assets/png/preview_2x.png') ),
 			click: () => { window.webContents.send( 'note', 'edit' ) }
 		})
 		

@@ -22,6 +22,8 @@ const	sourceCss 		= 'app-source/scss/*.scss',
 		destHtml 		= 'dist/html',
 		sourceSvg 		= 'app-source/assets/svg/*.svg',
 		destSvg 		= 'dist/assets/svg',
+		sourcePng 		= 'app-source/assets/png/*.png',
+		destPng 		= 'dist/assets/png',
 		sourceLang 		= 'app-source/i18n/**/*.json',
 		destLang 		= 'dist/i18n'
 
@@ -77,6 +79,14 @@ gulp.task('svg', () => {
 	
 	return gulp.src(sourceSvg)
 		.pipe(gulp.dest(destSvg))
+})
+
+
+
+gulp.task('png', () => {
+	
+	return gulp.src(sourcePng)
+		.pipe(gulp.dest(destPng))
 })
 
 
@@ -171,6 +181,7 @@ gulp.task('build', gulp.series(
 	'html',
 	'js',
 	'svg',
+	'png',
 	'i18n',
 	'icns',
 	'icon',
