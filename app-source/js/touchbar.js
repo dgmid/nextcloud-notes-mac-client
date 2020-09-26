@@ -92,7 +92,7 @@ module.exports = {
 					
 					accessibilityLabel: i18n.t('touchbar:format.heading', 'Heading'),
 					icon: nativeImage.createFromPath( path.join(__dirname, '../assets/png/heading_2x.png') ),
-					click: () => {  }
+					click: () => { window.webContents.send('markdown', 'heading') }
 				}),
 				
 				new TouchBarButton({

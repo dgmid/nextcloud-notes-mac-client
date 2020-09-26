@@ -877,7 +877,7 @@ ipcRenderer.on('note', (event, message) => {
 
 
 
-//note(dgmid): markdown menu commands
+//note(dgmid): markdown menu & touchbar commands
 
 ipcRenderer.on('markdown', (event, message) => {
 	
@@ -885,6 +885,9 @@ ipcRenderer.on('markdown', (event, message) => {
 		
 		switch( message ) {
 			
+			case 'heading':
+				easymde.toggleHeadingSmaller()
+			break
 			case 'h1':
 				easymde.toggleHeading1()
 			break
