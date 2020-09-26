@@ -6,8 +6,11 @@ const path		= require( 'path' )
 const Store		= require( 'electron-store' )
 const log		= require( 'electron-log' )
 
-const ncLoginflow	= require( './window-nc-loginflow.min' )
-const touchbar		= require( './touchbar.min' )
+const menuApp			= require( './menu-app.min' )
+const menuSidebar		= require( './menu-sidebar.min' )
+const menuNotes			= require( './menu-notes.min' )
+const ncLoginflow		= require( './window-nc-loginflow.min' )
+const touchbar			= require( './touchbar.min' )
 
 let win,
 	willQuit = false
@@ -172,9 +175,9 @@ module.exports.openWindow = function() {
 		}
 	})
 	
-	require( './menu-app.min' )
-	require( './menu-sidebar.min' )
-	require( './menu-notes.min' )
+	menuApp.createMenu()
+	menuSidebar.createMenu( win )
+	menuNotes.createMenu( win )
 }
 
 
