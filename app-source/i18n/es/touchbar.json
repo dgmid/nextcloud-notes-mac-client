@@ -6,7 +6,19 @@
     "export": "Exportar",
     "print": "Impresión",
     "search": "Buscar",
-    "categories": "Categorías"
+    "categories": "Categorías",
+    "prefercences": "Preferencias"
+  },
+  "format": {
+    "heading": "Título",
+    "bold": "Negrita",
+    "italic": "Cursiva",
+    "ul": "Lista",
+    "check": "Casillas de verificación",
+    "link": "Enlace",
+    "image": "Imagen",
+    "code": "Código",
+    "table": "Tabla"
   },
   "edit": {
     "preview": "Avance",

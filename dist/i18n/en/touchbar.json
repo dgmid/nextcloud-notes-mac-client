@@ -6,7 +6,19 @@
     "export": "Export",
     "print": "Print",
     "search": "Search",
-    "categories": "Categories"
+    "categories": "Categories",
+    "prefercences": "Preferences"
+  },
+  "format": {
+    "heading": "Heading",
+    "bold": "Bold",
+    "italic": "Italic",
+    "ul": "List",
+    "check": "Checkbox List",
+    "link": "Link",
+    "image": "Image",
+    "code": "Code",
+    "table": "Table"
   },
   "edit": {
     "preview": "Preview",

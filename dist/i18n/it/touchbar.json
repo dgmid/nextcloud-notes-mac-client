@@ -6,7 +6,19 @@
     "export": "Esporta",
     "print": "Stampa",
     "search": "Cerca",
-    "categories": "Categorie"
+    "categories": "Categorie",
+    "prefercences": "Preferenze"
+  },
+  "format": {
+    "heading": "Intestazione",
+    "bold": "Grassetto",
+    "italic": "Corsivo",
+    "ul": "Lista",
+    "check": "Elenco di controllo",
+    "link": "Collegamento",
+    "image": "Immagine",
+    "code": "Codice",
+    "table": "Tabella"
   },
   "edit": {
     "preview": "Antiprima",

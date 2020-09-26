@@ -97,14 +97,14 @@ module.exports = {
 				
 				new TouchBarButton({
 					
-					accessibilityLabel: i18n.t('touchbar:format.heading', 'Bold'),
+					accessibilityLabel: i18n.t('touchbar:format.bold', 'Bold'),
 					icon: nativeImage.createFromPath( path.join(__dirname, '../assets/png/bold_2x.png') ),
 					click: () => { window.webContents.send('markdown', 'b') }
 				}),
 				
 				new TouchBarButton({
 					
-					accessibilityLabel: i18n.t('touchbar:format.heading', 'Italic'),
+					accessibilityLabel: i18n.t('touchbar:format.italic', 'Italic'),
 					icon: nativeImage.createFromPath( path.join(__dirname, '../assets/png/italic_2x.png') ),
 					click: () => { window.webContents.send('markdown', 'i') }
 				}),

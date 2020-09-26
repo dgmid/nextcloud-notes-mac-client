@@ -6,7 +6,19 @@
     "export": "Exportation",
     "print": "Impression",
     "search": "Chercher",
-    "categories": "Catégories"
+    "categories": "Catégories",
+    "prefercences": "Préférences"
+  },
+  "format": {
+    "heading": "Titre",
+    "bold": "Gras",
+    "italic": "Italique",
+    "ul": "Liste",
+    "check": "Liste à coches",
+    "link": "Lien",
+    "image": "Image",
+    "code": "Code",
+    "table": "Table"
   },
   "edit": {
     "preview": "Aperçu",
