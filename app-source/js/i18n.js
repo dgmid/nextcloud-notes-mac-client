@@ -13,6 +13,7 @@ const i18nextOptions = {
 	ns: [
 		'main',
 		'app',
+		'touchbar',
 		'date',
 		'menu',
 		'sidebarmenu',

@@ -1,0 +1,15 @@
+{
+  "preview": {
+    "new": "Nuovo",
+    "edit": "Modifica",
+    "delete": "Elimina",
+    "export": "Esporta",
+    "print": "Stampa",
+    "search": "Cerca",
+    "categories": "Categorie"
+  },
+  "edit": {
+    "preview": "Antiprima",
+    "save": "Salva"
+  }
+}

@@ -6,8 +6,8 @@ const path		= require( 'path' )
 const Store		= require( 'electron-store' )
 const log		= require( 'electron-log' )
 
-const ncLoginflow = require( './window-nc-loginflow.min' )
-const touchbar = require( './touchbar.min' )
+const ncLoginflow	= require( './window-nc-loginflow.min' )
+const touchbar		= require( './touchbar.min' )
 
 let win,
 	willQuit = false

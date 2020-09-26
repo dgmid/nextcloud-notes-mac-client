@@ -1,0 +1,15 @@
+{
+  "preview": {
+    "new": "New",
+    "edit": "Edit",
+    "delete": "Delete",
+    "export": "Export",
+    "print": "Print",
+    "search": "Search",
+    "categories": "Categories"
+  },
+  "edit": {
+    "preview": "Preview",
+    "save": "Save"
+  }
+}
