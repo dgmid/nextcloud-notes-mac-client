@@ -2,6 +2,7 @@
   "preview": {
     "new": "New",
     "edit": "Edit",
+    "favorite": "Favorite",
     "delete": "Delete",
     "export": "Export",
     "print": "Print",

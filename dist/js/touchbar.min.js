@@ -36,6 +36,13 @@ module.exports = {
 				
 				new TouchBarButton({
 					
+					accessibilityLabel: i18n.t('touchbar:preview.favorite', 'Favorite'),
+					icon: nativeImage.createFromPath( path.join(__dirname, '../assets/png/favorite_2x.png') ),
+					click: () => { window.webContents.send( 'note', 'favorite' ) }
+				}),
+				
+				new TouchBarButton({
+					
 					accessibilityLabel: i18n.t('touchbar:preview.delete', 'Delete'),
 					icon: nativeImage.createFromPath( path.join(__dirname, '../assets/png/delete_2x.png') ),
 					click: () => { window.webContents.send( 'note', 'delete' ) }
