@@ -1,9 +1,11 @@
 'use strict'
 
-const {BrowserWindow} = require('electron')
-const url	= require( 'url' )
-const path	= require( 'path' )
-const log	= require( 'electron-log' )
+const { app, BrowserWindow } = require('electron')
+const url		= require( 'url' )
+const path		= require( 'path' )
+const log		= require( 'electron-log' )
+
+const touchbar	= require( './touchbar.min' )
 
 let prefs = null
 
@@ -39,6 +41,7 @@ module.exports.openPrefs = function() {
 		prefs.once('ready-to-show', () => {
 			
 			prefs.show()
+			touchbar.prefsTouchbar( prefs )
 		})
 		
 		prefs.webContents.on('did-fail-load', () => {
@@ -71,3 +74,9 @@ module.exports.openPrefs = function() {
 		prefs.focus()
 	}
 }
+
+
+app.on('close-prefs', () => {
+	
+	prefs.close()
+})

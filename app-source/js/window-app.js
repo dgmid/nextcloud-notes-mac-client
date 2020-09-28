@@ -38,7 +38,8 @@ let store = new Store({
 			
 			sidebar: null,
 			selected: null,
-			categories: true
+			categories: true,
+			theme: 'default'
 		},
 		
 		appSettings: {

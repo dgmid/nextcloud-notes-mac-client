@@ -29,6 +29,34 @@ window.onerror = function( error, url, line ) {
 }
 
 
+ipcRenderer.on('touchbar-zoom', (event, message) => {
+	
+	$('#zoom').val( message )
+	store.set( 'appSettings.zoom', message )
+	ipcRenderer.send('set-zoom-slider', parseInt( message ) )
+})
+
+
+ipcRenderer.on('touchbar-theme', (event, message) => {
+	
+	store.set( 'appInterface.theme', message )
+	
+	if( message == 'default' ) {
+		
+		$('#os-theme').prop('checked', true)
+		localStorage.removeItem('user_theme')
+		ipcRenderer.send('update-theme', message )
+		__setTheme()
+		
+	} else {
+		
+		$(`#${message}`).prop('checked', true)
+		localStorage.user_theme = message
+		ipcRenderer.send('update-theme', message )
+		__setTheme()
+	}
+})
+
 
 $(document).ready(function() {
 	
@@ -102,10 +130,12 @@ $(document).ready(function() {
 				
 				let theme = $('[name$=theme]:checked').val()
 				
+				store.set( 'appInterface.theme', theme )
+				
 				if( theme == 'default' ) {
 					
 					localStorage.removeItem('user_theme')
-					ipcRenderer.send('update-theme', theme )
+					store.set( 'appInterface.theme', theme )
 					__setTheme()
 					
 				} else {
