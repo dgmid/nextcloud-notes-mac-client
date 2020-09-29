@@ -131,6 +131,7 @@ $(document).ready(function() {
 				let theme = $('[name$=theme]:checked').val()
 				
 				store.set( 'appInterface.theme', theme )
+				ipcRenderer.send( 'update-theme-touchbar', theme)
 				
 				if( theme == 'default' ) {
 					

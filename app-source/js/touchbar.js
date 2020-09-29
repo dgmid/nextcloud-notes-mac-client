@@ -19,7 +19,14 @@ const {
 
 } = TouchBar
 
-let previewBar, editBar, formatBar, prefsBar
+let previewBar,
+	editBar,
+	formatBar,
+	prefsBar,
+	textSlider,
+	themeSelect
+
+const themeVals	= ['default', 'light', 'dark']
 
 module.exports = {
 	
@@ -217,23 +224,39 @@ module.exports = {
 		
 		const i18n		= require( './i18n.min' )
 		const theme		= store.get( 'appInterface.theme' )
-		const themeVals	= ['default', 'light', 'dark']
+		let currentTheme = themeVals.indexOf( theme )
+		
+		textSlider = new TouchBarSlider({
+			
+			label: 'Text size',
+			value: store.get( 'appSettings.zoom' ),
+			minValue: 4,
+			maxValue: 16,
+			change: ( newValue ) => {
+				
+				window.webContents.send( 'touchbar-zoom', newValue )
+			}
+		})
+		
+		themeSelect = new TouchBarSegmentedControl({
+			
+			segments: [
+				{ label: 'OS Default' },
+				{ label: 'Light' },
+				{ label: 'Dark' }
+			],
+			selectedIndex: currentTheme,
+			change: ( selectedIndex ) => {
+				
+				window.webContents.send( 'touchbar-theme', themeVals[selectedIndex] )
+			}
+		})
 		
 		prefsBar = new TouchBar({
 			
 			items: [
 				
-				new TouchBarSlider({
-					
-					label: 'Text size',
-					value: store.get( 'appSettings.zoom' ),
-					minValue: 4,
-					maxValue: 16,
-					change: ( newValue ) => {
-						
-						window.webContents.send( 'touchbar-zoom', newValue )
-					}
-				}),
+				textSlider,
 				
 				new TouchBarSpacer({ size: 'small' }),
 				
@@ -242,19 +265,7 @@ module.exports = {
 					label: 'Theme'
 				}),
 				
-				new TouchBarSegmentedControl({
-					
-					segments: [
-						{ label: 'OS Default' },
-						{ label: 'Light' },
-						{ label: 'Dark' }
-					],
-					selectedIndex: themeVals.indexOf( theme ),
-					change: ( selectedIndex ) => {
-						
-						window.webContents.send( 'touchbar-theme', themeVals[selectedIndex] )
-					}
-				}),
+				themeSelect,
 				
 				new TouchBarSpacer({ size: 'small' }),
 				
@@ -270,3 +281,10 @@ module.exports = {
 		window.setTouchBar( prefsBar )
 	}
 }
+
+
+ipcMain.on('update-theme-touchbar', (event, message) => {
+	
+	let index = themeVals.indexOf( message )
+	themeSelect.selectedIndex = index
+})
