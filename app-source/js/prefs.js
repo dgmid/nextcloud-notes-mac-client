@@ -109,7 +109,8 @@ $(document).ready(function() {
 			
 			case 'zoom':
 				store.set( `appSettings.${name}`, val )
-				ipcRenderer.send('set-zoom-slider', parseInt( val ) )
+				ipcRenderer.send( 'update-textslider-touchbar', parseInt( val ) )
+				ipcRenderer.send( 'set-zoom-slider', parseInt( val ) )
 			break
 			
 			case 'cursor':
@@ -131,7 +132,7 @@ $(document).ready(function() {
 				let theme = $('[name$=theme]:checked').val()
 				
 				store.set( 'appInterface.theme', theme )
-				ipcRenderer.send( 'update-theme-touchbar', theme)
+				ipcRenderer.send( 'update-themeselect-touchbar', theme )
 				
 				if( theme == 'default' ) {
 					

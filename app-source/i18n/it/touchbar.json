@@ -24,5 +24,13 @@
   "edit": {
     "preview": "Antiprima",
     "save": "Salva"
+  },
+  "prefs": {
+    "textsize": "Testo",
+    "theme": "Tema",
+    "os": "predefinito",
+    "light": "chiaro",
+    "dark": "scuro",
+    "close": "Chiudi"
   }
 }

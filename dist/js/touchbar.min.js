@@ -224,12 +224,13 @@ module.exports = {
 		
 		const i18n		= require( './i18n.min' )
 		const theme		= store.get( 'appInterface.theme' )
-		let currentTheme = themeVals.indexOf( theme )
-		
+		let currentTheme = themeVals.indexOf( theme ),
+			size = store.get( 'appSettings.zoom' )
+			
 		textSlider = new TouchBarSlider({
 			
-			label: 'Text size',
-			value: store.get( 'appSettings.zoom' ),
+			label: i18n.t('touchbar:prefs.textsize', 'Text size'),
+			value: parseInt( size ),
 			minValue: 4,
 			maxValue: 16,
 			change: ( newValue ) => {
@@ -241,9 +242,9 @@ module.exports = {
 		themeSelect = new TouchBarSegmentedControl({
 			
 			segments: [
-				{ label: 'OS Default' },
-				{ label: 'Light' },
-				{ label: 'Dark' }
+				{ label: i18n.t('touchbar:prefs.os', 'OS Default') },
+				{ label: i18n.t('touchbar:prefs.light', 'Light') },
+				{ label: i18n.t('touchbar:prefs.dark', 'Dark') }
 			],
 			selectedIndex: currentTheme,
 			change: ( selectedIndex ) => {
@@ -262,7 +263,7 @@ module.exports = {
 				
 				new TouchBarLabel({
 					
-					label: 'Theme'
+					label: i18n.t('touchbar:prefs.theme', 'Theme')
 				}),
 				
 				themeSelect,
@@ -271,7 +272,8 @@ module.exports = {
 				
 				new TouchBarButton({
 					
-					label: 'Close',
+					label: i18n.t('touchbar:prefs.close', 'Close'),
+					accessibilityLabel: i18n.t('touchbar:prefs.close', 'Close'),
 					backgroundColor: '#3479F6',
 					click: () => { app.emit( 'close-prefs' ) }
 				})
@@ -283,7 +285,13 @@ module.exports = {
 }
 
 
-ipcMain.on('update-theme-touchbar', (event, message) => {
+ipcMain.on('update-textslider-touchbar', (event, message) => {
+	
+	textSlider.value = message
+})
+
+
+ipcMain.on('update-themeselect-touchbar', (event, message) => {
 	
 	let index = themeVals.indexOf( message )
 	themeSelect.selectedIndex = index

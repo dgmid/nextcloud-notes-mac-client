@@ -24,5 +24,13 @@
   "edit": {
     "preview": "Vorschau",
     "save": "Speichern"
+  },
+  "prefs": {
+    "textsize": "Textgröße",
+    "theme": "Thema",
+    "os": "OS",
+    "light": "hell",
+    "dark": "dunkel",
+    "close": "Schließen"
   }
 }
