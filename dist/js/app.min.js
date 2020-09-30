@@ -472,6 +472,7 @@ function prepareToSave( selected ) {
 function saveDialog( selected ) {
 	
 	let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
+					type: 'question',
 					message: i18n.t('app:dialog.save.title', 'You have made changes to this note'),
 					detail: i18n.t('app:dialog.save.text', 'Do you want to save them?'),
 					buttons: [i18n.t('app:dialog.button.savechanges', 'Save changes'), i18n.t('app:dialog.button.cancel', 'Cancel')]
@@ -527,6 +528,7 @@ function saveNote( id ) {
 function deleteCheck( id ) {
 	
 	let response = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
+							type: 'warning',
 							message: i18n.t('app:dialog.delete.title', 'Are you sure you want to delete this note?'),
 							detail: i18n.t('app:dialog.delete.text', 'This operation is not reversable.'),
 							buttons: [i18n.t('app:dialog.button.delete', 'Delete Note'), i18n.t('app:dialog.button.cancel', 'Cancel')]
