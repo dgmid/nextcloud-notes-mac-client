@@ -9,6 +9,7 @@ const log		= require( 'electron-log' )
 const menuApp			= require( './menu-app.min' )
 const menuSidebar		= require( './menu-sidebar.min' )
 const menuNotes			= require( './menu-notes.min' )
+const menuDock			= require( './menu-dock.min' )
 const ncLoginflow		= require( './window-nc-loginflow.min' )
 const touchbar			= require( './touchbar.min' )
 
@@ -179,6 +180,7 @@ module.exports.openWindow = function() {
 	menuApp.createMenu()
 	menuSidebar.createMenu( win )
 	menuNotes.createMenu( win )
+	menuDock.createMenu( win )
 }
 
 

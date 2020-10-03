@@ -1192,6 +1192,16 @@ ipcRenderer.on('add-table', (event, message) => {
 
 
 
+//note(dgmid): dock menu
+
+ipcRenderer.on( 'dock-category', (event, message) => {
+	
+	$('.categories button').removeClass('selected')
+	$( `#fixed-categories [data-catid="${message}"]` ).addClass( 'selected' ).focus()
+	categories.selectCategory( message )
+})
+
+
 //note(dgmid): on quit without saving
 
 ipcRenderer.on('before-quit', (event, message) => {
@@ -1335,6 +1345,8 @@ $('body').on('click', '.categories button', function(event) {
 	
 	categories.selectCategory( catid )
 	categories.showHideCategoryIcons()
+	
+	ipcRenderer.send( 'dock-update-cats', catid )
 })
 
 
