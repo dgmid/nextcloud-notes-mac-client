@@ -108,9 +108,10 @@ $(document).ready(function() {
 			break
 			
 			case 'zoom':
-				store.set( `appSettings.${name}`, val )
-				ipcRenderer.send( 'update-textslider-touchbar', parseInt( val ) )
-				ipcRenderer.send( 'set-zoom-slider', parseInt( val ) )
+				let level = parseInt( val )
+				store.set( `appSettings.${name}`, level )
+				ipcRenderer.send( 'update-textslider-touchbar', level )
+				ipcRenderer.send( 'set-zoom-slider', level )
 			break
 			
 			case 'cursor':

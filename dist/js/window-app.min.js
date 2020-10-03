@@ -46,7 +46,7 @@ let store = new Store({
 			
 			sortby: 'modified',
 			orderby: 'desc',
-			zoom: '10',
+			zoom: 10,
 			cursor: 'start',
 			spellcheck: true,
 			showcats: true,
