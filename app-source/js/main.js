@@ -1,6 +1,6 @@
 'use strict'
 
-const {app, ipcMain, protocol, webContents} = require('electron')
+const {app, ipcMain, webContents} = require('electron')
 const url		= require( 'url' )
 const path		= require( 'path' )
 const dialog	= require( 'electron' ).dialog
