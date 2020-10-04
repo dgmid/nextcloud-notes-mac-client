@@ -4,7 +4,6 @@ const {
 	app,
 	BrowserWindow,
 	Menu,
-	MenuItem,
 	ipcMain
 } = require( 'electron' )
 const log	= require( 'electron-log' )

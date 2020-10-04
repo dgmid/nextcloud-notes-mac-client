@@ -3,8 +3,6 @@
 const electron			= require( 'electron' )
 const { Menu, shell }	= require( 'electron' )
 const app				= electron.app
-const ipc				= electron.ipcMain
-const path				= require( 'path' )
 const name				= app.name
 const Store				= require( 'electron-store' )
 const store				= new Store()
