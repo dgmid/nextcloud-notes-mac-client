@@ -16,6 +16,7 @@ const i18nextOptions = {
 		'touchbar',
 		'date',
 		'menu',
+		'dock',
 		'sidebarmenu',
 		'notecontextmenu',
 		'newcategory',

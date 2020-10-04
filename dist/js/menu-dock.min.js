@@ -23,9 +23,9 @@ module.exports.createMenu = function ( win ) {
 	
 	let selected = store.get( 'categories.selected' )
 	
-	itemAll.label = 'All Notes'
-	itemFav.label = 'Favorites'
-	itemNone.label = 'Uncategorised'
+	itemAll.label = i18n.t('dock:categories.all', 'All Notes')
+	itemFav.label = i18n.t('dock:categories.favorite', 'Favorites')
+	itemNone.label = i18n.t('dock:categories.none', 'Uncategorised')
 	
 	itemAll.checked = (selected == '##all##') ? true : false
 	itemFav.checked = (selected == '##fav##') ? true : false
