@@ -25,8 +25,7 @@ module.exports = {
 		let compressed = [],
 		copy = array.slice(0),
 		orderby = store.get( 'appSettings.ordercats' ),
-		results = []
-		
+		results = []		
 		if( orderby == null ) orderby = 'asc'
 		
 		$('#categories').empty().addClass( orderby )
@@ -47,6 +46,7 @@ module.exports = {
 			if (theCount > 0) {
 				
 				var a = new Object()
+				a.id 	= module.exports.sanitizeCategory( array[i] )
 				a.value = array[i]
 				a.count = theCount
 				compressed.push(a)
@@ -57,8 +57,8 @@ module.exports = {
 			
 			compressed.sort(function(x, y) {
 				
-				var itemX = x['value']
-				var itemY = y['value']
+				var itemX = x['id']
+				var itemY = y['id']
 				
 				return (itemX < itemY) ? -1 : (itemX > itemY) ? 1 : 0
 			})
@@ -68,7 +68,7 @@ module.exports = {
 			
 			let theItem		= item.value,
 				theCount	= item.count,
-				theID 		= module.exports.sanitizeCategory( theItem ),
+				theID 		= item.id,
 				showcount	= (store.get( 'appSettings.catcount' )) ? ' show' : ''
 			
 			if( theItem.length > 0 ) {
