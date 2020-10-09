@@ -138,7 +138,7 @@ $(document).ready(function() {
 				if( theme == 'default' ) {
 					
 					localStorage.removeItem('user_theme')
-					store.set( 'appInterface.theme', theme )
+					ipcRenderer.send('update-theme', theme )
 					__setTheme()
 					
 				} else {
