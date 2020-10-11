@@ -751,6 +751,13 @@ ipcRenderer.on('note', (event, message) => {
 			if( selected ) saveNote( selected )
 		break
 		
+		case 'open':
+			if( server && selected ) {
+				
+				shell.openExternal( `${server}/index.php/apps/notes/note/${selected}` )
+			}
+		break
+		
 		case 'favorite':
 			if( selected ) {
 			

@@ -93,6 +93,14 @@ module.exports.createMenu = function () {
 					type: 'separator'
 				},
 				{
+					label: 'Open in Nextcloud →',
+					accelerator: 'Cmd+o',
+					click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'open') }
+				},
+				{
+					type: 'separator'
+				},
+				{
 					label: i18n.t('menu:note.favorite', 'Toggle Favorite'),
 					accelerator: 'Cmd+Alt+f',
 					click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'favorite') }
