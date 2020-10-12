@@ -14,6 +14,7 @@
     "new": "Nouvelle note",
     "edit": "Éditer / Prévisualiser la note sélectionnée",
     "save": "Sauvegarder la note sélectionnée",
+    "open": "Ouvrir dans Nextcloud",
     "favorite": "Basculer vers favoris",
     "move": "Déplacer la note vers",
     "newcat": "Nouvelle catégorie…",

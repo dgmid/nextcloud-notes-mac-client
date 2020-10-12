@@ -14,6 +14,7 @@
     "new": "New Note",
     "edit": "Edit / Preview Selected Note",
     "save": "Save Selected Note",
+    "open": "Open in Nextcloud",
     "favorite": "Toggle Favorite",
     "move": "Move Selected Note to",
     "newcat": "New Category…",

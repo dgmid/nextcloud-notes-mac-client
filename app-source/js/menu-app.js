@@ -93,7 +93,7 @@ module.exports.createMenu = function () {
 					type: 'separator'
 				},
 				{
-					label: 'Open in Nextcloud →',
+					label: i18n.t('menu:note.open', 'Open in Nextcloud') + '  →',
 					accelerator: 'Cmd+o',
 					click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'open') }
 				},
