@@ -21,15 +21,16 @@ module.exports.createMenu = function ( win ) {
 	
 	const i18n = require( './i18n.min' )
 	
-	let selected = store.get( 'categories.selected' )
+	let selectedNote 	= store.get( 'appInterface.selected' ),
+		selectedCat 	= store.get( 'categories.selected' )
 	
 	itemAll.label = i18n.t('dock:categories.all', 'All Notes')
 	itemFav.label = i18n.t('dock:categories.favorite', 'Favorites')
 	itemNone.label = i18n.t('dock:categories.none', 'Uncategorised')
 	
-	itemAll.checked = (selected == '##all##') ? true : false
-	itemFav.checked = (selected == '##fav##') ? true : false
-	itemNone.checked = (selected == '##none##') ? true : false
+	itemAll.checked = (selectedCat == '##all##') ? true : false
+	itemFav.checked = (selectedCat == '##fav##') ? true : false
+	itemNone.checked = (selectedCat == '##none##') ? true : false
 	
 	itemAll.click = () => {
 		
@@ -50,6 +51,18 @@ module.exports.createMenu = function ( win ) {
 	}
 	
 	let dockMenu = new Menu()
+	
+	if( selectedNote ) {
+		
+		dockMenu.append( new MenuItem({
+				
+				label: 'Open in Nextcloud' + '  →',
+				click () { win.webContents.send('note', 'open') }
+			})
+		)
+		
+		dockMenu.append( new MenuItem({type: 'separator'}) )
+	}
 	
 	dockMenu.append( itemAll )
 	dockMenu.append( itemFav )

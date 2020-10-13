@@ -82,12 +82,12 @@ module.exports.createMenu = function () {
 				{
 					label: i18n.t('menu:note.edit', 'Edit / Preview Selected Note'),
 					accelerator: 'Cmd+e',
-					click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'edit') } 
+					click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'edit') }
 				},
 				{
 					label: i18n.t('menu:note.save', 'Save Selected Note'),
 					accelerator: 'Cmd+s',
-					click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'save') } 
+					click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('note', 'save') }
 				},
 				{
 					type: 'separator'
@@ -398,17 +398,17 @@ module.exports.createMenu = function () {
 				{
 					label: i18n.t('menu:view.zoomin', 'Zoom In'),
 					accelerator: 'Cmd+=',
-					click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('set-zoom-level', 1) }	
+					click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('set-zoom-level', 1) }
 				},
 				{
 					label: i18n.t('menu:view.zoomout', 'Zoom Out'),
 					accelerator: 'Cmd+-',
-					click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('set-zoom-level', -1) }	
+					click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('set-zoom-level', -1) }
 				},
 				{
 					label: i18n.t('menu:view.actualsize', 'Actual Size'),
 					accelerator: 'Cmd+0',
-					click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('set-zoom-level', 0) }	
+					click (item, focusedWindow) { if(focusedWindow) focusedWindow.webContents.send('set-zoom-level', 0) }
 				},
 				{
 					type: 'separator'
