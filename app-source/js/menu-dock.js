@@ -56,7 +56,7 @@ module.exports.createMenu = function ( win ) {
 		
 		dockMenu.append( new MenuItem({
 				
-				label: 'Open in Nextcloud' + '  →',
+				label: i18n.t('dock:open', 'Open in Nextcloud') + ' →',
 				click () { win.webContents.send('note', 'open') }
 			})
 		)
