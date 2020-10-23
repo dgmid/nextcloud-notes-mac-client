@@ -8,7 +8,7 @@
     "start": "electron .",
     "rebuild": "./node_modules/.bin/electron-rebuild",
     "debug": "electron . --debug-brk = 5858",
-    "package": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=10.1.4 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;"
+    "package": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=10.1.5 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;"
   },
   "author": {
     "name": "D.G. Midwinter",
@@ -41,7 +41,7 @@
     "jquery": "^3.5.1",
     "jquery-i18next": "^1.2.1",
     "js-search": "^2.0.0",
-    "marked": "^1.2.0",
+    "marked": "^1.2.2",
     "mousetrap": "^1.6.5",
     "pretty": "^2.0.0",
     "remove-markdown": "^0.3.0",
@@ -52,7 +52,7 @@
   "devDependencies": {
     "del": "^6.0.0",
     "devtron": "^1.4.0",
-    "electron": "^10.1.4",
+    "electron": "^10.1.5",
     "electron-rebuild": "^2.3.2",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
