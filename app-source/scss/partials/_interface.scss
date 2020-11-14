@@ -548,33 +548,36 @@ aside {
 	}
 }
 
-.CodeMirror {
+.EasyMDEContainer {
 	
-	border: none;
-	color: inherit;
-	background: transparent;
-	border-top: 1px solid var(--dividers);
-	position: absolute;
-	top: 54px;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	padding: 0 22px;
-	
-	.cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
+	.CodeMirror {
 		
-		background: none;
-		background-image: none;
-		background-position: 0 bottom;
-		background-repeat: repeat-x;
-		background-size: 5px 2px;
-	}
-	
-	&.spellcheck {
+		border: none;
+		color: inherit;
+		background: transparent;
+		border-top: 1px solid var(--dividers);
+		position: absolute;
+		top: 54px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding: 0 22px;
 		
 		.cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
 			
-			background-image: linear-gradient(to right, red 50%, transparent 50%);
+			background: none;
+			background-image: none;
+			background-position: 0 bottom;
+			background-repeat: repeat-x;
+			background-size: 5px 2px;
+		}
+		
+		&.spellcheck {
+			
+			.cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
+				
+				background-image: linear-gradient(to right, red 50%, transparent 50%);
+			}
 		}
 	}
 }
