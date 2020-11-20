@@ -178,8 +178,8 @@ module.exports.openWindow = function() {
 	})
 	
 	menuApp.createMenu()
-	menuSidebar.createMenu( win )
-	menuNotes.createMenu( win )
+	menuSidebar.createMenu()
+	menuNotes.createMenu()
 	menuDock.createMenu( win )
 }
 

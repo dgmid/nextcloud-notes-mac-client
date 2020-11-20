@@ -11,8 +11,8 @@ const Store = require( 'electron-store' )
 const store = new Store()
 
 
-module.exports.createMenu = function ( winId ) {
-
+module.exports.createMenu = function () {
+	
 	let i18n = require('./i18n.min')
 	
 	let notesMenuTemplate
@@ -172,7 +172,6 @@ module.exports.createMenu = function ( winId ) {
 		
 		const notesMenu = Menu.buildFromTemplate( notesMenuTemplate )
 		
-		const win = BrowserWindow.fromWebContents( winId )
-		notesMenu.popup( win )
+		notesMenu.popup()
 	})
 }
