@@ -11,7 +11,6 @@ body {
 
 #frame {
 	
-	background-image: var(--texture);
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -221,7 +220,7 @@ main {
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background: var(--texture) repeat center center;
+		background: var(--background);
 		z-index: 1;
 		
 		.spinner {
@@ -369,6 +368,7 @@ aside {
 	width: 200px;
 	float: left;
 	height: 100vh;
+	background: var(--aside);
 	border-right: 1px solid var(--dividers);
 	position: relative;
 	display: flex;
@@ -589,10 +589,11 @@ aside {
 
 .editor-toolbar {
 	
+	background: var(--aside);
 	border: 0;
 	border-radius: 0;
-	height: 50px;
-    margin-top: 3px;
+	height: 54px;
+    padding-top: 3px;
 	overflow: hidden;
 	text-align: center;
 	white-space: nowrap;
@@ -658,7 +659,7 @@ aside {
 .editor-preview {
 	
 	padding: 22px;
-	background-image: var(--texture);
+	background: var(--background);
 }
 
 
@@ -712,7 +713,7 @@ aside {
 	
 	main {
 		
-		background-image: var(--texture);
+		background-image: var(--background);
 		
 		#edit {
 			
@@ -742,7 +743,6 @@ aside {
 	aside {
 		
 		border-right: 1px solid var(--header-border);
-		background-color: rgba(30,30,30,.75);
 		
 		#result {
 			
@@ -786,6 +786,14 @@ aside {
 		}
 	}
 	
+	.EasyMDEContainer {
+		
+		.CodeMirror {
+			
+			border-top: 1px solid var(--header-border);
+		}
+	}
+	
 	.CodeMirror {
 		
 		.CodeMirror-cursor {
@@ -799,9 +807,6 @@ aside {
 
 [data-theme="dark"] {
 
-	body {
-
-	}
 }
 
 //note(dgmid): user themes
@@ -816,7 +821,7 @@ aside {
 	footer {
 		
 		background-color: #1e1e1e;
-		background-image: var(--texture);
+		background: var(--background);
 	}
 	
 	aside {
@@ -833,11 +838,6 @@ aside {
 	#sidebar {
 		
 		button {
-			
-			&:focus {
-				
-				
-			}
 			
 			&.selected:focus {
 				
@@ -868,47 +868,6 @@ aside {
 				
 				i { background-color: #fff; }
 			}
-		}
-	}
-}
-
-
-
-//note(dgmid): retina
-
-@media screen and (-webkit-min-device-pixel-ratio: 2) { 
-		
-	#frame,
-	.editor-preview {
-		
-		background-image: var(--texture2);
-		background-size: 100px 100px;
-	}
-	
-	main {
-		
-		.loader {
-			
-			background: var(--texture2) repeat center center;
-			background-size: 100px 100px;
-		}
-	}
-	
-	[data-theme="dark"] {
-		
-		main {
-			
-			background-image: var(--texture2);
-			background-size: 100px 100px;
-		}
-	}
-	
-	[data-user="dark"] {
-		
-		footer {
-			
-			background-image: var(--texture2);
-			background-size: 100px 100px;
 		}
 	}
 }

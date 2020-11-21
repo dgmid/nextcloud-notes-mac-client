@@ -5,7 +5,6 @@ body {
 	
 	text-align: center;
 	padding: 0;
-	background-image: var(--texture);
 	
 	main {
 		
@@ -71,17 +70,5 @@ body {
 			font-size: 11px;
 			border-radius: 3px;
 		}
-	}
-}
-
-
-//note(dgmid): @2x
-
-@media screen and (-webkit-min-device-pixel-ratio: 2) { 
-	
-	body {
-		
-		background-image: var(--texture2);
-		background-size: 100px 100px;
 	}
 }

@@ -17,7 +17,7 @@ module.exports.openAbout = () => {
 			width: 340,
 			height: 360,
 			title: '',
-			vibrancy: 'under-window',
+			vibrancy: 'window',
 			resizable: false,
 			minimizable: false,
 			maximizable: false,

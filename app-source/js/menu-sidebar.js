@@ -98,7 +98,7 @@ module.exports.createMenu = function () {
 				}
 			]
 		}
-			
+		
 		const sidebarMenu = Menu.buildFromTemplate( sidebarMenuTemplate )
 		
 		sidebarMenu.popup()
