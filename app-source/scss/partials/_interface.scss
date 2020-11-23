@@ -11,6 +11,7 @@ body {
 
 #frame {
 	
+	background: var(--main);
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -197,7 +198,7 @@ footer {
 }
 
 main {
-
+	
 	margin-left: 200px;
 	padding: 0;
 	height: 100vh;
@@ -370,7 +371,6 @@ aside {
 	width: 200px;
 	float: left;
 	height: 100vh;
-	background: var(--aside);
 	border-right: 1px solid var(--dividers);
 	position: relative;
 	display: flex;
@@ -592,7 +592,6 @@ aside {
 
 .editor-toolbar {
 	
-	background: var(--aside);
 	border: 0;
 	border-radius: 0;
 	height: 54px;

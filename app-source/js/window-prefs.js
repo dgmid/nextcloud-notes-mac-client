@@ -22,7 +22,7 @@ module.exports.openPrefs = function() {
 			minimizable: false,
 			maximizable: false,
 			show: false,
-			vibrancy: 'under-window',
+			vibrancy: 'window',
 			webPreferences: {
 				devTools: true,
 				nodeIntegration: true,
