@@ -9,6 +9,26 @@ body {
 	overflow: hidden;
 }
 
+.draggable-header {
+	
+	height: 54px;
+	-webkit-app-region: drag;
+}
+
+.toolbar,
+.editor-toolbar {
+	
+	box-shadow: 0 0 0 rgba(0,0,0,0);
+	transition: box-shadow 1s;
+	position: relative;
+	z-index: 1;
+	
+	&:hover {
+		
+		box-shadow: 0 .75px 0 var(--header-border);
+	}
+}
+
 #frame {
 	
 	background: var(--main);
@@ -345,7 +365,7 @@ main {
 		
 		transition: top .5s;
 		
-		&.slidedown { top: -1px; }
+		&.slidedown { top: 0; }
 	}
 	
 	#update {
@@ -371,10 +391,19 @@ aside {
 	width: 200px;
 	float: left;
 	height: 100vh;
+	padding-top: 54px;
 	border-right: 1px solid var(--dividers);
 	position: relative;
 	display: flex;
 	flex-direction: column;
+	
+	.draggable-header {
+		
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+	}
 	
 	#result {
 		
@@ -558,7 +587,6 @@ aside {
 		border: none;
 		color: inherit;
 		background: transparent;
-		border-top: 1px solid var(--dividers);
 		position: absolute;
 		top: 54px;
 		left: 0;
@@ -591,6 +619,8 @@ aside {
 }
 
 .editor-toolbar {
+	
+	-webkit-app-region: drag;
 	
 	border: 0;
 	border-radius: 0;
@@ -660,7 +690,7 @@ aside {
 
 .editor-preview {
 	
-	padding: 22px;
+	padding: 32px 22px 22px;
 	background: var(--background);
 }
 
@@ -785,14 +815,6 @@ aside {
 			
 			border-left-color: var(--header-border);
 			border-right-color: var(--dividers);
-		}
-	}
-	
-	.EasyMDEContainer {
-		
-		.CodeMirror {
-			
-			border-top: 1px solid var(--header-border);
 		}
 	}
 	
