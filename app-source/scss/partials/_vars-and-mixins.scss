@@ -6,10 +6,16 @@
 	--text:					#454545;
 	--text-light:			rgba(69,69,69,.7);
 	--background:			#ffffff;
+	--editor:				rgba(255,255,255,.5);
 	--main:					#ffffff;
 	--app-color-focus:		rgba(254,226,152,.5);
 	--dividers:				#e6e6e6;
 	--header-border:		#b5b4b5;
+	
+	--icons-enabled:		rgba(80,80,80,.8);
+	--icons-disabled:		rgba(80,80,80,.35);
+	--icons-active:			rgba(80,80,80,.8);
+	
 	--accent:				#3478f6;
 	--accent-light:			#3279FF;
 	--accent-dark:			#004EE1;
@@ -17,6 +23,7 @@
 	// toolbar
 	
 	--toolbar-hover:		rgba(0,0,0,.05);
+	--toolbar-active:		rgba(0,0,0,.05);
 	--toolbar-border:		rgba(69,69,69,.5);
 	
 	// edit
@@ -35,6 +42,7 @@
 	--select-border:		#b2b2b2;
 	
 	// buttons
+	
 	
 	--button:				#ffffff;
 	--button-color:			rgba(0,0,0,.85);
@@ -71,7 +79,7 @@
 	--code-blue-dk:			#0056b2;
 	--code-indigo-lt:		#0058b3;
 	--code-indigo-dk:		#003d7c;
-	--code-purple-lt:			#9013fe;
+	--code-purple-lt:		#9013fe;
 	--code-purple-dk:		#640db1;
 	--code-pink-lt:			#ff42f6;
 	--code-pink-dk:			#b22eab;
@@ -87,14 +95,20 @@
 	--text:					#dcdcdc;
 	--text-light:			rgba(255,255,255,.6);
 	--background:			#1d1d1d;
+	--editor:				rgba(0,0,0,.1);
 	--main:					rgba(30,30,30,.70);
 	--app-color-focus:		#343434;
 	--dividers:				#484848;
 	--header-border:		#000000;
 	
+	--icons-enabled:		rgba(255,255,255,.6);
+	--icons-disabled:		rgba(255,255,255,.15);
+	--icons-active:			rgba(255,255,255,1);
+	
 	// toolbar
 	
-	--toolbar-hover:		rgba(255,255,255,.05);
+	--toolbar-hover:		rgba(255,255,255,.06);
+	--toolbar-active:		rgba(255,255,255,.12);
 	--toolbar-border:		rgba(255,255,255,.3);
 	
 	// edit

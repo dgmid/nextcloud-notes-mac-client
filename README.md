@@ -59,3 +59,13 @@ Translations for this app are by:
 | DE | [stratmaster](https://github.com/stratmaster) |
 | ES | Juan Velasco |
 | FR | Alain Grau |
+
+-----
+
+## Support me
+**Nextcloud Notes Client** is free,
+but if you would like to make a small donation to its ongoing development you can do so here:
+
+[![Donate button](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=EBVEE9526GTYJ&item_name=help+support+ongoing+development+of+this+software&currency_code=EUR)
+
+This will help fund me and further development of this software.

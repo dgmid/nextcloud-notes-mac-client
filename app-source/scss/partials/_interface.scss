@@ -586,7 +586,7 @@ aside {
 		
 		border: none;
 		color: inherit;
-		background: transparent;
+		background: var(--editor);
 		position: absolute;
 		top: 54px;
 		left: 0;
@@ -633,15 +633,20 @@ aside {
 	button {
 		
 		cursor: default;
+		width: 42px;
+		height: 28px;
 		font-size: 15px;
 		transition: all .3s;
+		margin: 0;
+		border: 0;
+		border-radius: 6px;
 		
 		i {
 			
 			display: block;
-			width: 28px;
+			width: 42px;
 			height: 28px;
-			background-color: var(--text);
+			background-color: var(--icons-enabled);
 			background-repeat: no-repeat;
 			background-position: center center;
 		}
@@ -649,20 +654,15 @@ aside {
 		&:hover {
 			
 			background-color: var(--toolbar-hover);
-			border-color: var(--toolbar-border);
 		}
 		
-		&.active {
-			
-			background-color: var(--app-light);
-			border-color: var(--app-light);
-		}
-		
+		&.active,
 		&:focus {
 			
 			outline: none;
-			border-color: var(--accent);
-			box-shadow: 0 0 3px 1px var(--accent-light);
+			background-color: var(--toolbar-active);
+			
+			i { background-color: var(--icons-active) }
 		}
 		
 		&.icon-heading i { mask: var(--icon-heading) no-repeat center center; }
@@ -682,8 +682,8 @@ aside {
 	
 	i.separator {
 		
-		border-left-color: var(--dividers);
-		border-right-color: #fff;
+		border-left-color: transparent;
+		border-right-color: transparent;
 		vertical-align: 7px;
 	}
 }
@@ -723,22 +723,6 @@ aside {
 					border-color: var(--accent);
 					box-shadow: 0 0 3px 1px var(--accent-light);
 				}
-			}
-		}
-		
-		button {
-			
-			&:focus {
-				
-				background-color: rgba(255,255,255,.075);
-				outline: none;
-			}
-			
-			&.selected,
-			&.selected:focus {
-				
-				color: #fff;
-				background-color: var(--accent-light);
 			}
 		}
 	}
@@ -802,19 +786,10 @@ aside {
 	
 	.editor-toolbar {
 		
-		button {
-			
-			&.active {
-				
-				background-color: var(--app-dark);
-				border-color: var(--app-dark);
-			}
-		}
-		
 		i.separator {
 			
-			border-left-color: var(--header-border);
-			border-right-color: var(--dividers);
+			border-left-color: transparent;
+			border-right-color: transparent;
 		}
 	}
 	
