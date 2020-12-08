@@ -1,5 +1,5 @@
 # Nextcloud Notes Client
-[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) ![GitHub package.json version](https://img.shields.io/github/package-json/v/dgmid/nextcloud-notes-mac-client) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dgmid/nextcloud-notes-mac-client?label=latest%20release&logo=github)](https://github.com/dgmid/nextcloud-notes-mac-client/releases/latest) ![GitHub All Releases](https://img.shields.io/github/downloads/dgmid/nextcloud-notes-mac-client/total)
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) ![GitHub package.json version](https://img.shields.io/github/package-json/v/dgmid/nextcloud-notes-mac-client) [![GitHub release (latest by date)](https://img.shields.io/github/v/release/dgmid/nextcloud-notes-mac-client?label=latest%20release&logo=github)](https://github.com/dgmid/nextcloud-notes-mac-client/releases/latest) ![GitHub All Releases](https://img.shields.io/github/downloads/dgmid/nextcloud-notes-mac-client/total) [![PayPal donate](https://img.shields.io/badge/paypal-donate-yellow?style=flat&logo=paypal)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=EBVEE9526GTYJ&item_name=help+support+ongoing+development+of+this+software&currency_code=EUR)
 
 A replacement for the Mac Notes app that syncs with a Nextcloud server running the Nextcloud Notes app
 
@@ -60,12 +60,10 @@ Translations for this app are by:
 | ES | Juan Velasco |
 | FR | Alain Grau |
 
------
-
 ## Support me
 **Nextcloud Notes Client** is free,
 but if you would like to make a small donation to its ongoing development you can do so here:
 
 [![Donate button](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=EBVEE9526GTYJ&item_name=help+support+ongoing+development+of+this+software&currency_code=EUR)
 
-This will help fund me and further development of this software.
+This will help fund the further development of this software.
