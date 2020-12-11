@@ -25,7 +25,7 @@ body {
 	
 	&:hover {
 		
-		box-shadow: 0 .75px 0 var(--header-border);
+		box-shadow: 0 .75px 0 var(--header-border), 0 1.5px 1px var(--header-border);
 	}
 }
 
@@ -636,7 +636,7 @@ aside {
 		width: 42px;
 		height: 28px;
 		font-size: 15px;
-		transition: all .3s;
+		transition: background-color .15s;
 		margin: 0;
 		border: 0;
 		border-radius: 6px;
