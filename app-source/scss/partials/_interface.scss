@@ -20,7 +20,7 @@ body {
 	
 	background: var(--main);
 	box-shadow: 0 0 0 rgba(0,0,0,0);
-	transition: box-shadow 1s;
+	transition: box-shadow .33s;
 	position: relative;
 	z-index: 1;
 	
@@ -703,6 +703,7 @@ aside {
 	.editor-toolbar {
 		
 		background: transparent;
+		box-shadow: 0 .75px 0 var(--header-border), 0 1.5px 1px var(--header-border);
 	}
 	
 	.editor-toolbar {
