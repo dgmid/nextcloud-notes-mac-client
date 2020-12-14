@@ -121,11 +121,13 @@ module.exports.openWindow = function() {
 	win.on('blur', () => {
 		
 		win.setVibrancy( 'window' )
+		win.webContents.send('window', 'blur')
 	})
 	
 	win.on('focus', () => {
 		
 		win.setVibrancy( 'sidebar' )
+		win.webContents.send('window', 'focus')
 	})
 	
 	win.on('close', (e) => {

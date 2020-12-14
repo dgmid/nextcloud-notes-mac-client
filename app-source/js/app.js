@@ -1230,6 +1230,22 @@ ipcRenderer.on('before-quit', (event, message) => {
 
 
 
+//note(dgmid): window state
+
+ipcRenderer.on('window', (event, message) => {
+	
+	if( message  === 'blur') {
+		
+		$('body').addClass('blur')
+	
+	} else {
+		
+		$('body').removeClass('blur')
+	}
+})
+
+
+
 //note(dgmid): on click sidebar button
 
 $('body').on('click', '#sidebar li button', function(event) {

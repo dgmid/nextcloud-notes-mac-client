@@ -18,6 +18,7 @@ body {
 .toolbar,
 .editor-toolbar {
 	
+	background: var(--main);
 	box-shadow: 0 0 0 rgba(0,0,0,0);
 	transition: box-shadow 1s;
 	position: relative;
@@ -31,7 +32,6 @@ body {
 
 #frame {
 	
-	background: var(--main);
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -355,13 +355,14 @@ main {
 		position: absolute;
 		top: -20px;
 		right: 0;
+		z-index: 1;
 		height: 15px;
 		font-size: 11px;
 		line-height: 11px;
 		font-weight: 500;
 		color: #fff;
 		border: 0;
-		border-radius: 0 0 0 3px;
+		border-radius: 0 0 0 6px;
 		
 		transition: top .5s;
 		
@@ -378,7 +379,7 @@ main {
 	
 	#dev {
 		
-		padding: 1px 6px;
+		padding: 1px 8px;
 		background-color: var(--code-green-lt);
 		
 		&.α { background-color: var(--code-red-lt); }
@@ -426,6 +427,8 @@ aside {
 		overflow-x: hidden;
 		overflow-y: scroll;
 		padding: 10px 10px 0;
+		flex-grow: 1;
+		background: var(--main);
 	}
 }
 
@@ -694,6 +697,25 @@ aside {
 	background: var(--background);
 }
 
+.blur {
+	
+	.toolbar,
+	.editor-toolbar {
+		
+		background: transparent;
+	}
+	
+	.editor-toolbar {
+		
+		button {
+			
+			i {
+				
+				background-color: var(--icons-disabled);
+			}
+		}
+	}
+}
 
 
 //note(dgmid): dark theme
