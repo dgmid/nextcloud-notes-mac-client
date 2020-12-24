@@ -6,7 +6,7 @@
 	--text:					#454545;
 	--text-light:			rgba(69,69,69,.7);
 	--background:			#ffffff;
-	--editor:				rgba(255,255,255,.5);
+	--editor:				rgba(255,255,255,.8);
 	--main:					#ffffff;
 	--app-color-focus:		rgba(254,226,152,.5);
 	--dividers:				#e6e6e6;
@@ -54,6 +54,7 @@
 	--hover:				#005ee0;
 	--code:					#ebebeb;
 	--code-color:			#777777;
+	--hr:					#ebebeb;
 	--mark:					#000000;
 	--table-border:			#dddddd;
 	--table-head:			#ffffff;
@@ -95,11 +96,11 @@
 	--text:					#dcdcdc;
 	--text-light:			rgba(255,255,255,.6);
 	--background:			#1d1d1d;
-	--editor:				rgba(0,0,0,.1);
+	--editor:				rgba(0,0,0,.15);
 	--main:					rgba(30,30,30,.80);
 	--app-color-focus:		#343434;
 	--dividers:				#484848;
-	--header-border:		#000000;
+	--header-border:		rgba(0,0,0,.5);
 	
 	--icons-enabled:		rgba(255,255,255,.6);
 	--icons-disabled:		rgba(255,255,255,.15);
@@ -134,8 +135,9 @@
 	
 	// note
 	
-	--code:					#1e1e1e;
+	--code:					rgba(0,0,0,.25);
 	--code-color:			#ffffff;
+	--hr:					rgba(255,255,255,.125);
 	--mark:					#ffffff;
 	--table-border:			#484848;
 	--table-head:			#484848;

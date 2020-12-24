@@ -56,4 +56,14 @@ $(document).mouseup(function (e) {
 $(document).ready(function() {
 		
 	setWidth( store.get('appInterface.sidebar') )
+	
+	$('body').on('mouseover', '.toolbar, .editor-toolbar', function() {
+		
+		$('.toolbar, .editor-toolbar').addClass( 'hover' )
+	})
+	
+	$('body').on('mouseout', '.toolbar, .editor-toolbar', function() {
+		
+		$('.toolbar, .editor-toolbar').removeClass( 'hover' )
+	})
 })
