@@ -3,6 +3,7 @@
 const Store = require( 'electron-store' )
 const store = new Store()
 const $ = require( 'jquery' )
+const scroll = require( 'jquery-scrollstop' )
 
 
 let	min 	= 200,
@@ -63,6 +64,18 @@ $(document).ready(function() {
 	})
 	
 	$('body').on('mouseout', '.toolbar, .editor-toolbar', function() {
+		
+		$('.toolbar, .editor-toolbar').removeClass( 'hover' )
+	})
+	
+	
+	const latency = {latency: 2000};
+	
+	$("aside .inner").on('scrollstart', latency, function() {
+		
+		$('.toolbar, .editor-toolbar').addClass( 'hover' )
+	
+	}).on('scrollstop', latency, function() {
 		
 		$('.toolbar, .editor-toolbar').removeClass( 'hover' )
 	})
