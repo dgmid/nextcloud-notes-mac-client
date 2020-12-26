@@ -24,9 +24,10 @@ body {
 	position: relative;
 	z-index: 1;
 	
-	&.hover {
+	&.hover,
+	&.scroll {
 		
-		box-shadow: 0 .5px 0 var(--header-border), 0 .75px 1px var(--header-border);
+		box-shadow: 0 .5px 0 var(--header-border), 0 .65px 0 var(--header-border), 0 .85px 1px var(--header-border);
 	}
 }
 

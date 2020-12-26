@@ -289,7 +289,19 @@ function displayNote( note ) {
 	easymde = new EasyMDE( editor.easymdeSetup )
 	toggleSpellcheck( store.get('appSettings.spellcheck') )
 	
-	// register right click for notes menu
+	easymde.codemirror.on( 'scroll', function( instance, event ) {
+	
+		let scroll = instance.getScrollInfo()
+		
+		if( scroll.top > 0 ) {
+			
+			$('.editor-toolbar').addClass( 'scroll' )
+			
+		} else {
+			
+			$('.editor-toolbar').removeClass( 'scroll' )
+		}
+	})
 	
 	easymde.codemirror.on( 'mousedown', function( instance, event ) {
 		
@@ -1493,6 +1505,27 @@ function setFocus() {
 		}
 	}
 }
+
+
+
+//note(dgmid): titlebar shadow on preview scroll
+
+document.addEventListener('scroll', function (event) {
+	
+	if ( $(event.target).hasClass('editor-preview-full') ) {
+		
+		let position = $('.editor-preview-full').scrollTop()
+		
+		if( position > 0 ) {
+			
+			$('.editor-toolbar').addClass( 'scroll' )
+			
+		} else {
+			
+			$('.editor-toolbar').removeClass( 'scroll' )
+		}
+	}
+}, true )
 
 
 
