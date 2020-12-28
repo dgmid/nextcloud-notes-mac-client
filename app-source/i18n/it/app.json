@@ -3,6 +3,8 @@
     "update": "Aggiornamento disponibile"
   },
   "toolbar": {
+    "new": "Nuova nota (Cmd-N)",
+    "delete": "Elimina la nota selezionata (Cmd-D)",
     "heading": "Intestazione",
     "bold": "Grassetto",
     "italic": "Corsivo",

@@ -4,7 +4,7 @@ const i18n = require( 'i18next' )
 const i18nextBackend = require( 'i18next-sync-fs-backend' )
 const LanguageDetector = require( 'i18next-electron-language-detector' )
 const path = require( 'path' )
-
+const log				= require( 'electron-log' )
 
 const i18nextOptions = {
 
@@ -43,7 +43,7 @@ i18n.use(LanguageDetector).use(i18nextBackend)
 
 
 if (!i18n.isInitialized) {
-
+	
 	i18n.init(i18nextOptions)
 }
 

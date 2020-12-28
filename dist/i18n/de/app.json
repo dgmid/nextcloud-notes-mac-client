@@ -3,6 +3,8 @@
     "update": "Aktualisierung verfügbar"
   },
   "toolbar": {
+    "new": "Neue Notiz (Cmd-N)",
+    "delete": "Ausgewählte Notiz löschen (Cmd-D)",
     "heading": "Überschrift",
     "bold": "Fett",
     "italic": "Kursiv",

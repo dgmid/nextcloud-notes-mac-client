@@ -3,6 +3,8 @@
     "update": "Actualización Disponible"
   },
   "toolbar": {
+    "new": "Nueva Nota (Cmd-N)",
+    "delete": "Eliminar Nota seleccionada (Cmd-D)",
     "heading": "Título",
     "bold": "Negrita",
     "italic": "Itálica",

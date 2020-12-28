@@ -1587,6 +1587,8 @@ $(document).ready(function() {
 	$('#cat-fav').html( i18n.t('app:categories.fav', 'Favorites')).attr('title', i18n.t('app:categories.fav', 'Favorites'))
 	$('#cat-none').html( i18n.t('app:categories.none', 'Uncategorised')).attr('title', i18n.t('app:categories.none', 'Uncategorised'))
 	$('#search').attr('placeholder', i18n.t('app:sidebar.search', 'Search'))
+	$('#new-button').attr('title', i18n.t('app:toolbar.new', 'New Note (Cmd-N)'))
+	$('#delete-button').attr('title', i18n.t('app:toolbar.delete', 'Delete Selected Note (Cmd-D)'))
 	
 	
 	//note(dgmid): check login

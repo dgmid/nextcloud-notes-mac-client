@@ -3,6 +3,8 @@
     "update": "Mise à jour disponible"
   },
   "toolbar": {
+    "new": "Nouvelle note (Cmd-N)",
+    "delete": "Supprimer la note (Cmd-D)",
     "heading": "Capitale",
     "bold": "Gras",
     "italic": "Italique",
