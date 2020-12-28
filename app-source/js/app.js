@@ -1333,9 +1333,9 @@ $('body').on('focusout', '#sidebar li button', function(event) {
 
 
 
-//note(dgmid): on click empty sidebar
+//note(dgmid): on click empty sidebar container
 
-$('body').on('mouseup', 'aside', function(event) {
+$('body').on('mouseup', 'aside .inner', function(event) {
 	
 	if( event.which === 3 ) {
 	
