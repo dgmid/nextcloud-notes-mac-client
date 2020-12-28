@@ -15,6 +15,14 @@ body {
 	-webkit-app-region: drag;
 }
 
+.toolbar {
+	
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 10px 10px 15px;
+}
+
 .toolbar,
 .editor-toolbar {
 	
@@ -634,13 +642,27 @@ aside {
 	text-align: center;
 	white-space: nowrap;
 	
+	i.separator {
+		
+		border-left-color: transparent;
+		border-right-color: transparent;
+		vertical-align: 7px;
+	}
+}
+
+.toolbar,
+.editor-toolbar {
+	
 	button {
 		
+		appearnce: none;
 		cursor: default;
 		width: 42px;
 		height: 28px;
 		font-size: 15px;
+		background-color: transparent;
 		transition: background-color .15s;
+		padding: 0;
 		margin: 0;
 		border: 0;
 		border-radius: 6px;
@@ -660,7 +682,14 @@ aside {
 			background-color: var(--toolbar-hover);
 		}
 		
-		&.active,
+		&.active {
+			
+			outline: none;
+			background-color: var(--toolbar-active);
+			
+			i { background-color: var(--icons-active) }
+		}
+		
 		&:focus {
 			
 			outline: none;
@@ -682,13 +711,9 @@ aside {
 		&.icon-blockquote i { mask: var(--icon-blockquote) no-repeat center center; }
 		&.icon-table i { mask: var(--icon-table) no-repeat center center; }
 		&.icon-hr i { mask: var(--icon-hr) no-repeat center center; }
-	}
-	
-	i.separator {
 		
-		border-left-color: transparent;
-		border-right-color: transparent;
-		vertical-align: 7px;
+		&#new-button i { mask: var(--icon-new) no-repeat center center; }
+		&#delete-button i { mask: var(--icon-trash) no-repeat center center; }
 	}
 }
 
@@ -705,9 +730,6 @@ aside {
 		
 		background: transparent;
 		box-shadow: 0 .75px 0 var(--header-border), 0 1.5px 1px var(--header-border);
-	}
-	
-	.editor-toolbar {
 		
 		button {
 			

@@ -379,6 +379,47 @@ function getSelected( sidebar ) {
 
 
 
+//note(dgmid): new note
+
+function newNote() {
+	
+	let body
+	
+	switch( store.get( 'categories.selected' ) ) {
+	
+		case '##all##':
+		case '##none##':
+			
+			body = {
+				"content": '# ' +  i18n.t('app:sidebar.new', 'New note')
+			}
+			
+		break
+		
+		case '##fav##':
+			
+			body = {
+				"content": '# ' +  i18n.t('app:sidebar.new', 'New note'),
+				"favorite": true
+			}
+			
+		break
+		
+		default:
+			
+			body = {
+				"content": '# ' +  i18n.t('app:sidebar.new', 'New note'),
+				"category": $('.categories li button.selected').data('category')
+			}
+	}
+	
+	fetch.apiCall( 'new', null, body, function( call, id, body, notes ) {
+		
+		fetchResult( call, id, body, notes )
+	})
+}
+
+
 //note(dgmid): edit note
 
 function editNote() {
@@ -716,43 +757,8 @@ ipcRenderer.on('note', (event, message) => {
 	
 	switch( message ) {
 		
-		case 'new':
-			
-			let body
-			
-			switch( store.get( 'categories.selected' ) ) {
-			
-				case '##all##':
-				case '##none##':
-					
-					body = {
-						"content": '# ' +  i18n.t('app:sidebar.new', 'New note')
-					}
-					
-				break
-				
-				case '##fav##':
-					
-					body = {
-						"content": '# ' +  i18n.t('app:sidebar.new', 'New note'),
-						"favorite": true
-					}
-					
-				break
-				
-				default:
-					
-					body = {
-						"content": '# ' +  i18n.t('app:sidebar.new', 'New note'),
-						"category": $('.categories li button.selected').data('category')
-					}
-			}
-			
-			fetch.apiCall( 'new', null, body, function( call, id, body, notes ) {
-				
-				fetchResult( call, id, body, notes )
-			})
-			
+		case 'new':	
+			newNote()
 		break
 		
 		case 'edit':
@@ -1596,7 +1602,36 @@ $(document).ready(function() {
 			fetchResult( call, id, body, notes )
 		})
 	}
-
+	
+	
+	//note(dgmid): new / delete buttons
+	
+	$('#new-button').click(function() {
+		
+		let $this = $(this)
+		newNote()
+		
+		setTimeout( function() {
+			
+			$this.blur()
+		
+		}, 500)
+	})
+	
+	$('#delete-button').click(function() {
+		
+		let $this = $(this),
+			selected = store.get( 'appInterface.selected' )
+		
+		if( selected ) deleteCheck( selected )
+		
+		setTimeout( function() {
+			
+			$this.blur()
+		
+		}, 500)
+	})
+	
 	
 	//note(dgmid): edit save
 	
