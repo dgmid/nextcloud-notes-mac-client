@@ -10,7 +10,7 @@ const $					= require( 'jquery' )
 const removeMarkdown	= require( 'remove-markdown' )
 const EasyMDE			= require( 'easymde' )
 const hljs				= require( 'highlight.js' )
-const entities			= require( 'html-entities' ).AllHtmlEntities
+const entities			= require( 'html-entities' )
 const replaceString		= require('replace-string')
 const log				= require( 'electron-log' )
 
