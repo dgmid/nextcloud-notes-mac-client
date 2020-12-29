@@ -142,6 +142,7 @@ footer {
 		font-size: 14px;
 		line-height: 24px;
 		border-radius: 5px;
+		position: relative;
 		
 		transition: background-color .15s;
 		
@@ -195,11 +196,21 @@ footer {
 		button {
 			
 			padding: 0 10px 0 30px;
-			background-image: var(--category);
-			background-position: left 8px center;
-			background-repeat: no-repeat;
 			display: flex;
 			flex-direction: row;
+			
+			&::before {
+				
+				content: '';
+				display: block;
+				width: 30px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				background-color: var(--accent);
+				mask: var(--category) no-repeat center center;
+			}
 			
 			.cat-name {
 				
@@ -210,9 +221,13 @@ footer {
 				padding-right: 5px;
 			}
 			
-			&.selected:focus {
+			&.selected,
+			&:focus {
 				
-				background-image: var(--category-selected);
+				&::before {
+					
+					background-color: #fff;
+				}
 			}
 			
 			.cat-count {
@@ -533,8 +548,21 @@ aside {
 			font-size: 12px;
 			padding: 2px 0 0 44px;
 			color: var(--text-light);
-			background: var(--category) no-repeat left 25px top 4px;
+			position: relative;
 			display: none;
+			
+			&:before {
+				
+				content: '';
+				display: block;
+				width: 14px;
+				height: 12px;
+				background-color: var(--text-light);
+				mask: var(--category) no-repeat left center;
+				position: absolute;
+				left: 25px;
+				top: 3px;
+			}
 		}
 		
 		&[data-favorite="true"] {
@@ -851,7 +879,42 @@ aside {
 //note(dgmid): dark theme
 
 [data-theme="dark"] {
-
+	
+	footer {
+		
+		button {
+			
+			&:focus {
+				
+				background-color: var(--app-color-focus);
+			}
+			
+			&.selected:focus {
+				
+				background-color: var(--accent-light);
+			}
+		}
+		
+		#categories {
+			
+			button {
+				
+				&::before {
+					
+					background-color: var(--accent-light);
+				}
+				
+				&.selected,
+				&:focus {
+					
+					&::before {
+						
+						background-color: #fff;
+					}
+				}
+			}
+		}
+	}
 }
 
 //note(dgmid): user themes
@@ -867,6 +930,34 @@ aside {
 		
 		background-color: #1e1e1e;
 		background: var(--background);
+		
+		button {
+			
+			&:focus {
+				
+				background-color: var(--app-color-focus);
+			}
+		}
+		
+		#categories {
+			
+			button {
+				
+				&::before {
+					
+					background-color: var(--accent-light);
+				}
+				
+				&.selected,
+				&:focus {
+					
+					&::before {
+						
+						background-color: #fff;
+					}
+				}
+			}
+		}
 	}
 	
 	aside {
@@ -899,7 +990,6 @@ aside {
 				
 				.side-cat {
 					
-					background-image: var(--category-selected);
 				}
 			}
 		}
