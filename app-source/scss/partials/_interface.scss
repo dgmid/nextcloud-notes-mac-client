@@ -18,9 +18,17 @@ body {
 .toolbar {
 	
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-end;
 	align-items: center;
 	padding: 10px 10px 10px 15px;
+}
+
+.slide {
+	
+	.toolbar {
+		
+		justify-content: space-between;
+	}
 }
 
 .toolbar,
