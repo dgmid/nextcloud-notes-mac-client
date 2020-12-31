@@ -868,6 +868,8 @@ aside {
 			&.selected,
 			&.selected:focus {
 				
+				background-color: var(--app-dark);
+				
 				span { color: white; }
 				
 				.excerpt,
@@ -899,6 +901,19 @@ aside {
 [data-theme="dark"] {
 	
 	footer {
+		
+		button {
+			
+			&:focus {
+				
+				background-color: var(--app-color-focus);
+			}
+			
+			&.selected:focus {
+				
+				background-color: var(--accent-light);
+			}
+		}
 		
 		#fixed-categories,
 		#categories {
