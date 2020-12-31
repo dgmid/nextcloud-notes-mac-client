@@ -4,7 +4,7 @@ const i18n = require( 'i18next' )
 const i18nextBackend = require( 'i18next-sync-fs-backend' )
 const LanguageDetector = require( 'i18next-electron-language-detector' )
 const path = require( 'path' )
-const log				= require( 'electron-log' )
+
 
 const i18nextOptions = {
 
