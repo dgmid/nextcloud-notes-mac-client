@@ -365,7 +365,10 @@ function getSelected( sidebar ) {
 	
 	if( selected ) {
 		
-		$(`button[data-id="${selected}"]`).addClass('selected').parent().prev().children().addClass('above-selected')
+		$(`button[data-id="${selected}"]`).addClass('selected')
+		
+		let above = aboveSelected( $('#sidebar button.selected') )
+		above.addClass( 'above-selected' )
 		
 		if( !sidebar ) {
 			
@@ -1283,7 +1286,10 @@ $('body').on('click', '#sidebar li button', function(event) {
 	$('main').append('<div class="loader"><div class="spinner"></div></div>')
 	
 	$('#sidebar li button').removeClass('selected').removeClass('above-selected')
-	$(this).addClass('selected').parent().prev().children().addClass('above-selected')
+	$(this).addClass('selected')
+	
+	let above = aboveSelected( $('#sidebar button.selected') )
+	above.addClass( 'above-selected' )
 	
 	fetch.apiCall( 'single', id, null, function( call, id, body, notes ) {
 			
@@ -1320,6 +1326,9 @@ $('body').on('mouseup', '#sidebar li button', function(event) {
 $('body').on('focus', '#sidebar li button', function(event) {
 	
 	$(this).parent().prev().children().addClass('above-selected')
+	
+	let above = aboveSelected( $(this) )
+	above.addClass( 'above-selected' )
 })
 
 
@@ -1327,7 +1336,8 @@ $('body').on('focusout', '#sidebar li button', function(event) {
 	
 	if( !$(this).hasClass('selected') ) {
 		
-		$(this).parent().prev().children().removeClass('above-selected')
+		let above = aboveSelected( $(this) )
+		above.removeClass( 'above-selected' )
 	}
 })
 
@@ -1533,6 +1543,21 @@ document.addEventListener('scroll', function (event) {
 	}
 }, true )
 
+
+
+//dgmid(dgmid): get visible item above selected item
+
+function aboveSelected( item ) {
+	
+	let $prev = item.parent()
+	
+	do {
+		$prev = $prev.prev()
+		
+	} while ($prev.length && $prev.is(':hidden'))
+	
+	return $prev.children()
+}
 
 
 //note(dgmid): docready
