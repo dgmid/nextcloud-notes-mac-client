@@ -118,7 +118,7 @@ footer {
 		
 		&:focus {
 			
-			background-color: rgba(0,0,0,.15);
+			background-color: var(--app-color-focus);
 			outline: none;
 		}
 		
@@ -619,6 +619,22 @@ aside {
 					
 					color: rgba(255,255,255,.6);
 				}
+				
+				.checked,
+				.unchecked {
+					
+					background-color: rgba(255,255,255,.6);
+				}
+			}
+			
+			.side-cat {
+				
+				color: rgba(255,255,255,.6);
+				
+				&::before {
+					
+					background-color: rgba(255,255,255,.6);
+				}
 			}
 			
 			outline: none;
@@ -926,8 +942,7 @@ aside {
 					background-color: var(--accent-light);
 				}
 				
-				&.selected,
-				&:focus {
+				&.selected {
 					
 					&::before {
 						

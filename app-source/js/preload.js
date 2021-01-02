@@ -16,7 +16,7 @@ const setOSTheme = () => {
 	
 	let theme 	= nativeTheme.shouldUseDarkColors ? 'dark' : 'light',
 		accent 	= systemPreferences.getAccentColor().substr(0, 6)
-	
+		
 	if( parts[0] <= 17 ) { 
 		
 		theme = 'light'

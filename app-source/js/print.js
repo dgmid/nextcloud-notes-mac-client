@@ -26,7 +26,7 @@ module.exports.printNote = function( message ) {
 	let css		= fs.readFileSync(path.join(__dirname, '../css/print.min.css') ,'utf8'),
 		zoom 	= store.get( 'appSettings.zoom' )
 	
-	let head = `<html><head><meta charset="utf-8"><style>${css}</style></head><body style="--accent: ${message.colors[0]}; --accent-light: ${message.colors[1]}; --accent-dark: ${message.colors[2]}; --app-light: ${message.colors[3]}; --app-dark: ${message.colors[4]};"><div class="editor-preview-active" style="padding: 22px; font-size: ${zoom/10}rem">`,
+	let head = `<html><head><meta charset="utf-8"><style>${css}</style></head><body style="--accent: ${message.colors[0]}; --accent-light: ${message.colors[1]}; --accent-dark: ${message.colors[2]};"><div class="editor-preview-active" style="padding: 22px; font-size: ${zoom/10}rem">`,
 		foot = `</div></body>`
 	
 	printWindow.loadURL( `data:text/html;charset=UTF-8,${encodeURIComponent(head + message.note + foot)}` )

@@ -4,7 +4,7 @@
 header {
 	
 	padding: 10px 40px;
-	background-color: var(--app-light);
+	background-color: var(--accent-light);
 	font-size: 13px;
 	line-height: 18px;
 	text-align: center;
@@ -196,7 +196,7 @@ footer {
 	header {
 		
 		color: #fff;
-		background-color: var(--app-dark);
+		background-color: var(--accent-dark);
 	}
 	
 	canvas { filter: invert(100%); }

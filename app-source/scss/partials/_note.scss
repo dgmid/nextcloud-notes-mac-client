@@ -74,7 +74,7 @@
 	blockquote {
 		
 		padding-left: 2ch;
-		border-left: 0.2em solid var(--app-light);
+		border-left: 0.2em solid var(--accent-light);
 	}
 	
 	ul {
@@ -129,7 +129,7 @@
 			
 			&[checked] {
 				
-				background-color: var(--app-dark);
+				background-color: var(--accent-dark);
 				mask: var(--checked);
 			}
 		}
@@ -207,7 +207,7 @@
 	mark {
 		
 		color: var(--mark);
-		background-color: var(--app-light);
+		background-color: var(--accent-light);
 		padding-left: .5ch;
 		padding-right: .5ch;
 	}
@@ -313,19 +313,19 @@
 				
 				&[checked] {
 				
-					background-color: var(--app-light);
+					background-color: var(--accent-light);
 				}
 			}
 		}
 		
 		blockquote {
 			
-			border-left-color: var(--app-dark);
+			border-left-color: var(--accent-dark);
 		}
 		
 		mark {
 			
-			background-color: var(--app-dark);
+			background-color: var(--accent-dark);
 		}
 		
 		table {
