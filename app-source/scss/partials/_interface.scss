@@ -648,6 +648,17 @@ aside {
 			.side-cat { display: none; }
 		}
 	}
+	
+	.last {
+		
+		button {
+			
+			&::after {
+				
+				display: none;
+			}
+		}
+	}
 }
 
 .EasyMDEContainer {

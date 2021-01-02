@@ -107,6 +107,7 @@ module.exports = {
 		$('#search').val( '' )
 		$('#clear').hide()
 		$('#result').empty().hide()
+		$('#sidebar li').removeClass( 'last' )
 		
 		switch( catid ) {
 			
@@ -129,6 +130,8 @@ module.exports = {
 				$(`#sidebar button[data-catid='${catid}']`).parent('li').show()	
 			break
 		}
+		
+		$('#sidebar li:visible:last').addClass( 'last' )
 	},
 	
 	toggleCategories: function( state ) {
