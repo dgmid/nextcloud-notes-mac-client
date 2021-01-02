@@ -100,47 +100,30 @@ footer {
 		
 		&:first-of-type { margin-bottom: 16px; }
 	}
-	
-	button {
-		
-		border: 0;
-		border-radius: 0;
-		width: 100%;
-		text-align: left;
-		color: var(--text);
-		background-color: transparent;
-		font-size: 14px;
-		line-height: 24px;
-		border-radius: 5px;
-		position: relative;
-		
-		transition: background-color .15s;
-		
-		&:focus {
-			
-			background-color: var(--app-color-focus);
-			outline: none;
-		}
-		
-		&.selected,
-		&.selected:focus {
-			
-			color: #fff;
-			background-color: var(--accent);
-		}
-	}
-	
-	#fixed-categories {
+
+	.categories {
 		
 		button {
 			
+			border: 0;
+			border-radius: 0;
 			padding: 0 10px 0 30px;
+			width: 100%;
+			text-align: left;
+			color: var(--text);
+			background-color: transparent;
+			font-size: 14px;
+			line-height: 24px;
+			border-radius: 5px;
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			background-position: left 8px center;
 			background-repeat: no-repeat;
 			position: relative;
+			
+			transition: background-color .15s;
+			
 			
 			&::before {
 				
@@ -157,6 +140,19 @@ footer {
 			&#cat-all::before	{ mask: var(--all) no-repeat center center; }
 			&#cat-fav::before	{ mask: var(--favorite) no-repeat center center; }
 			&#cat-none::before	{ mask: var(--none) no-repeat center center; }
+			
+			&:focus {
+				
+				background-color: var(--app-color-focus);
+				outline: none;
+			}
+			
+			&.selected,
+			&.selected:focus {
+				
+				color: #fff;
+				background-color: var(--accent);
+			}
 			
 			&.selected {
 				
@@ -175,20 +171,8 @@ footer {
 		
 		button {
 			
-			padding: 0 10px 0 30px;
-			display: flex;
-			flex-direction: row;
-			
 			&::before {
 				
-				content: '';
-				display: block;
-				width: 30px;
-				position: absolute;
-				top: 0;
-				left: 0;
-				bottom: 0;
-				background-color: var(--accent);
 				mask: var(--category) no-repeat center center;
 			}
 			
@@ -199,14 +183,6 @@ footer {
 				overflow: hidden;
 				text-overflow: ellipsis;
 				padding-right: 5px;
-			}
-			
-			&.selected {
-				
-				&::before {
-					
-					background-color: #fff;
-				}
 			}
 			
 			.cat-count {
@@ -805,24 +781,6 @@ aside {
 	background: var(--background);
 }
 
-.blur {
-	
-	.toolbar,
-	.editor-toolbar {
-		
-		background: transparent;
-		box-shadow: 0 .75px 0 var(--header-border), 0 1.5px 1px var(--header-border);
-		
-		button {
-			
-			i {
-				
-				background-color: var(--icons-disabled);
-			}
-		}
-	}
-}
-
 
 //note(dgmid): dark theme
 
@@ -836,6 +794,20 @@ aside {
 	footer {
 		
 		border-right: 1px solid var(--header-border);
+		
+		.categories {
+			
+			button {
+				
+				&.selected {
+					
+					&::before {
+						
+						background-color: var(--accent-light);
+					}
+				}
+			}
+		}
 		
 		.search-field {
 			
@@ -932,8 +904,7 @@ aside {
 	
 	footer {
 		
-		#fixed-categories,
-		#categories {
+		.categories {
 			
 			button {
 				
@@ -995,8 +966,7 @@ aside {
 			}
 		}
 		
-		#fixed-categories,
-		#categories {
+		.categories {
 			
 			button {
 				
@@ -1026,32 +996,143 @@ aside {
 
 //note(dgmid): accent text color
 
-[data-select] {
+// [data-select] {
+// 	
+// 	#sidebar {
+// 		
+// 		button {
+// 			
+// 			&.selected:focus {
+// 				
+// 				&[data-favorite=true] {
+// 					
+// 					.side-title::before {
+// 						
+// 						background-image: var(--favorite-selected);
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+// 	
+// 	.editor-toolbar {
+// 	
+// 		button {
+// 		
+// 			&.active {
+// 				
+// 				i { background-color: #fff; }
+// 			}
+// 		}
+// 	}
+// }
+
+
+//dgmid(dgmid): blur state
+
+.blur {
 	
-	#sidebar {
+	footer {
 		
-		button {
-			
-			&.selected:focus {
+		.categories {
+		
+			button {
 				
-				&[data-favorite=true] {
+				&::before {
 					
-					.side-title::before {
+					opacity: .5;
+				}
+				
+				&.selected {
+					
+					color: var(--text);
+					background-color: var(--app-color-focus);
+					
+					&::before {
 						
-						background-image: var(--favorite-selected);
+						background-color: var(--accent);
 					}
 				}
 			}
 		}
 	}
 	
+	.toolbar,
 	.editor-toolbar {
-	
-		button {
 		
-			&.active {
+		background: transparent;
+		box-shadow: 0 .75px 0 var(--header-border), 0 1.5px 1px var(--header-border);
+		
+		button {
+			
+			i {
 				
-				i { background-color: #fff; }
+				background-color: var(--icons-disabled);
+			}
+		}
+	}
+	
+	#sidebar {
+		
+		button {
+			
+			&.selected {
+				
+				background-color: var(--app-color-focus);
+			}
+		}
+	}
+}
+
+[data-theme="light"] {
+	
+	.blur {
+		
+		#sidebar {
+			
+			button {
+				
+				&.selected {
+					
+					span {
+						color: var(--text-light);
+						
+						&.side-title {
+							
+							color: var(--text);
+							
+							&::before {
+								
+								background-color: var(--text);
+							}
+						}
+						
+						.checked,
+						.unchecked,
+						&.side-cat::before {
+							
+							background-color: var(--text-light);
+						}
+						
+					}
+				}
+			}
+		}
+	}
+}
+
+[data-theme="dark"] {
+	
+	.blur {
+		
+		#sidebar {
+			
+			button {
+				
+				&.selected {
+					
+					
+				}
 			}
 		}
 	}
