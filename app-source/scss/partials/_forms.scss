@@ -4,7 +4,8 @@
 header {
 	
 	padding: 10px 40px;
-	background-color: var(--accent-light);
+	background-color: var(--accent);
+	color: #fff;
 	font-size: 13px;
 	line-height: 18px;
 	text-align: center;
@@ -192,12 +193,6 @@ footer {
 //note(dgmid): dark theme
 
 [data-theme="dark"] {
-	
-	header {
-		
-		color: #fff;
-		background-color: var(--accent-dark);
-	}
 	
 	canvas { filter: invert(100%); }
 	
