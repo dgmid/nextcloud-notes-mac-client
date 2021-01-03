@@ -3,13 +3,13 @@
 
 @keyframes pulse {
 	0% {
-		color: var(--link);
+		color: var(--accent-light);
 	}
 	70% {
-		color: var(--hover);
+		color: var(--accent-dark);
 	}
 	100% {
-		color: var(--link);
+		color: var(--accent-light);
 	}
 }
 
@@ -121,7 +121,7 @@
 			display: inline-block;
 			margin-right: .25em;
 			vertical-align: -0.35em;
-			background-color: #b8b8b8;
+			background-color: var(--text-light);
 			mask: var(--unchecked);
 			mask-repeat: no-repeat;
 			mask-position: left bottom;
@@ -183,7 +183,7 @@
 	
 	a {
 		
-		color: var(--link);
+		color: var(--accent-light);
 		text-decoration: none;
 		transition: color .15s;
 		
@@ -194,7 +194,7 @@
 		
 		&:focus {
 			
-			outline: 4px solid -webkit-focus-ring-color;
+			outline: 4px solid var(--accent-light);
 		}
 	}
 	
@@ -206,7 +206,7 @@
 	
 	mark {
 		
-		color: var(--mark);
+		color: white;
 		background-color: var(--accent-light);
 		padding-left: .5ch;
 		padding-right: .5ch;
@@ -315,6 +315,19 @@
 				
 					background-color: var(--accent-light);
 				}
+			}
+		}
+		
+		code {
+			
+			background-color: rgba(255,255,255,.15);
+		}
+		
+		pre {
+			
+			code {
+				
+				background-color: transparent;
 			}
 		}
 		

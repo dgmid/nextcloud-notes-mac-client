@@ -278,57 +278,65 @@ main {
 	#edit {
 	
 		position: fixed;
-		right: 15px;
-		bottom: 15px;
-		width: 32px;
-		height: 32px;
-		background-color: var(--edit);
-		background-position: center center;
-		background-repeat: no-repeat;
-		border: 1px solid var(--text);
-		border-radius: 7px;
-		background-image: var(--pencil);
-		opacity: .5;
+		right: 12px;
+		bottom: 12px;
+		width: 38px;
+		height: 38px;
+		padding: 0;
+		border: none;
+		background: transparent;
 		z-index: 2;
 		
-		transition: all .15s ease-in-out;
-	
-		&:focus {
-	
-			opacity: 1;
-			background-color: var(--accent-light);
-			border-color: transparent;
-			outline: none;
-		}
-	
-		&:hover {
-		
-			opacity: 1;
-			background-color: var(--edit-hover);
-			background-image: var(--pencil-white);
-			border-color: transparent;
-		}
-		
-		&:active {
+		svg {
 			
-			background-color: var(--edit-active);
-			background-image: var(--pencil-white);
-			border-color: transparent;
+			opacity: .75;
+			transition: opacity .3s;
+			
+			#edit-button-focus		{ fill: transparent; }
+			#edit-button-back		{ fill: var(--text); }
+			#edit-button-preview	{ fill: transparent; }
+			#edit-button-edit		{ fill: #fff; }
+		}
+	
+		&:hover,
+		&:focus,
+		&:active {
+		
+			svg { opacity: 1; }
+		}
+		
+		&:focus {
+			
+			outline: none;
+			
+			svg {
+				
+				#edit-button-focus {
+					
+					fill: var(--accent);
+					opacity: .6;
+				}
+			}
+		}
+		
+		&:active:focus {
+			
+			outline: none;
+			
+			svg {
+				
+				#edit-button-back { fill: var(--accent); }
+				#edit-button-focus { fill: transparent; }
+			}
 		}
 	}
 	
 	#edit.editing {
 		
-		background-image: var(--eye);
-		
-		&:hover {
-
-			background-image: var(--eye-white);
-		}
-		
-		&:active {
+		svg {
 			
-			background-image: var(--eye-white);
+			#edit-button-preview	{ fill: #fff; }
+			#edit-button-edit		{ fill: transparent; }
 		}
 	}
 	
@@ -844,26 +852,19 @@ aside {
 		
 		#edit {
 			
-			border: 0;
-			background-image: var(--pencil-white);
-			opacity: .7;
+			svg {
+				
+				#edit-button-back { fill: #000; }
+			}
 			
-			&:focus { background-image: var(--pencil); }
-			
-			&:hover { background-image: var(--pencil); }
-			
-			&:active { opacity: 1; }
-		}
-		
-		#edit.editing {
-			
-			background-image: var(--eye-white);
-			
-			&:focus { background-image: var(--eye); }
-			
-			&:hover { background-image: var(--eye); }
-			
-			&:active { background-image: var(--eye); }
+			&:focus,
+			&:active {
+				
+				svg {
+					
+					#edit-button-back { fill: var(--accent); }
+				}
+			}
 		}
 	}
 	
@@ -1005,40 +1006,6 @@ aside {
 }
 
 
-//note(dgmid): accent text color
-
-// [data-select] {
-// 	
-// 	#sidebar {
-// 		
-// 		button {
-// 			
-// 			&.selected:focus {
-// 				
-// 				&[data-favorite=true] {
-// 					
-// 					.side-title::before {
-// 						
-// 						background-image: var(--favorite-selected);
-// 					}
-// 				}
-// 			}
-// 		}
-// 	}
-// 	
-// 	.editor-toolbar {
-// 	
-// 		button {
-// 		
-// 			&.active {
-// 				
-// 				i { background-color: #fff; }
-// 			}
-// 		}
-// 	}
-// }
-
-
 //dgmid(dgmid): blur state
 
 .blur {
@@ -1142,7 +1109,10 @@ aside {
 				
 				&.selected {
 					
-					
+					.side-text {
+						
+						color: var(--text-light);
+					}
 				}
 			}
 		}
