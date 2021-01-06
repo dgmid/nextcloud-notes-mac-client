@@ -287,6 +287,16 @@
 			}
 		}
 	}
+	
+	#datetime {
+		
+		display: block;
+		text-align: center;
+		color: var(--text-light);
+		font-size: 13px;
+		font-weight: 400;
+		padding-bottom: 20px;
+	}
 }
 
 .cm-formatting-task {

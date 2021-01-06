@@ -255,7 +255,7 @@ function addSidebarEntry( item ) {
 	}
 	
 	let entry = `<li data-id="${item.id}">
-					<button data-id="${item.id}" data-title="${item.title}" data-content="" data-catid="${catClass}" data-category="${item.category}" data-favorite="${item.favorite}">
+					<button data-id="${item.id}" data-title="${item.title}" data-content="" data-catid="${catClass}" data-category="${item.category}" data-favorite="${item.favorite}" data-timestamp="${item.modified}">
 						<span class="side-title">${item.title}</span>
 						<span class="side-text">${formattedDate}&nbsp;&nbsp;<span class="excerpt">${plainTxt}</span></span>
 						<span class="side-cat">${theCat}</span>
@@ -330,7 +330,9 @@ function displayNote( note ) {
 		easymde.togglePreview()
 		setCheckLists()
 		applyZoom( store.get( 'appSettings.zoom' ) )
-	
+		
+		insertDate()
+		
 	} else {
 			
 			easymde.codemirror.on("changes", initCheckboxes)
@@ -369,6 +371,8 @@ function getSelected( sidebar ) {
 		
 		let above = aboveSelected( $('#sidebar button.selected') )
 		above.addClass( 'above-selected' )
+		
+		insertDate()
 		
 		if( !sidebar ) {
 			
@@ -501,6 +505,18 @@ function toggleEditorCheckboxes( element ) {
 
 
 
+//note(dgmid): insert date in to note
+
+function insertDate() {
+	
+	let timestamp = $('#sidebar button.selected').data( 'timestamp' )
+	
+	$('#datetime').remove()
+	$('.editor-preview').prepend(`<time id="datetime">${dates.titlebarDate( timestamp )}</time>`)
+}
+
+
+
 //note(dgmid): prepare to save
 
 function prepareToSave( selected ) {
@@ -511,6 +527,7 @@ function prepareToSave( selected ) {
 	}
 	
 	easymde.togglePreview()
+	insertDate()
 	
 	$('.editor-toolbar button').removeClass('active')
 	$('#edit').attr('title', i18n.t('app:main.button.edit', 'Edit Note')).removeClass('editing').focus()
