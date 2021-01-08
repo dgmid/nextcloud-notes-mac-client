@@ -603,7 +603,7 @@ aside {
 		&.selected:focus {
 			
 			outline: none;
-			background-color: var(--accent-light);
+			background-color: var(--accent);
 			
 			&::after { display: none; }
 			
