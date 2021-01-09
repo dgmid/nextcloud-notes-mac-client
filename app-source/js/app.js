@@ -278,7 +278,7 @@ function displayNote( note ) {
 		$('#edit').removeClass('editing')
 	}
 	
-	ipcRenderer.send( 'update-titlebar', dates.titlebarDate( note.modified ) )
+	ipcRenderer.send( 'update-titlebar', note.title )
 	
 	if( easymde ) {
 		
@@ -367,12 +367,15 @@ function getSelected( sidebar ) {
 	
 	if( selected ) {
 		
-		$(`button[data-id="${selected}"]`).addClass('selected')
+		let selectedbutton = $(`button[data-id="${selected}"]`)
 		
-		let above = aboveSelected( $('#sidebar button.selected') )
+		selectedbutton.addClass('selected')
+		
+		let above = aboveSelected( selectedbutton )
 		above.addClass( 'above-selected' )
 		
 		insertDate()
+		ipcRenderer.send( 'update-titlebar', selectedbutton.data( 'title' ) )
 		
 		if( !sidebar ) {
 			
