@@ -93,6 +93,7 @@ function fetchResult( call, id, body, notes ) {
 				$('#note').attr('data-id', null)
 				$('#note').html('')
 				ipcRenderer.send( 'update-titlebar', '' )
+				ipcRenderer.send( 'dock-update-openitem', false )
 			}
 			
 			fetch.apiCall( 'all', null, null, function( call, id, body, notes ) {
@@ -279,6 +280,7 @@ function displayNote( note ) {
 	}
 	
 	ipcRenderer.send( 'update-titlebar', note.title )
+	ipcRenderer.send( 'dock-update-openitem', true )
 	
 	if( easymde ) {
 		
@@ -376,6 +378,11 @@ function getSelected( sidebar ) {
 		
 		insertDate()
 		ipcRenderer.send( 'update-titlebar', selectedbutton.data( 'title' ) )
+		
+		if( selectedbutton.length ) {
+			
+			ipcRenderer.send( 'dock-update-openitem', true )
+		}
 		
 		if( !sidebar ) {
 			
