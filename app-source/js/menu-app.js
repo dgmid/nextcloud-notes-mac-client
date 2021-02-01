@@ -466,14 +466,6 @@ module.exports.createMenu = function () {
 						focusedWindow.webContents.send('reload-sidebar', null)
 					}
 				},
-				//@exclude
-				{
-					label: i18n.t('menu:view.devtools', 'Toggle Developer Tools'),
-					accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
-					click (item, focusedWindow) { if (focusedWindow) focusedWindow.webContents.toggleDevTools()
-					}
-				},
-				//@end
 				{
 					type: 'separator'
 				},
@@ -511,6 +503,25 @@ module.exports.createMenu = function () {
 				}
 			]
 		},
+		//@exclude
+		{
+			label: 'Developer',
+			submenu:
+			[
+				{
+					label: i18n.t('menu:view.devtools', 'Toggle Developer Tools'),
+					accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
+					click (item, focusedWindow) { if (focusedWindow) focusedWindow.webContents.toggleDevTools()
+					}
+				},
+				{
+					label: 'Open config.json',
+					accelerator: 'Cmd+J',
+					click (item, focusedWindow) { if(focusedWindow) app.emit('open-config') }
+				}
+			]
+		},
+		//@end
 		{
 			label: i18n.t('menu:help.help', 'Help'),
 			role: 'help',

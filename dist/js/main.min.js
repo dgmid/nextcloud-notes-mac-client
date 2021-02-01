@@ -61,6 +61,12 @@ app.on('open-prefs', () => {
 })
 
 
+app.on('open-config', () => {
+	
+	store.openInEditor()
+})
+
+
 ipcMain.on('print-preview', (event, message) => {
 	
 	const print	= require( './print.min' )
