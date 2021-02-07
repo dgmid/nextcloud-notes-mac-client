@@ -447,8 +447,8 @@ aside {
 		font-weight: 500;
 		line-height: 30px;
 		color: var(--text-light);
-		background: #f6f6f6;
-		border-bottom: 1px solid #fff;
+		background-color: var(--main);
+		border-bottom: 1px solid var(--dividers);
 		padding: 0 15px;
 		white-space: nowrap;
 		overflow: hidden;
@@ -888,8 +888,7 @@ aside {
 		
 		#result {
 			
-			background: #2e2e2e;
-			border-bottom: 1px solid var(--header-border);
+			
 		}
 	}
 	
