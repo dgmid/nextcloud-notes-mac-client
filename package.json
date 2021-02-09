@@ -8,8 +8,8 @@
     "start": "electron .",
     "rebuild": "./node_modules/.bin/electron-rebuild",
     "debug": "electron . --debug-brk = 5858",
-    "package": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=10.3.1 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;",
-    "package-arm": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=10.3.1 --overwrite --platform=darwin --arch=arm64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;"
+    "package": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=10.3.2 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;",
+    "package-arm": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=10.3.2 --overwrite --platform=darwin --arch=arm64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;"
   },
   "author": {
     "name": "D.G. Midwinter",
@@ -34,7 +34,7 @@
     "electron-log": "^4.3.1",
     "electron-store": "^7.0.1",
     "fs-extra": "^9.1.0",
-    "highlight.js": "^10.5.0",
+    "highlight.js": "^10.6.0",
     "html-entities": "^2.1.0",
     "i18next": "^19.8.7",
     "i18next-electron-language-detector": "0.0.10",
@@ -42,7 +42,7 @@
     "jquery": "^3.5.1",
     "jquery-i18next": "^1.2.1",
     "js-search": "^2.0.0",
-    "marked": "^1.2.9",
+    "marked": "^2.0.0",
     "mousetrap": "^1.6.5",
     "pretty": "^2.0.0",
     "remove-markdown": "^0.3.0",
@@ -53,7 +53,7 @@
   "devDependencies": {
     "del": "^6.0.0",
     "devtron": "^1.4.0",
-    "electron": "^10.3.1",
+    "electron": "^10.3.2",
     "electron-rebuild": "^2.3.5",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
