@@ -515,9 +515,17 @@ module.exports.createMenu = function () {
 					}
 				},
 				{
+					type: 'separator'
+				},
+				{
 					label: 'Open config.json',
 					accelerator: 'Cmd+J',
 					click (item, focusedWindow) { if(focusedWindow) app.emit('open-config') }
+				},
+				{
+					label: 'Open database.json',
+					accelerator: 'Cmd+Alt+J',
+					click (item, focusedWindow) { if(focusedWindow) app.emit('open-database') }
 				}
 			]
 		},

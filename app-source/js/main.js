@@ -61,12 +61,6 @@ app.on('open-prefs', () => {
 })
 
 
-app.on('open-config', () => {
-	
-	store.openInEditor()
-})
-
-
 ipcMain.on('print-preview', (event, message) => {
 	
 	const print	= require( './print.min' )
@@ -94,3 +88,18 @@ ipcMain.on('error-in-render', function(event, message) {
 	log.error(`exception in render process:`)
 	log.info (message)
 })
+
+
+//@exclude
+const database	= new Store({name: 'database'})
+
+app.on('open-config', () => {
+	
+	store.openInEditor()
+})
+
+app.on('open-database', () => {
+	
+	database.openInEditor()
+})
+//@end
