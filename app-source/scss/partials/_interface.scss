@@ -725,12 +725,14 @@ aside {
 	
 	-webkit-app-region: drag;
 	
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	height: 54px;
 	border: 0;
 	border-radius: 0;
-	height: 54px;
-    padding-top: 3px;
 	overflow: hidden;
-	text-align: center;
 	white-space: nowrap;
 	
 	i.separator {
