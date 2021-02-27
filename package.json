@@ -42,7 +42,7 @@
     "jquery": "^3.5.1",
     "jquery-i18next": "^1.2.1",
     "js-search": "^2.0.0",
-    "marked": "^2.0.0",
+    "marked": "^2.0.1",
     "mousetrap": "^1.6.5",
     "pretty": "^2.0.0",
     "remove-markdown": "^0.3.0",
