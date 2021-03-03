@@ -39,7 +39,7 @@
     "i18next": "^19.9.1",
     "i18next-electron-language-detector": "0.0.10",
     "i18next-sync-fs-backend": "^1.1.1",
-    "jquery": "^3.5.1",
+    "jquery": "^3.6.0",
     "jquery-i18next": "^1.2.1",
     "js-search": "^2.0.0",
     "marked": "^2.0.1",
