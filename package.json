@@ -35,7 +35,7 @@
     "electron-store": "^7.0.2",
     "fs-extra": "^9.1.0",
     "highlight.js": "^10.7.1",
-    "html-entities": "^2.1.1",
+    "html-entities": "^2.3.1",
     "i18next": "^20.1.0",
     "i18next-electron-language-detector": "0.0.10",
     "i18next-sync-fs-backend": "^1.1.1",
