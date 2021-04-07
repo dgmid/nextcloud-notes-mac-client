@@ -36,7 +36,7 @@
     "fs-extra": "^9.1.0",
     "highlight.js": "^10.7.2",
     "html-entities": "^2.3.2",
-    "i18next": "^20.1.0",
+    "i18next": "^20.2.0",
     "i18next-electron-language-detector": "0.0.10",
     "i18next-sync-fs-backend": "^1.1.1",
     "jquery": "^3.6.0",
