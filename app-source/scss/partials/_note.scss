@@ -110,6 +110,12 @@
 	
 	li {
 		
+		&::marker {
+			
+			font-weight: 500;
+			color: var(--accent-dark);
+		}
+		
 		margin-bottom: .2em;
 		
 		input[type="checkbox"] {
@@ -318,7 +324,12 @@
 	.editor-preview-active {
 		
 		li {
-		
+			
+			&::marker {
+				
+				color: var(--accent);
+			}
+			
 			input[type="checkbox"] {
 				
 				&[checked] {
