@@ -2,7 +2,6 @@
 
 const {
 	app,
-	BrowserWindow,
 	Menu,
 	ipcMain
 } = require( 'electron' )

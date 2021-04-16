@@ -1,6 +1,9 @@
 'use strict'
 
 const {app, shell, ipcMain, webContents} = require('electron')
+
+require('@electron/remote/main').initialize()
+
 const url		= require( 'url' )
 const path		= require( 'path' )
 const dialog	= require( 'electron' ).dialog

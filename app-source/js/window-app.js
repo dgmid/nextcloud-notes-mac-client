@@ -94,6 +94,7 @@ module.exports.openWindow = function() {
 			devTools: true,
 			nodeIntegration: true,
 			enableRemoteModule: true,
+			contextIsolation: false,
 			preload: path.join(__dirname, './preload.min.js'),
 			spellcheck: true
 		}
