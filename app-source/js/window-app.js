@@ -86,7 +86,7 @@ module.exports.openWindow = function() {
 		titleBarStyle: 'hidden',
 		trafficLightPosition: {
 			x: 20,
-			y: 35
+			y: 18
 		},
 		vibrancy: 'sidebar',
 		visualEffectState: 'follow-window',
