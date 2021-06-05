@@ -8,8 +8,8 @@
     "start": "electron .",
     "rebuild": "./node_modules/.bin/electron-rebuild",
     "debug": "electron . --debug-brk = 5858",
-    "package": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=13.1.0 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;",
-    "package-arm": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=13.1.0 --overwrite --platform=darwin --arch=arm64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;"
+    "package": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=13.1.1 --overwrite --platform=darwin --arch=x64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;",
+    "package-arm": "gulp build; npm prune -production; electron-packager . --asar=true --electron-version=13.1.1 --overwrite --platform=darwin --arch=arm64 --icon=dist/assets/icon/icon.icns --ignore=\"app-source|gulpfile\\.js|README\\.md\" --prune=false --out=build --darwinDarkModeSupport=true; npm install;"
   },
   "author": {
     "name": "D.G. Midwinter",
@@ -54,7 +54,7 @@
   "devDependencies": {
     "del": "^6.0.0",
     "devtron": "^1.4.0",
-    "electron": "^13.1.0",
+    "electron": "^13.1.1",
     "electron-rebuild": "^2.3.5",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
