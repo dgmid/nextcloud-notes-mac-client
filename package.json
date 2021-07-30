@@ -65,7 +65,7 @@
     "gulp-sass": "^5.0.0",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-string-replace": "^1.1.2",
-    "gulp-uglify-es": "^2.0.0",
+    "gulp-uglify-es": "^3.0.0",
     "pump": "^3.0.0",
     "reset-css": "^5.0.1",
     "sass": "^1.36.0"
