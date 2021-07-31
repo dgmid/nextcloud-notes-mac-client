@@ -27,7 +27,7 @@
     "last 1 Chrome versions"
   ],
   "dependencies": {
-    "@electron/remote": "^1.2.0",
+    "@electron/remote": "^1.2.1",
     "color": "^4.0.0",
     "compare-versions": "^3.6.0",
     "dateformat": "^4.5.1",
