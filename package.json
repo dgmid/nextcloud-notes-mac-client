@@ -54,7 +54,7 @@
     "del": "^6.0.0",
     "devtron": "^1.4.0",
     "electron": "^14.0.0",
-    "electron-rebuild": "^3.2.2",
+    "electron-rebuild": "^3.2.3",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-cssnano": "^2.1.3",
