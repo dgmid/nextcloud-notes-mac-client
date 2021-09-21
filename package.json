@@ -30,7 +30,7 @@
     "@electron/remote": "^2.0.1",
     "color": "^4.0.1",
     "compare-versions": "^3.6.0",
-    "dateformat": "^4.5.1",
+    "dateformat": "^4.6.1",
     "easymde": "^2.15.0",
     "electron-log": "^4.4.1",
     "electron-store": "^8.0.1",
