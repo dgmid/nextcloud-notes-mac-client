@@ -3,7 +3,7 @@
   "version": "1.4.5-alpha",
   "productName": "Nextcloud Notes Client",
   "description": "Access and edit your Nextcloud Notes on the Mac",
-  "main": "dist/js/main.min.js",
+  "main": "./dist/js/main.min.js",
   "scripts": {
     "start": "electron .",
     "rebuild": "./node_modules/.bin/electron-rebuild",
