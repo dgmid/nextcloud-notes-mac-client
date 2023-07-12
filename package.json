@@ -43,7 +43,7 @@
     "jquery": "^3.6.0",
     "jquery-i18next": "^1.2.1",
     "js-search": "^2.0.0",
-    "marked": "^3.0.4",
+    "marked": "^4.0.10",
     "mousetrap": "^1.6.5",
     "pretty": "^2.0.0",
     "remove-markdown": "^0.3.0",
@@ -53,7 +53,7 @@
   "devDependencies": {
     "del": "^6.0.0",
     "devtron": "^1.4.0",
-    "electron": "^13.4.0",
+    "electron": "^25.2.0",
     "electron-rebuild": "^3.2.3",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
